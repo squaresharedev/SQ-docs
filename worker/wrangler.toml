@@ -1,0 +1,23 @@
+# Square Share Docs Worker: serves the Next.js static export from ../out and
+# answers `Accept: text/markdown` with each page's .md version.
+#
+# Local:  pnpm build && pnpm worker:dev   (http://localhost:8787)
+# Production (not set up yet): docs.squareshare.eu, built with
+# SITE_URL=https://docs.squareshare.eu. Also allow AI crawlers in the Cloudflare
+# dashboard's AI bot settings, or they are blocked before robots.txt is read.
+
+name = "sq-docs"
+main = "index.ts"
+compatibility_date = "2026-10-01"
+
+[assets]
+directory = "../out"
+binding = "ASSETS"
+# out/<lang>/404.html for missing pages under /en and /cs, out/404.html elsewhere.
+not_found_handling = "404-page"
+html_handling = "auto-trailing-slash"
+# The Worker sees every request so it can negotiate Markdown and set caching.
+run_worker_first = true
+
+[dev]
+port = 8787

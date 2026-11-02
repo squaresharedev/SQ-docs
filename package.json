@@ -1,0 +1,48 @@
+{
+  "name": "sq-docs",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --port 3100",
+    "build": "pnpm content:lint && next build && node scripts/postbuild.ts",
+    "postinstall": "fumadocs-mdx",
+    "typecheck": "fumadocs-mdx && tsc --noEmit && tsc --noEmit -p worker/tsconfig.json",
+    "lint": "eslint --max-warnings 0",
+    "content:lint": "node scripts/content-lint.ts",
+    "check:links": "node scripts/link-check.ts",
+    "check:seo": "node scripts/seo-check.ts",
+    "check:draft-path": "node scripts/draft-path-check.ts",
+    "worker:dev": "wrangler dev --config worker/wrangler.toml --port 8787",
+    "test:e2e": "playwright test",
+    "test:lighthouse": "node scripts/lighthouse.ts",
+    "check": "pnpm typecheck && pnpm lint && pnpm build && pnpm check:links && pnpm check:seo"
+  },
+  "dependencies": {
+    "@squaresharedev/tokens": "file:../System/SQ-system/packages/tokens",
+    "fumadocs-core": "16.17.10",
+    "fumadocs-mdx": "15.4.10",
+    "fumadocs-ui": "16.17.10",
+    "hono": "^4.13.16",
+    "next": "16.4.4",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261101.1",
+    "@tailwindcss/postcss": "^4",
+    "@types/mdast": "^4.0.4",
+    "@types/mdx": "^2.0.13",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.4",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "vfile": "^6.0.3",
+    "wrangler": "^4.156.2"
+  },
+  "packageManager": "pnpm@11.9.0"
+}

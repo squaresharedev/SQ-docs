@@ -1,0 +1,36 @@
+packages:
+  - "."
+
+# pnpm 11 reads pnpm settings from here, not from .npmrc. Mirrors
+# `auto-install-peers=false` in .npmrc, like the dashboard repo.
+autoInstallPeers: false
+
+allowBuilds:
+  esbuild: true
+  workerd: true
+  sharp: false
+
+minimumReleaseAgeExclude:
+  - '@fumadocs/tailwind@0.1.5'
+  - fumadocs-core@16.17.10
+  - fumadocs-ui@16.17.10
+  - '@next/env@16.4.4'
+  - '@next/eslint-plugin-next@16.4.4'
+  - '@next/swc-darwin-arm64@16.4.4'
+  - '@next/swc-darwin-x64@16.4.4'
+  - '@next/swc-linux-arm64-gnu@16.4.4'
+  - '@next/swc-linux-arm64-musl@16.4.4'
+  - '@next/swc-linux-x64-gnu@16.4.4'
+  - '@next/swc-linux-x64-musl@16.4.4'
+  - '@next/swc-win32-arm64-msvc@16.4.4'
+  - '@next/swc-win32-x64-msvc@16.4.4'
+  - eslint-config-next@16.4.4
+  - next@16.4.4
+  - '@cloudflare/workerd-darwin-64@1.20261102.1'
+  - '@cloudflare/workerd-darwin-arm64@1.20261102.1'
+  - '@cloudflare/workerd-linux-64@1.20261102.1'
+  - '@cloudflare/workerd-linux-arm64@1.20261102.1'
+  - '@cloudflare/workerd-windows-64@1.20261102.1'
+  - miniflare@5.20261102.0-beta
+  - workerd@1.20261102.1
+  - wrangler@4.156.2

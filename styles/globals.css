@@ -1,0 +1,28 @@
+@import "tailwindcss";
+@import "fumadocs-ui/css/lib/default-colors.css";
+@import "fumadocs-ui/css/preset.css";
+/* The dashboard's design tokens: colours, radius, shadows, font roles. */
+@import "@squaresharedev/tokens/tokens.css";
+/* Fumadocs UI variables pointed at those tokens. */
+@import "./fumadocs-theme.css";
+
+/*
+ * Dark mode runs off the `.dark` class (next-themes, via Fumadocs). The
+ * `dark:` variant for that class is declared by fumadocs-ui/css/lib/base.css,
+ * which preset.css imports, so it is not declared a second time here.
+ */
+
+html {
+  scrollbar-gutter: stable;
+  -webkit-font-smoothing: antialiased;
+}
+
+html > body[data-scroll-locked] {
+  margin-right: 0px !important;
+  --removed-body-scroll-bar-size: 0px !important;
+}
+
+::selection {
+  background-color: var(--color-acid);
+  color: var(--color-surface-dark);
+}

@@ -1,0 +1,150 @@
+/*
+ * The one place where Fumadocs UI meets the dashboard's design tokens
+ * (@squaresharedev/tokens). Every value here is a token reference: change a
+ * token in the package and the docs follow.
+ */
+
+/* Colours. The tokens define :root (light) and .dark; Fumadocs reads --color-fd-*. */
+:root,
+.dark {
+  --color-fd-background: var(--background);
+  --color-fd-foreground: var(--foreground);
+  --color-fd-muted: var(--muted);
+  --color-fd-muted-foreground: var(--muted-foreground);
+  --color-fd-popover: var(--popover);
+  --color-fd-popover-foreground: var(--popover-foreground);
+  --color-fd-card: var(--card);
+  --color-fd-card-foreground: var(--card-foreground);
+  --color-fd-border: var(--border);
+  --color-fd-primary: var(--primary);
+  --color-fd-primary-foreground: var(--primary-foreground);
+  --color-fd-secondary: var(--secondary);
+  --color-fd-secondary-foreground: var(--secondary-foreground);
+  /*
+   * Fumadocs paints hover and selected rows with "accent". In the tokens'
+   * light palette accent and secondary are the same grey; in the dark palette
+   * accent is the brand purple, which the dashboard keeps for one brand moment
+   * per surface, not for every hovered row. Secondary is the grey in both.
+   */
+  --color-fd-accent: var(--secondary);
+  --color-fd-accent-foreground: var(--secondary-foreground);
+  --color-fd-ring: var(--ring);
+  /* The dashboard's scrim: black at 40%. */
+  --color-fd-overlay: color-mix(in oklab, var(--color-surface-dark) 40%, transparent);
+}
+
+@theme static {
+  --color-fd-error: var(--destructive);
+  --color-fd-success: var(--color-success);
+}
+
+/*
+ * Radius. The tokens give sm 0.375rem (inputs), md 0.5rem (cards) and lg
+ * 0.75rem (large panels); Fumadocs draws with rounded-xl and rounded-2xl, so
+ * those point at the token scale too.
+ */
+@theme {
+  --radius-xl: var(--radius-md);
+  --radius-2xl: var(--radius-lg);
+}
+
+/* Square corners for code, like the dashboard's code surface and buttons. */
+#nd-page figure.shiki,
+#nd-page figure.shiki > div {
+  border-radius: var(--radius);
+}
+
+/* Visible focus everywhere, in the text colour so it clears 3:1 on both palettes. */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-fd-foreground);
+  outline-offset: 2px;
+}
+
+/* Reading comfort: ~70 characters per line, generous leading, semibold headings. */
+#nd-page .prose {
+  line-height: 1.75;
+}
+
+#nd-page .prose :where(p, ul, ol, blockquote, .answer-block) {
+  max-width: 70ch;
+}
+
+#nd-page :where(h1, h2, h3, h4) {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* The answer under the title: a card, like the dashboard's cards. */
+.answer-block {
+  margin-block: 1.75rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--color-fd-border);
+  border-inline-start: 3px solid var(--color-fd-primary);
+  border-radius: var(--radius-md);
+  background: var(--color-fd-card);
+  box-shadow: var(--shadow-xs);
+  font-size: 1.0625em;
+  color: var(--color-fd-foreground);
+}
+
+.answer-block > :first-child {
+  margin-top: 0;
+}
+
+.answer-block > :last-child {
+  margin-bottom: 0;
+}
+
+/* Docs home: a Markdown list of sections drawn as cards. */
+.section-cards > ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+  padding: 0;
+  list-style: none;
+  max-width: none;
+}
+
+.section-cards > ul > li {
+  position: relative;
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid var(--color-fd-border);
+  border-radius: var(--radius-md);
+  background: var(--color-fd-card);
+  box-shadow: var(--shadow-xs);
+  color: var(--color-fd-muted-foreground);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  transition: box-shadow var(--default-transition-duration) var(--default-transition-timing-function);
+}
+
+.section-cards > ul > li::marker {
+  content: none;
+}
+
+.section-cards > ul > li:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.section-cards > ul > li > a,
+.section-cards > ul > li > p > a {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--color-fd-foreground);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* The whole card is the link's hit area. */
+.section-cards > ul > li a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.section-cards > ul > li p {
+  margin: 0;
+}
