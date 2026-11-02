@@ -1,6 +1,6 @@
 ---
 title: "Platby a výplaty"
-description: "Jak fungují platby a výplaty ve Square Share přes váš vlastní účet Stripe. Aktuální stav a co přijde."
+description: "Jak vám zákazníci na Square Share platí: přímo vám, protože prodávajícím jste vy. Square Share vaše peníze nikdy nedrží."
 translationKey: "payments-and-payouts"
 lastUpdated: "2026-11-02"
 draft: true
@@ -9,33 +9,18 @@ draft: true
 
 <AnswerBlock>
 
-Platby ve Square Share fungují přes váš vlastní účet Stripe prostřednictvím přímých plateb. Vy jste prodávající, který za prodej právně odpovídá, a peníze jdou přímo k vám. Square Share vaše prostředky nikdy nedrží. Tato sekce poroste, jak se platební funkce postupně zpřístupňují.
+Zákazníci vám platí přímo a za každý prodej právně odpovídáte vy jako prodávající. Square Share vaše peníze nikdy nedrží. Pokladna Square Share bude přijímat platby na váš vlastní účet Stripe. Než bude dostupná, platí vám zákazníci přes odkaz na nákup u produktu nebo e-mailem. Tato sekce se bude rozšiřovat.
 
 </AnswerBlock>
 
-## Jak to funguje dnes
-
-{/* TODO(adrian): pokladna Square Share přes Stripe je v kódu hotová, ale v produkci vypnutá; text níže popisuje aktuální stav, ověřte ho a doplňte před spuštěním plateb */}
-
-Propojíte svůj vlastní účet Stripe. Výplaty pak procházejí přímo přes váš Stripe účet na váš bankovní účet. Square Share vaše prostředky nikdy nedrží a nikdy nevidí vaše bankovní údaje.
-
-Než bude pokladna Square Share spuštěna, platí tento postup:
-
-- Zákazníkům nastavte odkaz na vlastní pokladnu u každého produktu (pole **Odkaz na nákup** ve formuláři produktu).
-- Nebo zákazníci napíší na váš kontaktní e-mail a domluvíte se přímo.
-
-Panel zobrazuje: "Příjem plateb přes Stripe já brzy. Do té doby vám kupující platí přes odkaz na nákup u produktu nebo se vám ozvou e-mailem."
-
-## Propojení Stripe
-
-Stripe propojíte v sekci **Platby** v panelu. Nastavení probíhá přímo u Stripe; Square Share nevidí ani neukládá vaše bankovní údaje ani doklady k ověření totožnosti.
+{/* TODO(adrian): pokladna Square Share přes Stripe je v kódu hotová, ale v produkci vypnutá. Panel na stránce Platby píše, že příjem plateb přes Stripe bude brzy a že do té doby zákazníci platí přes odkaz u produktu nebo e-mailem. Po spuštění pokladny stránku aktualizujte. */}
 
 ## Kdo je prodávající?
 
-Vy. Square Share funguje na modelu přímých plateb: vy jste prodávající, který právně odpovídá za každou transakci. Square Share pouze poskytuje technickou infrastrukturu.
+Vy. Proto panel chce vaše [údaje o prodejci](/cs/reference/slovnik#seller-details) (jméno, adresu a kontaktní e-mail), než se cokoli zveřejní nebo prodá.
 
 ## Související stránky
 
 - [Co je Square Share?](/cs/co-je-square-share)
-- [Jak přidám výlohu na svůj web?](/cs/instalace/pridani-vylohy-na-web)
-- [Slovník pojmů](/cs/reference/slovnik#merchant-of-record)
+- [Slovník pojmů: prodávající](/cs/reference/slovnik#merchant-of-record)
+- [Slovník pojmů: výplata](/cs/reference/slovnik#payout)

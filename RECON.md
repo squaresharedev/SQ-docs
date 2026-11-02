@@ -83,6 +83,7 @@ code value. TODO(adrian) confirms it.
   started" buttons on squareshare.eu. Home's footer "Get Started" link points to
   `https://squareshare.eu/#hero`. The docs use that. TODO(adrian).
 - Home has no Czech version and no "not affiliated with Square" statement.
+- Contact email office@squareshare.eu comes from the brief (not found in code).
 
 ## 6. Storefront embed (shipped, live since 2026-10-19)
 

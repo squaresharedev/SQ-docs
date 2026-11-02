@@ -1,6 +1,6 @@
 ---
 title: "Jak přidám na svůj web tlačítko pro nákup?"
-description: "Jak přidat odkaz pro nákup jednoho produktu na tlačítko vašeho webu. Odkaz, HTML a blocked stavy."
+description: "Jak přidat odkaz pro nákup jednoho produktu na tlačítko vašeho webu. Odkaz, HTML a co dělat, když kopírování nejde."
 translationKey: "add-purchase-button"
 lastUpdated: "2026-11-02"
 draft: true
@@ -52,22 +52,21 @@ Zákazník se dostane na stránku produktu hostovanou Square Share. Tlačítko n
 
 {/* TODO(adrian): pokladna Square Share přes Stripe je v kódu hotová, ale v produkci vypnutá; doplňte popis průběhu po spuštění plateb */}
 
-Stránka produktu se odmítne načíst uvnitř iframe, vyskakovacího okna ani lightboxu. Odkaz musí vždy otevřít stránku ve stejném panelu prohlížeče.
+Stránka produktu se odmítne načíst uvnitř iframe, vyskakovacího okna ani lightboxu.
 
 ## Proč nemůžu odkaz zkopírovat?
 
 Tlačítko kopírování zůstane uzamčené, pokud nastane jedna z těchto situací:
 
 - **Produkt je stažen.** Panel zobrazí: "Tento produkt byl stažen. Otevřete ho a uvidíte proč."
+- **Údaje o prodejci nejsou vyplněné.** Panel zobrazí: "Dokud nebudou vaše údaje prodejce kompletní, nemůžete nic zveřejnit ani prodat." a odkaz **Doplnit údaje prodejce**.
 - **Produkt je koncept.** Nejdřív ho nastavte jako Aktivní. Panel zobrazí: "Tento produkt je koncept. Nejdřív ho nastavte jako Aktivní."
 - **Produkt není v žádné výloze.** Panel zobrazí: "Nejdřív produkt umístěte do výlohy, aby měl stránku, na kterou kupující přijdou."
-- **Údaje prodejce nejsou vyplněné.** Doplňte je v sekci **Nastavení**.
 
-{/* TODO(adrian): ověřit český text pro blocked stav "údaje prodejce neúplné" u dialogu tlačítka pro nákup */}
 
 ## Jak ověřím, že to funguje?
 
-Klikněte na **Vyzkoušet tlačítko** přímo v dialogu. Odkaz se otevře v nové záložce a vy uvidíte stránku produktu. V sekci **Analytika** se zobrazí jako kanál "Tlačítko nákupu".
+Klikněte na **Vyzkoušet tlačítko** přímo v dialogu. Odkaz se otevře v nové záložce a vy uvidíte stránku produktu.
 
 ## Související stránky
 
