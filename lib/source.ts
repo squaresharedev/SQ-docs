@@ -7,7 +7,19 @@ import { i18n } from "./i18n.ts";
 import { remarkGlossary } from "./mdx/remark-glossary.ts";
 
 /** MDX components that only wrap content: their children go to Markdown as is. */
-const WRAPPER_COMPONENTS = new Set(["AnswerBlock", "SectionCards"]);
+const WRAPPER_COMPONENTS = new Set([
+  "AnswerBlock",
+  "SectionCards",
+  "GuideCards",
+  "FeatureCards",
+  "Steps",
+  "Snippet",
+  "Buttons",
+  "ComingNext",
+]);
+
+/** MDX components that only draw: left out of the Markdown version entirely. */
+const PICTURE_COMPONENTS = new Set(["Illustration"]);
 
 const docs = defineDocs({
   dir: "content/docs",
@@ -26,6 +38,7 @@ const docs = defineDocs({
           if (node.type === "mdxJsxFlowElement" && WRAPPER_COMPONENTS.has(node.name ?? "")) {
             return "children-only";
           }
+          if (node.type === "mdxJsxFlowElement" && PICTURE_COMPONENTS.has(node.name ?? "")) return false;
           return true;
         },
       },

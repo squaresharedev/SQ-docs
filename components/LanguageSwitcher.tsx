@@ -30,9 +30,9 @@ export function LanguageSwitcher({ className }: { className?: string }) {
                 aria-current={current ? "page" : undefined}
                 title={LANGUAGE_NAME[code]}
                 className={cn(
-                  "flex h-8 min-w-10 items-center justify-center px-2 font-inter text-xs font-medium uppercase tracking-wide transition-colors",
+                  "flex h-8 min-w-10 items-center justify-center px-2 font-mono text-xs font-medium uppercase tracking-widest transition-colors",
                   current
-                    ? "bg-fd-primary text-fd-primary-foreground"
+                    ? "bg-fd-foreground text-fd-background"
                     : "text-fd-muted-foreground hover:bg-fd-accent hover:text-fd-accent-foreground",
                 )}
               >

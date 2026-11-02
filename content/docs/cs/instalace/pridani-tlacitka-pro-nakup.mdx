@@ -13,6 +13,8 @@ Tlačítko pro nákup je odkaz, který přidáte na libovolné tlačítko svého
 
 </AnswerBlock>
 
+<Illustration kind="button" />
+
 ## Co potřebuji, než začnu?
 
 - Účet Square Share.
@@ -20,7 +22,15 @@ Tlačítko pro nákup je odkaz, který přidáte na libovolné tlačítko svého
 - Produkt musí být umístěný ve výloze, aby měl vlastní stránku.
 - Vyplněné údaje prodejce v sekci **Nastavení**.
 
+<Buttons>
+
+[Otevřít panel](https://dashboard.squareshare.eu)
+
+</Buttons>
+
 ## Jak tlačítko přidám?
+
+<Steps>
 
 1. V panelu přejděte do sekce **Produkty**.
 2. Najděte produkt, otevřete jeho nabídku kliknutím na tlačítko **⋯** a zvolte **Přidat na váš web**.
@@ -28,21 +38,31 @@ Tlačítko pro nákup je odkaz, který přidáte na libovolné tlačítko svého
 4. Klikněte na **Kopírovat odkaz** nebo **Kopírovat HTML** a vložte zkopírovanou hodnotu na svůj web.
 5. Kliknutím na **Vyzkoušet tlačítko** ověřte, že odkaz otevírá stránku produktu.
 
+</Steps>
+
 ### Formát odkazu a HTML
 
 Odkaz má tvar:
+
+<Snippet>
 
 ```
 https://dashboard.squareshare.eu/s/STOREFRONT_ID/p/PRODUCT_ID?via=button
 ```
 
+</Snippet>
+
 Panel zkopíruje odkaz s vašimi skutečnými hodnotami. Adresu ponechte přesně tak, jak je, včetně parametru `?via=button`.
 
 V HTML vypadá tlačítko takto:
 
+<Snippet>
+
 ```html title="Tlačítko pro nákup (HTML)"
 <a href="https://dashboard.squareshare.eu/s/STOREFRONT_ID/p/PRODUCT_ID?via=button">Koupit</a>
 ```
+
+</Snippet>
 
 Text odkazu ("Koupit") přepište na cokoli, co odpovídá vašemu webu.
 
@@ -67,6 +87,12 @@ Tlačítko kopírování zůstane uzamčené, pokud nastane jedna z těchto situ
 ## Jak ověřím, že to funguje?
 
 Klikněte na **Vyzkoušet tlačítko** přímo v dialogu. Odkaz se otevře v nové záložce a vy uvidíte stránku produktu.
+
+<Buttons>
+
+[Dál: instalace s AI nástrojem](/cs/instalace/instalace-s-ai-nastrojem) [Raději přidat výlohu](/cs/instalace/pridani-vylohy-na-web)
+
+</Buttons>
 
 ## Související stránky
 

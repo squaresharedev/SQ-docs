@@ -70,25 +70,25 @@ function entriesFor(node: JsxFlowElement, file: VFile): readonly GlossaryEntry[]
     });
 }
 
+/**
+ * In HTML the terms become a definition list (dl > div > dt + dd) via hName;
+ * the Markdown version is the plain list from toMarkdown(). Items are "spread"
+ * so their two paragraphs survive as the dt and the dd.
+ */
 function buildList(entries: readonly GlossaryEntry[], locale: Locale, withAnchors: boolean): List {
   return {
     type: "list",
     ordered: false,
-    spread: false,
-    data: { hProperties: { className: ["glossary-list"] } },
+    spread: true,
+    data: { hName: "dl", hProperties: { className: ["glossary-list"] } },
     children: entries.map(
       (entry): ListItem => ({
         type: "listItem",
-        spread: false,
-        data: withAnchors ? { hProperties: { id: entry.key } } : undefined,
+        spread: true,
+        data: { hName: "div", hProperties: withAnchors ? { id: entry.key } : {} },
         children: [
-          {
-            type: "paragraph",
-            children: [
-              { type: "strong", children: [{ type: "text", value: entry[locale].term }] },
-              { type: "text", value: `: ${entry[locale].definition}` },
-            ],
-          },
+          { type: "paragraph", data: { hName: "dt" }, children: [{ type: "text", value: entry[locale].term }] },
+          { type: "paragraph", data: { hName: "dd" }, children: [{ type: "text", value: entry[locale].definition }] },
         ],
       }),
     ),

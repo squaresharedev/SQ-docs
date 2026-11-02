@@ -12,6 +12,8 @@ Copy your storefront's snippet from its Share page in the dashboard and paste it
 
 </AnswerBlock>
 
+<Illustration kind="storefront" />
+
 ## What do I need before I start?
 
 - A Square Share account at [dashboard.squareshare.eu](https://dashboard.squareshare.eu).
@@ -21,7 +23,15 @@ Copy your storefront's snippet from its Share page in the dashboard and paste it
 - Product pages turned on in the storefront designer. A click on a storefront tile opens the product's page.
 - A website served over **https**. The storefront will not show on http pages.
 
+<Buttons>
+
+[Open the dashboard](https://dashboard.squareshare.eu)
+
+</Buttons>
+
 ## How do I add the storefront?
+
+<Steps>
 
 1. In the dashboard, select **Storefront** in the sidebar.
 2. Click **Share** on your storefront's card (or **Share** in the designer header if the storefront is open). The page that opens is titled "Share this storefront".
@@ -34,12 +44,18 @@ Copy your storefront's snippet from its Share page in the dashboard and paste it
 9. Paste the snippet into your page (see "Where do I paste the snippet?" below).
 10. Under "Add this to your privacy policy" (Required), click **Copy privacy text** and add that text to your site's privacy policy.
 
+</Steps>
+
 The snippet the dashboard copies for you looks like this (the dashboard fills in your real key):
+
+<Snippet>
 
 ```html title="Script snippet"
 <div data-squareshare-storefront="YOUR-EMBED-KEY"></div>
 <script async src="https://embed.squareshare.eu/widget.js"></script>
 ```
+
+</Snippet>
 
 Replace `YOUR-EMBED-KEY` with the key shown on the Share page in your dashboard. The dashboard's **Copy embed snippet** button fills this in for you automatically.
 
@@ -68,6 +84,8 @@ Choose your site builder:
 
 The iframe snippet, for sites that strip scripts:
 
+<Snippet>
+
 ```html title="Iframe snippet"
 <iframe
   src="https://embed.squareshare.eu/e/YOUR-EMBED-KEY/yoursite.com/www.yoursite.com"
@@ -78,6 +96,8 @@ The iframe snippet, for sites that strip scripts:
   style="display:block;width:100%;height:640px;border:0"
 ></iframe>
 ```
+
+</Snippet>
 
 The address ends with your saved domains and their `www.` versions (up to four). The dashboard fills in your key and domains when you click **Copy embed snippet** on the **Iframe only** tab. Copy it again after you change your domains.
 
@@ -105,6 +125,12 @@ If the storefront does not show, check these points:
 - To test on a preview address (such as `yoursite.webflow.io`), add that address to **Allowed domains** as well.
 
 A refused embed draws nothing visible on the page. The Script version logs a console message starting with `[Square Share] The storefront is not showing on` to help with diagnosis.
+
+<Buttons>
+
+[Next: add a purchase button](/en/install/add-purchase-button) [Ask an AI coding tool to do it](/en/install/install-with-ai-coding-tool)
+
+</Buttons>
 
 ## Related pages
 

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { DocsLayout } from "fumadocs-ui/layouts/notebook";
 import { LocaleProvider } from "@/components/locale-context";
 import { Provider } from "@/components/Provider";
+import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { COPY } from "@/lib/copy";
 import { fontVariables } from "@/lib/fonts";
@@ -40,6 +41,7 @@ export default async function LocaleLayout({ params, children }: LayoutProps<"/[
             >
               {children}
             </DocsLayout>
+            <SiteFooter locale={lang} />
           </LocaleProvider>
         </Provider>
       </body>

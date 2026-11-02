@@ -12,6 +12,8 @@ A purchase button is a link you copy from the dashboard and paste into a button 
 
 </AnswerBlock>
 
+<Illustration kind="button" />
+
 {/* TODO(adrian): The dashboard dialog title and the Analytics channel label still use the older name for this feature (exact strings in RECON.md section 7). The docs say "purchase button" throughout. Align the UI wording when possible. */}
 
 ## What do I need before I start?
@@ -22,7 +24,15 @@ A purchase button is a link you copy from the dashboard and paste into a button 
 - The product on a storefront, with its product page turned on.
 - A button on your website whose link you can set.
 
+<Buttons>
+
+[Open the dashboard](https://dashboard.squareshare.eu)
+
+</Buttons>
+
 ## How do I add a purchase button?
+
+<Steps>
 
 1. In the dashboard, go to **Products**.
 2. Click the **...** (three-dot) menu on the product card for the product you want to sell.
@@ -31,23 +41,33 @@ A purchase button is a link you copy from the dashboard and paste into a button 
 5. Paste the link into the link setting of a button on your website.
 6. Click **Try your button** (at the bottom of the dialog) to open the product page in a new tab and confirm it works.
 
+</Steps>
+
 You can also use the **HTML** tab to copy a ready-made `<a>` element, or the **AI agent** tab for a prompt you can give to an AI coding tool. See [How do I install Square Share with an AI coding tool?](/en/install/install-with-ai-coding-tool).
 
 ## What does the link look like?
 
 The link from the **Link** tab follows this format:
 
+<Snippet>
+
 ```
 https://dashboard.squareshare.eu/s/STOREFRONT_ID/p/PRODUCT_ID?via=button
 ```
+
+</Snippet>
 
 The dashboard fills in `STOREFRONT_ID` and `PRODUCT_ID` with your real values.
 
 The HTML snippet from the **HTML** tab looks like this:
 
+<Snippet>
+
 ```html title="HTML snippet"
 <a href="https://dashboard.squareshare.eu/s/STOREFRONT_ID/p/PRODUCT_ID?via=button">Buy now</a>
 ```
+
+</Snippet>
 
 The default link text the dashboard provides is "Buy now". Change it to suit your site before pasting.
 
@@ -71,6 +91,12 @@ The copy button is blocked in four situations:
 Click **Try your button** in the dialog. It opens the product page in a new tab. If the page loads and shows your product details, the button is working.
 
 If the page does not load, check that the product is Active, on a storefront, and that product pages are turned on.
+
+<Buttons>
+
+[Next: install with an AI coding tool](/en/install/install-with-ai-coding-tool) [Add a storefront instead](/en/install/add-storefront-to-website)
+
+</Buttons>
 
 ## Related pages
 

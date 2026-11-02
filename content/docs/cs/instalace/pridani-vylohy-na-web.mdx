@@ -13,6 +13,8 @@ Výlohu na web přidáte tak, že v panelu zapnete vložení na web, zadáte svo
 
 </AnswerBlock>
 
+<Illustration kind="storefront" />
+
 ## Co potřebuji, než začnu?
 
 - Účet Square Share (přihlášení na dashboard.squareshare.eu).
@@ -21,7 +23,15 @@ Výlohu na web přidáte tak, že v panelu zapnete vložení na web, zadáte svo
 - Produktové stránky zapnuté v editoru výlohy.
 - Vyplněné údaje prodejce v sekci **Nastavení** (bez nich zůstane tlačítko kopírování uzamčené).
 
+<Buttons>
+
+[Otevřít panel](https://dashboard.squareshare.eu)
+
+</Buttons>
+
 ## Jak výlohu přidám?
+
+<Steps>
 
 1. V panelu přejděte do sekce **Výloha**.
 2. Na kartě výlohy klikněte na tlačítko **Sdílet**, nebo použijte stejné tlačítko v záhlaví editoru.
@@ -32,12 +42,18 @@ Výlohu na web přidáte tak, že v panelu zapnete vložení na web, zadáte svo
 7. Klikněte na **Kopírovat kód pro vložení** a vložte kód na svůj web.
 8. V kroku zásad ochrany osobních údajů (povinný) klikněte na **Kopírovat text o soukromí** a vložte text do zásad ochrany osobních údajů svého webu.
 
+</Steps>
+
 Panel dosadí váš vlastní klíč automaticky.
+
+<Snippet>
 
 ```html title="Kód pro vložení výlohy (záložka Skript)"
 <div data-squareshare-storefront="VAS-KLIC-VLOZENI"></div>
 <script async src="https://embed.squareshare.eu/widget.js"></script>
 ```
+
+</Snippet>
 
 ## Kam kód vložím?
 
@@ -65,11 +81,15 @@ V panelu najdete záložky **Skript** a **Jen iframe**.
 | Vhodné pro | Většinu webů | Weby, které odstraňují skripty |
 | Po změně domény | Stačí ponechat stávající kód | Zkopírujte kód znovu |
 
+<Snippet>
+
 ```html title="Kód pro vložení výlohy (záložka Jen iframe)"
 <iframe src="https://embed.squareshare.eu/e/VAS-KLIC-VLOZENI/vasweb.cz/www.vasweb.cz" title="Shop" loading="lazy"
   sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms" referrerpolicy="no-referrer"
   style="display:block;width:100%;height:640px;border:0"></iframe>
 ```
+
+</Snippet>
 
 Adresa končí vašimi uloženými doménami a jejich verzemi s `www.` (nejvýše čtyři). Panel doplní váš klíč i domény, když na záložce **Jen iframe** kliknete na **Kopírovat kód pro vložení**. Po změně domén kód zkopírujte znovu.
 
@@ -92,6 +112,12 @@ Výloha se zobrazí na vašem zveřejněném webu, ne v editoru nástroje pro tv
 Chcete-li výlohu vidět na adrese náhledu (například `vasweb.webflow.io`), přidejte i tuto adresu do **Povolených domén**.
 
 Když se výloha nenačte, `widget.js` zapíše do konzole prohlížeče zprávu začínající `[Square Share] The storefront is not showing on`.
+
+<Buttons>
+
+[Dál: tlačítko pro nákup](/cs/instalace/pridani-tlacitka-pro-nakup) [Nechat to udělat AI nástroj](/cs/instalace/instalace-s-ai-nastrojem)
+
+</Buttons>
 
 ## Související stránky
 

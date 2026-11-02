@@ -13,7 +13,11 @@ Zkopírujte kód výlohy nebo odkaz tlačítka pro nákup z panelu, přiložte p
 
 </AnswerBlock>
 
-## Jak na to
+<Illustration kind="ai" />
+
+## Jak šablonu promptu použiji?
+
+<Steps>
 
 1. Zkopírujte svůj kód z panelu: kód pro vložení výlohy (záložka **Skript** nebo **Jen iframe**) nebo odkaz tlačítka pro nákup (záložka **Odkaz** nebo **HTML**).
 2. Zkopírujte níže příslušnou šablonu promptu.
@@ -21,7 +25,11 @@ Zkopírujte kód výlohy nebo odkaz tlačítka pro nákup z panelu, přiložte p
 4. Výsledný prompt vložte do Claude Code, Cursoru nebo Lovable.
 5. Zkontrolujte výsledek na zveřejněném webu s adresou `https`.
 
+</Steps>
+
 ## Šablona promptu: přidání výlohy
+
+<Snippet>
 
 ```text title="Šablona promptu (před použitím upravte)"
 Přidej na můj web výlohu Square Share. Kód pro vložení (nic v něm neměň):
@@ -39,9 +47,13 @@ Tento web zobrazuje výlohu, kterou poskytuje Square Share. Při jejím načten�
 Přečti si dokumentaci: https://docs.squareshare.eu/cs/instalace/pridani-vylohy-na-web.md
 ```
 
+</Snippet>
+
 Před odesláním: nahraďte `VAS-KLIC-VLOZENI` klíčem ze svého panelu a doplňte název stránky a místo vložení.
 
 ## Šablona promptu: přidání tlačítka pro nákup
+
+<Snippet>
 
 ```text title="Šablona promptu (před použitím upravte)"
 Přidej na můj web tlačítko pro nákup. Musí odkazovat přesně na tuto adresu:
@@ -59,9 +71,17 @@ Nepotřebuješ žádný skript, SDK ani volání API. Adresu ponech přesně tak
 Přečti si dokumentaci: https://docs.squareshare.eu/cs/instalace/pridani-tlacitka-pro-nakup.md
 ```
 
+</Snippet>
+
 Před odesláním: nahraďte `STOREFRONT_ID` a `PRODUCT_ID` hodnotami z odkazu, který jste zkopírovali z panelu.
 
 Dialog pro tlačítko pro nákup v panelu má záložku **AI agent** s připraveným promptem v angličtině. Tuto záložku použijte, pokud pracujete v anglickém prostředí.
+
+<Buttons>
+
+[Návod k výloze](/cs/instalace/pridani-vylohy-na-web) [Návod k tlačítku pro nákup](/cs/instalace/pridani-tlacitka-pro-nakup)
+
+</Buttons>
 
 ## Související stránky
 

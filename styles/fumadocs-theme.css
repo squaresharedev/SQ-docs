@@ -70,7 +70,7 @@
   outline-offset: 2px;
 }
 
-/* Reading comfort: ~70 characters per line, generous leading, semibold headings. */
+/* Reading comfort: ~70 characters per line, generous leading. Headline type is in visuals.css. */
 #nd-page .prose {
   line-height: 1.75;
 }
@@ -79,82 +79,7 @@
   max-width: 70ch;
 }
 
-#nd-page :where(h1, h2, h3, h4) {
+#nd-page :where(h4) {
   font-weight: 600;
   letter-spacing: -0.01em;
-}
-
-/* The answer under the title: a card, like the dashboard's cards. */
-.answer-block {
-  margin-block: 1.75rem;
-  padding: 1rem 1.25rem;
-  border: 1px solid var(--color-fd-border);
-  border-inline-start: 3px solid var(--color-fd-primary);
-  border-radius: var(--radius-md);
-  background: var(--color-fd-card);
-  box-shadow: var(--shadow-xs);
-  font-size: 1.0625em;
-  color: var(--color-fd-foreground);
-}
-
-.answer-block > :first-child {
-  margin-top: 0;
-}
-
-.answer-block > :last-child {
-  margin-bottom: 0;
-}
-
-/* Docs home: a Markdown list of sections drawn as cards. */
-.section-cards > ul {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
-  gap: 0.75rem;
-  margin: 1.5rem 0;
-  padding: 0;
-  list-style: none;
-  max-width: none;
-}
-
-.section-cards > ul > li {
-  position: relative;
-  margin: 0;
-  padding: 1rem;
-  border: 1px solid var(--color-fd-border);
-  border-radius: var(--radius-md);
-  background: var(--color-fd-card);
-  box-shadow: var(--shadow-xs);
-  color: var(--color-fd-muted-foreground);
-  font-size: 0.9375rem;
-  line-height: 1.6;
-  transition: box-shadow var(--default-transition-duration) var(--default-transition-timing-function);
-}
-
-.section-cards > ul > li::marker {
-  content: none;
-}
-
-.section-cards > ul > li:hover {
-  box-shadow: var(--shadow-md);
-}
-
-.section-cards > ul > li > a,
-.section-cards > ul > li > p > a {
-  display: block;
-  margin-bottom: 0.25rem;
-  color: var(--color-fd-foreground);
-  font-size: 1rem;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-/* The whole card is the link's hit area. */
-.section-cards > ul > li a::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-}
-
-.section-cards > ul > li p {
-  margin: 0;
 }

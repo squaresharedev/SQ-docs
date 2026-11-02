@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { ButtonLink } from "@/components/ButtonLink";
 import { LogoMark } from "@/components/Logo";
+import { HeroCursors } from "@/components/visuals/HeroDecor";
 import { LANGUAGE_NAME, LANGUAGE_TAG, LOCALES, type Locale } from "@/lib/i18n";
 import { publishedPages } from "@/lib/llms";
 import { absoluteUrl, SITE_URL } from "@/lib/site";
@@ -28,33 +29,31 @@ export const metadata: Metadata = {
   alternates: { canonical: absoluteUrl("/"), languages: publishedHomes() },
 };
 
+/** The language chooser, drawn like the homepage hero. */
 export default function LanguageChooser() {
   return (
-    <main className="mx-auto flex min-h-screen max-w-xl flex-col justify-center gap-10 px-6 py-16">
-      <div className="flex items-center gap-3">
-        <LogoMark className="size-7" />
-        <h1 className="text-2xl font-semibold tracking-tight">Square Share Docs</h1>
+    <main className="relative isolate flex min-h-screen flex-col justify-center overflow-hidden px-6 py-16 sm:px-12">
+      <HeroCursors />
+      <div className="relative mx-auto w-full max-w-3xl">
+        <p className="m-0 flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+          <LogoMark className="size-6 text-foreground" />
+          Square Share
+        </p>
+        <h1 className="mt-6 mb-0 font-display text-5xl leading-[1.02] font-bold tracking-tight sm:text-7xl">
+          Square Share <span className="text-acid">Docs</span>
+        </h1>
+        <ul className="mt-10 grid list-none gap-4 p-0 sm:grid-cols-2">
+          {LOCALES.map((locale, index) => (
+            <li key={locale} lang={locale} className="flex flex-col gap-3 border border-border bg-card p-5">
+              <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">/{locale}</span>
+              <span className="text-sm text-muted-foreground">{CHOICES[locale]}</span>
+              <ButtonLink href={`/${locale}`} variant={index === 0 ? "solid" : "outline"} className="self-start">
+                {LANGUAGE_NAME[locale]}
+              </ButtonLink>
+            </li>
+          ))}
+        </ul>
       </div>
-      <ul className="flex flex-col gap-3">
-        {LOCALES.map((locale) => (
-          <li key={locale}>
-            <Link
-              href={`/${locale}`}
-              hrefLang={locale}
-              lang={locale}
-              className="flex items-center justify-between gap-4 border border-border bg-card px-5 py-4 transition-colors hover:bg-accent"
-            >
-              <span className="flex flex-col gap-1">
-                <span className="text-lg font-semibold">{LANGUAGE_NAME[locale]}</span>
-                <span className="font-inter text-sm text-muted-foreground">{CHOICES[locale]}</span>
-              </span>
-              <span aria-hidden="true" className="font-inter text-sm uppercase text-muted-foreground">
-                /{locale}
-              </span>
-            </Link>
-          </li>
-        ))}
-      </ul>
     </main>
   );
 }

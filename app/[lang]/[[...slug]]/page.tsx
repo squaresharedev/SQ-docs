@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { createRelativeLink } from "fumadocs-ui/mdx";
 import { DocsBody, DocsPage, DocsTitle } from "fumadocs-ui/layouts/notebook/page";
+import { DocsHomeHero } from "@/components/DocsHomeHero";
 import { DraftBanner } from "@/components/DraftBanner";
 import { JsonLd } from "@/components/JsonLd";
 import { getMDXComponents } from "@/components/mdx";
@@ -31,11 +32,22 @@ export default async function Page(props: PageProps<"/[lang]/[[...slug]]">) {
   const locale = localeOf(page);
   const copy = COPY[locale];
   const MDX = page.data.body;
+  // A locale's docs home opens with the homepage-style hero instead of a plain title.
+  const isHome = page.slugs.length === 0;
 
   return (
-    <DocsPage toc={page.data.toc} tableOfContent={{ style: "clerk" }}>
+    <DocsPage
+      toc={page.data.toc}
+      full={isHome}
+      tableOfContent={{ style: "clerk", enabled: !isHome }}
+      tableOfContentPopover={{ enabled: !isHome }}
+    >
       {page.data.draft ? <DraftBanner copy={copy} /> : null}
-      <DocsTitle>{page.data.title}</DocsTitle>
+      {isHome ? (
+        <DocsHomeHero title={page.data.title} lead={page.data.description} locale={locale} copy={copy} />
+      ) : (
+        <DocsTitle className="docs-title">{page.data.title}</DocsTitle>
+      )}
       <PageMeta
         lastUpdated={page.data.lastUpdated}
         markdownUrl={markdownPath(page)}
@@ -43,7 +55,7 @@ export default async function Page(props: PageProps<"/[lang]/[[...slug]]">) {
         copy={copy}
       />
       <DocsBody>
-        <MDX components={getMDXComponents({ a: createRelativeLink(source, page) })} />
+        <MDX components={getMDXComponents(locale, { a: createRelativeLink(source, page) })} />
       </DocsBody>
       <JsonLd data={pageGraph(page)} />
     </DocsPage>
