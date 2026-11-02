@@ -1,0 +1,84 @@
+---
+title: How do I install Square Share with an AI coding tool?
+description: Copy your snippet and a prompt template, then ask Claude Code, Cursor or Lovable to add the storefront to your site.
+translationKey: install-with-ai
+lastUpdated: 2026-11-02
+draft: true
+---
+
+<AnswerBlock>
+
+Copy your snippet from the dashboard, then give an AI coding tool the snippet and a prompt that tells it exactly where to place the code. The tool edits your site files. You verify the result on your published https site.
+
+</AnswerBlock>
+
+## Steps
+
+1. In the dashboard, go to **Storefront** and open your storefront. Click **Share**, then copy your embed snippet from the **Script** tab. The snippet contains your real embed key.
+2. Copy the prompt template below. Replace `YOUR-EMBED-KEY` with your real key from the snippet you just copied.
+3. Replace any other placeholders in the template (such as which page should show the storefront).
+4. Paste the completed prompt into Claude Code, Cursor, Lovable, or another AI coding tool.
+5. Review the changes the tool makes to your site files.
+6. Publish the site and check the result on your live https address. The storefront does not show in a site builder's editor preview.
+
+The dashboard's **Add to your website** dialog on any product card also has an **AI agent** tab with a ready-made prompt for adding a purchase button.
+
+## Prompt template: add a storefront
+
+Copy this template, fill in the placeholders, then paste it into your AI coding tool.
+
+```text title="Prompt template (edit before use)"
+Add a Square Share storefront to this site.
+
+Paste this snippet exactly as-is into the main content area of the page where
+the storefront should appear. Replace YOUR-EMBED-KEY with your real key from
+the dashboard Share page before running this prompt:
+
+    <div data-squareshare-storefront="YOUR-EMBED-KEY"></div>
+    <script async src="https://embed.squareshare.eu/widget.js"></script>
+
+Rules:
+- Do not modify the snippet in any way.
+- The site must use https. The storefront will not show on http pages.
+- Place the snippet in the main content area of the page, not in the <head>.
+
+Also add this paragraph to the site's privacy policy:
+
+    This site shows a storefront provided by Square Share. When it loads,
+    the visitor's IP address and browser details are sent to Square Share
+    to display the products and to count visits. Square Share sets no
+    cookies and stores nothing on the visitor's device for this.
+    Details: https://squareshare.eu/legal/privacy-policy/
+
+For full instructions, read:
+https://docs.squareshare.eu/en/install/add-storefront-to-website.md
+```
+
+## Prompt template: add a purchase button
+
+Copy this template, fill in the placeholders, then paste it into your AI coding tool.
+
+```text title="Prompt template (edit before use)"
+Add a purchase button to this site.
+
+The link for the button is:
+https://dashboard.squareshare.eu/s/STOREFRONT_ID/p/PRODUCT_ID?via=button
+
+Replace STOREFRONT_ID and PRODUCT_ID with the real values from the dashboard.
+Copy the link from Products, then the three-dot menu on the product card, then
+Add to your website, then the Link tab.
+
+Rules:
+- Open the link in the same browser tab. Do not use target="_blank", a popup,
+  or an iframe.
+- No script is needed. The link is a plain <a href> element.
+- Do not wrap it in a frame or overlay. The product page refuses to be framed.
+
+For full instructions, read:
+https://docs.squareshare.eu/en/install/add-purchase-button.md
+```
+
+## Related pages
+
+- [How do I add a storefront to my website?](/en/install/add-storefront-to-website)
+- [How do I add a purchase button to my website?](/en/install/add-purchase-button)

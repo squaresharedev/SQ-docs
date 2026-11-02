@@ -1,9 +1,12 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { lazy, type ReactNode } from "react";
 import { RootProvider } from "fumadocs-ui/provider/next";
 import type { I18nProviderProps } from "fumadocs-ui/contexts/i18n";
-import SearchDialog from "./SearchDialog";
+import { DocsLink } from "./DocsLink";
+
+// The dialog and its search engine download on first open, not with every page.
+const SearchDialog = lazy(() => import("./SearchDialog"));
 
 /**
  * Fumadocs root provider. Light by default like the dashboard; dark mode is
@@ -17,7 +20,12 @@ export function Provider({
   children: ReactNode;
 }) {
   return (
-    <RootProvider search={{ SearchDialog }} i18n={i18n} theme={{ defaultTheme: "light", hotKey: false }}>
+    <RootProvider
+      search={{ SearchDialog, preload: false }}
+      i18n={i18n}
+      theme={{ defaultTheme: "light", hotKey: false }}
+      components={{ Link: DocsLink }}
+    >
       {children}
     </RootProvider>
   );

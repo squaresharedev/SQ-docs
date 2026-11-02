@@ -48,6 +48,16 @@
   --radius-2xl: var(--radius-lg);
 }
 
+/* Sidebar rows use the dashboard's nav item radius; the theme switch is a control, so it follows inputs. */
+#nd-sidebar :where(a, button) {
+  border-radius: var(--radius-sm);
+}
+
+[data-theme-toggle],
+[data-theme-toggle] > * {
+  border-radius: var(--radius-sm);
+}
+
 /* Square corners for code, like the dashboard's code surface and buttons. */
 #nd-page figure.shiki,
 #nd-page figure.shiki > div {

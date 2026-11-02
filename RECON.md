@@ -109,7 +109,7 @@ code value. TODO(adrian) confirms it.
      **Script** / **Iframe only**, button **Copy embed snippet**.
   3. "Add this to your privacy policy" (Required): **Copy privacy text**.
   4. "Snippet key" with **Rotate key** (rotating breaks every pasted copy).
-- Copy unlocks only when: embedding is on, at least one domain is SAVED, seller
+- The Copy button works only when: embedding is on, at least one domain is SAVED, seller
   details are complete, product pages are on.
 - Site builder instructions (`Store/messages/en/storefront.json`):
   Another site: "Paste it into your page's HTML where the storefront should appear."
@@ -136,7 +136,8 @@ code value. TODO(adrian) confirms it.
   provided by Square Share. When it loads, the visitor's IP address and browser
   details are sent to Square Share to display the products and to count
   visits. Square Share sets no cookies and stores nothing on the visitor's
-  device for this. Details: {policy}"
+  device for this. Details: {policy}". The dashboard fills `{policy}` with
+  `https://squareshare.eu/legal/privacy-policy/` (`Store/src/lib/legal/links.ts`).
 
 ## 7. Purchase button (shipped; the dashboard calls it "buy button")
 

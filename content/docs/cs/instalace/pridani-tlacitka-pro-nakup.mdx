@@ -1,0 +1,76 @@
+---
+title: "Jak přidám na svůj web tlačítko pro nákup?"
+description: "Jak přidat odkaz pro nákup jednoho produktu na tlačítko vašeho webu. Odkaz, HTML a blocked stavy."
+translationKey: "add-purchase-button"
+lastUpdated: "2026-11-02"
+draft: true
+---
+{/* TODO(adrian): native review */}
+
+<AnswerBlock>
+
+Tlačítko pro nákup je odkaz, který přidáte na libovolné tlačítko svého webu. Zákazník na něj klikne a dostane se přímo na stránku produktu hostovanou Square Share. Odkaz zkopírujete v panelu v sekci Produkty přes nabídku karty produktu. Žádný skript ani iframe nepotřebujete.
+
+</AnswerBlock>
+
+## Co potřebuji, než začnu?
+
+- Účet Square Share.
+- Alespoň jeden aktivní produkt v panelu.
+- Produkt musí být umístěný ve výloze, aby měl vlastní stránku.
+- Vyplněné údaje prodejce v sekci **Nastavení**.
+
+## Jak tlačítko přidám?
+
+1. V panelu přejděte do sekce **Produkty**.
+2. Najděte produkt, otevřete jeho nabídku kliknutím na tlačítko **⋯** a zvolte **Přidat na váš web**.
+3. V dialogu "Přidejte na svůj web tlačítko pro nákup" přepněte na záložku **Odkaz** nebo **HTML**.
+4. Klikněte na **Kopírovat odkaz** nebo **Kopírovat HTML** a vložte zkopírovanou hodnotu na svůj web.
+5. Kliknutím na **Vyzkoušet tlačítko** ověřte, že odkaz otevírá stránku produktu.
+
+### Formát odkazu a HTML
+
+Odkaz má tvar:
+
+```
+https://dashboard.squareshare.eu/s/STOREFRONT_ID/p/PRODUCT_ID?via=button
+```
+
+Panel zkopíruje odkaz s vašimi skutečnými hodnotami. Adresu ponechte přesně tak, jak je, včetně parametru `?via=button`.
+
+V HTML vypadá tlačítko takto:
+
+```html title="Tlačítko pro nákup (HTML)"
+<a href="https://dashboard.squareshare.eu/s/STOREFRONT_ID/p/PRODUCT_ID?via=button">Koupit</a>
+```
+
+Text odkazu ("Koupit") přepište na cokoli, co odpovídá vašemu webu.
+
+## Co se stane, když zákazník klikne?
+
+Zákazník se dostane na stránku produktu hostovanou Square Share. Tlačítko na stránce produktu ho pak přesměruje (v tomto pořadí): na odkaz na nákup, který jste nastavili u produktu, nebo vám zákazník napíše e-mailem na vaši kontaktní adresu.
+
+{/* TODO(adrian): pokladna Square Share přes Stripe je v kódu hotová, ale v produkci vypnutá; doplňte popis průběhu po spuštění plateb */}
+
+Stránka produktu se odmítne načíst uvnitř iframe, vyskakovacího okna ani lightboxu. Odkaz musí vždy otevřít stránku ve stejném panelu prohlížeče.
+
+## Proč nemůžu odkaz zkopírovat?
+
+Tlačítko kopírování zůstane uzamčené, pokud nastane jedna z těchto situací:
+
+- **Produkt je stažen.** Panel zobrazí: "Tento produkt byl stažen. Otevřete ho a uvidíte proč."
+- **Produkt je koncept.** Nejdřív ho nastavte jako Aktivní. Panel zobrazí: "Tento produkt je koncept. Nejdřív ho nastavte jako Aktivní."
+- **Produkt není v žádné výloze.** Panel zobrazí: "Nejdřív produkt umístěte do výlohy, aby měl stránku, na kterou kupující přijdou."
+- **Údaje prodejce nejsou vyplněné.** Doplňte je v sekci **Nastavení**.
+
+{/* TODO(adrian): ověřit český text pro blocked stav "údaje prodejce neúplné" u dialogu tlačítka pro nákup */}
+
+## Jak ověřím, že to funguje?
+
+Klikněte na **Vyzkoušet tlačítko** přímo v dialogu. Odkaz se otevře v nové záložce a vy uvidíte stránku produktu. V sekci **Analytika** se zobrazí jako kanál "Tlačítko nákupu".
+
+## Související stránky
+
+- [Jak přidám výlohu na svůj web?](/cs/instalace/pridani-vylohy-na-web)
+- [Jak nainstaluji Square Share pomocí AI nástroje?](/cs/instalace/instalace-s-ai-nastrojem)
+- [Řešení problémů](/cs/reseni-problemu)

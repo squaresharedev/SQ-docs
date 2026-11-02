@@ -1,9 +1,89 @@
 ---
-title: Co je Square Share?
-description: Square Share přidá výlohu nebo tlačítko pro nákup na web, který už máte.
-translationKey: what-is-square-share
-lastUpdated: 2026-11-02
+title: "Co je Square Share?"
+description: "Co je Square Share, pro koho je určen a jak funguje. Funkce dostupné dnes, platby a plány do budoucna."
+translationKey: "what-is-square-share"
+lastUpdated: "2026-11-02"
 draft: true
 ---
+{/* TODO(adrian): native review */}
 
-Stub.
+<AnswerBlock>
+
+Square Share je infrastruktura výlohy pro lidi s vlastním webem. Přidáte kód na svůj web a vaše produkty se tam zobrazí. Slouží prodejcům starším 18 let se sídlem v EU, USA nebo Kanadě. Peníze jdou přímo vám, na váš vlastní účet Stripe.
+
+</AnswerBlock>
+
+## Co se Square Share můžu dělat už dnes?
+
+Jsou dostupné tři věci.
+
+**Vložená výloha.** Mřížka vašich produktů, kterou navrhnete v panelu a zobrazíte na vlastním webu pomocí jednoho kusu kódu. Více v části [Jak přidám výlohu na svůj web?](/cs/instalace/pridani-vylohy-na-web).
+
+**Tlačítko pro nákup.** Odkaz, který přidáte na libovolné tlačítko svého webu. Zákazník klikne a dostane se přímo na stránku produktu. Více v části [Jak přidám na svůj web tlačítko pro nákup?](/cs/instalace/pridani-tlacitka-pro-nakup).
+
+**Editor výlohy v režimu mřížky.** Každý blok leží na buňkách mřížky. V editoru nastavíte:
+
+- Tři vzhledy (Minimalistický, Klasický, Výrazný), které najednou nastaví barvy, písmo, rohy a rozestupy.
+- Vlastní písmo ve formátu WOFF2, WOFF, TTF nebo OTF, do 2 MB.
+- Barvy pozadí, zvýraznění, textu, výplně a ohraničení tvarů.
+- Otočení bloku v rozsahu od -180 do 180 stupňů.
+- Zarovnání textu: vlevo, na střed, vpravo.
+- Velikost bloku tažením za okraje.
+- Hustotu mřížky od 0 do 32 px.
+- Zaoblení rohů dlaždic produktů, cenovky a tvarů.
+- Tloušťku ohraničení cenovky a tvarů.
+- Zobrazení názvu při najetí myší.
+- Pozici ceny: pod obrázkem, na obrázku, skrytou, nebo na jednom ze sedmi míst na obrázku.
+
+## Pro koho je Square Share?
+
+Pro lidi, kteří mají vlastní web a chtějí z něj prodávat, bez přechodu na jinou platformu.
+
+K registraci musíte být starší 18 let a mít bydliště v Evropské unii, USA nebo Kanadě.
+
+## Jak Square Share funguje?
+
+1. V panelu přidejte produkty a navrhněte výlohu v editoru.
+2. Zkopírujte kód výlohy a vložte ho na svůj web.
+3. Zákazníci kliknou na produkt a dostane se na jeho stránku.
+
+Podrobnosti o vložení kódu najdete na stránce [Jak přidám výlohu na svůj web?](/cs/instalace/pridani-vylohy-na-web).
+
+## Jak fungují platby a výplaty?
+
+{/* TODO(adrian): pokladna Square Share přes Stripe je v kódu hotová, ale v produkci vypnutá; text níže popisuje aktuální stav, ověřte ho před spuštěním plateb */}
+
+Propojíte svůj vlastní účet Stripe. Platby pak procházejí přímo přes váš Stripe účet. Vy jste prodávající, který za každý prodej právně odpovídá. Square Share vaše prostředky nikdy nedrží.
+
+Než bude pokladna Square Share spuštěna, kupující vám platí přes odkaz na nákup u produktu, nebo vám napíší e-mailem.
+
+Přečtěte si víc na stránce [Platby a výplaty](/cs/platby-a-vyplaty).
+
+## Je Square Share totéž co Square?
+
+Ne. Square Share je nezávislá služba provozovaná společností Root Labs. Square (Block, Inc.) je jiná, na nás nezávislá společnost.
+
+## Co přijde dál?
+
+V plánu jsou tyto funkce (bez konkrétních termínů):
+
+- Volný režim editoru, kde bloky nebudou vázané na mřížku.
+- Šablony výlohy.
+- Hostované výlohy na app.squareshare.eu pro lidi bez vlastního webu.
+- Objevovací feed nebo tržiště.
+- Další widgety: přihlášení k odběru e-mailů, rezervace, kalendář dostupnosti.
+- Pluginy pro WordPress a Wix.
+- Pokladna Square Share přes Stripe, která umožní zákazníkům platit přímo na stránce produktu.
+
+## Klíčové pojmy
+
+<GlossaryList terms="storefront embed purchase-button dashboard merchant-of-record payout" />
+
+Úplný seznam termínů najdete ve [Slovníku pojmů](/cs/reference/slovnik).
+
+## Související stránky
+
+- [Jak přidám výlohu na svůj web?](/cs/instalace/pridani-vylohy-na-web)
+- [Jak přidám na svůj web tlačítko pro nákup?](/cs/instalace/pridani-tlacitka-pro-nakup)
+- [Platby a výplaty](/cs/platby-a-vyplaty)
+- [Slovník pojmů](/cs/reference/slovnik)

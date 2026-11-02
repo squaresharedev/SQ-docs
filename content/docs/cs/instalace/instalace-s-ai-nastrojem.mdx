@@ -1,0 +1,70 @@
+---
+title: "Jak nainstaluji Square Share pomocí AI nástroje?"
+description: "Jak vložit výlohu nebo tlačítko pro nákup na web pomocí Claude Code, Cursoru nebo Lovable. Šablony promptů."
+translationKey: "install-with-ai"
+lastUpdated: "2026-11-02"
+draft: true
+---
+{/* TODO(adrian): native review */}
+
+<AnswerBlock>
+
+Zkopírujte kód výlohy nebo odkaz tlačítka pro nákup z panelu, přiložte připravenou šablonu promptu a vložte celé to do Claude Code, Cursoru nebo Lovable. AI nástroj kód vloží na váš web a zároveň splní nezbytné podmínky, aby se výloha správně zobrazila.
+
+</AnswerBlock>
+
+## Jak na to
+
+1. Zkopírujte svůj kód z panelu: kód pro vložení výlohy (záložka **Skript** nebo **Jen iframe**) nebo odkaz tlačítka pro nákup (záložka **Odkaz** nebo **HTML**).
+2. Zkopírujte níže příslušnou šablonu promptu.
+3. V šabloně nahraďte zástupný text (v hranatých závorkách) skutečnými hodnotami ze svého panelu a webu.
+4. Výsledný prompt vložte do Claude Code, Cursoru nebo Lovable.
+5. Zkontrolujte výsledek na zveřejněném webu s adresou `https`.
+
+## Šablona promptu: přidání výlohy
+
+```text title="Šablona promptu (před použitím upravte)"
+Přidej na můj web výlohu Square Share. Kód pro vložení (nic v něm neměň):
+
+<div data-squareshare-storefront="VAS-KLIC-VLOZENI"></div>
+<script async src="https://embed.squareshare.eu/widget.js"></script>
+
+Vlož ho na stránku [NÁZEV STRÁNKY] na místo [KDE SE MÁ ZOBRAZIT, např. za hlavičkou nebo před patičkou].
+
+Stránka musí používat https. Na http výloha nenačte.
+
+Do zásad ochrany osobních údajů doplň také tento text (beze změn):
+Tento web zobrazuje výlohu, kterou poskytuje Square Share. Při jejím načtení se IP adresa a údaje o prohlížeči návštěvníka odešlou službě Square Share, aby mohla zobrazit produkty a počítat návštěvy. Square Share k tomu neukládá žádné soubory cookie ani nic jiného do zařízení návštěvníka. Podrobnosti: https://squareshare.eu/legal/privacy-policy/
+
+Přečti si dokumentaci: https://docs.squareshare.eu/cs/instalace/pridani-vylohy-na-web.md
+```
+
+Před odesláním: nahraďte `VAS-KLIC-VLOZENI` klíčem ze svého panelu, a doplňte název stránky a místo vložení.
+
+## Šablona promptu: přidání tlačítka pro nákup
+
+```text title="Šablona promptu (před použitím upravte)"
+Přidej na můj web tlačítko pro nákup. Musí odkazovat přesně na tuto adresu:
+https://dashboard.squareshare.eu/s/STOREFRONT_ID/p/PRODUCT_ID?via=button
+
+V HTML to vypadá takto:
+<a href="https://dashboard.squareshare.eu/s/STOREFRONT_ID/p/PRODUCT_ID?via=button">Koupit</a>
+
+Nastyluj ho stejně jako ostatní tlačítka na mém webu. Pokud web už tlačítko pro nákup tohoto produktu má, nasměruj na tuto adresu to stávající a nepřidávej druhé.
+
+Odkaz musí otevřít stránku ve stejném panelu prohlížeče. Nenačítej ji v iframe, vyskakovacím okně ani lightboxu: stránka se v rámu odmítne načíst.
+
+Nepotřebuješ žádný skript, SDK ani volání API. Adresu ponech přesně tak, jak je, včetně všeho za otazníkem.
+
+Přečti si dokumentaci: https://docs.squareshare.eu/cs/instalace/pridani-tlacitka-pro-nakup.md
+```
+
+Před odesláním: nahraďte `STOREFRONT_ID` a `PRODUCT_ID` hodnotami z odkazu, který jste zkopírovali z panelu.
+
+Dialog pro tlačítko pro nákup v panelu má záložku **AI agent** s připraveným promptem v angličtině. Tuto záložku použijte, pokud pracujete v anglickém prostředí.
+
+## Související stránky
+
+- [Jak přidám výlohu na svůj web?](/cs/instalace/pridani-vylohy-na-web)
+- [Jak přidám na svůj web tlačítko pro nákup?](/cs/instalace/pridani-tlacitka-pro-nakup)
+- [Řešení problémů](/cs/reseni-problemu)

@@ -1,0 +1,80 @@
+---
+title: How do I add a purchase button to my website?
+description: Copy a link or HTML snippet from the dashboard and paste it into a button on your site to sell one product.
+translationKey: add-purchase-button
+lastUpdated: 2026-11-02
+draft: true
+---
+
+<AnswerBlock>
+
+A purchase button is a link you copy from the dashboard and paste into a button on your own website. When a buyer clicks it, they land on the product page hosted by Square Share. No script or iframe is needed.
+
+</AnswerBlock>
+
+{/* TODO(adrian): The dashboard dialog title and the Analytics channel label still use the older name for this feature (exact strings in RECON.md section 7). The docs say "purchase button" throughout. Align the UI wording when possible. */}
+
+## What do I need before I start?
+
+- A Square Share account at [dashboard.squareshare.eu](https://dashboard.squareshare.eu).
+- At least one product with status **Active** (not Draft).
+- Seller details complete (name, address, and contact email).
+- The product on a storefront, with its product page turned on.
+- A button on your website whose link you can set.
+
+## How do I add a purchase button?
+
+1. In the dashboard, go to **Products**.
+2. Click the **...** (three-dot) menu on the product card for the product you want to sell.
+3. Click **Add to your website**.
+4. On the **Link** tab, click the copy button to copy the link.
+5. Paste the link into the link setting of a button on your website.
+6. Click **Try your button** (at the bottom of the dialog) to open the product page in a new tab and confirm it works.
+
+You can also use the **HTML** tab to copy a ready-made `<a>` element, or the **AI agent** tab for a prompt you can give to an AI coding tool. See [How do I install Square Share with an AI coding tool?](/en/install/install-with-ai-coding-tool).
+
+## What does the link look like?
+
+The link from the **Link** tab follows this format:
+
+```
+https://dashboard.squareshare.eu/s/STOREFRONT_ID/p/PRODUCT_ID?via=button
+```
+
+The dashboard fills in `STOREFRONT_ID` and `PRODUCT_ID` with your real values.
+
+The HTML snippet from the **HTML** tab looks like this:
+
+```html title="HTML snippet"
+<a href="https://dashboard.squareshare.eu/s/STOREFRONT_ID/p/PRODUCT_ID?via=button">Buy now</a>
+```
+
+The default link text the dashboard provides is "Buy now". Change it to suit your site before pasting.
+
+The purchase button is a plain link. It does not need a script or an iframe. Do not load it in a frame: the product page refuses to be framed.
+
+## What happens when a buyer clicks it?
+
+The buyer lands on the product page Square Share hosts for that product. From there they can complete the purchase through your product's purchase link, through Square Share checkout (when available), or by emailing you directly.
+
+## Why can't I copy the link?
+
+The copy button is blocked in four situations:
+
+1. **The product is offline.** The product must be Active, not taken offline.
+2. **Seller details are incomplete.** Complete your name, address, and contact email in Settings.
+3. **The product is a Draft.** The dialog shows "Make it Active first." Change the product status to Active.
+4. **The product is not on a storefront.** The dialog shows "Put this product on a storefront first, so it has a page to land on." Add the product to a storefront and turn on its product page.
+
+## How do I check it worked?
+
+Click **Try your button** in the dialog. It opens the product page in a new tab. If the page loads and shows your product details, the button is working.
+
+If the page does not load, check that the product is Active, on a storefront, and that product pages are turned on.
+
+## Related pages
+
+- [How do I add a storefront to my website?](/en/install/add-storefront-to-website)
+- [How do I install Square Share with an AI coding tool?](/en/install/install-with-ai-coding-tool)
+- [Glossary: purchase button](/en/reference/glossary#purchase-button)
+- [Glossary: product page](/en/reference/glossary#product-page)

@@ -1,0 +1,71 @@
+{/*
+  Square Share docs page template
+  ================================
+  Copy this file to content/docs/en/<section>/<slug>.mdx (English)
+  or content/docs/cs/<section>/<slug>.mdx (Czech).
+
+  Fill in the frontmatter fields below, then replace the placeholder sections.
+  Delete these block comments before publishing.
+*/}
+---
+# Required. Title as a question the user would type, e.g. "How do I add a storefront?"
+# Do not repeat the title as an H1 in the body; the framework renders it from this field.
+title: Page title here
+
+# Required. One sentence, max 160 characters. No colon unless the whole value is quoted.
+# If the description contains a colon, wrap it in double quotes:
+#   description: "How this works: a short answer."
+description: One sentence describing this page, max 160 characters.
+
+# Required. Must match the EN and CS files for the same page exactly, so hreflang works.
+# Lowercase kebab-case only: my-page-slug
+translationKey: my-page-slug
+
+# Required. ISO date of the last meaningful content change. YYYY-MM-DD.
+# YAML reads an unquoted date as a Date object; the schema accepts both.
+lastUpdated: 2026-11-02
+
+# Required. Keep true until both the EN and CS translations are ready.
+# Only a human sets this to false. Both translations of a pair must be
+# non-draft before hreflang is emitted and the page appears in the sitemap.
+draft: true
+---
+
+{/* AnswerBlock: exactly ONE paragraph, 40 to 60 words. No H1 (the title field is the H1). */}
+<AnswerBlock>
+
+Write a 40 to 60 word paragraph here. Answer the page's title question directly. First two sentences carry the answer. Numbered steps, tables, and details go in the body below.
+
+</AnswerBlock>
+
+{/* Example TODO: use this pattern anywhere a fact needs confirming before publish. */}
+{/* TODO(adrian): Confirm X before removing this note. */}
+
+## What do I need before I start?
+
+List prerequisites as a bullet list.
+
+## How do I do the thing?
+
+Use numbered steps for any procedure.
+
+1. Step one.
+2. Step two.
+3. Step three.
+
+## Table example
+
+| Column A | Column B |
+| --- | --- |
+| Row 1 A | Row 1 B |
+| Row 2 A | Row 2 B |
+
+## Code block example
+
+```html title="Snippet title"
+<div>paste code here</div>
+```
+
+## Related pages
+
+- [Link text](/en/section/slug)

@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { DocsLink as Link } from "./DocsLink";
 import { usePathname } from "next/navigation";
 import { LANGUAGE_NAME, LOCALES, type Locale } from "@/lib/i18n";
 import { cn } from "@/lib/cn";
