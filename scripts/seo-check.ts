@@ -10,6 +10,7 @@
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { frontmatter } from "fumadocs-core/content/md/frontmatter";
+import { OG_LOCALE } from "../lib/i18n.ts";
 import {
   ANSWER_MAX_WORDS,
   ANSWER_MIN_WORDS,
@@ -222,9 +223,12 @@ function sitemapEntries(xml: string): Map<string, { lastmod?: string; alternates
 // Run
 // ---------------------------------------------------------------------------
 
-async function fetchText(path: string): Promise<{ ok: boolean; status: number; text: string }> {
-  const response = await fetch(`${BASE}${path}`, { redirect: "follow" });
-  return { ok: response.ok, status: response.status, text: await response.text() };
+async function fetchText(
+  path: string,
+  headers: Record<string, string> = {},
+): Promise<{ ok: boolean; status: number; text: string; headers: Headers }> {
+  const response = await fetch(`${BASE}${path}`, { redirect: "follow", headers });
+  return { ok: response.ok, status: response.status, text: await response.text(), headers: response.headers };
 }
 
 const pages = loadPages();
@@ -318,6 +322,30 @@ for (const page of pages) {
   check(count(html, "nav") >= 1, "no <nav> found");
   check(count(html, "article") === 1, `expected exactly one <article>, found ${count(html, "article")}`);
 
+  // Open Graph and Twitter cards.
+  const ogImage = `${SITE_URL}/og${page.url}/image.png`;
+  const social: [key: "name" | "property", name: string, expected: string][] = [
+    ["name", "description", page.description],
+    ["property", "og:title", title],
+    ["property", "og:description", page.description],
+    ["property", "og:url", page.absolute],
+    ["property", "og:type", "article"],
+    ["property", "og:locale", OG_LOCALE[page.locale]],
+    ["property", "og:site_name", TITLE_SUFFIX[page.locale].slice(3)],
+    ["property", "og:image", ogImage],
+    ["property", "article:published_time", page.lastUpdated],
+    ["property", "article:modified_time", page.lastUpdated],
+    ["name", "twitter:card", "summary_large_image"],
+    ["name", "twitter:title", title],
+    ["name", "twitter:description", page.description],
+    ["name", "twitter:image", ogImage],
+  ];
+  for (const [key, name, expected] of social) {
+    const actual = metaContent(html, key, name);
+    check(actual === expected, `<meta ${key}="${name}"> is ${JSON.stringify(actual)}, expected ${JSON.stringify(expected)}`);
+  }
+  check(existsSync(join(OUT, "og", ...page.url.slice(1).split("/"), "image.png")), `Open Graph image ${ogImage} is missing from out/`);
+
   // JSON-LD.
   const problems: string[] = [];
   const nodes = jsonLdNodes(html, problems);
@@ -389,6 +417,16 @@ for (const page of pages) {
           const words = countWords(htmlToText(fetched));
           check(words >= ANSWER_MIN_WORDS && words <= ANSWER_MAX_WORDS, `answer block has ${words} words; it must have ${ANSWER_MIN_WORDS} to ${ANSWER_MAX_WORDS}`);
         }
+        // The Worker: HTML and Markdown share the URL, so both must say Vary: Accept.
+        check(/text\/html/.test(response.headers.get("content-type") ?? ""), "page is not served as text/html");
+        check(/\baccept\b/i.test(response.headers.get("vary") ?? ""), "HTML response has no Vary: Accept");
+        const negotiated = await fetchText(page.url, { Accept: "text/markdown" });
+        check(
+          negotiated.headers.get("content-type") === "text/markdown; charset=utf-8",
+          `Accept: text/markdown returned Content-Type ${negotiated.headers.get("content-type")}`,
+        );
+        check(/\baccept\b/i.test(negotiated.headers.get("vary") ?? ""), "Markdown response has no Vary: Accept");
+        check(negotiated.text.startsWith(`# ${page.title}`), "Accept: text/markdown did not return the page's Markdown");
       }
     } catch (error) {
       baseReachable = false;

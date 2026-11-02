@@ -45,6 +45,8 @@ export function pageMetadata(page: DocsPage): Metadata {
       siteName: COPY[locale].siteName,
       locale: OG_LOCALE[locale],
       alternateLocale: otherLocales,
+      // No separate publication date exists, so both carry lastUpdated (as in the JSON-LD).
+      publishedTime: page.data.lastUpdated,
       modifiedTime: page.data.lastUpdated,
       images: [{ url: image, width: 1200, height: 630, alt: page.data.title }],
     },
