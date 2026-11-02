@@ -1,3 +1,5 @@
+import type { CSSProperties } from "react";
+
 /**
  * The homepage hero's ornaments, drawn statically: purple outline cursors
  * (some soft, as if out of focus) and a pixel skyline where the dark hero
@@ -27,15 +29,18 @@ export function HeroCursors() {
         <svg
           key={`${left}${top}`}
           viewBox="2.5 0.7 15.7 21.8"
-          className={hideOnPhones ? "absolute max-sm:hidden" : "absolute"}
-          style={{
-            left,
-            top,
-            width,
-            opacity,
-            rotate: `${rotate}deg`,
-            filter: blur ? `blur(${blur}px)` : undefined,
-          }}
+          className={hideOnPhones ? "hero-cursor absolute max-sm:hidden" : "hero-cursor absolute"}
+          style={
+            {
+              left,
+              top,
+              width,
+              opacity,
+              rotate: `${rotate}deg`,
+              // Soft focus only on wider screens (visuals.css): a blur filter is costly to paint on phones.
+              "--cursor-blur": blur ? `blur(${blur}px)` : undefined,
+            } as CSSProperties
+          }
         >
           <path
             d={POINTER}
