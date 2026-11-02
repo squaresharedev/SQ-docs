@@ -18,7 +18,11 @@ import { parseArgs, ROOT } from "./shared.ts";
 const options = parseArgs(process.argv.slice(2));
 const WITH_LIGHTHOUSE = options.get("lighthouse") === true;
 const SKIP_BUILD = options.get("skip-build") === true;
-const BASE = "http://localhost:8787";
+// A Worker of its own, started after the build: `wrangler dev` does not notice
+// files that postbuild renames, so a server that was already running would
+// serve a stale file list.
+const PORT = "8788";
+const BASE = `http://localhost:${PORT}`;
 const EXPECT = "docs-home,what-is-square-share";
 
 const FIXTURES = [
@@ -224,14 +228,18 @@ async function main(): Promise<void> {
 
   phase("4/7 worker on " + BASE);
   if (await serverUp()) {
-    console.log(`${BASE} is already serving; reusing it (it will not be stopped)`);
-  } else {
-    console.log("starting `pnpm worker:dev`");
-    startedServer = spawn("pnpm", ["worker:dev"], { cwd: ROOT, stdio: "ignore", shell: true, env: process.env });
-    if (!(await waitFor(serverUp, 120))) {
-      failures.push(`worker did not come up on ${BASE}`);
-      return;
-    }
+    failures.push(`${BASE} is already in use; stop that server and run again`);
+    return;
+  }
+  console.log(`starting wrangler dev on ${PORT}`);
+  startedServer = spawn(
+    "pnpm",
+    ["exec", "wrangler", "dev", "--config", "worker/wrangler.toml", "--port", PORT],
+    { cwd: ROOT, stdio: "ignore", shell: true, env: process.env },
+  );
+  if (!(await waitFor(serverUp, 120))) {
+    failures.push(`worker did not come up on ${BASE}`);
+    return;
   }
   // The Worker may still hold the old draft pages for a moment after the rebuild.
   const fresh = await waitFor(async () => {

@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { DocsLink as Link } from "./DocsLink";
 import type { ComponentProps } from "react";
 import { useNotebookLayout } from "fumadocs-ui/layouts/notebook";
 import { cn } from "@/lib/cn";

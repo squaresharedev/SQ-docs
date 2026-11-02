@@ -236,6 +236,16 @@ function pairOf(page: PageInfo): PageInfo | undefined {
   return pages.find((candidate) => candidate.locale === other && candidate.translationKey === page.translationKey);
 }
 
+/**
+ * Next writes the site root in <link hreflang> without its trailing slash, the
+ * sitemap keeps it: the same URL either way, so compare them without it.
+ */
+function sameUrls(map: Record<string, string>): string {
+  const normalized: Record<string, string> = {};
+  for (const [key, url] of Object.entries(map)) normalized[key] = url.replace(/^(https?:\/\/[^/]+)\/$/, "$1");
+  return JSON.stringify(sortKeys(normalized));
+}
+
 /** The hreflang set a page must carry, or undefined when it must carry none. */
 function expectedAlternates(page: PageInfo): Record<string, string> | undefined {
   const pair = pairOf(page);
@@ -420,10 +430,10 @@ for (const page of pages) {
 
   const expected = expectedAlternates(page);
   if (expected) {
-    check(JSON.stringify(sortKeys(hreflang)) === JSON.stringify(sortKeys(expected)), `hreflang links are ${JSON.stringify(hreflang)}, expected ${JSON.stringify(expected)}`);
+    check(sameUrls(hreflang) === sameUrls(expected), `hreflang links are ${JSON.stringify(hreflang)}, expected ${JSON.stringify(expected)}`);
     if (entry) {
       check(
-        JSON.stringify(sortKeys(entry.alternates)) === JSON.stringify(sortKeys(expected)),
+        sameUrls(entry.alternates) === sameUrls(expected),
         `sitemap xhtml:link alternates are ${JSON.stringify(entry.alternates)}, expected ${JSON.stringify(expected)}`,
       );
     }
@@ -432,7 +442,7 @@ for (const page of pages) {
     const pairHtml = pair ? readIfExists(htmlFileOf(pair.url)) : undefined;
     if (pairHtml !== undefined) {
       const theirs = hreflangLinks(pairHtml);
-      check(JSON.stringify(sortKeys(theirs)) === JSON.stringify(sortKeys(hreflang)), `hreflang is not reciprocal with ${pair?.url}`);
+      check(sameUrls(theirs) === sameUrls(hreflang), `hreflang is not reciprocal with ${pair?.url}`);
     } else {
       check(false, `paired page ${pair?.url ?? "(none)"} has no HTML to compare hreflang with`);
     }
