@@ -5,8 +5,12 @@
 @import "@squaresharedev/tokens/tokens.css";
 /* Fumadocs UI variables pointed at those tokens. */
 @import "./fumadocs-theme.css";
-/* The homepage and dashboard look: type, buttons, steps, pictures, footer. */
+/* The homepage and dashboard look: type, buttons, steps, cards, sidebar, editor view, footer. */
 @import "./visuals.css";
+/* The dashboard's settings-card corner art: its motion, copied as is. */
+@import "./corner-art.css";
+/* Motion tokens for the search palette (duration-base/slow, ease-standard/entrance). */
+@import "./search.css";
 
 /*
  * Dark mode runs off the `.dark` class (next-themes, via Fumadocs). The

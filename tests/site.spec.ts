@@ -1,4 +1,6 @@
+import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Page } from "@playwright/test";
+import { openPage, THEMES } from "./helpers.ts";
 import { PAGES } from "./pages.ts";
 
 const EN = "/en/what-is-square-share";
@@ -46,7 +48,8 @@ async function fallbackTerm(page: Page): Promise<string> {
 }
 
 async function openSearch(page: Page): Promise<void> {
-  const trigger = page.locator("header [data-search-full]");
+  // The dashboard's search field: a button that opens the palette.
+  const trigger = page.locator('header button[aria-haspopup="dialog"]').first();
   await expect(trigger).toBeVisible();
   await trigger.click();
   await expect(page.getByRole("dialog")).toBeVisible();
@@ -80,13 +83,10 @@ for (const [home, term, prefix] of [
     }
     await expect(items.first()).toBeVisible();
 
-    // Results are role=option rows whose id is "fd-search-option-<page URL>[-<hit index>]".
-    const ids = await items.evaluateAll((rows) => rows.map((row) => row.id));
-    expect(ids.length).toBeGreaterThan(0);
-    for (const id of ids) {
-      const url = id.replace(/^fd-search-option-/, "").replace(/-\d+$/, "");
-      expect(url === prefix.slice(0, -1) || url.startsWith(prefix), `result ${id} is not under ${prefix}`).toBe(true);
-    }
+    // Picking the first result opens a page in the same language.
+    await items.first().click();
+    await expect(page).toHaveURL(new RegExp(`${prefix}`));
+    await expect(page.getByRole("dialog")).toHaveCount(0);
   });
 }
 
@@ -96,6 +96,33 @@ test("Control+K opens search", async ({ page }) => {
   await page.keyboard.press("Control+k");
   await expect(page.getByRole("dialog")).toBeVisible();
 });
+
+async function expectNoSeriousAxe(page: Page, include?: string): Promise<void> {
+  const builder = new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"]);
+  const results = await (include ? builder.include(include) : builder).analyze();
+  const serious = results.violations.filter((violation) => violation.impact === "serious" || violation.impact === "critical");
+  const report = serious
+    .map((violation) => `[${violation.impact}] ${violation.id}: ${violation.nodes.map((node) => node.target.join(" ")).join(", ")}`)
+    .join("\n");
+  expect(serious, report).toEqual([]);
+}
+
+// Neither the open palette nor the editor view is in the page list the per-page axe checks use.
+for (const theme of THEMES) {
+  test(`axe: the open search palette (${theme})`, async ({ page }) => {
+    await openPage(page, "/en", theme);
+    await openSearch(page);
+    await searchFor(page, "storefront");
+    await expect(page.getByRole("dialog").getByRole("option").first()).toBeVisible();
+    await expectNoSeriousAxe(page, '[role="dialog"]');
+  });
+
+  test(`axe: the Markdown editor view (${theme})`, async ({ page }) => {
+    await openPage(page, "/en/markdown/what-is-square-share", theme);
+    await expect(page.locator(".ide-code .line").first()).toBeVisible();
+    await expectNoSeriousAxe(page);
+  });
+}
 
 test.describe("Markdown negotiation through the Worker", () => {
   test("Accept: text/markdown returns the .md version", async ({ request }) => {

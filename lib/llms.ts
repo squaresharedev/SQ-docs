@@ -13,13 +13,24 @@ import { markdownPath } from "./urls.ts";
 export async function pageMarkdown(page: DocsPage): Promise<string> {
   const copy = COPY[localeOf(page)];
   const status = page.data.draft ? ` ${copy.draftTitle}.` : "";
-  const body = (await page.data.getText("processed")).trim();
+  const body = collapseBlankLines((await page.data.getText("processed")).trim());
   return [
     `# ${page.data.title}`,
     `> ${page.data.description}`,
     `${copy.lastUpdated}: ${page.data.lastUpdated}.${status} URL: ${absoluteUrl(page.url)}`,
     body,
   ].join("\n\n") + "\n";
+}
+
+/**
+ * Unwrapped MDX components leave runs of empty lines behind. Keep one empty
+ * line between blocks, but leave fenced code exactly as written.
+ */
+function collapseBlankLines(markdown: string): string {
+  return markdown
+    .split(/(^[ \t]*```[\s\S]*?^[ \t]*```)/m)
+    .map((part) => (part.trimStart().startsWith("```") ? part : part.replace(/\n{3,}/g, "\n\n")))
+    .join("");
 }
 
 /** Pages AI crawlers may read: published ones only, in sidebar order. */

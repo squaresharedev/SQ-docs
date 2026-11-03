@@ -23,6 +23,9 @@ importers:
       hono:
         specifier: ^4.13.16
         version: 4.13.16
+      lucide-react:
+        specifier: ^1.66.0
+        version: 1.66.0(@types/react@19.3.0)(react@19.2.4)
       next:
         specifier: 16.4.4
         version: 16.4.4(@opentelemetry/api@1.10.0)(@playwright/test@1.64.1)(@types/node@20.19.43)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)

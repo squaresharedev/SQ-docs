@@ -1,0 +1,69 @@
+/**
+ * Copy for the search UI.
+ * EN is the primary copy; CS entries are natural Czech.
+ * Two plain objects so TypeScript can verify both locales cover every key.
+ */
+import type { Locale } from "@/lib/i18n";
+
+export type SearchCopy = {
+  /** Button label, also the input aria-label. */
+  triggerLabel: string;
+  /** aria-label for the search dialog element. */
+  overlayLabel: string;
+  /** Input placeholder. */
+  placeholder: string;
+  /** aria-label for the listbox. */
+  results: string;
+  /** Clear-input button label when the field has text. */
+  clear: string;
+  /** Clear-input button label when the field is empty (close action). */
+  close: string;
+  /** Shown when a non-empty query returns no results. Contains {query}. */
+  nothingMatches: string;
+  /** Shown when the query is empty. */
+  startTyping: string;
+  /** Announced via aria-live while the index is loading or a search is pending. */
+  searching: string;
+  /** Announced via aria-live when results arrive. Contains {count} and {query}. */
+  resultCount: string;
+};
+
+const en: SearchCopy = {
+  triggerLabel: "Search docs",
+  overlayLabel: "Search documentation",
+  placeholder: "Search documentation...",
+  results: "Search results",
+  clear: "Clear",
+  close: "Close",
+  nothingMatches: 'No results for "{query}"',
+  startTyping: "Type to search...",
+  searching: "Searching...",
+  resultCount: '{count} result for "{query}"',
+};
+
+const cs: SearchCopy = {
+  triggerLabel: "Hledat v dokumentaci",
+  overlayLabel: "Hledat v dokumentaci",
+  placeholder: "Hledejte v dokumentaci...",
+  results: "Výsledky vyhledávání",
+  clear: "Smazat",
+  close: "Zavřít",
+  nothingMatches: 'Žádné výsledky pro "{query}"',
+  startTyping: "Začněte psát...",
+  searching: "Hledám...",
+  resultCount: '{count} výsledek pro "{query}"',
+};
+
+export const searchCopy: Record<Locale, SearchCopy> = { en, cs };
+
+/** Substitute one or more {key} placeholders in a copy string. */
+export function interpolate(
+  template: string,
+  params: Record<string, string | number>,
+): string {
+  let out = template;
+  for (const [k, v] of Object.entries(params)) {
+    out = out.replace(`{${k}}`, String(v));
+  }
+  return out;
+}

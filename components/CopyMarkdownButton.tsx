@@ -1,12 +1,21 @@
 "use client";
 
 import { useState } from "react";
+import { Check, Copy as CopyIcon } from "lucide-react";
 import type { Copy } from "@/lib/copy";
 
 type Status = "idle" | "copied" | "failed";
 
 /** Fetches the page's `.md` version and puts it on the clipboard. */
-export function CopyMarkdownButton({ markdownUrl, copy }: { markdownUrl: string; copy: Copy }) {
+export function CopyMarkdownButton({
+  markdownUrl,
+  copy,
+  className,
+}: {
+  markdownUrl: string;
+  copy: Copy;
+  className?: string;
+}) {
   const [status, setStatus] = useState<Status>("idle");
 
   async function copyMarkdown() {
@@ -22,14 +31,11 @@ export function CopyMarkdownButton({ markdownUrl, copy }: { markdownUrl: string;
   }
 
   const label = status === "copied" ? copy.copiedMarkdown : status === "failed" ? copy.copyFailed : copy.copyMarkdown;
+  const Icon = status === "copied" ? Check : CopyIcon;
 
   return (
-    <button
-      type="button"
-      onClick={copyMarkdown}
-      data-copy-markdown=""
-      className="inline-flex h-8 items-center gap-2 border border-fd-border bg-fd-background px-3 text-sm font-medium text-fd-foreground transition-colors hover:bg-fd-accent"
-    >
+    <button type="button" onClick={copyMarkdown} data-copy-markdown="" className={className}>
+      <Icon className="size-4" aria-hidden="true" />
       <span aria-live="polite">{label}</span>
     </button>
   );

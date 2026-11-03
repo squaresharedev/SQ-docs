@@ -1,18 +1,20 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { createRelativeLink } from "fumadocs-ui/mdx";
-import { DocsBody, DocsPage, DocsTitle } from "fumadocs-ui/layouts/notebook/page";
+import { DocsBody, DocsPage } from "fumadocs-ui/layouts/notebook/page";
 import { DocsHomeHero } from "@/components/DocsHomeHero";
 import { DraftBanner } from "@/components/DraftBanner";
 import { JsonLd } from "@/components/JsonLd";
 import { getMDXComponents } from "@/components/mdx";
+import { PageHeader } from "@/components/PageHeader";
 import { PageMeta } from "@/components/PageMeta";
 import { COPY } from "@/lib/copy";
-import { pageGraph } from "@/lib/jsonld";
+import { CORNER_ART } from "@/lib/corner-art";
+import { pageGraph, sectionTrail } from "@/lib/jsonld";
 import { localeOf } from "@/lib/pairing";
 import { pageMetadata } from "@/lib/seo";
 import { source } from "@/lib/source";
-import { markdownPath } from "@/lib/urls";
+import { markdownPath, markdownViewPath } from "@/lib/urls";
 
 export const dynamicParams = false;
 
@@ -32,28 +34,37 @@ export default async function Page(props: PageProps<"/[lang]/[[...slug]]">) {
   const locale = localeOf(page);
   const copy = COPY[locale];
   const MDX = page.data.body;
-  // A locale's docs home opens with the homepage-style hero instead of a plain title.
+  // A locale's docs home opens with the homepage-style hero instead of the article header.
   const isHome = page.slugs.length === 0;
+  const meta = (
+    <PageMeta
+      lastUpdated={page.data.lastUpdated}
+      markdownUrl={markdownPath(page)}
+      markdownViewUrl={markdownViewPath(page)}
+      locale={locale}
+      copy={copy}
+    />
+  );
 
   return (
     <DocsPage
       toc={page.data.toc}
       full={isHome}
+      breadcrumb={{ enabled: false }}
       tableOfContent={{ style: "clerk", enabled: !isHome }}
       tableOfContentPopover={{ enabled: !isHome }}
     >
       {page.data.draft ? <DraftBanner copy={copy} /> : null}
       {isHome ? (
-        <DocsHomeHero title={page.data.title} lead={page.data.description} locale={locale} copy={copy} />
+        <>
+          <DocsHomeHero title={page.data.title} lead={page.data.description} locale={locale} copy={copy} />
+          {meta}
+        </>
       ) : (
-        <DocsTitle className="docs-title">{page.data.title}</DocsTitle>
+        <PageHeader title={page.data.title} trail={sectionTrail(page)} Art={CORNER_ART[page.data.translationKey]}>
+          {meta}
+        </PageHeader>
       )}
-      <PageMeta
-        lastUpdated={page.data.lastUpdated}
-        markdownUrl={markdownPath(page)}
-        locale={locale}
-        copy={copy}
-      />
       <DocsBody>
         <MDX components={getMDXComponents(locale, { a: createRelativeLink(source, page) })} />
       </DocsBody>

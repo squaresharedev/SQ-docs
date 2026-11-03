@@ -31,14 +31,22 @@ export function organization(): JsonLdNode {
 }
 
 /** Breadcrumb trail from the locale's docs home to the page, matching the page tree. */
-export function breadcrumbTrail(page: DocsPage): { name: string; url: string }[] {
+/** Docs home, then the page's sections from the page tree (a section has a URL only when it has an index page). */
+export function sectionTrail(page: DocsPage): { name: string; url?: string }[] {
   const locale = localeOf(page);
   const home = { name: COPY[locale].breadcrumbHome, url: `/${locale}` };
   if (page.url === home.url) return [home];
+  const sections = getBreadcrumbItems(page.url, source.getPageTree(locale), { includePage: false })
+    .filter((item) => typeof item.name === "string" && item.url !== page.url)
+    .map((item) => ({ name: item.name as string, url: item.url }));
+  return [home, ...sections];
+}
 
-  const items = getBreadcrumbItems(page.url, source.getPageTree(locale), { includePage: false })
-    .filter((item): item is { name: string; url: string } => typeof item.name === "string" && Boolean(item.url));
-  return [home, ...items, { name: page.data.title, url: page.url }];
+/** The JSON-LD trail: every item needs a URL, and it ends with the page. */
+export function breadcrumbTrail(page: DocsPage): { name: string; url: string }[] {
+  if (page.url === `/${localeOf(page)}`) return sectionTrail(page) as { name: string; url: string }[];
+  const linked = sectionTrail(page).filter((item): item is { name: string; url: string } => Boolean(item.url));
+  return [...linked, { name: page.data.title, url: page.url }];
 }
 
 export function breadcrumbList(page: DocsPage): JsonLdNode {

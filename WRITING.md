@@ -89,7 +89,7 @@ Use the full list on the Glossary page only. Use a chosen subset under "Key term
 
 ### SectionCards
 
-For the docs home page only. Wrap a Markdown list where each item has a link line and a description line with no blank line between them:
+For the docs home page only. Wrap a Markdown list where each item has a link line and a description line with no blank line between them. Each card shows the icon of the page it links to (from `lib/icons.tsx`, by translationKey), so there is nothing to set:
 
 ```mdx
 <SectionCards>
@@ -100,7 +100,7 @@ For the docs home page only. Wrap a Markdown list where each item has a link lin
 </SectionCards>
 ```
 
-### Pictures and visual blocks
+### Blocks and pictures
 
 These give pages the look of the homepage and the dashboard. Each one either
 wraps ordinary Markdown (so the `.md` version keeps the content) or only draws
@@ -109,16 +109,25 @@ only in a picture.
 
 | Component | What it does | In the `.md` version |
 | --- | --- | --- |
-| `<Illustration kind="storefront" />` | A drawing: `storefront`, `button`, `ai`, `editor` or `payment`. Put it under the AnswerBlock. | Left out |
-| `<GuideCards visuals="storefront button ai">` | Wraps a list of links; each item becomes a big card with a picture, in that order. Docs home. | The list |
-| `<FeatureCards visuals="...">` | Same as GuideCards for items that are not links (bold title, then text). | The list |
 | `<Steps>` | Wraps an ordered list; draws numbered step blocks. Use it for procedures. | The list |
 | `<Snippet>` | Wraps a fenced code block the reader copies into their site; draws the dashboard's flowing green border. | The code block |
 | `<Buttons>` | Wraps one paragraph of links; draws them as buttons (first solid, the rest outlined; external links get an up-right arrow). | The links |
-| `<ComingNext>` | Wraps a list of future features; draws the homepage's dark "What's next" cards. Future tense only. | The list |
+| `<MarkdownPreview page="add-storefront" />` | Shows another page's `.md` version in a small code editor window. `page` is that page's translationKey. | Left out |
 
 Leave a blank line after every opening tag and before every closing tag, as
 with AnswerBlock.
+
+Pages do not choose their own header picture. The animated art in the top
+right corner of each page header comes from `lib/corner-art.ts`, keyed by
+translationKey, and the sidebar icon from `lib/icons.tsx`. A new page gets
+neither until you add its translationKey to both files.
+
+### Markdown view
+
+Every page has a "View as Markdown" button. It opens `/<locale>/markdown/<slug>`,
+which shows the page's `.md` version in a code editor layout, with a file list
+of the other pages in that language. That view is not indexed; the raw file
+stays at `<page URL>.md`.
 
 ### Code blocks
 

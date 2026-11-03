@@ -13,6 +13,11 @@ export function markdownPath(page: Pick<PageRef, "url">): string {
   return `${page.url}.md`;
 }
 
+/** The page's Markdown shown in an editor: `/en/markdown/what-is-square-share`, `/en/markdown`. */
+export function markdownViewPath(page: Pick<PageRef, "slugs" | "locale">): string {
+  return ["", page.locale ?? "", "markdown", ...page.slugs].join("/");
+}
+
 /** Route segments of the Markdown route handler, which postbuild moves to markdownPath(). */
 export function markdownRouteSegments(page: Pick<PageRef, "slugs">): string[] {
   return [...page.slugs, "content.md"];

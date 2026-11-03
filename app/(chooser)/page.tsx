@@ -35,7 +35,7 @@ export default function LanguageChooser() {
     <main className="relative isolate flex min-h-screen flex-col justify-center overflow-hidden px-6 py-16 sm:px-12">
       <HeroCursors />
       <div className="relative mx-auto w-full max-w-3xl">
-        <p className="m-0 flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+        <p className="m-0 flex items-center gap-3 font-inter text-xs font-medium uppercase tracking-wide text-muted-foreground">
           <LogoMark className="size-6 text-foreground" />
           Square Share
         </p>
@@ -45,7 +45,7 @@ export default function LanguageChooser() {
         <ul className="mt-10 grid list-none gap-4 p-0 sm:grid-cols-2">
           {LOCALES.map((locale, index) => (
             <li key={locale} lang={locale} className="flex flex-col gap-3 border border-border bg-card p-5">
-              <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">/{locale}</span>
+              <span className="font-inter text-xs font-medium uppercase tracking-wide text-muted-foreground">/{locale}</span>
               <span className="text-sm text-muted-foreground">{CHOICES[locale]}</span>
               <ButtonLink href={`/${locale}`} variant={index === 0 ? "solid" : "outline"} className="self-start">
                 {LANGUAGE_NAME[locale]}

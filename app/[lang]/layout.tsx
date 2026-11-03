@@ -3,13 +3,14 @@ import { notFound } from "next/navigation";
 import { DocsLayout } from "fumadocs-ui/layouts/notebook";
 import { LocaleProvider } from "@/components/locale-context";
 import { Provider } from "@/components/Provider";
+import { SearchProvider } from "@/components/search";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { COPY } from "@/lib/copy";
 import { fontVariables } from "@/lib/fonts";
 import { isLocale, LANGUAGE_TAG, LOCALES } from "@/lib/i18n";
 import { switchTargets } from "@/lib/pairing";
-import { HOME_URL, WAITLIST_URL } from "@/lib/site";
+import { WAITLIST_URL } from "@/lib/site";
 import { source } from "@/lib/source";
 import { i18nUI } from "@/lib/ui-translations";
 
@@ -29,12 +30,12 @@ export default async function LocaleLayout({ params, children }: LayoutProps<"/[
       <body className="flex min-h-screen flex-col">
         <Provider i18n={i18nUI.provider(lang)}>
           <LocaleProvider locale={lang} copy={copy} switchTargets={switchTargets()}>
-            <DocsLayout
+            <SearchProvider>
+              <DocsLayout
               tree={source.getPageTree(lang)}
               nav={{ mode: "top", title: copy.siteName, url: `/${lang}` }}
               slots={{ header: SiteHeader, languageSelect: false }}
               links={[
-                { text: copy.mainSiteLink, url: HOME_URL, external: true, on: "menu" },
                 { type: "button", text: copy.getStarted, url: WAITLIST_URL, external: true, on: "menu" },
               ]}
               sidebar={{ collapsible: false }}
@@ -42,6 +43,7 @@ export default async function LocaleLayout({ params, children }: LayoutProps<"/[
               {children}
             </DocsLayout>
             <SiteFooter locale={lang} />
+            </SearchProvider>
           </LocaleProvider>
         </Provider>
       </body>

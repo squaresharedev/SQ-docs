@@ -1,0 +1,14 @@
+/* Search component motion tokens.
+   Mirrors the dashboard (Store) globals.css @theme block for the timing values
+   that @squaresharedev/tokens does not ship: duration-base (180ms),
+   duration-slow (260ms), ease-standard (same curve as Tailwind ease-in-out),
+   and the spring ease-entrance used by the palette open/close morph.
+
+   Imported from styles/globals.css after the tokens import. */
+
+@theme {
+  --transition-duration-base: 180ms;
+  --transition-duration-slow: 260ms;
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-entrance: cubic-bezier(0.16, 1, 0.3, 1);
+}

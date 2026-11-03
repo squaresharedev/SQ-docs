@@ -21,17 +21,14 @@ export function LogoMark({ className, ...props }: SVGProps<SVGSVGElement>) {
 }
 
 /**
- * Mark, wordmark and a small mono tag, like the homepage header's brand row.
- * The wordmark hides on the narrowest screens; the mark and tag stay.
+ * Mark and wordmark, like the dashboard sidebar's brand row (the mark, then
+ * the product name in semibold): "Square Share Docs" on one line.
  */
-export function Logo({ label }: { label: string }) {
+export function Logo() {
   return (
     <span className="inline-flex items-center gap-2.5">
-      <LogoMark className="size-6 shrink-0" />
-      <span className="text-lg font-semibold tracking-tight max-sm:sr-only">Square Share</span>
-      <span className="border border-current/30 px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-widest opacity-70">
-        {label}
-      </span>
+      <LogoMark className="size-5 shrink-0 sm:size-6" />
+      <span className="whitespace-nowrap text-base font-semibold tracking-tight sm:text-lg">Square Share Docs</span>
     </span>
   );
 }

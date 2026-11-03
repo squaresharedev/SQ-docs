@@ -4,22 +4,17 @@ import { applyMdxPreset } from "fumadocs-mdx/config";
 import { defineDocs } from "fumadocs-mdx/macro";
 import { frontmatterSchema } from "./frontmatter.ts";
 import { i18n } from "./i18n.ts";
+import { pageIconsPlugin } from "./icons.tsx";
 import { remarkGlossary } from "./mdx/remark-glossary.ts";
 
 /** MDX components that only wrap content: their children go to Markdown as is. */
-const WRAPPER_COMPONENTS = new Set([
-  "AnswerBlock",
-  "SectionCards",
-  "GuideCards",
-  "FeatureCards",
-  "Steps",
-  "Snippet",
-  "Buttons",
-  "ComingNext",
-]);
+const WRAPPER_COMPONENTS = new Set(["AnswerBlock", "SectionCards", "Steps", "Snippet", "Buttons"]);
 
-/** MDX components that only draw: left out of the Markdown version entirely. */
-const PICTURE_COMPONENTS = new Set(["Illustration"]);
+/**
+ * MDX components that only show something the Markdown already has (the
+ * editor view of another page's Markdown): left out of the Markdown version.
+ */
+const PICTURE_COMPONENTS = new Set(["MarkdownPreview"]);
 
 const docs = defineDocs({
   dir: "content/docs",
@@ -53,6 +48,7 @@ export const source = loader({
   baseUrl: "/",
   source: docs.toFumadocsSource(),
   i18n,
+  plugins: [pageIconsPlugin()],
 });
 
 export type DocsPage = NonNullable<ReturnType<typeof source.getPage>>;

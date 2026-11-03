@@ -1,0 +1,244 @@
+/*
+ * Copied from the dashboard: Store/src/app/globals.css, the corner art block.
+ * The two easing curves are the dashboard's motion tokens (Store globals.css
+ * @theme), which are not in the tokens package.
+ */
+:root {
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-entrance: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Corner art (ui/CornerArt, settings/corner-art): the small pictures in a
+   settings page's lead card. Each sets its own loop (--corner-loop) and the
+   distances its drawing decides; the still pose is in the markup, so these
+   only add the motion, and reduced motion leaves the still picture. */
+
+/* Code reels (two-factor): each reel spins to a code, holds, spins half a
+   cycle on to the next and holds, ending where it began. */
+@keyframes corner-reel {
+  0%,
+  8% {
+    translate: 0 0;
+  }
+  28%,
+  58% {
+    translate: 0 var(--reel-spin);
+  }
+  78%,
+  to {
+    translate: 0 calc(var(--reel-spin) * 2);
+  }
+}
+.corner-reel {
+  animation: corner-reel var(--corner-loop) var(--ease-standard) infinite backwards;
+}
+
+/* Ringing bell (notifications): a swing that dies away, the clapper a beat
+   behind it, a ring out either side at each strike, then quiet. */
+@keyframes corner-bell-swing {
+  0%,
+  52% {
+    rotate: 0deg;
+  }
+  56% {
+    rotate: 12deg;
+  }
+  62% {
+    rotate: -10deg;
+  }
+  68% {
+    rotate: 8deg;
+  }
+  74% {
+    rotate: -5deg;
+  }
+  80% {
+    rotate: 2.5deg;
+  }
+  86%,
+  to {
+    rotate: 0deg;
+  }
+}
+@keyframes corner-bell-clapper {
+  0%,
+  54% {
+    rotate: 0deg;
+  }
+  58% {
+    rotate: -12deg;
+  }
+  64% {
+    rotate: 10deg;
+  }
+  70% {
+    rotate: -7deg;
+  }
+  76% {
+    rotate: 4deg;
+  }
+  82% {
+    rotate: -2deg;
+  }
+  88%,
+  to {
+    rotate: 0deg;
+  }
+}
+@keyframes corner-bell-ring {
+  0%,
+  55% {
+    opacity: 0;
+    scale: 0.85;
+  }
+  60% {
+    opacity: 1;
+    scale: 1;
+  }
+  80%,
+  to {
+    opacity: 0;
+    scale: 1.2;
+  }
+}
+.corner-bell-swing {
+  animation: corner-bell-swing var(--corner-loop) var(--ease-standard) infinite;
+}
+.corner-bell-clapper {
+  animation: corner-bell-clapper var(--corner-loop) var(--ease-standard) infinite;
+}
+.corner-bell-ring {
+  animation: corner-bell-ring var(--corner-loop) var(--ease-entrance) infinite backwards;
+}
+
+/* Arriving team: the row steps along one place per stage, a stage per look,
+   so a loop ends where it began; each newcomer hops as it takes its place. */
+@keyframes corner-team-shift {
+  0%,
+  18% {
+    translate: 0 0;
+  }
+  25%,
+  43% {
+    translate: calc(var(--team-step) * -1) 0;
+  }
+  50%,
+  68% {
+    translate: calc(var(--team-step) * -2) 0;
+  }
+  75%,
+  93% {
+    translate: calc(var(--team-step) * -3) 0;
+  }
+  to {
+    translate: calc(var(--team-step) * -4) 0;
+  }
+}
+.corner-team-shift {
+  animation: corner-team-shift var(--corner-loop) var(--ease-standard) infinite;
+}
+@keyframes corner-team-hop {
+  0%,
+  6%,
+  to {
+    translate: 0 0;
+  }
+  3% {
+    translate: 0 -0.5rem;
+  }
+}
+.corner-team-hop {
+  animation: corner-team-hop var(--corner-loop) var(--ease-standard) infinite backwards;
+}
+
+/* Printing receipt (billing): fed out of the card's top edge in jerks, a line
+   at a time, held, then torn off and dropped. */
+@keyframes corner-receipt {
+  from {
+    translate: 0 var(--receipt-hide);
+    rotate: 0deg;
+    opacity: 1;
+    animation-timing-function: steps(8, end);
+  }
+  40%,
+  72% {
+    translate: 0 0;
+    rotate: 0deg;
+    opacity: 1;
+  }
+  86%,
+  to {
+    translate: 0 0.75rem;
+    rotate: -5deg;
+    opacity: 0;
+  }
+}
+.corner-receipt {
+  animation: corner-receipt var(--corner-loop) var(--ease-standard) infinite;
+}
+
+/* Writing signature (terms): the pen comes down, writes the signature along
+   its own path in step with the ink, and lifts away; the ink rests, fades,
+   and is written again. Both share the writing stretch (8% to 48%) and its
+   easing, so the nib stays on the line. */
+@keyframes corner-sign-ink {
+  0%,
+  8% {
+    stroke-dashoffset: 1;
+    opacity: 1;
+  }
+  48%,
+  82% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  92%,
+  to {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+@keyframes corner-sign-pen {
+  from {
+    offset-distance: 0%;
+    opacity: 0;
+    translate: 0.5rem -0.75rem;
+  }
+  8% {
+    offset-distance: 0%;
+    opacity: 1;
+    translate: 0 0;
+  }
+  48% {
+    offset-distance: 100%;
+    opacity: 1;
+    translate: 0 0;
+  }
+  60%,
+  to {
+    offset-distance: 100%;
+    opacity: 0;
+    translate: 0.5rem -0.75rem;
+  }
+}
+.corner-sign-ink {
+  animation: corner-sign-ink var(--corner-loop) var(--ease-standard) infinite;
+}
+.corner-sign-pen {
+  animation: corner-sign-pen var(--corner-loop) var(--ease-standard) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .corner-reel,
+  .corner-bell-swing,
+  .corner-bell-clapper,
+  .corner-bell-ring,
+  .corner-team-shift,
+  .corner-team-hop,
+  .corner-receipt,
+  .corner-sign-ink,
+  .corner-sign-pen {
+    animation: none;
+  }
+}
+

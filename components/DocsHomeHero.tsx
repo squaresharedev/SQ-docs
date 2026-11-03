@@ -40,7 +40,7 @@ export function DocsHomeHero({
     <div className="not-prose docs-hero-frame">
       <section className="dark docs-hero relative isolate overflow-hidden bg-fd-background px-6 pt-16 pb-24 text-fd-foreground sm:px-10 sm:pt-20 sm:pb-28">
         <HeroCursors />
-        <p className="relative m-0 font-mono text-xs uppercase tracking-widest text-fd-muted-foreground">
+        <p className="relative m-0 font-inter text-xs font-medium uppercase tracking-wide text-fd-muted-foreground">
           {BRAND_NAME} / {copy.docsLabel}
         </p>
         <h1 className="relative mt-4 mb-0 max-w-3xl font-display text-4xl leading-[1.05] font-bold tracking-tight sm:text-6xl">
