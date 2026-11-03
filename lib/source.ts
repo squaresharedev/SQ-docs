@@ -10,12 +10,6 @@ import { remarkGlossary } from "./mdx/remark-glossary.ts";
 /** MDX components that only wrap content: their children go to Markdown as is. */
 const WRAPPER_COMPONENTS = new Set(["AnswerBlock", "SectionCards", "Steps", "Snippet", "Buttons"]);
 
-/**
- * MDX components that only show something the Markdown already has (the
- * editor view of another page's Markdown): left out of the Markdown version.
- */
-const PICTURE_COMPONENTS = new Set(["MarkdownPreview"]);
-
 const docs = defineDocs({
   dir: "content/docs",
   docs: {
@@ -33,7 +27,6 @@ const docs = defineDocs({
           if (node.type === "mdxJsxFlowElement" && WRAPPER_COMPONENTS.has(node.name ?? "")) {
             return "children-only";
           }
-          if (node.type === "mdxJsxFlowElement" && PICTURE_COMPONENTS.has(node.name ?? "")) return false;
           return true;
         },
       },

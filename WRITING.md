@@ -102,32 +102,33 @@ For the docs home page only. Wrap a Markdown list where each item has a link lin
 
 ### Blocks and pictures
 
-These give pages the look of the homepage and the dashboard. Each one either
-wraps ordinary Markdown (so the `.md` version keeps the content) or only draws
-(so the `.md` version leaves it out). Pictures are decorative: never put a fact
-only in a picture.
+These give pages the look of the homepage and the dashboard. Each one wraps
+ordinary Markdown, so the `.md` version keeps the content.
 
 | Component | What it does | In the `.md` version |
 | --- | --- | --- |
 | `<Steps>` | Wraps an ordered list; draws numbered step blocks. Use it for procedures. | The list |
 | `<Snippet>` | Wraps a fenced code block the reader copies into their site; draws the dashboard's flowing green border. | The code block |
 | `<Buttons>` | Wraps one paragraph of links; draws them as buttons (first solid, the rest outlined; external links get an up-right arrow). | The links |
-| `<MarkdownPreview page="add-storefront" />` | Shows another page's `.md` version in a small code editor window. `page` is that page's translationKey. | Left out |
 
 Leave a blank line after every opening tag and before every closing tag, as
 with AnswerBlock.
 
-Pages do not choose their own header picture. The animated art in the top
-right corner of each page header comes from `lib/corner-art.ts`, keyed by
-translationKey, and the sidebar icon from `lib/icons.tsx`. A new page gets
-neither until you add its translationKey to both files.
+Each page's sidebar icon comes from `lib/icons.tsx`, keyed by translationKey;
+add a new page's key there. A few pages also carry one of the dashboard's
+animated settings pictures in the top right corner of their header
+(`lib/corner-art.ts`). Only add one where the picture means what the page is
+about: the receipt is the dashboard's billing picture, so it sits on Payments
+and payouts. Most pages have none.
 
-### Markdown view
+Cards have the same thin border on all four sides. Do not give one edge its
+own colour or weight (a thick coloured line down the left, say).
 
-Every page has a "View as Markdown" button. It opens `/<locale>/markdown/<slug>`,
-which shows the page's `.md` version in a code editor layout, with a file list
-of the other pages in that language. That view is not indexed; the raw file
-stays at `<page URL>.md`.
+### Markdown version
+
+Every page has a "View as Markdown" button. It opens the raw file at
+`<page URL>.md`: plain text, no page design around it, the same file AI tools
+read.
 
 ### Code blocks
 

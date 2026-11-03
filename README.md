@@ -63,14 +63,15 @@ Graph tags and JSON-LD. It is read when the site is built.
   files, URL helpers, UI copy.
 - `app/[lang]`: the docs (one root layout per locale, so `<html lang>` is right),
   `app/(chooser)`: the language chooser at `/` (the `x-default` target).
-- `app/[lang]/markdown`: the "View as Markdown" page, which shows a page's `.md`
-  version in a code editor layout (`components/ide`). Not indexed.
+- `lib/legal.tsx`: squareshare.eu's legal pages, listed in the footer and as the
+  last group of the sidebar.
 - `styles/fumadocs-theme.css`: the only place Fumadocs UI meets the tokens.
 - Parts copied from the sibling apps, each file naming its source: the footer
   (`components/SiteFooter.tsx`, `components/home/PixelGrid.tsx`) from Home, and
-  the search field and palette (`components/search`) and the animated header art
-  (`components/corner-art`, `styles/corner-art.css`) from the dashboard. The search
-  reads the static index at `/api/search.json` instead of the dashboard's API.
+  the search field and palette (`components/search`) and the billing receipt
+  animation (`components/corner-art`, `styles/corner-art.css`) from the
+  dashboard. The search reads the static index at `/api/search.json` instead of
+  the dashboard's API.
 - `worker/`: Hono Worker plus `wrangler.toml`.
 - `RECON.md`: what was verified in the sibling repos and where.
 

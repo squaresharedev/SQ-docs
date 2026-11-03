@@ -87,20 +87,18 @@ for (const docPage of PAGES) {
       expect(broken, broken.join("\n")).toEqual([]);
     });
 
-    test("View as Markdown opens the editor view, which links the raw .md", async ({ page, request }) => {
+    test("View as Markdown opens the raw .md as plain text", async ({ page, request }) => {
       await page.goto(docPage.url);
-      const viewUrl = docPage.url.replace(/^\/(en|cs)/, "/$1/markdown");
-      const link = page.locator(`article a[href="${viewUrl}"]`);
+      const link = page.locator(`article a[href="${docPage.markdownUrl}"][type="text/markdown"]`);
       await expect(link).toHaveCount(1);
       await link.click();
-      await expect(page).toHaveURL(new RegExp(`${viewUrl}$`));
-      // The page's real Markdown, highlighted, with its first line the title.
-      await expect(page.locator(".ide-code .line").first()).toContainText("# ");
-      const raw = page.locator('article a[type="text/markdown"]');
-      await expect(raw).toHaveAttribute("href", docPage.markdownUrl);
+      await expect(page).toHaveURL(new RegExp(`${docPage.markdownUrl.replace(/\./g, "\\.")}$`));
+      // The browser shows the file itself: no page around it, the first line the title.
+      await expect(page.locator("article, header, nav")).toHaveCount(0);
+      expect((await page.locator("body").innerText()).startsWith("# ")).toBe(true);
       const response = await request.get(docPage.markdownUrl);
       expect(response.status()).toBe(200);
-      expect(response.headers()["content-type"]).toMatch(/^text\/markdown/);
+      expect(response.headers()["content-type"]).toBe("text/markdown; charset=utf-8");
     });
 
     test("Copy page as Markdown puts the .md on the clipboard", async ({ page, context, request }) => {

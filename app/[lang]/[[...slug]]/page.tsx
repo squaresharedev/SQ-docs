@@ -14,7 +14,7 @@ import { pageGraph, sectionTrail } from "@/lib/jsonld";
 import { localeOf } from "@/lib/pairing";
 import { pageMetadata } from "@/lib/seo";
 import { source } from "@/lib/source";
-import { markdownPath, markdownViewPath } from "@/lib/urls";
+import { markdownPath } from "@/lib/urls";
 
 export const dynamicParams = false;
 
@@ -40,7 +40,6 @@ export default async function Page(props: PageProps<"/[lang]/[[...slug]]">) {
     <PageMeta
       lastUpdated={page.data.lastUpdated}
       markdownUrl={markdownPath(page)}
-      markdownViewUrl={markdownViewPath(page)}
       locale={locale}
       copy={copy}
     />

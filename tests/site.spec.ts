@@ -107,7 +107,7 @@ async function expectNoSeriousAxe(page: Page, include?: string): Promise<void> {
   expect(serious, report).toEqual([]);
 }
 
-// Neither the open palette nor the editor view is in the page list the per-page axe checks use.
+// The palette only exists while open, so the per-page axe checks never see it.
 for (const theme of THEMES) {
   test(`axe: the open search palette (${theme})`, async ({ page }) => {
     await openPage(page, "/en", theme);
@@ -116,13 +116,26 @@ for (const theme of THEMES) {
     await expect(page.getByRole("dialog").getByRole("option").first()).toBeVisible();
     await expectNoSeriousAxe(page, '[role="dialog"]');
   });
-
-  test(`axe: the Markdown editor view (${theme})`, async ({ page }) => {
-    await openPage(page, "/en/markdown/what-is-square-share", theme);
-    await expect(page.locator(".ide-code .line").first()).toBeVisible();
-    await expectNoSeriousAxe(page);
-  });
 }
+
+test("the sidebar ends with the legal pages, in both languages", async ({ page }) => {
+  for (const [url, label] of [
+    [EN, "Legal"],
+    [CS, "Právní informace"],
+  ] as const) {
+    await page.goto(url);
+    const sidebar = page.locator("#nd-sidebar");
+    await expect(sidebar.locator("[data-radix-scroll-area-viewport] > div > p")).toHaveText(label);
+    // The last four sidebar links, in the footer's order, all on squareshare.eu.
+    const hrefs = await sidebar.locator("a[data-active]").evaluateAll((links) => links.slice(-4).map((a) => a.getAttribute("href")));
+    expect(hrefs).toEqual([
+      "https://squareshare.eu/legal/privacy-policy/",
+      "https://squareshare.eu/legal/cookie-policy/",
+      "https://squareshare.eu/terms",
+      "https://squareshare.eu/accessibility",
+    ]);
+  }
+});
 
 test.describe("Markdown negotiation through the Worker", () => {
   test("Accept: text/markdown returns the .md version", async ({ request }) => {

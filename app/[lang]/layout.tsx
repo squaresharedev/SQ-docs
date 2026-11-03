@@ -9,6 +9,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { COPY } from "@/lib/copy";
 import { fontVariables } from "@/lib/fonts";
 import { isLocale, LANGUAGE_TAG, LOCALES } from "@/lib/i18n";
+import { withLegalPages } from "@/lib/legal";
 import { switchTargets } from "@/lib/pairing";
 import { WAITLIST_URL } from "@/lib/site";
 import { source } from "@/lib/source";
@@ -32,7 +33,7 @@ export default async function LocaleLayout({ params, children }: LayoutProps<"/[
           <LocaleProvider locale={lang} copy={copy} switchTargets={switchTargets()}>
             <SearchProvider>
               <DocsLayout
-              tree={source.getPageTree(lang)}
+              tree={withLegalPages(source.getPageTree(lang), lang)}
               nav={{ mode: "top", title: copy.siteName, url: `/${lang}` }}
               slots={{ header: SiteHeader, languageSelect: false }}
               links={[

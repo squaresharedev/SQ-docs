@@ -15,6 +15,7 @@
 import { useEffect, useRef } from "react";
 import { Heart, Mail } from "lucide-react";
 import type { Locale } from "@/lib/i18n";
+import { LEGAL_HEADING, LEGAL_LINKS } from "@/lib/legal";
 import { CONTACT_EMAIL, DASHBOARD_URL, HOME_URL } from "@/lib/site";
 import PixelGrid from "./home/PixelGrid";
 
@@ -27,10 +28,8 @@ const FOOTER_COPY = {
   en: {
     tagline: "Turn any website into a store. Embed a portable storefront anywhere and own your revenue stream.",
     explore: "Explore",
-    legal: "Legal",
     contact: "Contact",
     links: ["How It Works", "Our Story", "Get Started", "Sign In"],
-    legalLinks: ["Privacy Policy", "Cookie Policy", "Terms of Service", "Accessibility"],
     rights: "© 2026 Square Share. All rights reserved.",
     madeWith: "Made with",
     love: "love",
@@ -40,10 +39,8 @@ const FOOTER_COPY = {
   cs: {
     tagline: "Udělejte z jakéhokoli webu obchod. Vložte přenosnou výlohu kamkoli a mějte své tržby pod kontrolou.",
     explore: "Procházet",
-    legal: "Právní informace",
     contact: "Kontakt",
     links: ["Jak to funguje", "Náš příběh", "Začít", "Přihlásit se"],
-    legalLinks: ["Ochrana osobních údajů", "Zásady cookies", "Obchodní podmínky", "Přístupnost"],
     rights: "© 2026 Square Share. Všechna práva vyhrazena.",
     madeWith: "Vyrobeno s",
     love: "láskou",
@@ -53,12 +50,6 @@ const FOOTER_COPY = {
 } as const;
 
 const FOOTER_HREFS = [`${HOME_URL}/#features`, `${HOME_URL}/#founder`, `${HOME_URL}/#hero`, `${DASHBOARD_URL}/login`];
-const LEGAL_HREFS = [
-  `${HOME_URL}/legal/privacy-policy/`,
-  `${HOME_URL}/legal/cookie-policy/`,
-  `${HOME_URL}/terms`,
-  `${HOME_URL}/accessibility`,
-];
 
 // Brand glyphs (simple-icons path data): lucide dropped brand marks for
 // trademark reasons, so we inline the SVG paths here.
@@ -158,14 +149,14 @@ export function SiteFooter({ locale }: { locale: Locale }) {
                   </a>
                 ))}
               </nav>
-              <nav className="flex flex-col gap-3" aria-label={copy.legal}>
-                {copy.legalLinks.map((label, index) => (
+              <nav className="flex flex-col gap-3" aria-label={LEGAL_HEADING[locale]}>
+                {LEGAL_LINKS.map(({ key, href, label }) => (
                   <a
-                    key={label}
-                    href={LEGAL_HREFS[index]}
+                    key={key}
+                    href={href}
                     className="font-mono text-xs uppercase tracking-widest text-white/50 transition-colors duration-200 hover:text-acid"
                   >
-                    {label}
+                    {label[locale]}
                   </a>
                 ))}
               </nav>

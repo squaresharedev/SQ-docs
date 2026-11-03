@@ -1,20 +1,13 @@
 import type { ComponentType } from "react";
-import { ArrivingTeam } from "@/components/corner-art/ArrivingTeam";
-import { CodeReels } from "@/components/corner-art/CodeReels";
 import { PrintingReceipt } from "@/components/corner-art/PrintingReceipt";
-import { RingingBell } from "@/components/corner-art/RingingBell";
-import { WritingSignature } from "@/components/corner-art/WritingSignature";
 
 /**
  * Which of the dashboard's settings-card motion graphics sits in a page's
- * header corner, by translationKey (both languages share it).
+ * header corner, by translationKey (both languages share it). Only where the
+ * picture means what the page is about: the receipt is the dashboard's billing
+ * picture. The others (two-factor code, notification bell, team, signature)
+ * fit no docs page, so most pages have none.
  */
-export const CORNER_ART: Record<string, ComponentType<{ className?: string }>> = {
-  "what-is-square-share": ArrivingTeam,
-  "add-storefront": CodeReels,
-  "add-purchase-button": PrintingReceipt,
-  "install-with-ai": CodeReels,
+export const CORNER_ART: Partial<Record<string, ComponentType<{ className?: string }>>> = {
   "payments-and-payouts": PrintingReceipt,
-  troubleshooting: RingingBell,
-  glossary: WritingSignature,
 };

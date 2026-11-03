@@ -1,7 +1,7 @@
 /*
  * The homepage's and dashboard's look in the docs: headline type, buttons
  * with arrows, numbered steps, the code surface, section cards, glossary
- * cards, the sidebar and the editor view. Colours, radius and shadows are
+ * cards and the sidebar. Colours, radius and shadows are
  * token references (see fumadocs-theme.css); the only literal colours are the
  * code surface greens, which the dashboard defines outside the tokens package.
  * Labels use Inter (font-inter), like the dashboard's eyebrows; no mono face
@@ -128,7 +128,6 @@
   margin-block: 1.75rem 2.25rem;
   padding: 1.1rem 1.35rem 1.25rem;
   border: 1px solid var(--color-fd-border);
-  border-inline-start: 4px solid var(--color-acid);
   background: var(--color-fd-card);
   font-size: 1.0625em;
   color: var(--color-fd-foreground);
@@ -349,13 +348,13 @@
 .glossary-list > div {
   padding: 1rem 1.1rem;
   border: 1px solid var(--color-fd-border);
-  border-top: 3px solid var(--color-fd-foreground);
   background: var(--color-fd-card);
   scroll-margin-top: 6rem;
 }
 
+/* The term a link points at: the whole card, never one edge. */
 .glossary-list > div:target {
-  border-top-color: var(--color-acid);
+  border-color: var(--color-acid);
 }
 
 .glossary-list dt {
@@ -378,7 +377,7 @@
 
 /* Section titles: the dashboard's eyebrow. */
 /* The outer folder (the inner list has an id) and its first child, the title. */
-#nd-sidebar [data-disabled]:not([id]) > :first-child {
+:is(#nd-sidebar, #nd-sidebar-mobile) [data-disabled]:not([id]) > :first-child {
   margin-top: 0.75rem;
   font-family: var(--font-inter), var(--font-geist), sans-serif;
   font-size: 0.75rem;
@@ -388,59 +387,47 @@
 }
 
 /* Items: the dashboard's nav item (Sidebar.tsx NAV_ITEM_CLASSES), sharp. */
-#nd-sidebar a[data-active] {
+:is(#nd-sidebar, #nd-sidebar-mobile) a[data-active] {
   gap: 0.5rem;
   border-radius: 0;
   font-size: 0.875rem;
   font-weight: 500;
 }
 
-#nd-sidebar a[data-active="false"] {
+:is(#nd-sidebar, #nd-sidebar-mobile) a[data-active="false"] {
   color: var(--color-fd-muted-foreground);
 }
 
-#nd-sidebar a[data-active="false"]:hover,
-#nd-sidebar a[data-active="true"] {
+:is(#nd-sidebar, #nd-sidebar-mobile) a[data-active="false"]:hover,
+:is(#nd-sidebar, #nd-sidebar-mobile) a[data-active="true"] {
   background: var(--color-fd-accent);
   color: var(--color-fd-foreground);
 }
 
-/* ---------------------------------------------------------------- Editor view */
-
-.ide-code pre {
-  margin: 0;
-  /* Each line is its own block: the newlines between them must not render. */
-  white-space: normal;
-  padding: 0.75rem 0 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent !important;
-  font-family: var(--font-jetbrains-mono), monospace;
-  font-size: 0.8125rem;
-  line-height: 1.65;
-  counter-reset: ide-line;
+/*
+ * The legal group (lib/legal.tsx) under the tree's only separator. The list
+ * fills the sidebar's height so the group sits at the bottom when there is
+ * room; on a short screen it follows the list and scrolls with it.
+ */
+:is(#nd-sidebar, #nd-sidebar-mobile) [data-radix-scroll-area-viewport] > div {
+  min-height: 100%;
 }
 
-/* Wrapped like an editor with word wrap on, a line number before each line. */
-.ide-code .line {
-  position: relative;
-  display: block;
-  min-height: 1.65em;
-  padding-inline: 3.75rem 1rem;
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-  counter-increment: ide-line;
-}
-
-.ide-code .line::before {
-  content: counter(ide-line);
-  position: absolute;
-  left: 0;
-  width: 2.75rem;
+:is(#nd-sidebar, #nd-sidebar-mobile) [data-radix-scroll-area-viewport] > div > p {
+  margin: auto 0 0.25rem;
+  padding: 1.25rem 0.5rem 0;
+  border-top: 1px solid var(--color-fd-border);
   color: var(--color-fd-muted-foreground);
-  text-align: right;
-  user-select: none;
-  opacity: 0.6;
+  font-family: var(--font-inter), var(--font-geist), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+}
+
+/* Room above the group when the list leaves none. */
+:is(#nd-sidebar, #nd-sidebar-mobile) [data-radix-scroll-area-viewport] > div > :has(+ p) {
+  margin-bottom: 1.5rem;
 }
 
 /* The theme switch is a control: sharp like every dashboard control. */
