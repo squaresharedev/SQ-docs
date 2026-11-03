@@ -1,3 +1,4 @@
+import type { ComponentProps } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { createRelativeLink } from "fumadocs-ui/mdx";
@@ -13,8 +14,8 @@ import { CORNER_ART } from "@/lib/corner-art";
 import { pageGraph, sectionTrail } from "@/lib/jsonld";
 import { localeOf } from "@/lib/pairing";
 import { pageMetadata } from "@/lib/seo";
-import { source } from "@/lib/source";
-import { markdownPath } from "@/lib/urls";
+import { source, type DocsPage as SourcePage } from "@/lib/source";
+import { markdownHref, markdownPath } from "@/lib/urls";
 
 export const dynamicParams = false;
 
@@ -29,6 +30,19 @@ async function findPage(props: PageProps<"/[lang]/[[...slug]]">) {
   return page;
 }
 
+/**
+ * Links in page content. A link to a `.md` file is a plain link (the browser
+ * shows the file, there is no page to route to) that also works under
+ * `next dev`; every other link resolves relative paths the Fumadocs way.
+ */
+function contentLink(page: SourcePage) {
+  const RelativeLink = createRelativeLink(source, page);
+  return function ContentLink(props: ComponentProps<"a">) {
+    if (props.href?.endsWith(".md")) return <a {...props} href={markdownHref(props.href)} type="text/markdown" />;
+    return <RelativeLink {...props} />;
+  };
+}
+
 export default async function Page(props: PageProps<"/[lang]/[[...slug]]">) {
   const page = await findPage(props);
   const locale = localeOf(page);
@@ -39,7 +53,7 @@ export default async function Page(props: PageProps<"/[lang]/[[...slug]]">) {
   const meta = (
     <PageMeta
       lastUpdated={page.data.lastUpdated}
-      markdownUrl={markdownPath(page)}
+      markdownUrl={markdownHref(markdownPath(page))}
       locale={locale}
       copy={copy}
     />
@@ -65,7 +79,7 @@ export default async function Page(props: PageProps<"/[lang]/[[...slug]]">) {
         </PageHeader>
       )}
       <DocsBody>
-        <MDX components={getMDXComponents(locale, { a: createRelativeLink(source, page) })} />
+        <MDX components={getMDXComponents(locale, { a: contentLink(page) })} />
       </DocsBody>
       <JsonLd data={pageGraph(page)} />
     </DocsPage>

@@ -28,6 +28,11 @@ registry refuses this machine's token (see "Tokens package" below).
 
 Do not run `pnpm build` while `pnpm dev` is running: both write `.next`.
 
+`<page URL>.md` only exists in the build (postbuild puts the files there and the
+Worker serves them). Under `pnpm dev` the "View as Markdown" button and `.md`
+links in page text go to the Markdown route instead,
+`/md/<lang>/<slug>/content.md`, which shows the same file.
+
 ## Scripts
 
 | Script | What it does |
