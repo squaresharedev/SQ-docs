@@ -1,0 +1,110 @@
+---
+title: How do I connect an AI assistant to Square Share?
+description: "Add the Square Share MCP address to Claude or another MCP app, approve it once, and the assistant can work on your products and storefronts."
+translationKey: connect-ai-assistant
+lastUpdated: 2026-11-03
+draft: true
+---
+
+<AnswerBlock>
+
+Add https://dashboard.squareshare.eu/mcp as a connector in Claude or another app that supports remote MCP servers. The app sends you to a Square Share page where you choose what it may do and click Connect. After that, the assistant can read and edit your products, storefronts and shipping terms, within the permissions you ticked.
+
+</AnswerBlock>
+
+## What is the address?
+
+This is the address of Square Share's MCP server. It is the same for every account; you choose your account when you approve the connection.
+
+<Snippet>
+
+```text title="MCP server address"
+https://dashboard.squareshare.eu/mcp
+```
+
+</Snippet>
+
+You also find it in the dashboard under **Settings**, **Connected apps**, with a **Copy address** button.
+
+## How do I connect it to Claude?
+
+<Steps>
+
+1. In the dashboard, open **Settings**, **Connected apps**, and click **Copy address**. **Open Claude connectors** next to it takes you to Claude.
+2. In Claude, go to **Customize**, then **Connectors**, and click **Add custom connector**. Paste the address and click **Add**. On a Team or Enterprise plan, an owner adds it under **Organization settings**, **Connectors**.
+3. Claude sends you to a Square Share page titled "Connect Claude to your store?". Check the account under **Store** and the permissions under **What it can do**.
+4. Click **Connect**. You are taken back to Claude.
+
+</Steps>
+
+Only click **Connect** if you started the connection yourself, from the app the page names.
+
+In Claude Code, add the server from your terminal. Then run `/mcp` inside Claude Code and follow the steps in your browser to sign in, on the same Square Share page.
+
+<Snippet>
+
+```bash title="Claude Code"
+claude mcp add --transport http square-share https://dashboard.squareshare.eu/mcp
+```
+
+</Snippet>
+
+Other apps that support remote MCP servers with a sign-in step work the same way: add the address, then approve it in the browser.
+
+## What can I let it do?
+
+You tick permissions when you connect. **See your store** is always included. **Refund orders** and **Delete things** start unticked, because they cannot be undone.
+
+| Permission | What it covers |
+| --- | --- |
+| See your store | Products, storefronts, discounts, reviews, sales figures and your notifications |
+| See orders | Orders, including buyers' names, emails and delivery addresses |
+| Edit products | Create and change products, their stock and their photos |
+| Edit storefronts | Design storefronts, product pages and checkout, and set shipping terms |
+| Manage discounts | Start and end sales, and create discount codes |
+| Moderate reviews | Hide, show and publish reviews |
+| Ship orders | Mark orders shipped, which emails the buyer |
+| Edit your profile | Your username, bio, photo and email preferences |
+| Clear notifications | Mark your notifications as read |
+| Answer takedowns | Ask for a review of a takedown, or appeal a decision |
+| Refund orders | Take orders back, which emails the buyer and cannot be undone |
+| Delete things | Delete products, storefronts and discounts, and replace embed keys. This cannot be undone |
+
+To change the permissions later, disconnect the app and connect it again.
+
+## What can an assistant never do?
+
+Some things stay with you, in your own browser, whatever you tick:
+
+- Change your seller details, your sign-in email or your password.
+- Invite, remove or change teammates.
+- Set up or remove two-factor authentication.
+- Change your plan or billing, or delete your account.
+- Accept terms on your behalf, or approve its own connection.
+
+The assistant also goes through the same checks you do. A product it publishes still needs your [seller details](/en/seller-details), and an Active product still needs a storefront with product pages on.
+
+## What can I ask it?
+
+Some requests that work with the default permissions:
+
+- "Which of my products have no photo?"
+- "Put my three newest products on my storefront and make the first one twice as big."
+- "Set my dispatch time to: Ships within 2 business days."
+- "How many people viewed my product pages in the last 30 days?"
+
+Check what it changed in the dashboard before you share any links.
+
+## Does two-factor authentication change anything?
+
+If your account uses [two-factor authentication](/en/account/two-factor-authentication), the Connect page asks for your second step before it lets the app in. With a passkey, the button becomes "Confirm with passkey". With an authenticator app, you type a code. You are not asked again if you passed it in the last ten minutes.
+
+## How do I disconnect an app?
+
+Go to **Settings**, **Connected apps**. Each app is listed with when it was last used. Click **Disconnect**. It stops working straight away, and you can connect it again later.
+
+## Related pages
+
+- [How do I turn on two-factor authentication?](/en/account/two-factor-authentication)
+- [How do I install Square Share with an AI coding tool?](/en/install/install-with-ai-coding-tool)
+- [How do I add a product?](/en/products-and-storefronts/add-a-product)

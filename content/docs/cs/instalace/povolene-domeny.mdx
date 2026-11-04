@@ -1,0 +1,83 @@
+---
+title: "Jak fungují povolené domény?"
+description: "Výloha se zobrazí jen na doménách, které uvedete na její stránce Sdílet. Přesná pravidla pro www, subdomény, adresy náhledu a https."
+translationKey: "allowed-domains"
+lastUpdated: "2026-11-03"
+draft: true
+---
+{/* TODO(adrian): native review */}
+
+<AnswerBlock>
+
+Výloha se zobrazí jen na webech, jejichž doména je v seznamu Povolené domény. Uvést jich můžete až 10. Shodovat se musí celá doména, jen www se ignoruje: vasweb.cz platí i pro www.vasweb.cz. Subdomény a adresy náhledu potřebují vlastní položku a stránka musí používat https.
+
+</AnswerBlock>
+
+## Kde povolené domény nastavím?
+
+<Steps>
+
+1. V panelu otevřete **Výloha** a u své výlohy klikněte na **Sdílet**.
+2. V části „Vyberte weby, kde se zobrazí“ zapněte **Zobrazit na mém webu**.
+3. Do pole **Povolené domény** napište domény oddělené čárkou. Nejvýše 10.
+4. Klikněte na **Uložit nastavení**. Panel potvrdí „Nastavení vložení na web uloženo.“
+
+</Steps>
+
+Můžete vložit i celou adresu. Panel ji zkrátí na doménu: `https://www.VasWeb.cz/obchod/` se uloží jako `www.vasweb.cz`.
+
+## Zobrazí se výloha na této stránce?
+
+Řekněme, že **Povolené domény** obsahují `vasweb.cz` a kód je vložený na těchto stránkách s https:
+
+| Stránka | Zobrazí se? |
+| --- | --- |
+| `vasweb.cz/obchod` | Ano. Na cestě nezáleží. |
+| `www.vasweb.cz` | Ano. Úvodní `www.` se ignoruje. |
+| `obchod.vasweb.cz` | Ne. Uveďte i subdoménu. |
+| `vasweb.webflow.io` | Ne. Uveďte i adresu náhledu. |
+| `vasweb.sk` | Ne. Je to jiná doména. |
+
+Funguje to i obráceně: když uvedete `www.vasweb.cz`, výloha se zobrazí i na `vasweb.cz`. Na stránce s obyčejným `http://` se nezobrazí nikdy, ať uvedete cokoli.
+
+Zástupné znaky neexistují. `vasweb.cz` nikdy nepokryje `obchod.vasweb.cz` ani žádnou jinou adresu, která jen končí vaší doménou. Je to záměr: cizí weby tak vaši výlohu zobrazit nemohou.
+
+## Co uvést nemůžu?
+
+Panel odmítne položku s portem (`vasweb.cz:8080`), se zástupným znakem (`*.vasweb.cz`) nebo cokoli, co není prostý název domény. To platí i pro `localhost` a IP adresy, takže se výloha na adrese pro lokální vývoj nezobrazí. Zkoušejte ji na zveřejněném webu nebo na adrese náhledu, kterou uvedete.
+
+Odmítne také stejnou doménu dvakrát a víc než 10 položek.
+
+## Musím uvést adresu náhledu svého nástroje pro tvorbu webu?
+
+Ano, pokud tam chcete výlohu vidět. Kód vložený do nástroje pro tvorbu webu se zobrazí na zveřejněném webu, ne v editoru nástroje. Adresa náhledu nebo bezplatná adresa je jiná doména:
+
+| Nástroj | Příklad adresy náhledu nebo bezplatné adresy |
+| --- | --- |
+| Webflow | `vasweb.webflow.io` |
+| Wix | `vasejmeno.wixsite.com` |
+| Framer | `vasweb.framer.website` |
+| Squarespace | `vasweb.squarespace.com` |
+
+{/* TODO(adrian): The builder hostnames above are each builder's public default domains (webflow.io, wixsite.com, framer.website, squarespace.com). Confirm the examples against a real site of each before publishing. */}
+
+Wix navíc vkládá kód do rámu na vlastní adrese Wixu. Square Share ten rám pozná podle webu, který jste uvedli, takže uvádíte jen adresu svého webu.
+
+## Co se stane, když seznam změním?
+
+Změny platí po kliknutí na **Uložit nastavení**. Když doménu odeberete, výloha se na ní přestane zobrazovat. Když vypnete **Zobrazit na mém webu**, přestane se zobrazovat všude.
+
+Pokud používáte kód **Jen iframe**, vaše uložené domény jsou součástí jeho adresy. Po změně pole **Povolené domény** ho zkopírujte znovu a nový kód vložte na web. Kód **Skript** žádnou úpravu nepotřebuje.
+
+## Jak zastavím všechny kopie najednou?
+
+Na stránce Sdílet použijte **Vyměnit klíč** v části „Klíč kódu pro vložení“. Všechny kopie starého kódu okamžitě přestanou fungovat, i ty na webech, kde je chcete dál mít, takže pak nový kód vložte všude znovu. Panel potvrdí „Nový klíč pro vložení na web vytvořen.“
+
+## Klíčové pojmy
+
+<GlossaryList terms="allowed-domains embed storefront" />
+
+## Související stránky
+
+- [Jak přidám výlohu na svůj web?](/cs/instalace/pridani-vylohy-na-web)
+- [Proč se moje výloha na webu nezobrazuje?](/cs/reseni-problemu/vyloha-se-nezobrazuje)

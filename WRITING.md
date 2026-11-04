@@ -110,6 +110,7 @@ ordinary Markdown, so the `.md` version keeps the content.
 | `<Steps>` | Wraps an ordered list; draws numbered step blocks. Use it for procedures. | The list |
 | `<Snippet>` | Wraps a fenced code block the reader copies into their site; draws the dashboard's flowing green border. | The code block |
 | `<Buttons>` | Wraps one paragraph of links; draws them as buttons (first solid, the rest outlined; external links get an up-right arrow). | The links |
+| `<SetupMap>` | Wraps an ordered list; draws the dashboard's "Get set up" line beside it, as a new account sees it. Write each item as a bold label, a line break, then one sentence. Only for the dashboard's own setup steps. | The list |
 
 Leave a blank line after every opening tag and before every closing tag, as
 with AnswerBlock.
@@ -118,8 +119,10 @@ Each page's sidebar icon comes from `lib/icons.tsx`, keyed by translationKey;
 add a new page's key there. A few pages also carry one of the dashboard's
 animated settings pictures in the top right corner of their header
 (`lib/corner-art.ts`). Only add one where the picture means what the page is
-about: the receipt is the dashboard's billing picture, so it sits on Payments
-and payouts. Most pages have none.
+about, and where the dashboard shows the same picture: the receipt (billing)
+sits on Payments and payouts, the route (the Shipping card) on Shipping and
+returns, the code reels (the two-factor card) on Two-factor authentication.
+Most pages have none.
 
 Cards have the same thin border on all four sides. Do not give one edge its
 own colour or weight (a thick coloured line down the left, say).

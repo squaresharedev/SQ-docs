@@ -1,0 +1,98 @@
+---
+title: How do I add a product?
+description: "Go to Products, click Add product, give it a title and a price, set it to Active and save. Everything else on the form is optional."
+translationKey: add-a-product
+lastUpdated: 2026-11-03
+draft: true
+---
+
+<AnswerBlock>
+
+In the dashboard, go to Products and click Add product. A title and a price are enough to save it. Choose whether you ship it or sell it as a download, set it to Active, and save. Buyers can see it once you place it on a storefront that shows product pages.
+
+</AnswerBlock>
+
+## How do I add a product?
+
+<Steps>
+
+1. In the dashboard, open **Products** and click **Add product**. The page that opens is called "New product".
+2. Under **Basics**, type a **Title** and a price, and choose the currency (EUR or USD). Add a **Description** and a display image if you have them.
+3. Under **What are you selling?**, choose **Something I ship** or **A download**. A download needs its file, up to 200 MB.
+4. Under **Visibility**, choose **Active** if buyers should be able to buy it, or **Draft** to keep it hidden while you work on it.
+5. Click **Save product**.
+
+</Steps>
+
+The product does not have a page yet. Put it on a storefront, with product pages turned on, to give it one. See [How do I design my storefront?](/en/products-and-storefronts/design-your-storefront).
+
+<Buttons>
+
+[Open the dashboard](https://dashboard.squareshare.eu) [Design your storefront](/en/products-and-storefronts/design-your-storefront)
+
+</Buttons>
+
+## What is the difference between Active and Draft?
+
+| Status | Who sees it | When to use it |
+| --- | --- | --- |
+| Active | Buyers, once it is on a storefront | The product is ready to sell |
+| Draft | Only you | You are still writing it, or it is not for sale right now |
+
+Setting a product back to Draft takes its page offline. The **Get set up** card on the Overview page brings back its publish step if that was your only live product.
+
+## What else can I add?
+
+Everything below **Basics** is optional. The form calls these extras "Make it shine": add whatever helps buyers decide.
+
+| Section | What it holds | Limits |
+| --- | --- | --- |
+| Stock | Unlimited, or a set number that counts down to zero, with a low-stock alert and a maximum per order | Up to 100 per order |
+| Options | Sizes, colours or versions, shown as swatches, chips or a dropdown | 4 groups, 48 options in total |
+| Photos | More angles and close-ups. A photo can belong to one option | 24 extra photos, 10 MB each |
+| Badges | Short labels such as "Handmade", beside the product or on its photo | 6 badges, 3 on the photo |
+| Specifications | Dimensions, weight, materials, care, what is included | 30 rows |
+| Documents | Manuals and certificates as PDF files | 8 PDFs, 20 MB each |
+| Safety and compliance | The maker's name, address and email, for physical goods | Hidden for downloads |
+| Add to order | Up to four of your other products, of the same kind and currency, to buy in the same order | Buyers do not see it yet: it needs Square Share checkout, which is not available |
+
+Images can be PNG, JPG, WEBP, GIF or AVIF, up to 10 MB each.
+
+The dashboard explains the Safety and compliance section this way: EU product-safety law asks for the maker's details on physical goods. If the maker is outside the EU, there is also room for the EU responsible person.
+
+## How do buyers pay for it?
+
+The button on the product page depends on what you set:
+
+| What you set | The button | Where it goes |
+| --- | --- | --- |
+| A purchase link on the product | "Checkout on" and the link's site name | Your own checkout page, in a new tab |
+| No purchase link | **Ask about this product** | An email to your contact email, with the product title in the subject |
+
+To add a purchase link, open **Selling through your own checkout? Add its link** on the product form. The link must start with `https://`.
+
+{/* TODO(adrian): Square Share checkout is built but switched off (NEXT_PUBLIC_STRIPE_CONNECT_ENABLED). When it goes live, products without a purchase link get a card checkout instead of the email button. Update this table then. */}
+
+Square Share checkout will take card payments on the product page. Until it is available, a product without a purchase link uses the email button. See [Payments and payouts](/en/payments-and-payouts).
+
+## Can I import products from another platform?
+
+Yes, from a CSV file. Go to **Products** and click **Import**. It works with a Shopify product export or any tool that exports a CSV, up to 2 MB per file.
+
+- You match the file's columns to Title, Description, Price, SKU and Stock. Only Title is needed.
+- One currency applies to every product in the file.
+- Shopify's variant rows are folded into one product each. Add sizes and colours after importing.
+- Photos are not imported. Add them to each product afterwards.
+- You choose to import them as **Drafts** or as **Live products**. Live products need your [seller details](/en/seller-details) first.
+
+You see exactly which rows will be imported, and which skipped, before anything is saved.
+
+## Key terms
+
+<GlossaryList terms="product product-page storefront" />
+
+## Related pages
+
+- [How do I set up Square Share?](/en/set-up-square-share)
+- [How do I design my storefront?](/en/products-and-storefronts/design-your-storefront)
+- [How do I add a purchase button to my website?](/en/install/add-purchase-button)

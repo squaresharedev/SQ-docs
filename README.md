@@ -73,9 +73,10 @@ Graph tags and JSON-LD. It is read when the site is built.
 - `styles/fumadocs-theme.css`: the only place Fumadocs UI meets the tokens.
 - Parts copied from the sibling apps, each file naming its source: the footer
   (`components/SiteFooter.tsx`, `components/home/PixelGrid.tsx`) from Home, and
-  the search field and palette (`components/search`) and the billing receipt
-  animation (`components/corner-art`, `styles/corner-art.css`) from the
-  dashboard. The search reads the static index at `/api/search.json` instead of
+  the search field and palette (`components/search`), the setup checklist's
+  line (`components/SetupMap.tsx`, `components/transit-styles.ts`) and the
+  billing, shipping and two-factor corner animations (`components/corner-art`,
+  `styles/corner-art.css`) from the dashboard. The search reads the static index at `/api/search.json` instead of
   the dashboard's API.
 - `worker/`: Hono Worker plus `wrangler.toml`.
 - `RECON.md`: what was verified in the sibling repos and where.

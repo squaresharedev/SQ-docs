@@ -1,6 +1,7 @@
 /*
  * Copied from the dashboard: Store/src/app/globals.css, the corner art block,
- * keeping only the printing receipt (the one picture that fits a docs page).
+ * keeping only the pictures that fit a docs page: the printing receipt
+ * (billing), and further down the transit flow (shipping).
  * The two easing curves are the dashboard's motion tokens (Store globals.css
  * @theme), which are not in the tokens package.
  */
@@ -42,6 +43,87 @@
 
 @media (prefers-reduced-motion: reduce) {
   .corner-receipt {
+    animation: none;
+  }
+}
+
+/* Copied from the dashboard: Store/src/app/globals.css, the transit flow block (shipping). */
+
+/* Transit flow (ui/TransitFlow): a pill of ink runs the whole line at an
+   even pace, in through one cut edge of the card and out through the other,
+   and each station it passes lights as it goes through. The pill's path is
+   pathLength 100 and it travels from 20 to -100 (TransitFlow times the
+   stations from those two numbers): it starts wholly before the line and ends
+   wholly past it, and both of the line's ends are off the card, so it is
+   never seen to appear or vanish. TransitFlow sets the loop's length
+   (--transit-loop) and each station's own animation-delay; a flash peaks at
+   the loop's start, so that delay is simply when the pill reaches it. The
+   still pose (pill hidden, lit stations at opacity 0) is in the markup, so
+   these only add the motion. */
+@keyframes transit-flow-run {
+  from {
+    stroke-dashoffset: 20;
+  }
+  to {
+    stroke-dashoffset: -100;
+  }
+}
+.transit-flow-run {
+  animation: transit-flow-run var(--transit-loop) linear infinite;
+}
+/* A lit station grows out of the plain one and shrinks back into it: at 0.75
+   the bold ring (size-4) is exactly the plain one's size-3, so the change
+   reads as the station darkening, not as a second ring fading over it. */
+@keyframes transit-flow-pass {
+  0%,
+  3% {
+    opacity: 1;
+    scale: 1;
+  }
+  10%,
+  90% {
+    opacity: 0;
+    scale: 0.75;
+  }
+  97%,
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+.transit-flow-pass {
+  animation: transit-flow-pass var(--transit-loop) var(--ease-standard) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .transit-flow-run,
+  .transit-flow-pass {
+    animation: none;
+  }
+}
+
+
+/* Copied from the dashboard: Store/src/app/globals.css, the code reels (two-factor). */
+/* Code reels (two-factor): each reel spins to a code, holds, spins half a
+   cycle on to the next and holds, ending where it began. */
+@keyframes corner-reel {
+  0%,
+  8% {
+    translate: 0 0;
+  }
+  28%,
+  58% {
+    translate: 0 var(--reel-spin);
+  }
+  78%,
+  to {
+    translate: 0 calc(var(--reel-spin) * 2);
+  }
+}
+.corner-reel {
+  animation: corner-reel var(--corner-loop) var(--ease-standard) infinite backwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .corner-reel {
     animation: none;
   }
 }

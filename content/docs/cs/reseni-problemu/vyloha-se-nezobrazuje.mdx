@@ -1,0 +1,80 @@
+---
+title: "Proč se moje výloha na webu nezobrazuje?"
+description: "Prázdné místo místo výlohy obvykle znamená chybějící doménu, stránku na http, náhled v editoru nebo upravený kód. Jak to ověřit."
+translationKey: "storefront-not-showing"
+lastUpdated: "2026-11-03"
+draft: true
+---
+{/* TODO(adrian): native review */}
+
+<AnswerBlock>
+
+Odmítnutá výloha nevykreslí nic, takže stránka vypadá, jako by tam kód vůbec nebyl. Nejčastější příčiny: doména stránky není v Povolených doménách, Zobrazit na mém webu je vypnuté, stránka používá http, nebo se díváte do editoru nástroje pro tvorbu webu místo na zveřejněný web.
+
+</AnswerBlock>
+
+## Co mám zkontrolovat nejdřív?
+
+Projděte seznam odshora. Většina problémů je jeden z prvních čtyř bodů.
+
+| Kontrola | Jak to poznáte | Řešení |
+| --- | --- | --- |
+| Doména je uvedená | Doména stránky není v **Povolené domény**, nebo chybí subdoména či adresa náhledu | Přidejte ji na stránce Sdílet a klikněte na **Uložit nastavení** |
+| Vkládání je zapnuté | **Zobrazit na mém webu** je na stránce Sdílet vypnuté | Zapněte ho a uložte |
+| Stránka používá https | V adresním řádku je `http://` | Přepněte web na https u svého hostingu nebo nástroje |
+| Díváte se na zveřejněný web | Máte otevřený editor nebo náhled nástroje | Otevřete skutečnou adresu v nové kartě |
+| Kód je ten, který jste zkopírovali | Klíč v `data-squareshare-storefront` není váš skutečný klíč, nebo byl kód upravený | Zkopírujte kód znovu přes **Kopírovat kód pro vložení** a starý nahraďte |
+| Klíč nebyl vyměněný | Po vložení kódu někdo klikl na **Vyměnit klíč** | Zkopírujte nový kód a vložte ho všude |
+| Údaje prodejce jsou kompletní | Stránka Sdílet říká „Dokud nebudou vaše údaje prodejce kompletní, nemůžete tuto výlohu vložit na web.“ | Doplňte [údaje prodejce](/cs/udaje-prodejce) |
+
+Přesná pravidla pro domény i s příklady najdete na stránce [Jak fungují povolené domény?](/cs/instalace/povolene-domeny).
+
+## Jak přečtu zprávu v konzoli prohlížeče?
+
+Kód **Skript** sám v konzoli prohlížeče napíše, proč se výloha nemůže zobrazit. Otevřete zveřejněnou stránku, otevřete nástroje pro vývojáře (ve většině prohlížečů F12, na Macu Cmd+Option+I) a zvolte kartu **Console**. Hledejte zprávu jako tato (je vždy anglicky):
+
+```text title="Zpráva v konzoli"
+[Square Share] The storefront is not showing on vasweb.cz. Check that this site's address is in the storefront's allowed domains, that embedding is switched on, and that the site uses https. Pasted code shows on the published site, not in a site builder's editor or preview, unless that preview address is listed too.
+```
+
+Doména ve zprávě je ta z adresního řádku prohlížeče. Porovnejte ji písmeno po písmenu s obsahem pole **Povolené domény**.
+
+Zpráva má úroveň Info, ne Error, takže se ukáže, když má konzole zapnutou úroveň Info. Na stránce s http se objeví hned, v ostatních případech asi po 10 sekundách od odmítnutí.
+
+## Proč tam není žádná zpráva?
+
+Načítání začne, jen když najde platný klíč. Pokud atribut `data-squareshare-storefront` obsahuje cokoli jiného než skutečný klíč, kód nic neudělá a nic nenapíše. Časté důvody:
+
+- Místo vašeho klíče se vložil zástupný text z této dokumentace, například `YOUR-EMBED-KEY`.
+- Nástroj pro tvorbu webu nebo editor změnil uvozovky nebo do atributu přidal mezery.
+- Řádek `<script>` zmizel. Některé nástroje skripty odstraňují. Tam použijte kód **Jen iframe**.
+
+Nejrychlejší řešení všech tří je zkopírovat kód z panelu znovu přes **Kopírovat kód pro vložení**. Vždy obsahuje váš skutečný klíč.
+
+## Proč se výloha objeví pozdě nebo až po obnovení stránky?
+
+Výloha se načte, když se její místo na stránce přiblíží k obrazovce. Na dlouhé stránce se tedy objeví, až k ní sjedete. To je v pořádku.
+
+Pokud se na Squarespace výloha zobrazí až po obnovení stránky, přepněte na kód **Jen iframe**. Stejně radí i panel.
+
+## Co když se výloha zobrazí, ale je oříznutá?
+
+Kód **Skript** si výšku nastaví podle výlohy, sám ji tedy nikdy neořízne. Pokud vypadá oříznutá, zkontrolujte, že rámeček kolem ní ve vašem nástroji nemá pevnou výšku. Ve Wixu roztáhněte rámeček Embed HTML na výšku výlohy.
+
+Kód **Jen iframe** má výšku 640 pixelů a posouvá se uvnitř. To je očekávané. Pokud váš web skripty povoluje, použijte kód **Skript**.
+
+## Pořád se nezobrazuje?
+
+Napište na office@squareshare.eu adresu stránky, prohlížeč, nástroj pro tvorbu webu a zprávu z konzole, pokud nějaká je.
+
+<Buttons>
+
+[Napsat na office@squareshare.eu](mailto:office@squareshare.eu) [Povolené domény s příklady](/cs/instalace/povolene-domeny)
+
+</Buttons>
+
+## Související stránky
+
+- [Jak přidám výlohu na svůj web?](/cs/instalace/pridani-vylohy-na-web)
+- [Jak fungují povolené domény?](/cs/instalace/povolene-domeny)
+- [Proč moje produktová stránka není zveřejněná?](/cs/reseni-problemu/produktova-stranka-neni-zverejnena)

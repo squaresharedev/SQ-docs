@@ -375,13 +375,17 @@
 
 /* ---------------------------------------------------------------- Sidebar */
 
-/* Section titles: the dashboard's eyebrow. */
+/*
+ * Section titles: the dashboard's eyebrow, in full colour and semibold so a
+ * title stands out from the muted page links under it.
+ */
 /* The outer folder (the inner list has an id) and its first child, the title. */
 :is(#nd-sidebar, #nd-sidebar-mobile) [data-disabled]:not([id]) > :first-child {
   margin-top: 0.75rem;
+  color: var(--color-fd-foreground);
   font-family: var(--font-inter), var(--font-geist), sans-serif;
   font-size: 0.75rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.025em;
   text-transform: uppercase;
 }
@@ -417,10 +421,10 @@
   margin: auto 0 0.25rem;
   padding: 1.25rem 0.5rem 0;
   border-top: 1px solid var(--color-fd-border);
-  color: var(--color-fd-muted-foreground);
+  color: var(--color-fd-foreground);
   font-family: var(--font-inter), var(--font-geist), sans-serif;
   font-size: 0.75rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.025em;
   text-transform: uppercase;
 }
@@ -450,4 +454,37 @@
 /* From the homepage's globals.css: the footer wordmark's colour. */
 .footer-wordmark {
   color: #ffffff;
+}
+
+/* ---------------------------------------------------------------- Setup map */
+
+/* The dashboard's "Get set up" rows (Store SetupChecklist): a label in
+   text-sm font-medium, and under it the detail line in muted text-xs. */
+.setup-map {
+  margin: 1.75rem 0;
+}
+
+.setup-map-row {
+  color: var(--color-fd-muted-foreground);
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+}
+
+.setup-map-row > strong:first-child,
+.setup-map-row > p:first-child > strong:first-child {
+  display: block;
+  color: var(--color-fd-foreground);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.setup-map-row > p {
+  margin: 0;
+}
+
+.setup-map-row a {
+  color: var(--color-fd-foreground);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }

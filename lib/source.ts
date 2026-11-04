@@ -8,7 +8,7 @@ import { pageIconsPlugin } from "./icons.tsx";
 import { remarkGlossary } from "./mdx/remark-glossary.ts";
 
 /** MDX components that only wrap content: their children go to Markdown as is. */
-const WRAPPER_COMPONENTS = new Set(["AnswerBlock", "SectionCards", "Steps", "Snippet", "Buttons"]);
+const WRAPPER_COMPONENTS = new Set(["AnswerBlock", "SectionCards", "Steps", "Snippet", "Buttons", "SetupMap"]);
 
 const docs = defineDocs({
   dir: "content/docs",

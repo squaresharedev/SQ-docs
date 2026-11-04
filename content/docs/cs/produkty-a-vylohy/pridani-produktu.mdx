@@ -1,0 +1,99 @@
+---
+title: "Jak přidám produkt?"
+description: "V sekci Produkty klikněte na Přidat produkt, zadejte název a cenu, nastavte stav Aktivní a uložte. Vše ostatní je nepovinné."
+translationKey: "add-a-product"
+lastUpdated: "2026-11-03"
+draft: true
+---
+{/* TODO(adrian): native review */}
+
+<AnswerBlock>
+
+V panelu otevřete Produkty a klikněte na Přidat produkt. K uložení stačí název a cena. Zvolte, jestli produkt posíláte, nebo prodáváte jako soubor ke stažení, nastavte stav Aktivní a uložte. Kupující ho uvidí, jakmile ho umístíte do výlohy, která zobrazuje produktové stránky.
+
+</AnswerBlock>
+
+## Jak přidám produkt?
+
+<Steps>
+
+1. V panelu otevřete **Produkty** a klikněte na **Přidat produkt**. Otevře se stránka „Nový produkt“.
+2. V sekci **Základy** zadejte **Název** a cenu a zvolte měnu (EUR nebo USD). Pokud je máte, přidejte **Popis** a hlavní obrázek.
+3. V části **Co prodáváte?** zvolte **Něco, co posílám**, nebo **Soubor ke stažení**. Soubor ke stažení potřebuje samotný soubor, do 200 MB.
+4. V sekci **Viditelnost** zvolte **Aktivní**, pokud ho mají kupující moct koupit, nebo **Koncept**, pokud ho chcete při práci nechat skrytý.
+5. Klikněte na **Uložit produkt**.
+
+</Steps>
+
+Produkt zatím nemá stránku. Abyste ji získali, umístěte ho do výlohy se zapnutými produktovými stránkami. Viz [Jak navrhnu výlohu?](/cs/produkty-a-vylohy/navrh-vylohy).
+
+<Buttons>
+
+[Otevřít panel](https://dashboard.squareshare.eu) [Navrhnout výlohu](/cs/produkty-a-vylohy/navrh-vylohy)
+
+</Buttons>
+
+## Jaký je rozdíl mezi stavem Aktivní a Koncept?
+
+| Stav | Kdo ho vidí | Kdy ho použít |
+| --- | --- | --- |
+| Aktivní | Kupující, jakmile je produkt ve výloze | Produkt je připravený k prodeji |
+| Koncept | Jen vy | Produkt ještě dopisujete, nebo ho teď neprodáváte |
+
+Když produkt přepnete zpět na Koncept, jeho stránka přestane být dostupná. Pokud to byl váš jediný zveřejněný produkt, karta **Začínáme** na stránce Přehled znovu ukáže krok se zveřejněním.
+
+## Co dalšího můžu přidat?
+
+Vše pod sekcí **Základy** je nepovinné. Formulář tyto doplňky nazývá „Ať vynikne“: přidejte to, co kupujícím pomůže se rozhodnout.
+
+| Sekce | Co obsahuje | Limity |
+| --- | --- | --- |
+| Zásoby | Neomezeně, nebo počet kusů, který klesá k nule, s upozorněním na nízké zásoby a maximem na objednávku | Nejvýše 100 kusů na objednávku |
+| Možnosti | Velikosti, barvy nebo varianty jako vzorníky barev, štítky nebo rozbalovací seznam | 4 skupiny, celkem 48 možností |
+| Fotky | Další pohledy a detaily. Fotka může patřit k jedné možnosti | 24 dalších fotek, každá do 10 MB |
+| Odznaky | Krátké štítky jako „Ruční výroba“ vedle produktu nebo na fotce | 6 odznaků, z toho 3 na fotce |
+| Specifikace | Rozměry, hmotnost, materiály, péče, co je v balení | 30 řádků |
+| Dokumenty | Návody a certifikáty v PDF | 8 souborů PDF, každý do 20 MB |
+| Bezpečnost a shoda | Jméno, adresa a e-mail výrobce u fyzického zboží | U souborů ke stažení skryto |
+| Přidat k objednávce | Až čtyři vaše další produkty stejného druhu a měny, ke koupi v jedné objednávce | Kupující to zatím neuvidí: vyžaduje to pokladnu Square Share, která zatím není dostupná |
+
+Obrázky mohou být ve formátu PNG, JPG, WEBP, GIF nebo AVIF, každý do 10 MB.
+
+Panel sekci Bezpečnost a shoda vysvětluje takto: předpisy EU o bezpečnosti výrobků vyžadují u fyzického zboží údaje o výrobci. Pokud výrobce sídlí mimo EU, je tu místo i pro odpovědnou osobu v EU.
+
+## Jak za produkt kupující zaplatí?
+
+Tlačítko na produktové stránce závisí na tom, co nastavíte:
+
+| Co nastavíte | Tlačítko | Kam vede |
+| --- | --- | --- |
+| Odkaz na nákup u produktu | „Pokladna na“ a název webu z odkazu | Na vaši vlastní pokladnu, v nové kartě |
+| Žádný odkaz na nákup | **Zeptat se na tento produkt** | Na e-mail na váš kontaktní e-mail, s názvem produktu v předmětu |
+
+Odkaz na nákup přidáte ve formuláři produktu přes **Prodáváte přes vlastní pokladnu? Přidejte odkaz**. Odkaz musí začínat `https://`.
+
+{/* TODO(adrian): Square Share checkout is built but switched off (NEXT_PUBLIC_STRIPE_CONNECT_ENABLED). When it goes live, products without a purchase link get a card checkout instead of the email button. Update this table then. */}
+
+Pokladna Square Share bude přijímat platby kartou přímo na produktové stránce. Dokud není dostupná, produkt bez odkazu na nákup používá tlačítko s e-mailem. Viz [Platby a výplaty](/cs/platby-a-vyplaty).
+
+## Můžu produkty importovat z jiné platformy?
+
+Ano, ze souboru CSV. Otevřete **Produkty** a klikněte na **Importovat**. Funguje to s exportem produktů ze Shopify i s jakýmkoli nástrojem, který umí export do CSV, do 2 MB na soubor.
+
+- Sloupce souboru přiřadíte k polím Název, Popis, Cena, SKU a Zásoby. Povinný je jen Název.
+- Pro všechny produkty v souboru platí jedna měna.
+- Řádky variant ze Shopify se sloučí do jednoho produktu. Velikosti a barvy přidejte po importu.
+- Fotky se neimportují. Přidejte je k jednotlivým produktům potom.
+- Vyberete, jestli se importují jako **Koncepty**, nebo jako **Zveřejněné produkty**. Zveřejněné produkty vyžadují vyplněné [údaje prodejce](/cs/udaje-prodejce).
+
+Než se cokoli uloží, uvidíte přesně, které řádky se naimportují a které se přeskočí.
+
+## Klíčové pojmy
+
+<GlossaryList terms="product product-page storefront" />
+
+## Související stránky
+
+- [Jak nastavím Square Share?](/cs/nastaveni-square-share)
+- [Jak navrhnu výlohu?](/cs/produkty-a-vylohy/navrh-vylohy)
+- [Jak přidám na svůj web tlačítko pro nákup?](/cs/instalace/pridani-tlacitka-pro-nakup)

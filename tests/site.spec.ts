@@ -83,9 +83,10 @@ for (const [home, term, prefix] of [
     }
     await expect(items.first()).toBeVisible();
 
-    // Picking the first result opens a page in the same language.
+    // Picking the first result opens a page in the same language: one under
+    // the prefix, or a heading on the locale home itself (/en#heading).
     await items.first().click();
-    await expect(page).toHaveURL(new RegExp(`${prefix}`));
+    await expect(page).toHaveURL(new RegExp(`//[^/]+(${prefix}|${home}([#?]|$))`));
     await expect(page.getByRole("dialog")).toHaveCount(0);
   });
 }

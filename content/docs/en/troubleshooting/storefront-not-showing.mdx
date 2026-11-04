@@ -1,0 +1,79 @@
+---
+title: Why is my storefront not showing on my website?
+description: "A blank space where the storefront should be usually means a missing domain, an http page, an editor preview or a changed snippet. How to check each."
+translationKey: storefront-not-showing
+lastUpdated: 2026-11-03
+draft: true
+---
+
+<AnswerBlock>
+
+A storefront that is refused draws nothing, so the page looks as if the snippet were missing. The usual causes are: the page's domain is not in Allowed domains, Show on my website is off, the page uses http, or you are looking at a site builder's editor instead of the published site.
+
+</AnswerBlock>
+
+## What should I check first?
+
+Work down this list. Most problems are one of the first four.
+
+| Check | How to tell | Fix |
+| --- | --- | --- |
+| The domain is listed | The page's domain is not in **Allowed domains**, or a subdomain or preview address is missing | Add it on the Share page and click **Save settings** |
+| Embedding is on | **Show on my website** is off on the Share page | Turn it on and save |
+| The page uses https | The address bar shows `http://` | Switch your site to https in your host or builder |
+| You are on the published site | You are looking at the builder's editor or preview | Open the live address in a new tab |
+| The snippet is the one you copied | The key in `data-squareshare-storefront` is not your real key, or the code was edited | Copy the snippet again with **Copy embed snippet** and replace the old one |
+| The key was not rotated | Someone clicked **Rotate key** after you pasted the snippet | Copy the new snippet and paste it everywhere |
+| Seller details are complete | The Share page says "You can't embed this storefront until your seller details are complete." | Fill in your [seller details](/en/seller-details) |
+
+For the exact domain rules, with examples, see [How do allowed domains work?](/en/install/allowed-domains).
+
+## How do I read the message in the browser console?
+
+The **Script** snippet explains itself in the browser console when the storefront cannot show. Open your published page, open the browser's developer tools (F12 in most browsers, or Cmd+Option+I on a Mac), and choose the **Console** tab. Look for a message like this:
+
+```text title="Console message"
+[Square Share] The storefront is not showing on yoursite.com. Check that this site's address is in the storefront's allowed domains, that embedding is switched on, and that the site uses https. Pasted code shows on the published site, not in a site builder's editor or preview, unless that preview address is listed too.
+```
+
+The domain in the message is the one in your browser's address bar. Compare it, letter for letter, with what is in **Allowed domains**.
+
+The message is an info message, not an error, so it shows when the console's Info level is on. It appears straight away on an http page, and after about 10 seconds when the storefront was refused for any other reason.
+
+## Why is there no message at all?
+
+The loader only starts when it finds a valid key. If the `data-squareshare-storefront` attribute holds anything other than a real key, it does nothing and says nothing. Common reasons:
+
+- The placeholder from these docs, such as `YOUR-EMBED-KEY`, was pasted instead of your key.
+- A site builder or editor changed the quotes or added spaces inside the attribute.
+- The `<script>` line was removed. Some builders strip scripts. Use the **Iframe only** snippet there.
+
+The quickest fix for all three is to copy the snippet from the dashboard again with **Copy embed snippet**. It always contains your real key.
+
+## Why does the storefront appear late, or only after a reload?
+
+The storefront loads when its place on the page comes near the screen, so one far down a long page appears as you scroll towards it. That is normal.
+
+On Squarespace, if the storefront only shows after a reload, switch to the **Iframe only** snippet. The dashboard gives the same advice for Squarespace.
+
+## What if the storefront shows but is cut off?
+
+The **Script** snippet sizes itself to the storefront, so it is never cut off on its own. If it looks cut off, check that your builder's box around it is not a fixed height. On Wix, drag the Embed HTML box as tall as your storefront.
+
+The **Iframe only** snippet is 640 pixels tall and scrolls inside. That is expected. Use the **Script** snippet if your site allows scripts.
+
+## Still not showing?
+
+Email office@squareshare.eu with the address of the page, the browser you used, your site builder, and the console message if there is one.
+
+<Buttons>
+
+[Email office@squareshare.eu](mailto:office@squareshare.eu) [Allowed domains, with examples](/en/install/allowed-domains)
+
+</Buttons>
+
+## Related pages
+
+- [How do I add a storefront to my website?](/en/install/add-storefront-to-website)
+- [How do allowed domains work?](/en/install/allowed-domains)
+- [Why is my product page not live?](/en/troubleshooting/product-page-not-live)

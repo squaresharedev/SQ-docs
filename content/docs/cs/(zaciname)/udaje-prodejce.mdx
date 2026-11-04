@@ -1,0 +1,86 @@
+---
+title: "Jak vyplním údaje prodejce?"
+description: "Obchodní jméno, adresu a kontaktní e-mail vyplníte v Nastavení, Firma a údaje prodejce. Bez nich nic nezveřejníte ani neprodáte."
+translationKey: "seller-details"
+lastUpdated: "2026-11-03"
+draft: true
+---
+{/* TODO(adrian): native review */}
+
+<AnswerBlock>
+
+Otevřete Nastavení, pak Firma a údaje prodejce, a vyplňte obchodní jméno, adresu a kontaktní e-mail. Tyto tři údaje jsou povinné: dokud nejsou kompletní, žádná produktová stránka se nezveřejní a nic se nedá prodat. Kupující je vidí v sekci Prodejce na každé produktové stránce, takže vědí, od koho kupují.
+
+</AnswerBlock>
+
+{/* TODO(adrian): While transactional email is off, a typed contact email is enough to publish. When it is switched on, the email must be confirmed with a code first (Store src/lib/contact-verification/availability.ts). Add that step here then. */}
+
+## Jak údaje prodejce doplním?
+
+<Steps>
+
+1. V panelu otevřete **Nastavení**.
+2. Zvolte **Firma a údaje prodejce**.
+3. Vyplňte **Obchodní jméno**, **Adresa** a **Kontaktní e-mail**.
+4. Doplňte nepovinná pole, která mají kupující vidět: **Země**, **DIČ** a **Medailonek**.
+5. Uložte. Panel uložení potvrdí zprávou.
+
+</Steps>
+
+Údaje nastavíte jednou pro celý účet. Platí pro každou produktovou stránku, přes kterou prodáváte.
+
+<Buttons>
+
+[Otevřít panel](https://dashboard.squareshare.eu)
+
+</Buttons>
+
+## Která pole jsou povinná a kdo je vidí?
+
+| Pole | Povinné | Co vidí kupující |
+| --- | --- | --- |
+| Obchodní jméno | Ano | Vaše jméno nahoře v sekci Prodejce |
+| Adresa | Ano | Vaši poštovní adresu tak, jak jste ji zadali |
+| Kontaktní e-mail | Ano | Vaši adresu jako odkaz, na který mohou napsat |
+| Země | Ne | Název země, pokud ji vyberete |
+| DIČ | Ne | Vaše DIČ, pokud ho doplníte |
+| Medailonek | Ne | Jednu větu pod vaším jménem |
+| Telefon | Ne | Zatím nic (viz níže) |
+
+## Jaké jméno mám uvést?
+
+Uveďte jméno, se kterým kupující uzavírá smlouvu. Pokud prodáváte přes registrovanou firmu, je to její obchodní jméno. Pokud prodáváte jako fyzická osoba, je to vaše celé jméno.
+
+Název výlohy se nepočítá. Název výlohy je název obchodu a panel ho místo obchodního jména nepřijme.
+
+## Jaký kontaktní e-mail mám použít?
+
+Adresu, kterou opravdu čtete. Nemusí to být ta, se kterou se přihlašujete, a panel je záměrně drží odděleně.
+
+Panel odmítne adresy, které nikdo nečte: zástupné adresy, dočasné e-mailové schránky, adresy typu no-reply a domény, které nepřijímají poštu.
+
+Kontaktní e-mail má ještě jednu roli. Když produkt nemá vlastní odkaz na nákup, tlačítko na jeho produktové stránce otevře e-mail na tuto adresu, aby se vás kupující mohl zeptat.
+
+## Proč se nezobrazuje telefonní číslo?
+
+Kupující vidí telefonní číslo, až když je potvrzené kódem z textové zprávy. Potvrzování textovou zprávou zatím není k dispozici, takže přidané číslo kupující zatím neuvidí.
+
+## Co Square Share s těmito údaji dělá?
+
+Zobrazují se na vašich produktových stránkách, aby kupující viděli, od koho kupují a jak vás kontaktovat. Panel uvádí, že je Square Share nikdy nepoužívá k marketingu, neprodává je ani nesdílí. Podrobnosti najdete v [zásadách ochrany osobních údajů Square Share](https://squareshare.eu/legal/privacy-policy/).
+
+## Co se změní, když jsou údaje kompletní?
+
+Panel vás přestane blokovat. Dokud nejsou vyplněná tři povinná pole, ukazuje u produktů, výloh a na stránce sdílení zprávy, že bez údajů prodejce nemůžete nic zveřejnit ani prodat.
+
+První krok karty **Začínáme** na stránce Přehled se odškrtne. Další kroky najdete na stránce [Jak nastavím Square Share?](/cs/nastaveni-square-share).
+
+## Klíčové pojmy
+
+<GlossaryList terms="seller-details merchant-of-record product-page" />
+
+## Související stránky
+
+- [Jak nastavím Square Share?](/cs/nastaveni-square-share)
+- [Platby a výplaty](/cs/platby-a-vyplaty)
+- [Proč moje produktová stránka není zveřejněná?](/cs/reseni-problemu/produktova-stranka-neni-zverejnena)

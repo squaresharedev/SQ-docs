@@ -1,0 +1,65 @@
+---
+title: "Proč moje produktová stránka není zveřejněná?"
+description: "Produktová stránka se otevře, jen když máte kompletní údaje prodejce a produkt je aktivní ve výloze se zapnutými stránkami. Zprávy a řešení."
+translationKey: "product-page-not-live"
+lastUpdated: "2026-11-03"
+draft: true
+---
+{/* TODO(adrian): native review */}
+
+<AnswerBlock>
+
+Produktová stránka se kupujícím otevře, jen když platí čtyři věci: údaje prodejce jsou kompletní, produkt má stav Aktivní, leží v mřížce některé výlohy a ta výloha má zapnuté Zobrazit produktovou stránku. Do té doby kupující po otevření odkazu uvidí, že produkt není dostupný. Co chybí, vám řekne stránka Přehled.
+
+</AnswerBlock>
+
+## Jak zjistím, co chybí?
+
+V panelu otevřete **Přehled**. Na kartě **Začínáme** řádek pod **Zveřejněte jeho stránku** uvádí první věc, která stránce brání. Pokud se dá opravit na jiné stránce, má řádek tlačítko, které vás tam vezme.
+
+| Panel píše | Co to znamená | Co udělat |
+| --- | --- | --- |
+| „Dokončete údaje prodejce a pak můžete stránku zveřejnit.“ | Chybí obchodní jméno, adresa nebo kontaktní e-mail | Doplňte [údaje prodejce](/cs/udaje-prodejce) |
+| „Jakmile bude produkt ve výloze, můžete jeho stránku zveřejnit.“ | Žádná výloha nemá produkt v mřížce | Otevřete editor a na panelu nástrojů použijte **Přidat produkt** |
+| „Nastavte produktu stav Aktivní, aby se jeho stránka zveřejnila.“ | Produkt je Koncept | Klikněte na **Upravit produkt** a nastavte stav **Aktivní** |
+| „Produktové stránky jsou v této výloze vypnuté. Zapněte je v editoru.“ | **Zobrazit produktovou stránku** je vypnuté | Klikněte na **Otevřít editor** a zapněte ho v nastavení **Produktová stránka** |
+| „Vaše stránka se zveřejní, až automatická kontrola produkt schválí.“ | Produkt čeká na automatickou kontrolu obsahu Square Share | Nic. Po schválení se stránka zveřejní sama |
+| „Automatická kontrola ten produkt pozastavila. Otevřete ho a uvidíte, co změnit.“ | Automatická kontrola našla něco ke změně | Klikněte na **Upravit produkt** a přečtěte si důvod |
+
+Když je vše v pořádku, krok říká „Vaše produktová stránka je zveřejněná.“
+
+## Co uvidí kupující, když stránka zveřejněná není?
+
+Stránku s nadpisem, že produkt není dostupný, a s vysvětlením, že mohl být odstraněn nebo že odkaz je zastaralý. Square Share ukazuje stejnou stránku bez ohledu na důvod, takže kupující se důvod nedozví.
+
+## Proč přestala fungovat stránka, která fungovala?
+
+Zveřejněná stránka zmizí, jakmile některá ze čtyř podmínek přestane platit. Hledejte nedávnou změnu:
+
+- Produkt jste přepnuli zpět na **Koncept**.
+- Produkt jste odebrali z mřížky výlohy, nebo jste výlohu smazali.
+- U té výlohy jste vypnuli **Zobrazit produktovou stránku**.
+- V údajích prodejce jste vymazali povinné pole.
+
+Nezapomeňte v editoru kliknout na **Uložit**. Neuložená změna se ke kupujícím nedostane, a to platí i pro opravu.
+
+## Proč po přesunu produktu nefunguje odkaz z tlačítka pro nákup?
+
+Adresa produktové stránky obsahuje kromě produktu i výlohu:
+
+```text title="Adresa produktové stránky"
+https://dashboard.squareshare.eu/s/STOREFRONT_ID/p/PRODUCT_ID
+```
+
+Stránka se otevře, jen dokud je produkt v této výloze. Když produkt z jedné výlohy odeberete a dáte ho do jiné, odkazy s první výlohou přestanou fungovat. Zkopírujte odkaz znovu přes **Produkty**, nabídku **...** u produktu a **Přidat na váš web** a na svém webu ho nahraďte.
+
+## Jak si stránku ověřím sám?
+
+Když karta ukazuje „Máte hotovo“, použijte **Kopírovat odkaz na produktovou stránku** a odkaz otevřete v anonymním okně prohlížeče. Uvidíte stránku tak, jak ji vidí kupující. U tlačítka pro nákup totéž udělá **Vyzkoušet tlačítko** v dialogu **Přidat na váš web**.
+
+## Související stránky
+
+- [Jak nastavím Square Share?](/cs/nastaveni-square-share)
+- [Jak navrhnu výlohu?](/cs/produkty-a-vylohy/navrh-vylohy)
+- [Jak přidám na svůj web tlačítko pro nákup?](/cs/instalace/pridani-tlacitka-pro-nakup)
+- [Proč se moje výloha na webu nezobrazuje?](/cs/reseni-problemu/vyloha-se-nezobrazuje)

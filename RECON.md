@@ -206,3 +206,56 @@ Freeform editor mode, templates, hosted storefronts on app.squareshare.eu,
 discovery feed or marketplace, more widgets (email signup, reservations or
 booking, availability calendar), WordPress and Wix plugins, Square Share
 checkout through Stripe (built, switched off).
+
+## 12. Second batch of pages (verified 2026-11-03)
+
+Read-only research in `Store` for the ten pages added on 2026-11-03. Paths
+relative to `Store/`. UI strings are quoted from `messages/en` and `messages/cs`.
+
+- **Production switches that limit what the docs may say:** buyer checkout off
+  (`.env.production` `NEXT_PUBLIC_STRIPE_CONNECT_ENABLED` commented out);
+  transactional email off (`wrangler.jsonc` LAUNCH SWITCHES step 3), so no app
+  emails, no invite emails, and a confirmed contact email is NOT yet required
+  to publish (`src/lib/contact-verification/availability.ts`); phone
+  confirmation by text unavailable. MCP server on (`AGENT_ACCESS_ENABLED`).
+- **Setup checklist** (`src/lib/onboarding/steps.ts`, `onboarding.json`): four
+  steps while checkout is off. A product page is live only when seller details
+  are complete, the product is Active, it has a block on a storefront, that
+  storefront has "Show a product page" on, and the automatic check has not
+  held it (`src/lib/products/public.ts`). Buyers otherwise see "This product
+  isn't available".
+- **Seller details** (`settings.json` `tax`): required Trader name, Address,
+  Contact email; optional VAT ID, Country, Phone, Bio. Public in the product
+  page Seller block (`src/components/product-page/SellerBlock.tsx`).
+- **Product form** (`src/lib/validation/product.ts`, `products.json`): EUR or
+  USD; download file up to 200 MB; images PNG/JPG/WEBP/GIF/AVIF up to 10 MB;
+  24 extra photos; 4 option groups, 48 options; 6 badges (3 on the photo);
+  8 PDFs up to 20 MB; max 100 per order. A purchase link opens in a new tab
+  ("Checkout on" host); without one the button is "Ask about this product"
+  (mailto). Add-ons need Square Share checkout, so buyers do not see them
+  today. CSV import up to 2 MB, photos not imported.
+- **Designer** (`storefront.json`, `src/types/storefront.ts`): canvas 3 to 12
+  columns, 2 to 60 rows, 120 blocks, grid gap 0 to 32 px; explicit Save
+  (Ctrl/Cmd+S); "Allow search engines" defaults off (`allowIndexing: false`).
+- **Allowed domains** (`src/lib/validation/inputs.ts`, `src/lib/storefront/embed.ts`):
+  pasted URLs are trimmed to the host; whole-host match, leading `www.` ignored
+  both ways; no wildcards, ports, localhost or IPs; Wix `filesusr.com` frames
+  recognised from the listed site. `public/widget.js` logs the
+  `[Square Share] The storefront is not showing on` message with
+  `console.info`, at once on http pages, else after 10 s; an invalid key does
+  nothing and logs nothing; frames load near the viewport (600 px margin).
+- **Shipping & returns** (`settings.json` `shipping`): up to 6 destinations, 8
+  profiles; returns window None, 14 (EU statutory minimum), 30 or custom days.
+  Product pages state EU withdrawal and guarantee rights (`productPage.json`
+  `statutory`).
+- **Two-factor** (`settings.json` `security`, `docs/two-factor-auth.md`):
+  passkey (Recommended) or authenticator app, 10 recovery codes; using one
+  turns 2FA off. Locked-out contact is `support@squareshare.eu`
+  (`src/lib/site.ts`).
+- **MCP** (`settings.json` `connectedApps`, `src/lib/agent/scopes.ts`,
+  `tests/unit/agent/registry.test.ts`): permission labels as on the consent
+  page; Refund orders and Delete things start unticked; seller details,
+  team, 2FA, email, billing and account deletion stay with the person. The
+  dashboard links to `https://claude.ai/settings/connectors`; Claude's own
+  docs (checked 2026-11-03) place custom connectors under Customize >
+  Connectors.

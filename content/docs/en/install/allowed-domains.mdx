@@ -1,0 +1,82 @@
+---
+title: How do allowed domains work?
+description: "Your storefront shows only on the domains you list on its Share page. Exact rules for www, subdomains, preview addresses and https."
+translationKey: allowed-domains
+lastUpdated: 2026-11-03
+draft: true
+---
+
+<AnswerBlock>
+
+A storefront only shows on websites whose domain is in its Allowed domains list. You can list up to 10. The whole domain must match, except that www is ignored: yoursite.com also covers www.yoursite.com. Subdomains and preview addresses need their own entry, and the page must use https.
+
+</AnswerBlock>
+
+## Where do I set allowed domains?
+
+<Steps>
+
+1. In the dashboard, open **Storefront** and click **Share** on your storefront.
+2. Under "Choose the sites it shows on", turn on **Show on my website**.
+3. Type your domains in **Allowed domains**, separated by commas. Up to 10.
+4. Click **Save settings**. The dashboard confirms with "Embed settings saved."
+
+</Steps>
+
+You can paste a full address. The dashboard trims it to the domain: `https://www.YourSite.com/shop/` is saved as `www.yoursite.com`.
+
+## Will my storefront show on this page?
+
+Say **Allowed domains** contains `yoursite.com`, and the snippet is on these https pages:
+
+| Page | Shows? |
+| --- | --- |
+| `yoursite.com/shop` | Yes. The path does not matter. |
+| `www.yoursite.com` | Yes. A leading `www.` is ignored. |
+| `shop.yoursite.com` | No. List the subdomain too. |
+| `yoursite.webflow.io` | No. List the preview address too. |
+| `yoursite.co.uk` | No. It is a different domain. |
+
+It works the other way round too: list `www.yoursite.com` and the storefront also shows on `yoursite.com`. On a page served over plain `http://`, it never shows, whatever you list.
+
+There is no wildcard. `yoursite.com` never covers `shop.yoursite.com` or any other address that merely ends in your domain. That is on purpose: it stops other people's sites from showing your storefront.
+
+## What can I not list?
+
+The dashboard refuses an entry with a port (`yoursite.com:8080`), a wildcard (`*.yoursite.com`), or anything that is not a plain domain name. That includes `localhost` and IP addresses, so the storefront does not show on a local development address. Test on your published site, or on a preview address that you list.
+
+It also refuses the same domain twice, and more than 10 entries.
+
+## Do I need to list my site builder's preview address?
+
+Yes, if you want to see the storefront there. Code pasted into a site builder shows on your published site, not in the builder's editor. A preview or free address is a different domain:
+
+| Builder | Example preview or free address to list |
+| --- | --- |
+| Webflow | `yoursite.webflow.io` |
+| Wix | `yourname.wixsite.com` |
+| Framer | `yoursite.framer.website` |
+| Squarespace | `yoursite.squarespace.com` |
+
+{/* TODO(adrian): The builder hostnames above are each builder's public default domains (webflow.io, wixsite.com, framer.website, squarespace.com). Confirm the examples against a real site of each before publishing. */}
+
+Wix also puts pasted code in a frame on a Wix address of its own. Square Share recognises that frame from the site you listed, so you only list your site's address.
+
+## What happens when I change the list?
+
+Changes apply once you click **Save settings**. Remove a domain and the storefront stops showing there. Turn off **Show on my website** and it stops showing everywhere.
+
+If you use the **Iframe only** snippet, your saved domains are part of its address. Copy that snippet again after you change **Allowed domains** and paste the new one into your site. The **Script** snippet needs no update.
+
+## How do I stop every copy at once?
+
+Use **Rotate key** under "Snippet key" on the Share page. Every copy of the old snippet stops working immediately, including copies on sites you still want, so paste the new snippet everywhere afterwards. The dashboard confirms with "New embed key issued."
+
+## Key terms
+
+<GlossaryList terms="allowed-domains embed storefront" />
+
+## Related pages
+
+- [How do I add a storefront to my website?](/en/install/add-storefront-to-website)
+- [Why is my storefront not showing on my website?](/en/troubleshooting/storefront-not-showing)

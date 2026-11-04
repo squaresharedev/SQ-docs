@@ -5,6 +5,7 @@ import { COPY } from "@/lib/copy";
 import type { Locale } from "@/lib/i18n";
 import { AnswerBlock } from "./AnswerBlock";
 import { Buttons, Snippet, Steps } from "./ContentBlocks";
+import { SetupMap } from "./SetupMap";
 import { SectionCards } from "./SectionCards";
 
 /** The MDX components, with the ones that print words bound to the page's locale. */
@@ -17,6 +18,7 @@ export function getMDXComponents(locale: Locale, components?: MDXComponents) {
     Steps,
     Snippet,
     Buttons,
+    SetupMap,
     ...components,
   } satisfies MDXComponents;
 }

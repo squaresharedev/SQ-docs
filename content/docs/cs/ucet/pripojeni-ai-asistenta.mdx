@@ -1,0 +1,111 @@
+---
+title: "Jak připojím AI asistenta k Square Share?"
+description: "Přidejte adresu MCP serveru Square Share do Claude nebo jiné MCP aplikace, jednou ji schvalte a asistent může pracovat s produkty a výlohami."
+translationKey: "connect-ai-assistant"
+lastUpdated: "2026-11-03"
+draft: true
+---
+{/* TODO(adrian): native review */}
+
+<AnswerBlock>
+
+Přidejte https://dashboard.squareshare.eu/mcp jako konektor do Claude nebo jiné aplikace, která podporuje vzdálené MCP servery. Aplikace vás pošle na stránku Square Share, kde zvolíte, co smí dělat, a kliknete na Připojit. Pak asistent může číst a upravovat vaše produkty, výlohy a dopravní podmínky v rozsahu oprávnění, která jste zaškrtli.
+
+</AnswerBlock>
+
+## Jaká je adresa?
+
+Toto je adresa MCP serveru Square Share. Je stejná pro všechny účty; svůj účet zvolíte při schvalování připojení.
+
+<Snippet>
+
+```text title="Adresa MCP serveru"
+https://dashboard.squareshare.eu/mcp
+```
+
+</Snippet>
+
+Najdete ji i v panelu v **Nastavení**, **Připojené aplikace**, s tlačítkem **Zkopírovat adresu**.
+
+## Jak ho připojím ke Claude?
+
+<Steps>
+
+1. V panelu otevřete **Nastavení**, **Připojené aplikace** a klikněte na **Zkopírovat adresu**. Tlačítko **Otevřít konektory v Claude** vedle vás vezme do Claude.
+2. V Claude otevřete **Customize**, pak **Connectors**, a klikněte na **Add custom connector**. Vložte adresu a klikněte na **Add**. U plánů Team a Enterprise konektor přidává vlastník v **Organization settings**, **Connectors**.
+3. Claude vás pošle na stránku Square Share s otázkou „Připojit Claude k vašemu obchodu?“. Zkontrolujte účet v poli **Obchod** a oprávnění v části **Co může dělat**.
+4. Klikněte na **Připojit**. Vrátíte se do Claude.
+
+</Steps>
+
+Na **Připojit** klikněte, jen pokud jste připojení spustili sami, z aplikace, kterou stránka jmenuje.
+
+V Claude Code přidejte server z terminálu. Pak v Claude Code spusťte `/mcp` a přihlaste se podle pokynů v prohlížeči, na stejné stránce Square Share.
+
+<Snippet>
+
+```bash title="Claude Code"
+claude mcp add --transport http square-share https://dashboard.squareshare.eu/mcp
+```
+
+</Snippet>
+
+Jiné aplikace, které podporují vzdálené MCP servery s přihlášením, fungují stejně: přidáte adresu a pak připojení schválíte v prohlížeči.
+
+## Co mu můžu dovolit?
+
+Oprávnění zaškrtáváte při připojení. **Zobrazit váš obchod** je vždy zahrnuté. **Vracet peníze za objednávky** a **Mazat věci** jsou na začátku nezaškrtnuté, protože je nelze vrátit zpět.
+
+| Oprávnění | Co zahrnuje |
+| --- | --- |
+| Zobrazit váš obchod | Produkty, výlohy, slevy, recenze, údaje o prodeji a vaše oznámení |
+| Zobrazit objednávky | Objednávky včetně jmen, e-mailů a doručovacích adres kupujících |
+| Upravovat produkty | Vytvářet a měnit produkty, jejich zásoby a fotky |
+| Upravovat výlohy | Navrhovat výlohy, produktové stránky a pokladnu a nastavovat dopravní podmínky |
+| Spravovat slevy | Spouštět a ukončovat akce a vytvářet slevové kódy |
+| Moderovat recenze | Skrývat, zobrazovat a zveřejňovat recenze |
+| Odesílat objednávky | Označit objednávky jako odeslané, což kupujícímu pošle e-mail |
+| Upravovat váš profil | Uživatelské jméno, bio, fotka a předvolby e-mailů |
+| Vyřizovat oznámení | Označit oznámení jako přečtená |
+| Reagovat na odstranění | Požádat o přezkoumání odstranění nebo se proti rozhodnutí odvolat |
+| Vracet peníze za objednávky | Stornovat objednávky, což kupujícímu pošle e-mail a nelze to vrátit zpět |
+| Mazat věci | Mazat produkty, výlohy a slevy a měnit klíče pro vložení. Nelze to vrátit zpět |
+
+Pokud chcete oprávnění později změnit, aplikaci odpojte a připojte znovu.
+
+## Co asistent nesmí nikdy?
+
+Některé věci zůstávají jen vám, ve vašem prohlížeči, ať zaškrtnete cokoli:
+
+- Měnit údaje prodejce, přihlašovací e-mail nebo heslo.
+- Zvát, odebírat nebo měnit členy týmu.
+- Nastavit nebo odebrat dvoufázové ověření.
+- Měnit plán nebo fakturaci, nebo smazat účet.
+- Přijímat podmínky za vás nebo schválit vlastní připojení.
+
+Asistent navíc prochází stejnými kontrolami jako vy. Produkt, který zveřejní, potřebuje vaše [údaje prodejce](/cs/udaje-prodejce) a aktivní produkt potřebuje výlohu se zapnutými produktovými stránkami.
+
+## Na co se ho můžu zeptat?
+
+Několik požadavků, které fungují s výchozími oprávněními:
+
+- „Které moje produkty nemají fotku?“
+- „Dej moje tři nejnovější produkty do výlohy a první z nich zvětši na dvojnásobek.“
+- „Nastav dobu odeslání na: Odesíláme do 2 pracovních dnů.“
+- „Kolik lidí za posledních 30 dní vidělo moje produktové stránky?“
+
+Než budete sdílet odkazy, zkontrolujte v panelu, co změnil.
+
+## Mění něco dvoufázové ověření?
+
+Pokud účet používá [dvoufázové ověření](/cs/ucet/dvoufazove-overeni), stránka připojení před připuštěním aplikace chce váš druhý krok. S přístupovým klíčem se tlačítko změní na „Potvrdit přístupovým klíčem“. S ověřovací aplikací zadáte kód. Pokud jste druhý krok zadali v posledních deseti minutách, panel se znovu neptá.
+
+## Jak aplikaci odpojím?
+
+Otevřete **Nastavení**, **Připojené aplikace**. U každé aplikace vidíte, kdy byla naposledy použita. Klikněte na **Odpojit**. Přestane fungovat okamžitě a později ji můžete připojit znovu.
+
+## Související stránky
+
+- [Jak zapnu dvoufázové ověření?](/cs/ucet/dvoufazove-overeni)
+- [Jak nainstaluji Square Share pomocí AI nástroje?](/cs/instalace/instalace-s-ai-nastrojem)
+- [Jak přidám produkt?](/cs/produkty-a-vylohy/pridani-produktu)
