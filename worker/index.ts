@@ -6,9 +6,16 @@ import { Hono } from "hono";
  * the same URL. Every page response says `Vary: Accept`, so caches keep the
  * two representations apart.
  */
-type Env = { ASSETS: Fetcher };
+type Env = { ASSETS: Fetcher; NOINDEX?: string };
 
 const app = new Hono<{ Bindings: Env }>();
+
+// Preview deploys (wrangler.toml [env.preview]) keep every response out of
+// search indexes, so a public preview never competes with the real site.
+app.use("*", async (c, next) => {
+  await next();
+  if (c.env.NOINDEX) c.res.headers.set("X-Robots-Tag", "noindex");
+});
 
 /** Doc pages: /en, /cs and anything under them without a file extension. */
 const PAGE_PATH = /^\/(en|cs)(\/[^.]*)?$/;

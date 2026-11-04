@@ -7,7 +7,8 @@ Next.js 16 (App Router, static export) + Fumadocs 16 + Tailwind CSS 4, with the
 dashboard's design tokens from `@squaresharedev/tokens`. A small Hono Worker
 serves the export on Cloudflare Workers and answers `Accept: text/markdown`.
 
-Nothing here is deployed. Local only for now.
+A preview runs at https://sq-docs-preview.squareshare.workers.dev (see
+"Deploying" below). Production is not set up yet.
 
 ## Setup
 
@@ -113,7 +114,23 @@ local token is fine-grained. Once a classic token is in `~/.npmrc`, switch the
 dependency in `package.json` from `file:../System/SQ-system/packages/tokens` to
 `^0.3.0` and run `pnpm install`. Nothing else changes.
 
-## Deploying (later)
+## Deploying
+
+### Preview
+
+A separate Worker, `sq-docs-preview`, for reading the drafts before launch.
+It sends `X-Robots-Tag: noindex` on every response, so search engines leave
+it alone. Wrangler needs `CLOUDFLARE_API_TOKEN` (or `wrangler login`).
+
+```sh
+SITE_URL=https://sq-docs-preview.squareshare.workers.dev pnpm build
+pnpm exec wrangler deploy --config worker/wrangler.toml --env preview
+```
+
+Rebuild without `SITE_URL` afterwards for local testing: the checks and
+Playwright expect the localhost build.
+
+### Production
 
 Not set up. When it is: build with `SITE_URL=https://docs.squareshare.eu`, deploy
 `worker/` with Wrangler, attach `docs.squareshare.eu`, and allow AI crawlers in
