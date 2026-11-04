@@ -8,6 +8,17 @@ interface PageRef {
   url: string;
 }
 
+/**
+ * Subpath the export is served from (`/SQ-docs` on GitHub Pages, empty on the
+ * Workers). next/link and the router add it themselves; plain `<a>` hrefs and
+ * `fetch()` calls go through withBasePath().
+ */
+export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
+export function withBasePath(path: string): string {
+  return `${BASE_PATH}${path}`;
+}
+
 /** `/en/what-is-square-share` -> `/en/what-is-square-share.md`, `/en` -> `/en.md`. */
 export function markdownPath(page: Pick<PageRef, "url">): string {
   return `${page.url}.md`;
@@ -20,9 +31,9 @@ export function markdownPath(page: Pick<PageRef, "url">): string {
  * route, so there the link goes to the Markdown route itself.
  */
 export function markdownHref(markdownUrl: string): string {
-  if (process.env.NODE_ENV !== "development") return markdownUrl;
+  if (process.env.NODE_ENV !== "development") return withBasePath(markdownUrl);
   const [, locale = "", ...slugs] = markdownUrl.replace(/\.md$/, "").split("/");
-  return [MARKDOWN_ROUTE, locale, ...markdownRouteSegments({ slugs })].join("/");
+  return withBasePath([MARKDOWN_ROUTE, locale, ...markdownRouteSegments({ slugs })].join("/"));
 }
 
 /** Route segments of the Markdown route handler, which postbuild moves to markdownPath(). */
@@ -33,7 +44,7 @@ export function markdownRouteSegments(page: Pick<PageRef, "slugs">): string[] {
 export const MARKDOWN_ROUTE = "/md";
 
 /** The prebuilt static search index, downloaded by the search dialog. */
-export const SEARCH_INDEX_PATH = "/api/search.json";
+export const SEARCH_INDEX_PATH = withBasePath("/api/search.json");
 
 export function ogImageSegments(page: Pick<PageRef, "slugs">): string[] {
   return [...page.slugs, "image.png"];
