@@ -1,0 +1,84 @@
+# Builds the static export and publishes it to GitHub Pages at
+# https://squaresharedev.github.io/SQ-docs/ on every push to main.
+name: Deploy docs to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the docs
+        uses: actions/checkout@v4
+        with:
+          path: SQ-docs
+
+      # package.json installs @squaresharedev/tokens from
+      # ../System/SQ-system/packages/tokens, so the shared repo sits there.
+      - name: Check out the shared packages
+        uses: actions/checkout@v4
+        with:
+          repository: squaresharedev/SQ-system
+          path: System/SQ-system
+
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: SQ-docs/package.json
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build the tokens package
+        working-directory: System/SQ-system
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm --filter @squaresharedev/tokens build
+
+      - name: Install docs dependencies
+        working-directory: SQ-docs
+        run: pnpm install --frozen-lockfile
+
+      - name: Build the static export
+        working-directory: SQ-docs
+        env:
+          BASE_PATH: /SQ-docs
+          SITE_URL: https://squaresharedev.github.io/SQ-docs
+        run: pnpm build
+
+      # Pages may redirect /en to /en/ when an en/ folder exists, so give
+      # those pages an index.html too.
+      - name: Serve /page and /page/ alike
+        working-directory: SQ-docs/out
+        run: |
+          find . -name '*.html' ! -name 'index.html' ! -name '404.html' | while read -r f; do
+            d="${f%.html}"
+            if [ -d "$d" ] && [ ! -e "$d/index.html" ]; then cp "$f" "$d/index.html"; fi
+          done
+          touch .nojekyll
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: SQ-docs/out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
