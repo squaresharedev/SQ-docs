@@ -1,0 +1,79 @@
+---
+title: "Proč import CSV přeskočil řádky?"
+navTitle: "Problémy s importem CSV"
+description: "Všechny zprávy importu produktů z CSV, jejich příčiny a jak opravit soubor: chybějící název nebo cena, duplicity, limity velikosti a počtu řádků."
+translationKey: "csv-import-problems"
+lastUpdated: "2026-11-05"
+draft: true
+---
+{/* TODO(adrian): native review */}
+
+<AnswerBlock>
+
+Import přeskočí řádek bez názvu, s názvem delším než 200 znaků, s cenou, kterou nepřečte, s nulovou cenou, nebo se stejným názvem jako jiný řádek. Než cokoli uloží, vypíše každý přeskočený řádek i důvod. Opravte tyto řádky v souboru, uložte ho znovu jako CSV a importujte ho ještě jednou.
+
+</AnswerBlock>
+
+## Proč byl řádek přeskočen?
+
+V části „Řádky, které se přeskočí“ má každý řádek své číslo a jeden z těchto důvodů:
+
+| Zpráva | Co znamená | Oprava |
+| --- | --- | --- |
+| Chybí název. | Sloupec Název je na řádku prázdný | Doplňte název |
+| Název je delší než 200 znaků. | Název je příliš dlouhý | Zkraťte ho na nejvýše 200 znaků |
+| Cenu se nepodařilo přečíst. | Sloupec Cena je prázdný nebo neobsahuje cenu | Do buňky s cenou napište obyčejné číslo |
+| Cena je nulová. | Cena je 0 | Nastavte cenu vyšší než nula. Import produkty s nulovou cenou nepřenese. |
+| Stejný název má i jiný řádek. | Dva řádky mají stejný název, bez ohledu na velká písmena | Jeden přejmenujte, nebo duplicitu smažte |
+
+Import potřebuje sloupce Název a Cena. Popis, SKU a Zásoby jsou nepovinné. Pokud import přiřadil k poli špatný sloupec, vyberte před importem správný v části **Sloupce**.
+
+## Proč soubor nejde importovat vůbec?
+
+| Zpráva | Oprava |
+| --- | --- |
+| „Soubor má“ a jeho velikost, pak „Importovat lze soubory do 2 MB.“ | Rozdělte soubor na menší |
+| Soubor je prázdný. | Exportujte ho ze zdroje znovu |
+| Import se nepodařilo přečíst. | Uložte ho z tabulkového programu jako CSV (hodnoty oddělené čárkou) a zkuste to znovu |
+| Vyberte pro tyto produkty měnu. | Zvolte **Měna**. V ní budou mít cenu všechny produkty ze souboru. |
+| Vyberte, jestli se mají produkty importovat jako koncepty, nebo jako zveřejněné. | V části **Importovat jako** zvolte **Koncepty** nebo **Zveřejněné produkty** |
+| Ze souboru se nedalo nic importovat. | Všechny řádky byly přeskočeny. Opravte vypsané řádky a importujte znovu. |
+| Žádný z řádků se nepodařilo uložit. | Nic se neuložilo. Spusťte import znovu. |
+
+Dobré řádky se ukládají společně, najednou: pokud uložení selže, neuloží se žádný, takže nikdy nezůstane uložená jen polovina souboru.
+
+## Proč jsou některé řádky za limitem?
+
+Jeden soubor může přinést jen určitý počet produktů. Stránka importu ho ukazuje jako „Nejvýše“ a číslo. Limit je 2 000, nebo méně, pokud váš plán dovoluje méně produktů. Řádky za limitem import vypíše se zprávou, že nebudou importovány a že máte soubor rozdělit. Zbytek importujte druhým souborem.
+
+## Co se stane s exportem ze Shopify?
+
+Import export produktů ze Shopify pozná. Shopify zapisuje každou variantu na vlastní řádek. Importuje se první řádek každého produktu a ostatní se k němu připojí: „řádky variant byly připojeny k produktům nad nimi. Velikosti a barvy doplňte po importu.“ Možnosti pak přidejte ve formuláři každého produktu.
+
+## Proč chybí moje fotky?
+
+Fotky se neimportují nikdy. Stránka importu uvádí: „Fotky se neimportují. Přenesou se ceny, zásoby a popisy; obrázky přidejte, až budou produkty tady.“
+
+## Proč můžu importovat jen koncepty?
+
+**Zveřejněné produkty** vyžadují kompletní [údaje prodejce](/cs/udaje-prodejce). Do té doby import nabízí jen **Koncepty**.
+
+## Proč importované produkty ještě nejsou vidět?
+
+Po importu může panel uvést, že se některé produkty „ještě kontrolují: kupující je uvidí, až je automatická kontrola schválí.“ S produkty je vše v pořádku. Objeví se, jakmile je kontrola schválí.
+
+<Buttons>
+
+[Otevřít panel](https://dashboard.squareshare.eu) [Jak přidám produkt?](/cs/produkty-a-vylohy/pridani-produktu)
+
+</Buttons>
+
+## Klíčové pojmy
+
+<GlossaryList terms="product seller-details" />
+
+## Související stránky
+
+- [Jak přidám produkt?](/cs/produkty-a-vylohy/pridani-produktu)
+- [Co znamená tato chybová zpráva v panelu?](/cs/reseni-problemu/chybove-zpravy-panelu)
+- [Řešení problémů](/cs/reseni-problemu)

@@ -35,7 +35,9 @@ const TAIL = 18;
 const FOOT = 12;
 /** The pill of ink's length. */
 const PILL = 18;
-/** One run of the pill, in ms, with the stretch it spends off the card. */
+/** One run of the pill, in ms, with the stretch it spends off the card.
+ *  corner-art.css plays one run (stations 1.1 loops): keep it under 5s
+ *  (WCAG 2.2.2). */
 const LOOP_MS = 3800;
 /** Where the pill starts and how far it goes, in percent of the line: as in
  *  globals.css's transit-flow-run (20 to -100), from wholly before the line's

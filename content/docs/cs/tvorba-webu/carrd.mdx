@@ -1,0 +1,85 @@
+---
+title: "Jak přidám Square Share na web v Carrdu?"
+navTitle: "Carrd"
+description: "Vložte kód výlohy do prvku Embed s typem Code v Carrdu, nebo nasměrujte tlačítko na produktovou stránku. Potřebný tarif a kontrola."
+translationKey: "builder-carrd"
+lastUpdated: "2026-11-05"
+draft: true
+---
+{/* TODO(adrian): native review */}
+
+<AnswerBlock>
+
+V Carrdu přidejte prvek Embed, nastavte typ Code, vložte kód ze stránky Sdílet vaší výlohy a web zveřejněte. Carrd v editoru vložený kód nezobrazuje, proto kontrolujte zveřejněný web. Prvek Embed Carrd nabízí od tarifu Pro Standard. V každém tarifu může prvek Buttons odkazovat na produktovou stránku.
+
+</AnswerBlock>
+
+{/* TODO(adrian): The plan rule comes from carrd.com/docs/building/embedding-custom-code and carrd.com/docs/pro/plans (checked 2026-11-05). Recheck before publishing. */}
+
+## Co potřebuji předem?
+
+- Výlohu v panelu se zapnutým **Zobrazit na mém webu** na její stránce **Sdílet**.
+- Adresu webu v Carrdu v **Povolených doménách**, uloženou: svou doménu, nebo adresu `vasweb.carrd.co`.
+- Tarif Carrd Pro, který vložený kód obsahuje. Podle [návodu Carrdu k vkládání kódu](https://carrd.com/docs/building/embedding-custom-code) je to Pro Standard nebo vyšší.
+
+## Jak přidám výlohu na web v Carrdu?
+
+<Steps>
+
+1. V panelu otevřete **Výloha**, u své výlohy klikněte na **Sdílet** a v poli **Váš nástroj pro tvorbu webu** zvolte **Carrd**.
+2. Nechte kartu **Skript** a klikněte na **Kopírovat kód pro vložení**.
+3. V Carrdu přidejte prvek **Embed** tam, kde má být výloha.
+4. Nastavte **Type** na **Code** a styl na **Inline**.
+5. Vložte kód do pole **Code**.
+6. Web zveřejněte.
+
+</Steps>
+
+<Snippet>
+
+```html title="Kód Skript"
+<div data-squareshare-storefront="YOUR-EMBED-KEY"></div>
+<script async src="https://embed.squareshare.eu/widget.js"></script>
+```
+
+</Snippet>
+
+Vložený kód se stylem Inline je ve stránce tam, kam jste ho umístili, a verze **Skript** roste podle výlohy.
+
+## Jak přidám tlačítko pro nákup v Carrdu?
+
+<Steps>
+
+1. V panelu otevřete **Produkty**, u produktu klikněte na nabídku **⋯** a zvolte **Přidat na váš web**.
+2. Na kartě **Odkaz** zkopírujte odkaz.
+3. V Carrdu přidejte prvek **Buttons**, nebo vyberte ten, který už máte.
+4. Vložte odkaz do pole URL tlačítka a web zveřejněte.
+
+</Steps>
+
+Odkaz nepotřebuje vložený kód, takže funguje v každém tarifu Carrdu, i v bezplatném. Podrobnosti: [Jak přidám na svůj web tlačítko pro nákup?](/cs/instalace/pridani-tlacitka-pro-nakup)
+
+## Proč se výloha v Carrdu nezobrazuje?
+
+- **Díváte se do editoru.** Carrd tam vložený kód nevykresluje. Web zveřejněte a otevřete živou verzi.
+- **Adresa není v seznamu.** Adresa v řádku prohlížeče musí být v **Povolených doménách**. Adresa `carrd.co` a vaše vlastní doména jsou různé domény.
+- **Tarif vložený kód neobsahuje.** Použijte tlačítko pro nákup, nebo změňte tarif.
+- **Styl vloženého kódu je Hidden.** Skrytý kód nemá na stránce žádné místo. Nastavte **Inline**.
+
+Celý seznam kontrol je na stránce [Proč se moje výloha na webu nezobrazuje?](/cs/reseni-problemu/vyloha-se-nezobrazuje)
+
+<Buttons>
+
+[Otevřít panel](https://dashboard.squareshare.eu) [Všechny nástroje pro tvorbu webu](/cs/tvorba-webu)
+
+</Buttons>
+
+## Klíčové pojmy
+
+<GlossaryList terms="storefront embed allowed-domains purchase-button" />
+
+## Související stránky
+
+- [Jak přidám výlohu na svůj web?](/cs/instalace/pridani-vylohy-na-web)
+- [Jak fungují povolené domény?](/cs/instalace/povolene-domeny)
+- [S jakými nástroji pro tvorbu webu Square Share funguje?](/cs/tvorba-webu)

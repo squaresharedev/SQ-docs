@@ -1,0 +1,82 @@
+---
+title: "Co znamená tato chybová zpráva v panelu?"
+navTitle: "Chybové zprávy"
+description: "Přesné chybové zprávy panelu Square Share k odkazům na nákup, obrázkům, souborům ke stažení, PDF, povoleným doménám a údajům prodejce, s opravami."
+translationKey: "dashboard-error-messages"
+lastUpdated: "2026-11-05"
+draft: true
+---
+{/* TODO(adrian): native review */}
+
+<AnswerBlock>
+
+Většina chyb v panelu vychází z limitu pro soubor, odkaz nebo seznam. Obrázky musí být PNG, JPG, WEBP, GIF nebo AVIF do 10 MB. Soubor ke stažení musí mít jeden z deseti typů a méně než 200 MB. Odkaz na nákup musí začínat https://. Povolené domény berou prosté názvy domén, nejvýše 10.
+
+</AnswerBlock>
+
+## Odkaz na nákup
+
+| Zpráva | Oprava |
+| --- | --- |
+| Odkaz na nákup musí být úplná adresa začínající https://. | Zkopírujte celou adresu z pokladny, začínající `https://` |
+| Odkaz na nákup může mít nejvýše 2048 znaků. | Použijte kratší odkaz své pokladny |
+| Odkaz na nákup nesmí obsahovat uživatelské jméno ani heslo. | Odstraňte z adresy část `jmeno:heslo@` |
+
+## Obrázky a fotky
+
+| Zpráva | Oprava |
+| --- | --- |
+| Použijte obrázek PNG, JPG, WEBP, GIF nebo AVIF. | Exportujte obrázek v jednom z těchto formátů |
+| Obrázek musí mít méně než 10 MB. | Zmenšete obrázek, nebo ho uložte v nižší kvalitě |
+| Každá fotka musí mít méně než 10 MB. | Totéž pro další fotky |
+
+## Soubory ke stažení
+
+| Zpráva | Oprava |
+| --- | --- |
+| Tento typ souboru není podporovaný. | Použijte soubor ZIP, PDF, EPUB, MP3, WAV, MP4, JPEG, PNG, WebP nebo TXT. Jiný typ zabalte do ZIPu. |
+| Obsah souboru neodpovídá jeho typu. | Soubor byl přejmenován, nebo špatně exportován. Exportujte ho znovu ve formátu, který uvádí jeho název. |
+| Soubor je příliš velký. | Udržte ho pod 200 MB, třeba rozdělením nebo zabalením do ZIPu |
+
+## Dokumenty
+
+| Zpráva | Oprava |
+| --- | --- |
+| Pro certifikáty, návody a další dokumenty použijte PDF. | Uložte dokument jako PDF |
+| „Soubor“, název dokumentu a pak „je příliš velký. Dokumenty musí mít méně než 20 MB.“ | Zmenšete PDF |
+
+## Povolené domény
+
+| Zpráva | Oprava |
+| --- | --- |
+| Domény zadávejte jen jako holé domény malými písmeny, např. vasweb.cz (bez https://, portu, cesty a zástupných znaků). | Odstraňte porty (`:8080`), zástupné znaky (`*.`), cesty a vše, co není prostý název domény |
+| Uveďte nejvýše 10 domén. | Odeberte položky, až jich zbude 10 nebo méně |
+| Každá doména smí být v seznamu jen jednou. | Smažte duplicitu |
+
+Můžete vložit i celou adresu: panel `https://www.VasWeb.cz/obchod/` před kontrolou zkrátí na `www.vasweb.cz`. Viz [Jak fungují povolené domény?](/cs/instalace/povolene-domeny)
+
+## Údaje prodejce
+
+| Zpráva | Oprava |
+| --- | --- |
+| Dokud nebudou vaše údaje prodejce kompletní, nemůžete zveřejňovat ani prodávat. | V **Nastavení**, v části **Firma a údaje prodejce**, vyplňte **Obchodní jméno**, **Adresa** a **Kontaktní e-mail** |
+
+Viz [Jak vyplním údaje prodejce?](/cs/udaje-prodejce)
+
+## Import produktů
+
+Zprávy z importu CSV, třeba „Cenu se nepodařilo přečíst.“, najdete na stránce [Proč import CSV přeskočil řádky?](/cs/reseni-problemu/problemy-s-importem-csv)
+
+## Zveřejnění
+
+Zprávy na kartě **Začínáme** o stránce, která není zveřejněná, najdete na stránce [Proč moje produktová stránka není zveřejněná?](/cs/reseni-problemu/produktova-stranka-neni-zverejnena)
+
+## Klíčové pojmy
+
+<GlossaryList terms="purchase-button allowed-domains seller-details" />
+
+## Související stránky
+
+- [Řešení problémů](/cs/reseni-problemu)
+- [Jak přidám produkt?](/cs/produkty-a-vylohy/pridani-produktu)
+- [Proč se moje výloha na webu nezobrazuje?](/cs/reseni-problemu/vyloha-se-nezobrazuje)

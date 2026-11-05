@@ -3,8 +3,9 @@
 /**
  * Copy of Store/src/components/search/SearchTrigger.tsx
  * Changes:
- *   - Imports: cn from @/lib/cn; no @/components/ui/control-styles import
- *     (strings inlined); no next-intl (useLocaleContext + searchCopy).
+ *   - Imports: cn from @/lib/cn; focusRingClass and transitionClass from
+ *     @squaresharedev/tokens (the package's copy of control-styles); no
+ *     next-intl (useLocaleContext + searchCopy).
  *   - Removed: the -ml-[13.5px] margin that compensated for the dashboard's
  *     header padding. The docs header handles its own spacing.
  *   - Keyboard hint on bg-background, not bg-muted: muted text on the muted
@@ -16,14 +17,10 @@ import * as React from "react";
 import { Search } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { useLocaleContext } from "@/components/locale-context";
+import { focusRingClass, transitionClass } from "@squaresharedev/tokens";
+import { ShortcutHint } from "@/components/search/SearchBar";
 import { useSearch } from "@/components/search/SearchProvider";
-import { useIsMacPlatform } from "@/components/search/useIsMacPlatform";
 import { searchCopy } from "@/components/search/copy";
-
-const focusRingClass =
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background";
-const transitionClass =
-  "transition-colors duration-base ease-standard motion-reduce:transition-none";
 
 /**
  * The minimized state of docs search, desktop: a quiet field-shaped button
@@ -34,7 +31,6 @@ export function SearchTrigger({ className }: { className?: string }) {
   const { locale } = useLocaleContext();
   const copy = searchCopy[locale];
   const search = useSearch();
-  const isMac = useIsMacPlatform();
 
   const buttonRef = React.useRef<HTMLButtonElement>(null);
   const registerAnchor = search?.registerAnchor;
@@ -64,14 +60,7 @@ export function SearchTrigger({ className }: { className?: string }) {
     >
       <Search className="size-4 shrink-0" aria-hidden />
       <span className="min-w-0 flex-1 truncate">{copy.triggerLabel}</span>
-      {isMac !== null && (
-        <kbd
-          aria-hidden
-          className="shrink-0 rounded-none border border-border bg-background px-1.5 py-0.5 font-inter text-[0.6875rem] leading-none text-muted-foreground"
-        >
-          {isMac ? "⌘K" : "Ctrl K"}
-        </kbd>
-      )}
+      <ShortcutHint />
     </button>
   );
 }

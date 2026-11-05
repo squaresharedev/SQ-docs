@@ -33,6 +33,12 @@ export const COPY = {
     footerGlossary: "Glossary",
     footerContact: "Contact",
     footerOperator: "Square Share is run by Root Labs in Brno, Czech Republic.",
+    skipToContent: "Skip to content",
+    breadcrumbLabel: "Breadcrumb",
+    sidebarLabel: "Documentation pages",
+    onThisPage: "On this page",
+    codeExample: "Code example",
+    darkTheme: "Dark theme",
   },
   cs: {
     siteName: "Square Share dokumentace",
@@ -61,6 +67,12 @@ export const COPY = {
     footerGlossary: "Slovník pojmů",
     footerContact: "Kontakt",
     footerOperator: "Square Share provozuje Root Labs z Brna.",
+    skipToContent: "Přeskočit na obsah",
+    breadcrumbLabel: "Drobečková navigace",
+    sidebarLabel: "Stránky dokumentace",
+    onThisPage: "Na této stránce",
+    codeExample: "Ukázka kódu",
+    darkTheme: "Tmavý motiv",
   },
 } as const satisfies Record<Locale, Record<string, string>>;
 

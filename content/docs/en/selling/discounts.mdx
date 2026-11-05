@@ -1,0 +1,85 @@
+---
+title: How do I run a sale or make a discount code?
+navTitle: "Discounts"
+description: "Run a sale from Discounts in the dashboard: buyers see the reduced price on your storefront and product pages. Discount codes need Square Share checkout."
+translationKey: discounts
+lastUpdated: 2026-11-05
+draft: true
+---
+
+<AnswerBlock>
+
+Open Discounts in the dashboard and click Create discount. A sale lowers prices for everyone, with no code, and buyers see it on your storefront and product pages straight away. A discount code is typed at Square Share checkout, which is not open yet. If buyers pay through your own purchase link, change the price there too.
+
+</AnswerBlock>
+
+{/* TODO(adrian): Discount codes only apply at Square Share checkout (NEXT_PUBLIC_STRIPE_CONNECT_ENABLED, off). Update this page when checkout goes live. */}
+
+## What is the difference between a sale and a discount code?
+
+| | Sale | Discount code |
+| --- | --- | --- |
+| Who gets it | Everyone | Buyers who type the code |
+| Where buyers see it | The storefront and product pages show the reduced price | At Square Share checkout |
+| Works today | Yes, the reduced price shows | Not yet: it needs Square Share checkout |
+| Value | An amount or a percentage off | An amount or a percentage off |
+| Covers | All products, or the products you pick | All products, or the products you pick |
+| Extras | Start and end dates | A code of 3 to 24 letters and numbers, a usage limit, dates, and a **Shared on** label to see which channel brought each order |
+
+An amount off applies only to products priced in that amount's currency.
+
+## How do I start a sale?
+
+<Steps>
+
+1. In the dashboard, open **Discounts** and click **Create discount**.
+2. Under **What kind of discount?**, choose **Sale**.
+3. Set how much comes off, and which products it covers.
+4. Choose when it starts and ends: now or on a date, and never, on a date, or after a set time.
+5. Save it.
+
+</Steps>
+
+## What do buyers see during a sale?
+
+The regular price is crossed out beside the sale price, and a note under the price says how much comes off and when the sale ends ("Sale ends" and the date). A note also says which price is crossed out:
+
+| Note on the page | When it appears |
+| --- | --- |
+| "Crossed-out price: the lowest price in the 30 days before this sale." | Your price was the same for the 30 days before the sale |
+| "Crossed-out price: the regular price. Lowest price in the 30 days before this sale:" and that price | Your price was lower at some point in those 30 days |
+| "Crossed-out price: the regular price." | Square Share has no full price history for that period |
+
+The percentage off only shows when it is measured against the lowest price of those 30 days. That follows the EU rule for announcing price reductions, which asks sellers to show the lowest price they charged in a period of at least 30 days before the reduction ([Directive (EU) 2019/2161](https://eur-lex.europa.eu/eli/dir/2019/2161/oj), which added Article 6a to the Price Indication Directive). This page is not legal advice.
+
+{/* TODO(adrian): Article 6a of Directive 98/6/EC, as inserted by Directive (EU) 2019/2161, quoted from memory of the official text. Confirm the wording against EUR-Lex before publishing. */}
+
+## What if buyers pay through my own purchase link?
+
+Your own checkout charges whatever price you set there. A sale in Square Share changes what the product page shows, not what another checkout charges. Change the price in your own checkout for the same dates, or buyers see one price and pay another.
+
+## What happens when a sale ends?
+
+Prices go back to normal straight away. Once a sale has started, only its end can change. To stop it early, use **End now**. To run it again later, create a new sale.
+
+| Status | Meaning |
+| --- | --- |
+| Scheduled | It starts on a later date |
+| Active | It is running |
+| Off | A code you switched off |
+| Used up | A code that reached its usage limit |
+| Ended | Its end date passed, or you ended it |
+
+## What's coming next?
+
+Discount codes will work once Square Share checkout opens. Buyers will type the code at checkout, and **Discounts** will show which channel each code's orders came from. There is no date yet.
+
+## Key terms
+
+<GlossaryList terms="storefront product-page purchase-button" />
+
+## Related pages
+
+- [Where do I see my orders?](/en/selling/orders)
+- [How do I design my storefront?](/en/products-and-storefronts/design-your-storefront)
+- [Payments and payouts](/en/payments-and-payouts)

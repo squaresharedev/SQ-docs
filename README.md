@@ -47,7 +47,7 @@ links in page text go to the Markdown route instead,
 | `pnpm check:links` | Every internal link and anchor in `out/` resolves. |
 | `pnpm check:seo` | Titles, descriptions, canonicals, JSON-LD, hreflang, sitemap, llms files, Markdown versions, drafts. Needs `pnpm worker:dev`. |
 | `pnpm check:draft-path` | Temporarily publishes four pages, rebuilds and proves the non-draft path (sitemap, hreflang, llms), then reverts and rebuilds. `--lighthouse` also runs Lighthouse while they are published. |
-| `pnpm test:e2e` | Playwright at 1280, 768 and 375 px, light and dark, with axe. Screenshots go to `tests/screenshots/`. |
+| `pnpm test:e2e` | Playwright at 1280, 768 and 375 px, light and dark, with axe: any WCAG 2.2 A/AA violation fails. Keyboard and screen reader checks in `tests/site.spec.ts`. Screenshots go to `tests/screenshots/`. |
 | `pnpm test:lighthouse` | Lighthouse (mobile) on the docs homes and the "What is Square Share" pages. |
 
 ## SITE_URL
@@ -71,7 +71,18 @@ Graph tags and JSON-LD. It is read when the site is built.
   `app/(chooser)`: the language chooser at `/` (the `x-default` target).
 - `lib/legal.tsx`: squareshare.eu's legal pages, listed in the footer and as the
   last group of the sidebar.
+- `styles/tokens.css`: the docs' own tokens, for values used in more than one
+  place that the package does not ship (motion, the eyebrow label, the code
+  surface greens, the focus colour, the sticky header's height). Components
+  and stylesheets use these names, never the values.
 - `styles/fumadocs-theme.css`: the only place Fumadocs UI meets the tokens.
+- Accessibility: the docs aim at WCAG 2.2 AA (what the European Accessibility
+  Act's EN 301 549 and US ADA and Section 508 practice point to). Fumadocs'
+  gaps are filled through its own props and slots: `components/TableOfContents.tsx`,
+  `components/ThemeSwitch.tsx`, `components/useDrawerFocus.ts`, `lib/sidebar.tsx`,
+  `components/DocsLink.tsx` (aria-current) and `components/mdx.tsx` (code block
+  names, table row headers). Motion that starts by itself stops within five
+  seconds (`styles/corner-art.css`, the code surface in `styles/visuals.css`).
 - Parts copied from the sibling apps, each file naming its source: the footer
   (`components/SiteFooter.tsx`, `components/home/PixelGrid.tsx`) from Home, and
   the search field and palette (`components/search`), the setup checklist's
@@ -136,3 +147,24 @@ Not set up. When it is: build with `SITE_URL=https://docs.squareshare.eu`, deplo
 `worker/` with Wrangler, attach `docs.squareshare.eu`, and allow AI crawlers in
 the Cloudflare dashboard's AI bot settings (otherwise Cloudflare blocks them
 before `robots.txt` is read).
+
+### Launch checklist for search and AI crawlers
+
+The site does the rest itself once pages are published: sitemap, hreflang,
+`llms.txt`, structured data and the Markdown versions only include pages with
+`draft: false` in both languages. What needs a person:
+
+1. A native speaker reviews the Czech pages; then set `draft: false` on both
+   languages of each page (the pair goes live together).
+2. Before deploying, prove the published site with
+   `SITE_URL=https://docs.squareshare.eu node scripts/draft-path-check.ts --all`.
+   It publishes every page in a temporary build, runs the SEO check, then puts
+   the files back.
+3. Deploy the default Worker (not `--env preview`, whose responses carry
+   `X-Robots-Tag: noindex`).
+4. In Cloudflare, allow the AI crawlers (above), and turn on Crawler Hints so
+   Bing and other IndexNow engines hear about changed pages.
+5. Verify `docs.squareshare.eu` in Google Search Console and Bing Webmaster
+   Tools with a DNS record, and submit `https://docs.squareshare.eu/sitemap.xml`
+   in both.
+6. Delete the `sq-docs-preview` Worker, or keep it: it is noindex either way.

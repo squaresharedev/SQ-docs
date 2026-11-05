@@ -1,0 +1,70 @@
+---
+title: "S jakými nástroji pro tvorbu webu Square Share funguje?"
+description: "Square Share funguje s každým nástrojem, který přijme vložený HTML kód: WordPress, Squarespace, Wix, Webflow, Framer, Carrd, Webnode a další."
+translationKey: "site-builders"
+lastUpdated: "2026-11-05"
+draft: true
+---
+{/* TODO(adrian): native review */}
+
+<AnswerBlock>
+
+Square Share funguje s každým nástrojem pro tvorbu webu, který dovolí vložit do stránky HTML kód: tam patří kód výlohy. Tlačítko pro nákup je obyčejný odkaz, takže funguje v každém nástroji s tlačítky nebo odkazy. Některé nástroje spouští vložené skripty jen v placených tarifech. Tabulka níže ukazuje, kam kód v každém patří.
+
+</AnswerBlock>
+
+{/* TODO(adrian): The plan column comes from each builder's own help centre, checked 2026-11-05. Builders change plans often: recheck every row before publishing. */}
+
+## Kam patří kód v jednotlivých nástrojích?
+
+| Nástroj | Kam vložit kód | Potřebný tarif |
+| --- | --- | --- |
+| [WordPress](/cs/tvorba-webu/wordpress) | Blok Vlastní HTML | Vlastní instalace: žádný, ale uložit ho musí Administrátor nebo Editor. WordPress.com: placený tarif se zapnutými funkcemi hostingu. |
+| [Squarespace](/cs/tvorba-webu/squarespace) | Blok Code | Core, Plus nebo Advanced |
+| [Wix](/cs/tvorba-webu/wix) | Embed Code, potom Embed HTML | Nápověda Wixu ho neuvádí |
+| [Webflow](/cs/tvorba-webu/webflow) | Prvek Code Embed | Placený tarif webu |
+| [Framer](/cs/tvorba-webu/framer) | Embed nastavený na HTML | Nápověda Frameru ho neuvádí |
+| [Carrd](/cs/tvorba-webu/carrd) | Prvek Embed s typem Code | Pro Standard nebo vyšší |
+| [Webnode](/cs/tvorba-webu/webnode) | Obsah HTML | Prémiový balíček, u projektů založených po 26. červnu 2023 |
+
+Tlačítko pro nákup v žádném z nich konkrétní tarif nepotřebuje.
+
+Panel také uvádí, kam kód patří v Google Sites (zvolte Insert, potom Embed, potom Embed code) a v Shopify (v editoru motivu přidejte sekci Custom Liquid).
+
+## Co platí ve všech nástrojích?
+
+- Vložený kód běží na zveřejněném webu, ne v editoru nástroje. Vždy kontrolujte živou stránku.
+- Adresa v řádku prohlížeče musí být v **Povolených doménách** na stránce **Sdílet** výlohy. Bezplatná adresa nástroje (třeba `vasweb.webflow.io`) a vaše vlastní doména jsou různé domény. Viz [Jak fungují povolené domény?](/cs/instalace/povolene-domeny)
+- Stránka musí používat https.
+- Pokud nástroj skripty odstraňuje, verze **Jen iframe** na stránce Sdílet žádný skript nemá. Má pevnou výšku 640 px.
+
+Tento kód vkládáte. Tlačítko **Kopírovat kód pro vložení** v panelu do něj doplní váš klíč:
+
+<Snippet>
+
+```html title="Kód Skript"
+<div data-squareshare-storefront="YOUR-EMBED-KEY"></div>
+<script async src="https://embed.squareshare.eu/widget.js"></script>
+```
+
+</Snippet>
+
+## Co když můj nástroj v seznamu není?
+
+Na stránce Sdílet zvolte v poli **Váš nástroj pro tvorbu webu** možnost **Jiný web** a vložte kód do toho, co váš nástroj nabízí pro čisté HTML: blok HTML, prvek pro kód nebo vložený obsah. Pokud nic takového nemá, přidejte raději [tlačítko pro nákup](/cs/instalace/pridani-tlacitka-pro-nakup). Odkaz na adresu umí přidat k tlačítku každý nástroj.
+
+<Buttons>
+
+[Přidat výlohu](/cs/instalace/pridani-vylohy-na-web) [Přidat tlačítko pro nákup](/cs/instalace/pridani-tlacitka-pro-nakup)
+
+</Buttons>
+
+## Klíčové pojmy
+
+<GlossaryList terms="storefront embed allowed-domains purchase-button" />
+
+## Související stránky
+
+- [Jak přidám výlohu na svůj web?](/cs/instalace/pridani-vylohy-na-web)
+- [Jak přidám na svůj web tlačítko pro nákup?](/cs/instalace/pridani-tlacitka-pro-nakup)
+- [Proč se moje výloha na webu nezobrazuje?](/cs/reseni-problemu/vyloha-se-nezobrazuje)

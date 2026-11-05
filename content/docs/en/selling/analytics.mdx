@@ -1,0 +1,66 @@
+---
+title: What does Square Share analytics measure?
+navTitle: "Analytics"
+description: Analytics counts storefront views, product clicks and product page views without cookies. What each number means and what sales figures need.
+translationKey: analytics
+lastUpdated: 2026-11-05
+draft: true
+---
+
+<AnswerBlock>
+
+Analytics in the dashboard counts storefront views, product clicks and product page views. It works without cookies: Square Share keeps a one-way code made from each visitor's IP address and browser details, never the address itself. Sales figures stay empty until Square Share checkout opens, because sales through your own link happen elsewhere.
+
+</AnswerBlock>
+
+{/* TODO(adrian): The hashing description comes from Store src/lib/analytics/record.ts (salted SHA-256 of IP and user agent, raw values never stored). Confirm it matches the privacy policy wording before publishing. */}
+
+## What does each number count?
+
+| Number | What it counts |
+| --- | --- |
+| Storefront views | How often your storefront was loaded by a visitor |
+| Product clicks | Visitors opening a product from one of your storefronts |
+| Product page views | Visitors opening one of your product pages |
+| Sales | Paid orders placed through Square Share checkout |
+| Checkout views | Buyers opening Square Share checkout for one of your products |
+
+The first three work today. Sales and checkout views fill in once Square Share checkout opens.
+
+A storefront view counts once per visitor, per storefront, per hour, so reloading a page does not inflate it.
+
+## How do I read the funnel?
+
+The funnel follows visitors from **Views on your site** to **Products opened**, then **Checkouts started** and **Checkouts left unpaid**. The dashboard notes: "These count events, not people." The checkout steps stay empty until Square Share checkout opens.
+
+## What can I filter and compare?
+
+- Time range: **Last 30 days**, **All time** or **Custom**.
+- Each number has panels for **Over time**, **Channels**, **By weekday** and **By storefront**.
+- **Download report** saves the figures as a file, depending on your plan.
+
+The page itself is included on every plan.
+
+## Does Square Share analytics use cookies?
+
+No. The privacy text the dashboard asks you to add to your site says it: Square Share "sets no cookies and stores nothing on the visitor's device" for the storefront. The visitor's IP address and browser details are sent to Square Share to show the products and to count visits. Square Share stores a one-way code made from them instead of the details themselves.
+
+You still add that privacy text to your own privacy policy. See [What do I add to my privacy policy?](/en/install/add-storefront-to-website#what-do-i-add-to-my-privacy-policy)
+
+## Why does analytics show views but no sales?
+
+Because sales through your own purchase link or by email happen outside Square Share. Analytics sees the visit to the product page, not the payment in another tool. Compare product page views with the sales in your own checkout to see how pages turn into orders.
+
+## What's coming next?
+
+When Square Share checkout opens, the sales panels will fill in: revenue, average order, unique buyers, refund rate and top products. The page also lists email signups and bookings, which will count once those storefront features ship. There are no dates.
+
+## Key terms
+
+<GlossaryList terms="storefront product-page embed" />
+
+## Related pages
+
+- [Where do I see my orders?](/en/selling/orders)
+- [How do I add a storefront to my website?](/en/install/add-storefront-to-website)
+- [How do I design my storefront?](/en/products-and-storefronts/design-your-storefront)

@@ -11,9 +11,22 @@
  * the original's link columns (shrink-0) push into the wordmark, and at 1280px
  * its credit line runs out of the column. The credit now wraps inside the
  * link columns' width instead.
+ *
+ * Tokens: the footer is the brand's dark palette in both themes, so it carries
+ * the tokens' `.dark` scope, and the original's literal black, white and
+ * purple are those tokens (background, foreground at the same opacities,
+ * acid): the same colours, and focus rings that show on black. Motion is the
+ * dashboard's control transition (transitionClass).
+ *
+ * Accessibility: the tagline, credit and "Contact" label were white at 30 to
+ * 40% (2.5 to 3.7:1 on black); they are at 50%, the lowest step that clears
+ * the 4.5:1 WCAG 1.4.3 asks of small text (5.3:1). The heart is an image with
+ * a name, so screen readers say "love".
  */
 import { useEffect, useRef } from "react";
 import { Heart, Mail } from "lucide-react";
+import { transitionClass } from "@squaresharedev/tokens";
+import { cn } from "@/lib/cn";
 import type { Locale } from "@/lib/i18n";
 import { LEGAL_HEADING, LEGAL_LINKS } from "@/lib/legal";
 import { CONTACT_EMAIL, DASHBOARD_URL, HOME_URL } from "@/lib/site";
@@ -50,6 +63,9 @@ const FOOTER_COPY = {
 } as const;
 
 const FOOTER_HREFS = [`${HOME_URL}/#features`, `${HOME_URL}/#founder`, `${HOME_URL}/#hero`, `${DASHBOARD_URL}/login`];
+
+/** The link columns' links (Explore and Legal). */
+const LINK_CLASS = cn("font-mono text-xs uppercase tracking-widest text-foreground/50 hover:text-acid", transitionClass);
 
 // Brand glyphs (simple-icons path data): lucide dropped brand marks for
 // trademark reasons, so we inline the SVG paths here.
@@ -114,22 +130,22 @@ export function SiteFooter({ locale }: { locale: Locale }) {
   }, []);
 
   return (
-    <footer ref={footerRef} className="relative isolate overflow-hidden border-t border-white/10 bg-black">
+    <footer ref={footerRef} className="dark relative isolate overflow-hidden border-t border-foreground/10 bg-background">
       {/* Interactive pixel grid: lights up in acid near the cursor.
           cellSize/gap are tuned so one lit square == one social button (48px). */}
-      <PixelGrid color="#a855f7" cellSize={52} gap={4} className="absolute inset-0 z-0" />
+      <PixelGrid color="var(--color-acid)" cellSize={52} gap={4} className="absolute inset-0 z-0" />
 
       {/* Subtle seam fade so the brand row stays crisp against the section above */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-24 bg-gradient-to-b from-black to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-24 bg-gradient-to-b from-background to-transparent" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 pt-24 pb-10">
         <div className="flex flex-col gap-12 xl:flex-row xl:items-stretch xl:justify-between">
           {/* Left: tagline above the giant wordmark */}
           <div className="xl:max-w-[58%]">
-            <p className="mb-8 max-w-sm text-sm leading-relaxed text-white/40">{copy.tagline}</p>
+            <p className="mb-8 max-w-sm text-sm leading-relaxed text-foreground/50">{copy.tagline}</p>
             <div
               aria-hidden="true"
-              className="footer-wordmark select-none text-[clamp(2.5rem,11vw,9rem)] font-black uppercase leading-[0.82] tracking-tighter"
+              className="select-none text-[clamp(2.5rem,11vw,9rem)] font-black uppercase leading-[0.82] tracking-tighter text-foreground"
             >
               Square Share
             </div>
@@ -140,31 +156,26 @@ export function SiteFooter({ locale }: { locale: Locale }) {
             <div className="flex flex-col gap-10 sm:flex-row sm:gap-12">
               <nav className="flex flex-col gap-3" aria-label={copy.explore}>
                 {copy.links.map((label, index) => (
-                  <a
-                    key={label}
-                    href={FOOTER_HREFS[index]}
-                    className="font-mono text-xs uppercase tracking-widest text-white/50 transition-colors duration-200 hover:text-acid"
-                  >
+                  <a key={label} href={FOOTER_HREFS[index]} className={LINK_CLASS}>
                     {label}
                   </a>
                 ))}
               </nav>
               <nav className="flex flex-col gap-3" aria-label={LEGAL_HEADING[locale]}>
                 {LEGAL_LINKS.map(({ key, href, label }) => (
-                  <a
-                    key={key}
-                    href={href}
-                    className="font-mono text-xs uppercase tracking-widest text-white/50 transition-colors duration-200 hover:text-acid"
-                  >
+                  <a key={key} href={href} className={LINK_CLASS}>
                     {label[locale]}
                   </a>
                 ))}
               </nav>
               <div className="flex flex-col gap-3">
-                <span className="font-mono text-xs uppercase tracking-widest text-white/30">{copy.contact}</span>
+                <span className="font-mono text-xs uppercase tracking-widest text-foreground/50">{copy.contact}</span>
                 <a
                   href={`mailto:${CONTACT_EMAIL}`}
-                  className="group inline-flex items-center gap-2 font-mono text-xs tracking-widest text-white/50 transition-colors duration-200 hover:text-acid"
+                  className={cn(
+                    "group inline-flex items-center gap-2 font-mono text-xs tracking-widest text-foreground/50 hover:text-acid",
+                    transitionClass,
+                  )}
                 >
                   <Mail size={14} strokeWidth={2} className="shrink-0" />
                   {CONTACT_EMAIL}
@@ -177,7 +188,10 @@ export function SiteFooter({ locale }: { locale: Locale }) {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={label}
-                      className="group flex h-12 w-12 items-center justify-center border border-white/10 text-white/50 transition-colors duration-200 hover:border-acid hover:bg-acid hover:text-black hover:shadow-[0_0_24px_-2px_rgba(168,85,247,0.55)]"
+                      className={cn(
+                        "group flex h-12 w-12 items-center justify-center border border-foreground/10 text-foreground/50 hover:border-acid hover:bg-acid hover:text-background hover:shadow-acid-glow",
+                        transitionClass,
+                      )}
                     >
                       <svg
                         viewBox="0 0 24 24"
@@ -185,7 +199,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
                         height={18}
                         fill="currentColor"
                         aria-hidden="true"
-                        className="transition-transform duration-200 ease-out group-hover:scale-125"
+                        className="transition-transform duration-base ease-out group-hover:scale-125 motion-reduce:transition-none"
                       >
                         <path d={path} />
                       </svg>
@@ -197,18 +211,21 @@ export function SiteFooter({ locale }: { locale: Locale }) {
 
             {/* Divider + credit, bottom-aligned with the wordmark */}
             {/* w-0 min-w-full: the credit takes the link columns' width and wraps, instead of widening the column. */}
-            <div className="mt-12 border-t border-white/10 pt-6 xl:mt-auto xl:w-0 xl:min-w-full xl:pt-24">
+            <div className="mt-12 border-t border-foreground/10 pt-6 xl:mt-auto xl:w-0 xl:min-w-full xl:pt-24">
               <div className="flex flex-col items-center gap-2 text-sm sm:flex-row sm:flex-wrap sm:justify-end sm:gap-x-6">
-                <span className="font-mono text-white/40">{copy.rights}</span>
-                <p className="inline-flex flex-wrap items-center justify-center gap-x-1.5 gap-y-1 text-white/40">
+                <span className="font-mono text-foreground/50">{copy.rights}</span>
+                <p className="inline-flex flex-wrap items-center justify-center gap-x-1.5 gap-y-1 text-foreground/50">
                   {copy.madeWith}
-                  <Heart size={13} aria-label={copy.love} className="fill-acid text-acid" />
+                  <Heart size={13} role="img" aria-label={copy.love} className="fill-acid text-acid" />
                   {copy.byThe}{" "}
                   <a
                     href="https://rootlabs.studio"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-semibold text-white/60 underline decoration-white/20 underline-offset-2 transition-colors duration-200 hover:text-acid hover:decoration-acid"
+                    className={cn(
+                      "font-semibold text-foreground/60 underline decoration-foreground/20 underline-offset-2 hover:text-acid hover:decoration-acid",
+                      transitionClass,
+                    )}
                   >
                     Root Labs
                   </a>{" "}

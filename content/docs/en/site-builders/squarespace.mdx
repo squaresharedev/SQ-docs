@@ -1,0 +1,96 @@
+---
+title: How do I add Square Share to a Squarespace site?
+navTitle: "Squarespace"
+description: Paste your storefront snippet into a Squarespace Code block, or link a Button block to a product page. Plan needs, checks and fixes.
+translationKey: builder-squarespace
+lastUpdated: 2026-11-05
+draft: true
+---
+
+<AnswerBlock>
+
+Edit the page in Squarespace, add a Code block, paste the snippet from your storefront's Share page and save. Squarespace runs scripts and iframes in a Code block only on its Core, Plus and Advanced plans. To sell one product, paste its link into a Button block instead. That works on every plan.
+
+</AnswerBlock>
+
+{/* TODO(adrian): Squarespace plan names and the Code block rule come from support.squarespace.com/hc/en-us/articles/206543167-Using-the-Code-Block (checked 2026-11-05). Recheck before publishing; Squarespace renames plans from time to time. */}
+
+## What do I need first?
+
+- A storefront in the dashboard with **Show on my website** turned on on its **Share** page.
+- Your Squarespace address in **Allowed domains** on that page, saved. List your own domain, and also your built-in `yoursite.squarespace.com` address if you want to see the storefront there.
+- A Squarespace plan that allows JavaScript in Code blocks: Core, Plus or Advanced, according to [Squarespace's Code block guide](https://support.squarespace.com/hc/en-us/articles/206543167-Using-the-Code-Block). The purchase button needs no particular plan.
+
+See [How do allowed domains work?](/en/install/allowed-domains) for the exact matching rules.
+
+## How do I add a storefront to a Squarespace page?
+
+<Steps>
+
+1. In the dashboard, open **Storefront**, click **Share** on your storefront, and choose **Squarespace** under **Your site builder**.
+2. Keep the **Script** tab and click **Copy embed snippet**.
+3. In Squarespace, open the page and click **Edit**.
+4. Add a block where the storefront should go and choose **Code**.
+5. Paste the snippet into the block. Leave the block's mode on HTML.
+6. Save the page.
+
+</Steps>
+
+The snippet looks like this. The dashboard fills in your own key:
+
+<Snippet>
+
+```html title="Script snippet"
+<div data-squareshare-storefront="YOUR-EMBED-KEY"></div>
+<script async src="https://embed.squareshare.eu/widget.js"></script>
+```
+
+</Snippet>
+
+The **Script** version sits in the page and grows to fit your storefront, so the Code block needs no height setting.
+
+## What if the storefront only appears after a reload?
+
+This happens on sites built on Squarespace version 7.0 with Ajax loading turned on. They load the next page without a full reload, so a pasted script may not run until the visitor reloads. Version 7.1 has no Ajax loading, according to [Squarespace's Ajax loading guide](https://support.squarespace.com/hc/en-us/articles/115000253288-Ajax-loading-in-version-7-0).
+
+You have two fixes. Turn off Ajax loading in your 7.0 site's design settings, or follow the dashboard's advice: switch to the **Iframe only** tab on the Share page and paste that version instead. The iframe version does not depend on a script. It has a fixed height of 640 px and scrolls inside its frame.
+
+Copy the iframe version again whenever you change **Allowed domains**, because your domains are part of its address.
+
+## How do I add a purchase button on Squarespace?
+
+<Steps>
+
+1. In the dashboard, open **Products**, click the **...** menu on the product, and choose **Add to your website**.
+2. On the **Link** tab, copy the link.
+3. In Squarespace, edit the page and add a **Button** block.
+4. Paste the link into the button's link field and save.
+
+</Steps>
+
+A buyer who clicks the button lands on the product page Square Share hosts. The link needs no script, so it works on every Squarespace plan. Full details: [How do I add a purchase button to my website?](/en/install/add-purchase-button)
+
+## Why is the storefront not showing on Squarespace?
+
+- **You are looking while logged in.** Code in a Code block may not run in the Squarespace editor. Open the published page in a private browser window.
+- **The address is not listed.** The address in the browser bar must match an entry in **Allowed domains**. `yoursite.squarespace.com` and your own domain are different domains.
+- **The plan does not allow scripts.** On a plan without JavaScript in Code blocks, the block stays empty. Use the purchase button, or change plan.
+- **The site loads pages without a reload.** On a 7.0 site with Ajax loading, turn it off or use the **Iframe only** version, as above.
+
+The full checklist is on [Why is my storefront not showing on my website?](/en/troubleshooting/storefront-not-showing)
+
+<Buttons>
+
+[Open the dashboard](https://dashboard.squareshare.eu) [All site builders](/en/site-builders)
+
+</Buttons>
+
+## Key terms
+
+<GlossaryList terms="storefront embed allowed-domains purchase-button" />
+
+## Related pages
+
+- [How do I add a storefront to my website?](/en/install/add-storefront-to-website)
+- [How do allowed domains work?](/en/install/allowed-domains)
+- [Which site builders does Square Share work with?](/en/site-builders)

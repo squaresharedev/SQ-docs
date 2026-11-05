@@ -15,7 +15,8 @@ const TOOTH_DEPTH = 4;
  *  wider than the paper. */
 const SLOT_LIP = 4;
 const SLOT_OVERHANG = 8;
-/** One print, a look at it, a tear, and a pause. */
+/** One print, a look at it, a tear, and a pause. corner-art.css plays 0.72
+ *  of it (the print and the look): keep that under 5s (WCAG 2.2.2). */
 const LOOP_MS = 5200;
 
 /** The paper: straight sides up into the slot, and a torn, toothed end. */

@@ -6,7 +6,12 @@ import { openPage, THEMES, watchErrors } from "./helpers.ts";
 import { PAGES } from "./pages.ts";
 
 const SCREENSHOT_DIR = join(process.cwd(), "tests", "screenshots");
-const AXE_TAGS = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"];
+/**
+ * WCAG 2.2 A and AA: the level EN 301 549 (the European Accessibility Act's
+ * standard) and the ADA and Section 508 practice in the US point to, and a
+ * superset of 2.1 AA. Any violation fails, whatever impact axe gives it.
+ */
+const AXE_TAGS = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"];
 
 test.describe("page list", () => {
   test("out/ has pages in both languages", () => {
@@ -44,20 +49,20 @@ for (const docPage of PAGES) {
         expect(errors.messages, errors.messages.join("\n")).toEqual([]);
       });
 
-      test("axe: no serious or critical violations", async ({ page }, testInfo) => {
+      test("axe: no WCAG 2.2 AA violations", async ({ page }, testInfo) => {
         test.skip(testInfo.project.name === "tablet", "axe runs at desktop and mobile");
         await openPage(page, docPage.url, theme);
 
         const results = await new AxeBuilder({ page }).withTags(AXE_TAGS).analyze();
-        const serious = results.violations.filter((violation) => violation.impact === "serious" || violation.impact === "critical");
-        const report = serious
+        const violations = results.violations;
+        const report = violations
           .map(
             (violation) =>
               `[${violation.impact}] ${violation.id}: ${violation.help}\n` +
               violation.nodes.map((node) => `    ${node.target.join(" ")}\n    ${node.failureSummary?.replace(/\n/g, "\n    ") ?? ""}`).join("\n"),
           )
           .join("\n");
-        expect(serious, report).toEqual([]);
+        expect(violations, report).toEqual([]);
       });
     });
   }

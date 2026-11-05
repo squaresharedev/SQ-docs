@@ -1,0 +1,97 @@
+---
+title: "Jak přidám Square Share na web ve Squarespace?"
+navTitle: "Squarespace"
+description: "Vložte kód výlohy do bloku Code ve Squarespace, nebo propojte blok Button s produktovou stránkou. Potřebný tarif, kontrola a řešení."
+translationKey: "builder-squarespace"
+lastUpdated: "2026-11-05"
+draft: true
+---
+{/* TODO(adrian): native review */}
+
+<AnswerBlock>
+
+Ve Squarespace otevřete úpravy stránky, přidejte blok Code, vložte do něj kód ze stránky Sdílet vaší výlohy a uložte. Skripty a iframy v bloku Code Squarespace spouští jen v tarifech Core, Plus a Advanced. Pro prodej jednoho produktu vložte jeho odkaz do bloku Button. To funguje v každém tarifu.
+
+</AnswerBlock>
+
+{/* TODO(adrian): Squarespace plan names and the Code block rule come from support.squarespace.com/hc/en-us/articles/206543167-Using-the-Code-Block (checked 2026-11-05). Recheck before publishing; Squarespace renames plans from time to time. */}
+
+## Co potřebuji předem?
+
+- Výlohu v panelu se zapnutým **Zobrazit na mém webu** na její stránce **Sdílet**.
+- Adresu webu v **Povolených doménách** na téže stránce, uloženou. Uveďte svou doménu, a pokud tam chcete výlohu vidět, i vestavěnou adresu `vasweb.squarespace.com`.
+- Tarif Squarespace, který dovoluje JavaScript v bloku Code: podle [návodu Squarespace k bloku Code](https://support.squarespace.com/hc/en-us/articles/206543167-Using-the-Code-Block) je to Core, Plus nebo Advanced. Tlačítko pro nákup žádný konkrétní tarif nepotřebuje.
+
+Přesná pravidla shody domén najdete na stránce [Jak fungují povolené domény?](/cs/instalace/povolene-domeny).
+
+## Jak přidám výlohu na stránku ve Squarespace?
+
+<Steps>
+
+1. V panelu otevřete **Výloha**, u své výlohy klikněte na **Sdílet** a v poli **Váš nástroj pro tvorbu webu** zvolte **Squarespace**.
+2. Nechte kartu **Skript** a klikněte na **Kopírovat kód pro vložení**.
+3. Ve Squarespace otevřete stránku a klikněte na **Edit**.
+4. Tam, kde má být výloha, přidejte blok a zvolte **Code**.
+5. Vložte kód do bloku. Režim bloku nechte na HTML.
+6. Stránku uložte.
+
+</Steps>
+
+Kód vypadá takto. Panel do něj doplní váš klíč:
+
+<Snippet>
+
+```html title="Kód Skript"
+<div data-squareshare-storefront="YOUR-EMBED-KEY"></div>
+<script async src="https://embed.squareshare.eu/widget.js"></script>
+```
+
+</Snippet>
+
+Verze **Skript** je přímo ve stránce a roste podle výlohy, takže blok Code nepotřebuje nastavit výšku.
+
+## Co když se výloha zobrazí až po obnovení stránky?
+
+Stává se to u webů postavených na Squarespace verze 7.0 se zapnutým načítáním Ajax. Takový web načte další stránku bez úplného obnovení, takže se vložený skript může spustit až po obnovení. Verze 7.1 načítání Ajax nemá, jak uvádí [návod Squarespace k načítání Ajax](https://support.squarespace.com/hc/en-us/articles/115000253288-Ajax-loading-in-version-7-0).
+
+Máte dvě řešení. Vypněte načítání Ajax v nastavení vzhledu webu verze 7.0, nebo se řiďte radou panelu: na stránce Sdílet přepněte na kartu **Jen iframe** a vložte tuto verzi. Verze iframe na skriptu nezávisí. Má pevnou výšku 640 px a posouvá se uvnitř svého rámu.
+
+Po každé změně **Povolených domén** verzi iframe zkopírujte znovu, protože vaše domény jsou součástí její adresy.
+
+## Jak přidám tlačítko pro nákup ve Squarespace?
+
+<Steps>
+
+1. V panelu otevřete **Produkty**, u produktu klikněte na nabídku **⋯** a zvolte **Přidat na váš web**.
+2. Na kartě **Odkaz** zkopírujte odkaz.
+3. Ve Squarespace upravte stránku a přidejte blok **Button**.
+4. Vložte odkaz do pole pro odkaz tlačítka a uložte.
+
+</Steps>
+
+Kupující, který na tlačítko klikne, se dostane na produktovou stránku, kterou hostuje Square Share. Odkaz nepotřebuje skript, takže funguje v každém tarifu Squarespace. Podrobnosti: [Jak přidám na svůj web tlačítko pro nákup?](/cs/instalace/pridani-tlacitka-pro-nakup)
+
+## Proč se výloha ve Squarespace nezobrazuje?
+
+- **Díváte se přihlášení.** Kód v bloku Code se v editoru Squarespace nemusí spustit. Otevřete zveřejněnou stránku v anonymním okně prohlížeče.
+- **Adresa není v seznamu.** Adresa v řádku prohlížeče musí odpovídat položce v **Povolených doménách**. `vasweb.squarespace.com` a vaše vlastní doména jsou různé domény.
+- **Tarif skripty nedovoluje.** V tarifu bez JavaScriptu v bloku Code zůstane blok prázdný. Použijte tlačítko pro nákup, nebo změňte tarif.
+- **Web načítá stránky bez obnovení.** U webu verze 7.0 s načítáním Ajax ho vypněte, nebo použijte verzi **Jen iframe**, viz výše.
+
+Celý seznam kontrol je na stránce [Proč se moje výloha na webu nezobrazuje?](/cs/reseni-problemu/vyloha-se-nezobrazuje)
+
+<Buttons>
+
+[Otevřít panel](https://dashboard.squareshare.eu) [Všechny nástroje pro tvorbu webu](/cs/tvorba-webu)
+
+</Buttons>
+
+## Klíčové pojmy
+
+<GlossaryList terms="storefront embed allowed-domains purchase-button" />
+
+## Související stránky
+
+- [Jak přidám výlohu na svůj web?](/cs/instalace/pridani-vylohy-na-web)
+- [Jak fungují povolené domény?](/cs/instalace/povolene-domeny)
+- [S jakými nástroji pro tvorbu webu Square Share funguje?](/cs/tvorba-webu)

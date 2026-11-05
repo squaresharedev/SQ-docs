@@ -1,0 +1,84 @@
+---
+title: How do I add Square Share to a Carrd site?
+navTitle: "Carrd"
+description: Paste your storefront snippet into a Carrd Embed element set to Code, or point a Carrd button at a product page. Plan needs and checks.
+translationKey: builder-carrd
+lastUpdated: 2026-11-05
+draft: true
+---
+
+<AnswerBlock>
+
+In Carrd, add an Embed element, set its type to Code, paste the snippet from your storefront's Share page and publish. Carrd shows nothing for embeds in the builder, so check the published site. Carrd includes the Embed element from its Pro Standard plan. On any plan, a Buttons element can link to a product page.
+
+</AnswerBlock>
+
+{/* TODO(adrian): The plan rule comes from carrd.com/docs/building/embedding-custom-code and carrd.com/docs/pro/plans (checked 2026-11-05). Recheck before publishing. */}
+
+## What do I need first?
+
+- A storefront in the dashboard with **Show on my website** turned on on its **Share** page.
+- Your Carrd address in **Allowed domains**, saved: your own domain, or your `yoursite.carrd.co` address.
+- A Carrd Pro plan that includes embeds. According to [Carrd's embed guide](https://carrd.com/docs/building/embedding-custom-code), that is Pro Standard or higher.
+
+## How do I add a storefront to a Carrd site?
+
+<Steps>
+
+1. In the dashboard, open **Storefront**, click **Share** on your storefront, and choose **Carrd** under **Your site builder**.
+2. Keep the **Script** tab and click **Copy embed snippet**.
+3. In Carrd, add an **Embed** element where the storefront should go.
+4. Set its **Type** to **Code** and its style to **Inline**.
+5. Paste the snippet into the **Code** field.
+6. Publish the site.
+
+</Steps>
+
+<Snippet>
+
+```html title="Script snippet"
+<div data-squareshare-storefront="YOUR-EMBED-KEY"></div>
+<script async src="https://embed.squareshare.eu/widget.js"></script>
+```
+
+</Snippet>
+
+An inline embed sits in the page where you placed it, and the **Script** version grows to fit your storefront.
+
+## How do I add a purchase button on Carrd?
+
+<Steps>
+
+1. In the dashboard, open **Products**, click the **...** menu on the product, and choose **Add to your website**.
+2. On the **Link** tab, copy the link.
+3. In Carrd, add a **Buttons** element, or select one you already have.
+4. Paste the link into the button's URL field and publish.
+
+</Steps>
+
+A link needs no embed, so this works on every Carrd plan, including free. Full details: [How do I add a purchase button to my website?](/en/install/add-purchase-button)
+
+## Why is the storefront not showing on Carrd?
+
+- **You are looking at the builder.** Carrd draws nothing for embeds there. Publish and open the live site.
+- **The address is not listed.** The address in the browser bar must be in **Allowed domains**. A `carrd.co` address and your own domain are different domains.
+- **The plan does not include embeds.** Use the purchase button, or change plan.
+- **The embed style is Hidden.** A hidden embed has no place on the page. Set it to **Inline**.
+
+The full checklist is on [Why is my storefront not showing on my website?](/en/troubleshooting/storefront-not-showing)
+
+<Buttons>
+
+[Open the dashboard](https://dashboard.squareshare.eu) [All site builders](/en/site-builders)
+
+</Buttons>
+
+## Key terms
+
+<GlossaryList terms="storefront embed allowed-domains purchase-button" />
+
+## Related pages
+
+- [How do I add a storefront to my website?](/en/install/add-storefront-to-website)
+- [How do allowed domains work?](/en/install/allowed-domains)
+- [Which site builders does Square Share work with?](/en/site-builders)

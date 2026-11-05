@@ -3,6 +3,7 @@
 import type { ComponentProps } from "react";
 import { Menu } from "lucide-react";
 import { useNotebookLayout } from "fumadocs-ui/layouts/notebook";
+import { transitionClass } from "@squaresharedev/tokens";
 import { cn } from "@/lib/cn";
 import { WAITLIST_URL } from "@/lib/site";
 import { DocsLink as Link } from "./DocsLink";
@@ -10,16 +11,20 @@ import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useLocaleContext } from "./locale-context";
 import { Logo } from "./Logo";
 import { SearchMobileTrigger, SearchTrigger } from "./search";
+import { useDrawerFocus } from "./useDrawerFocus";
 
 /**
  * Replaces the notebook layout's header slot with a bar like the dashboard's
  * top bar: the page's own background, a hairline under it, the wordmark, the
  * dashboard's search field, the language switch, the theme switch and a sharp
  * "Get started". The wrapper classes keep the layout's grid placement and height.
+ * Below md its menu button opens the sidebar drawer, which useDrawerFocus keeps
+ * keyboard-safe.
  */
 export function SiteHeader(props: ComponentProps<"header">) {
   const { slots } = useNotebookLayout();
   const { locale, copy } = useLocaleContext();
+  useDrawerFocus();
 
   return (
     <header
@@ -56,7 +61,9 @@ export function SiteHeader(props: ComponentProps<"header">) {
             <SearchMobileTrigger />
           </span>
           {slots.sidebar ? (
-            <slots.sidebar.trigger className="inline-flex size-10 items-center justify-center text-fd-foreground hover:bg-fd-accent md:hidden">
+            <slots.sidebar.trigger
+              className={cn("inline-flex size-10 items-center justify-center text-fd-foreground hover:bg-fd-accent md:hidden", transitionClass)}
+            >
               <Menu className="size-5" strokeWidth={2} aria-hidden="true" />
             </slots.sidebar.trigger>
           ) : null}

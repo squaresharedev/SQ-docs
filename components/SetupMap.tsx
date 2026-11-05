@@ -81,7 +81,8 @@ export function SetupMap({ children }: { children: ReactNode }) {
 
   return (
     <div className="setup-map not-prose [--map:3.5rem] [--map-gap:0.75rem]">
-      <ol className="relative">
+      {/* role="list": the stations replace the markers, and Safari drops a list without them. */}
+      <ol role="list" className="relative">
         {items.map((item, index) => {
           // Stations alternate left (0) and right (1) of the column's centre.
           const side = (index % 2) as 0 | 1;

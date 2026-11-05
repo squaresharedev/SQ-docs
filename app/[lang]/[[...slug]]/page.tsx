@@ -3,7 +3,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { createRelativeLink } from "fumadocs-ui/mdx";
 import { DocsBody, DocsPage } from "fumadocs-ui/layouts/notebook/page";
+import { TOCProvider } from "fumadocs-ui/layouts/notebook/page/slots/toc";
 import { DocsHomeHero } from "@/components/DocsHomeHero";
+import { DocsTOC, DocsTOCPopover } from "@/components/TableOfContents";
 import { DraftBanner } from "@/components/DraftBanner";
 import { JsonLd } from "@/components/JsonLd";
 import { getMDXComponents } from "@/components/mdx";
@@ -66,6 +68,7 @@ export default async function Page(props: PageProps<"/[lang]/[[...slug]]">) {
       breadcrumb={{ enabled: false }}
       tableOfContent={{ style: "clerk", enabled: !isHome }}
       tableOfContentPopover={{ enabled: !isHome }}
+      slots={{ toc: { provider: TOCProvider, main: DocsTOC, popover: DocsTOCPopover } }}
     >
       {page.data.draft ? <DraftBanner copy={copy} /> : null}
       {isHome ? (
@@ -74,7 +77,12 @@ export default async function Page(props: PageProps<"/[lang]/[[...slug]]">) {
           {meta}
         </>
       ) : (
-        <PageHeader title={page.data.title} trail={sectionTrail(page)} Art={CORNER_ART[page.data.translationKey]}>
+        <PageHeader
+          title={page.data.title}
+          trail={sectionTrail(page)}
+          trailLabel={copy.breadcrumbLabel}
+          Art={CORNER_ART[page.data.translationKey]}
+        >
           {meta}
         </PageHeader>
       )}

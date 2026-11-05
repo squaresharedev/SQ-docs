@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { ButtonLink } from "@/components/ButtonLink";
 import { LogoMark } from "@/components/Logo";
+import { JsonLd } from "@/components/JsonLd";
 import { HeroCursors } from "@/components/visuals/HeroDecor";
-import { LANGUAGE_NAME, LANGUAGE_TAG, LOCALES, type Locale } from "@/lib/i18n";
-import { publishedPages } from "@/lib/llms";
+import { LANGUAGE_NAME, LOCALES, OG_LOCALE, type Locale } from "@/lib/i18n";
+import { organization, website } from "@/lib/jsonld";
+import { chooserAlternates } from "@/lib/seo";
 import { absoluteUrl, SITE_URL } from "@/lib/site";
 
 const CHOICES: Record<Locale, string> = {
@@ -11,22 +13,32 @@ const CHOICES: Record<Locale, string> = {
   cs: "Číst dokumentaci Square Share v češtině",
 };
 
-/** hreflang only for languages whose docs home is published. */
-function publishedHomes(): Record<string, string> | undefined {
-  const homes: Record<string, string> = {};
-  for (const locale of LOCALES) {
-    const home = publishedPages(locale).find((page) => page.url === `/${locale}`);
-    if (!home) return undefined;
-    homes[LANGUAGE_TAG[locale]] = absoluteUrl(home.url);
-  }
-  return { ...homes, "x-default": absoluteUrl("/") };
-}
+const TITLE = "Square Share Docs";
+const DESCRIPTION = "Square Share documentation in English and Czech. Dokumentace Square Share v angličtině a češtině.";
+/** The chooser has no card image of its own, so it shares the English docs home's. */
+const IMAGE = absoluteUrl("/og/en/image.png");
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: { absolute: "Square Share Docs" },
-  description: "Square Share documentation in English and Czech. Dokumentace Square Share v angličtině a češtině.",
-  alternates: { canonical: absoluteUrl("/"), languages: publishedHomes() },
+  title: { absolute: TITLE },
+  description: DESCRIPTION,
+  alternates: { canonical: absoluteUrl("/"), languages: chooserAlternates() },
+  openGraph: {
+    type: "website",
+    title: TITLE,
+    description: DESCRIPTION,
+    url: absoluteUrl("/"),
+    siteName: TITLE,
+    locale: OG_LOCALE.en,
+    alternateLocale: [OG_LOCALE.cs],
+    images: [{ url: IMAGE, width: 1200, height: 630, alt: TITLE }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [{ url: IMAGE, alt: TITLE }],
+  },
 };
 
 /** The language chooser, drawn like the homepage hero. */
@@ -35,17 +47,17 @@ export default function LanguageChooser() {
     <main className="relative isolate flex min-h-screen flex-col justify-center overflow-hidden px-6 py-16 sm:px-12">
       <HeroCursors />
       <div className="relative mx-auto w-full max-w-3xl">
-        <p className="m-0 flex items-center gap-3 font-inter text-xs font-medium uppercase tracking-wide text-muted-foreground">
+        <p className="m-0 flex items-center gap-3 eyebrow text-muted-foreground">
           <LogoMark className="size-6 text-foreground" />
           Square Share
         </p>
         <h1 className="mt-6 mb-0 font-display text-5xl leading-[1.02] font-bold tracking-tight sm:text-7xl">
           Square Share <span className="text-acid">Docs</span>
         </h1>
-        <ul className="mt-10 grid list-none gap-4 p-0 sm:grid-cols-2">
+        <ul role="list" className="mt-10 grid list-none gap-4 p-0 sm:grid-cols-2">
           {LOCALES.map((locale, index) => (
             <li key={locale} lang={locale} className="flex flex-col gap-3 border border-border bg-card p-5">
-              <span className="font-inter text-xs font-medium uppercase tracking-wide text-muted-foreground">/{locale}</span>
+              <span className="eyebrow text-muted-foreground">/{locale}</span>
               <span className="text-sm text-muted-foreground">{CHOICES[locale]}</span>
               <ButtonLink href={`/${locale}`} variant={index === 0 ? "solid" : "outline"} className="self-start">
                 {LANGUAGE_NAME[locale]}
@@ -54,6 +66,7 @@ export default function LanguageChooser() {
           ))}
         </ul>
       </div>
+      <JsonLd data={{ "@context": "https://schema.org", "@graph": [website(), organization()] }} />
     </main>
   );
 }

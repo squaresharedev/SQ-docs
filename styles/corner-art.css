@@ -2,13 +2,12 @@
  * Copied from the dashboard: Store/src/app/globals.css, the corner art block,
  * keeping only the pictures that fit a docs page: the printing receipt
  * (billing), and further down the transit flow (shipping).
- * The two easing curves are the dashboard's motion tokens (Store globals.css
- * @theme), which are not in the tokens package.
+ * Changes: the easing curves come from tokens.css instead of a :root block
+ * here, and each picture plays once and holds a still frame instead of
+ * looping. The dashboard loops them forever; on a page people read, motion
+ * that starts by itself has to stop within five seconds (WCAG 2.2.2). Every
+ * count below keeps a play under that, at the loop lengths the components set.
  */
-:root {
-  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-entrance: cubic-bezier(0.16, 1, 0.3, 1);
-}
 
 /* Corner art (ui/CornerArt, settings/corner-art): the small pictures in a
    settings page's lead card. Each sets its own loop (--corner-loop) and the
@@ -37,8 +36,9 @@
     opacity: 0;
   }
 }
+/* 0.72 of a loop: printed and held, stopping before the tear (3.7s of 5.2s). */
 .corner-receipt {
-  animation: corner-receipt var(--corner-loop) var(--ease-standard) infinite;
+  animation: corner-receipt var(--corner-loop) var(--ease-standard) 0.72 forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -68,8 +68,9 @@
     stroke-dashoffset: -100;
   }
 }
+/* One run of the pill (3.8s), ending past the line. */
 .transit-flow-run {
-  animation: transit-flow-run var(--transit-loop) linear infinite;
+  animation: transit-flow-run var(--transit-loop) linear 1;
 }
 /* A lit station grows out of the plain one and shrinks back into it: at 0.75
    the bold ring (size-4) is exactly the plain one's size-3, so the change
@@ -91,8 +92,10 @@
     scale: 1;
   }
 }
+/* Each station's delay is negative, so it starts part way through a loop:
+   1.1 loops carry its flash through the pill's pass and back out (10%). */
 .transit-flow-pass {
-  animation: transit-flow-pass var(--transit-loop) var(--ease-standard) infinite;
+  animation: transit-flow-pass var(--transit-loop) var(--ease-standard) 1.1;
 }
 @media (prefers-reduced-motion: reduce) {
   .transit-flow-run,
@@ -119,8 +122,10 @@
     translate: 0 calc(var(--reel-spin) * 2);
   }
 }
+/* 0.58 of a loop: spins once and holds the second code (3.7s of 6.4s, plus
+   the last reel's 0.45s stagger). */
 .corner-reel {
-  animation: corner-reel var(--corner-loop) var(--ease-standard) infinite backwards;
+  animation: corner-reel var(--corner-loop) var(--ease-standard) 0.58 both;
 }
 @media (prefers-reduced-motion: reduce) {
   .corner-reel {

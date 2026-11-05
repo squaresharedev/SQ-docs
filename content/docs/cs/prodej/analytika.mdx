@@ -1,0 +1,67 @@
+---
+title: "Co měří analytika Square Share?"
+navTitle: "Analytika"
+description: "Analytika počítá zobrazení výlohy, kliknutí na produkty a zobrazení produktových stránek bez cookies. Co čísla znamenají a co potřebují prodeje."
+translationKey: "analytics"
+lastUpdated: "2026-11-05"
+draft: true
+---
+{/* TODO(adrian): native review */}
+
+<AnswerBlock>
+
+Analytika v panelu počítá zobrazení výlohy, kliknutí na produkty a zobrazení produktových stránek. Funguje bez cookies: Square Share si z IP adresy a údajů o prohlížeči návštěvníka uloží jen jednosměrný kód, nikdy samotnou adresu. Údaje o prodejích zůstanou prázdné, dokud nespustíme pokladnu Square Share, protože prodeje přes váš odkaz probíhají jinde.
+
+</AnswerBlock>
+
+{/* TODO(adrian): The hashing description comes from Store src/lib/analytics/record.ts (salted SHA-256 of IP and user agent, raw values never stored). Confirm it matches the privacy policy wording before publishing. */}
+
+## Co jednotlivá čísla počítají?
+
+| Číslo | Co počítá |
+| --- | --- |
+| Zobrazení výlohy | Jak často návštěvník načetl vaši výlohu |
+| Kliknutí na produkty | Návštěvníky, kteří otevřeli produkt z některé vaší výlohy |
+| Zobrazení produktových stránek | Návštěvníky, kteří otevřeli některou vaši produktovou stránku |
+| Prodeje | Zaplacené objednávky přes pokladnu Square Share |
+| Zobrazení pokladny | Kupující, kteří otevřeli pokladnu Square Share u vašeho produktu |
+
+První tři fungují už dnes. Prodeje a zobrazení pokladny se naplní, až spustíme pokladnu Square Share.
+
+Zobrazení výlohy se počítá jednou za hodinu na návštěvníka a výlohu, takže obnovování stránky číslo nenafukuje.
+
+## Jak číst trychtýř?
+
+Trychtýř výlohy sleduje návštěvníky od **Zobrazení na vašem webu** přes **Otevřené produkty** po **Zahájené platby** a **Nedokončené platby**. Panel k tomu uvádí: „Počítají se události, ne lidé.“ Kroky s placením zůstanou prázdné, dokud nespustíme pokladnu Square Share.
+
+## Co můžu filtrovat a porovnávat?
+
+- Období: **Posledních 30 dní**, **Celou dobu** nebo **Vlastní**.
+- Každé číslo má panely **V čase**, **Kanály**, **Podle dne v týdnu** a **Podle výlohy**.
+- **Stáhnout report** uloží čísla do souboru, podle vašeho plánu.
+
+Samotná stránka je součástí každého plánu.
+
+## Používá analytika Square Share cookies?
+
+Ne. Říká to i text o soukromí, který vás panel žádá přidat na web: Square Share pro výlohu nenastavuje žádné cookies a do zařízení návštěvníka nic neukládá. IP adresa a údaje o prohlížeči návštěvníka se posílají do Square Share, aby se zobrazily produkty a započítala návštěva. Square Share si místo nich uloží jednosměrný kód.
+
+Text o soukromí přesto přidáte do svých zásad ochrany osobních údajů. Viz [Co přidám do zásad ochrany osobních údajů?](/cs/instalace/pridani-vylohy-na-web#co-přidám-do-zásad-ochrany-osobních-údajů)
+
+## Proč analytika ukazuje zobrazení, ale žádné prodeje?
+
+Protože prodeje přes váš vlastní odkaz na nákup nebo e-mailem probíhají mimo Square Share. Analytika vidí návštěvu produktové stránky, ne platbu v jiném nástroji. Porovnejte zobrazení produktových stránek s prodeji ve své pokladně a uvidíte, jak se stránky mění v objednávky.
+
+## Co přijde dál?
+
+Až spustíme pokladnu Square Share, naplní se panely prodejů: tržby, průměrná objednávka, unikátní kupující, podíl vrácení a nejprodávanější produkty. Stránka uvádí i přihlášení k odběru a rezervace, které se začnou počítat, až tyto funkce výlohy přibudou. Termíny nejsou stanovené.
+
+## Klíčové pojmy
+
+<GlossaryList terms="storefront product-page embed" />
+
+## Související stránky
+
+- [Kde najdu své objednávky?](/cs/prodej/objednavky)
+- [Jak přidám výlohu na svůj web?](/cs/instalace/pridani-vylohy-na-web)
+- [Jak navrhnu výlohu?](/cs/produkty-a-vylohy/navrh-vylohy)

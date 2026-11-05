@@ -1,0 +1,103 @@
+---
+title: "Jak přidám Square Share na web ve WordPressu?"
+navTitle: "WordPress"
+description: "Vložte kód výlohy do bloku Vlastní HTML ve WordPressu, nebo propojte blok Tlačítka s produktovou stránkou. Role, tarify WordPress.com a kontrola."
+translationKey: "builder-wordpress"
+lastUpdated: "2026-11-05"
+draft: true
+---
+{/* TODO(adrian): native review */}
+
+<AnswerBlock>
+
+V blokovém editoru WordPressu přidejte blok Vlastní HTML, vložte do něj kód ze stránky Sdílet vaší výlohy a stránku zveřejněte. Ve vlastní instalaci WordPressu ho musí uložit účet Administrátor nebo Editor. Na WordPress.com potřebují skripty placený tarif se zapnutými funkcemi hostingu. Pro jeden produkt propojte blok Tlačítka s jeho produktovou stránkou.
+
+</AnswerBlock>
+
+{/* TODO(adrian): The WordPress.com rule is quoted from wordpress.com/support/wordpress-editor/blocks/custom-html-block/ (checked 2026-11-05). Recheck before publishing. Czech block names follow the Czech WordPress translation (Vlastní HTML, Tlačítka); confirm in a Czech install. */}
+
+## Co potřebuji předem?
+
+- Výlohu v panelu se zapnutým **Zobrazit na mém webu** na její stránce **Sdílet**.
+- Doménu webu v **Povolených doménách**, uloženou. Na WordPress.com bez vlastní domény je to adresa `vasweb.wordpress.com`.
+- Oprávnění ukládat skripty. Viz „Proč WordPress můj kód odstranil?“ níže.
+
+## Jak přidám výlohu na stránku ve WordPressu?
+
+<Steps>
+
+1. V panelu otevřete **Výloha**, u své výlohy klikněte na **Sdílet** a v poli **Váš nástroj pro tvorbu webu** zvolte **WordPress**.
+2. Nechte kartu **Skript** a klikněte na **Kopírovat kód pro vložení**.
+3. Ve WordPressu upravte stránku nebo příspěvek. Klikněte na tlačítko pro přidání bloku (**+**), vyhledejte **Vlastní HTML** a přidejte blok tam, kde má být výloha. Na prázdném řádku můžete také napsat `/html`.
+4. Vložte kód do bloku.
+5. Klikněte na **Aktualizovat** nebo **Publikovat**.
+
+</Steps>
+
+<Snippet>
+
+```html title="Kód Skript"
+<div data-squareshare-storefront="YOUR-EMBED-KEY"></div>
+<script async src="https://embed.squareshare.eu/widget.js"></script>
+```
+
+</Snippet>
+
+Náhled bloku v editoru skripty nespouští. Výlohu uvidíte na zveřejněné stránce. Roste podle obsahu, takže výšku nenastavujete.
+
+Používáte klasický editor? Přepněte na kartu **Text** a vložte kód tam. Fungují i nástroje pro stavbu stránek, pokud kód vložíte do prvku určeného pro HTML, například do widgetu HTML v Elementoru.
+
+## Proč WordPress můj kód odstranil?
+
+WordPress odstraňuje značky `<script>` a `<iframe>` z obsahu, který uložil účet bez oprávnění k nefiltrovanému HTML.
+
+| Kde web běží | Kdo může kód uložit |
+| --- | --- |
+| Vlastní instalace WordPressu | Administrátoři a Editoři. Autorům a Přispěvatelům se skripty při uložení odstraní. |
+| WordPress Multisite | Jen Super Admini. |
+| WordPress.com | Podle [návodu WordPress.com k bloku Custom HTML](https://wordpress.com/support/wordpress-editor/blocks/custom-html-block/) vyžadují značky jako iframe a script placený tarif se zapnutými funkcemi hostingu. |
+
+Pokud skripty ukládat nemůžete, tlačítko pro nákup funguje dál: je to obyčejný odkaz a odkazy WordPress ponechá.
+
+## Jak přidám tlačítko pro nákup ve WordPressu?
+
+<Steps>
+
+1. V panelu otevřete **Produkty**, u produktu klikněte na nabídku **⋯** a zvolte **Přidat na váš web**.
+2. Na kartě **Odkaz** zkopírujte odkaz.
+3. Ve WordPressu přidejte blok **Tlačítka** a napište text tlačítka.
+4. Na panelu nástrojů bloku klikněte na ikonu odkazu, vložte odkaz a stiskněte Enter.
+5. Klikněte na **Aktualizovat** nebo **Publikovat**.
+
+</Steps>
+
+Podrobnosti: [Jak přidám na svůj web tlačítko pro nákup?](/cs/instalace/pridani-tlacitka-pro-nakup)
+
+## Proč se výloha ve WordPressu nezobrazuje?
+
+- **Skript byl odstraněn.** Otevřete blok znovu. Pokud řádek `<script>` chybí, viz tabulka výše.
+- **Díváte se do editoru.** Zkontrolujte zveřejněnou stránku.
+- **Adresa není v seznamu.** Doména z řádku prohlížeče musí být v **Povolených doménách**.
+- **Plugin pro mezipaměť nebo optimalizaci skript změnil.** Vyřaďte `embed.squareshare.eu/widget.js` ze slučování nebo odkládání skriptů, nebo použijte verzi **Jen iframe**.
+
+Celý seznam kontrol je na stránce [Proč se moje výloha na webu nezobrazuje?](/cs/reseni-problemu/vyloha-se-nezobrazuje)
+
+## Co přijde dál?
+
+Plugin Square Share pro WordPress je v plánu. Zatím není dostupný a termín není stanovený. Do té doby je cestou blok Vlastní HTML.
+
+<Buttons>
+
+[Otevřít panel](https://dashboard.squareshare.eu) [Všechny nástroje pro tvorbu webu](/cs/tvorba-webu)
+
+</Buttons>
+
+## Klíčové pojmy
+
+<GlossaryList terms="storefront embed allowed-domains purchase-button" />
+
+## Související stránky
+
+- [Jak přidám výlohu na svůj web?](/cs/instalace/pridani-vylohy-na-web)
+- [Jak nainstaluji Square Share pomocí AI nástroje?](/cs/instalace/instalace-s-ai-nastrojem)
+- [S jakými nástroji pro tvorbu webu Square Share funguje?](/cs/tvorba-webu)

@@ -1,0 +1,92 @@
+---
+title: How do I add Square Share to a Webnode site?
+navTitle: "Webnode"
+description: Paste your storefront snippet into Webnode's HTML content, or link a Webnode button to a product page. Premium package needs and checks.
+translationKey: builder-webnode
+lastUpdated: 2026-11-05
+draft: true
+---
+
+<AnswerBlock>
+
+In the Webnode editor, add HTML content where the storefront should go, paste the snippet from your storefront's Share page and publish. Webnode shows HTML only on the published site, and it is a premium feature for projects created after 26 June 2023. On any package, a button can link to a product page.
+
+</AnswerBlock>
+
+{/* TODO(adrian): The dashboard's site builder list has no Webnode entry, so these steps use "Another site". Webnode's help (webnode.com/support/add-html-code/, checked 2026-11-05) does not say whether pasted HTML runs in the page or in a frame of its own. Square Share only recognises builder frames from Wix and Google Sites. Test on a published Webnode site before publishing this page. */}
+
+## What do I need first?
+
+- A storefront in the dashboard with **Show on my website** turned on on its **Share** page.
+- Your Webnode site's address in **Allowed domains**, saved. Copy the domain from the browser bar on your published site.
+- A premium Webnode package. According to [Webnode's guide to adding HTML](https://www.webnode.com/support/add-html-code/), adding HTML to the website body is a premium feature for projects created after 26 June 2023.
+
+## How do I add a storefront to a Webnode page?
+
+<Steps>
+
+1. In the dashboard, open **Storefront**, click **Share** on your storefront, and keep **Another site** under **Your site builder**.
+2. Keep the **Script** tab and click **Copy embed snippet**.
+3. In the Webnode editor, click the **+** where the storefront should go and choose **HTML**.
+4. Paste the snippet and confirm.
+5. Publish the site.
+
+</Steps>
+
+<Snippet>
+
+```html title="Script snippet"
+<div data-squareshare-storefront="YOUR-EMBED-KEY"></div>
+<script async src="https://embed.squareshare.eu/widget.js"></script>
+```
+
+</Snippet>
+
+Webnode does not show added HTML in the editor, only on the published site.
+
+## How do I check it worked?
+
+<Steps>
+
+1. Open your published Webnode site in a browser.
+2. Go to the page with the HTML content. The storefront should show there.
+3. If the space is empty, open the browser's developer console. A message starting with `[Square Share] The storefront is not showing on` names the address Square Share saw. Add that address to **Allowed domains**.
+
+</Steps>
+
+## How do I add a purchase button on Webnode?
+
+<Steps>
+
+1. In the dashboard, open **Products**, click the **...** menu on the product, and choose **Add to your website**.
+2. On the **Link** tab, copy the link.
+3. In the Webnode editor, add a button, or select one you already have.
+4. Set its link to a web address, paste the product link and publish.
+
+</Steps>
+
+A link needs no HTML content, so it works on every Webnode package. Full details: [How do I add a purchase button to my website?](/en/install/add-purchase-button)
+
+## Why is the storefront not showing on Webnode?
+
+- **You are looking at the editor.** Webnode shows HTML only on the published site.
+- **The package does not include HTML.** Use the purchase button, or upgrade.
+- **The address is not listed.** Your Webnode address and a domain you connect later are different domains. List each one you use.
+
+The full checklist is on [Why is my storefront not showing on my website?](/en/troubleshooting/storefront-not-showing)
+
+<Buttons>
+
+[Open the dashboard](https://dashboard.squareshare.eu) [All site builders](/en/site-builders)
+
+</Buttons>
+
+## Key terms
+
+<GlossaryList terms="storefront embed allowed-domains purchase-button" />
+
+## Related pages
+
+- [How do I add a storefront to my website?](/en/install/add-storefront-to-website)
+- [How do allowed domains work?](/en/install/allowed-domains)
+- [Which site builders does Square Share work with?](/en/site-builders)

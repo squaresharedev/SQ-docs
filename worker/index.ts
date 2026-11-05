@@ -60,6 +60,13 @@ app.get("*", async (c) => {
 
   const response = await c.env.ASSETS.fetch(c.req.raw);
 
+  // The assets layer sends /page/ to /page with a temporary 307. Make it a
+  // permanent 308, so search engines settle on the address without the slash.
+  const location = response.headers.get("Location");
+  if (response.status === 307 && location && url.pathname.length > 1 && url.pathname.endsWith("/")) {
+    return withHeaders(new Response(null, { status: 308 }), { Location: location, "Cache-Control": CACHE.other });
+  }
+
   if (isPage) {
     return withHeaders(response, { "Cache-Control": CACHE.document, Vary: "Accept" });
   }

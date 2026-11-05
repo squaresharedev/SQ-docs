@@ -1,0 +1,81 @@
+---
+title: What does this dashboard error message mean?
+navTitle: "Error messages"
+description: "The exact error messages the Square Share dashboard shows for purchase links, images, download files, PDFs, allowed domains and seller details, with fixes."
+translationKey: dashboard-error-messages
+lastUpdated: 2026-11-05
+draft: true
+---
+
+<AnswerBlock>
+
+Most dashboard errors come from a limit on a file, a link or a list. Images must be PNG, JPG, WEBP, GIF or AVIF under 10 MB. A download must be one of ten file types, under 200 MB. A purchase link must start with https://. Allowed domains take plain domain names, up to 10. Find your message below.
+
+</AnswerBlock>
+
+## Purchase link
+
+| Message | Fix |
+| --- | --- |
+| The purchase link must be a full https:// address. | Copy the full address from your checkout, starting with `https://` |
+| The purchase link must be 2048 characters or fewer. | Use your checkout's shorter link |
+| The purchase link cannot contain a username or password. | Remove the `name:password@` part from the address |
+
+## Images and photos
+
+| Message | Fix |
+| --- | --- |
+| Use a PNG, JPG, WEBP, GIF, or AVIF image. | Export the picture in one of those formats |
+| Image must be under 10 MB. | Make the image smaller, or save it at lower quality |
+| Each photo must be under 10 MB. | The same, for the extra photos |
+
+## Download files
+
+| Message | Fix |
+| --- | --- |
+| That file type is not supported. | Use a ZIP, PDF, EPUB, MP3, WAV, MP4, JPEG, PNG, WebP or TXT file. To sell another type, put it in a ZIP. |
+| That file's contents don't match its type. | The file was renamed, or exported wrongly. Export it again in the format its name says. |
+| That file is too large. | Keep it under 200 MB, for example by splitting it or compressing it into a ZIP |
+
+## Documents
+
+| Message | Fix |
+| --- | --- |
+| Use a PDF for certificates, manuals, and other documents. | Save the document as PDF |
+| A document's name, then "is too big. Documents have to be under 20 MB." | Make the PDF smaller |
+
+## Allowed domains
+
+| Message | Fix |
+| --- | --- |
+| The domain format message, asking for bare lowercase domains like yoursite.com | Remove ports (`:8080`), wildcards (`*.`), paths and anything that is not a plain domain name |
+| List up to 10 domains. | Remove entries until 10 or fewer are left |
+| Each entry in domains can only be listed once. | Delete the duplicate |
+
+You can paste a full address: the dashboard trims `https://www.YourSite.com/shop/` to `www.yoursite.com` before it checks. See [How do allowed domains work?](/en/install/allowed-domains)
+
+## Seller details
+
+| Message | Fix |
+| --- | --- |
+| You can't publish or sell until your seller details are complete. | Fill in **Trader name**, **Address** and **Contact email** in **Settings**, under **Business & seller details** |
+
+See [How do I fill in my seller details?](/en/seller-details)
+
+## Product import
+
+Messages from the CSV import, such as "No price we could read.", are on [Why did my CSV import skip rows?](/en/troubleshooting/csv-import-problems)
+
+## Publishing
+
+Messages on the **Get set up** card about a page that is not live are on [Why is my product page not live?](/en/troubleshooting/product-page-not-live)
+
+## Key terms
+
+<GlossaryList terms="purchase-button allowed-domains seller-details" />
+
+## Related pages
+
+- [Troubleshooting](/en/troubleshooting)
+- [How do I add a product?](/en/products-and-storefronts/add-a-product)
+- [Why is my storefront not showing on my website?](/en/troubleshooting/storefront-not-showing)

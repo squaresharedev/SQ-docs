@@ -1,20 +1,20 @@
 /*
  * The homepage's and dashboard's look in the docs: headline type, buttons
  * with arrows, numbered steps, the code surface, section cards, glossary
- * cards and the sidebar. Colours, radius and shadows are
- * token references (see fumadocs-theme.css); the only literal colours are the
- * code surface greens, which the dashboard defines outside the tokens package.
- * Labels use Inter (font-inter), like the dashboard's eyebrows; no mono face
- * outside code.
+ * cards and the sidebar. Every colour, font role, weight, tracking, motion
+ * value and step of the spacing scale is a token (the package's, Tailwind's
+ * or tokens.css); the literal sizes left are measurements of the originals
+ * that fall between the scale's steps. Labels use the eyebrow (Inter, like
+ * the dashboard's); no mono face outside code.
  */
 
 /* ---------------------------------------------------------------- Type */
 
 #nd-page :where(h1, h2, h3),
 .docs-hero h1 {
-  font-family: var(--font-space-grotesk), var(--font-geist), sans-serif;
-  font-weight: 700;
-  letter-spacing: -0.025em;
+  font-family: --theme(--font-display);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--tracking-tight);
 }
 
 #nd-page .docs-title {
@@ -25,7 +25,7 @@
 #nd-page .prose h2 {
   font-size: 1.75rem;
   line-height: 1.15;
-  margin-top: 3rem;
+  margin-top: --spacing(12);
 }
 
 /* ---------------------------------------------------------------- Buttons */
@@ -42,7 +42,7 @@
   background: var(--color-fd-foreground);
   color: var(--color-fd-background);
   font-size: 0.95rem;
-  font-weight: 800;
+  font-weight: var(--font-weight-extrabold);
   line-height: 1;
   text-decoration: none;
   white-space: nowrap;
@@ -61,12 +61,12 @@
 }
 
 .docs-button-sm {
-  height: 2.25rem;
-  padding: 0 1rem;
+  height: --spacing(9);
+  padding: 0 --spacing(4);
   font-size: 0.85rem;
 }
 
-/* Right for a page here, up and right for another site. */
+/* Right for a page here, up and right for another site. The dashboard's icon nudge timing (iconNudgeRightClass). */
 .docs-button::after,
 .docs-buttons a::after {
   content: "";
@@ -75,7 +75,7 @@
   flex-shrink: 0;
   background: currentColor;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='square'%3E%3Cpath d='M4 12h15M13 6l6 6-6 6'/%3E%3C/svg%3E") center / contain no-repeat;
-  transition: translate var(--default-transition-duration) ease-out;
+  transition: translate var(--transition-duration-base) ease-out;
 }
 
 .docs-button[data-external]::after,
@@ -99,8 +99,25 @@
 .docs-buttons > p {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
-  margin: 1.75rem 0;
+  gap: --spacing(3);
+  margin: --spacing(7) 0;
+}
+
+/* The skip link (app/[lang]/layout.tsx): hidden until a keyboard reaches it, then a button in the top corner. */
+.skip-link:not(:focus) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.skip-link:focus {
+  position: fixed;
+  top: --spacing(2);
+  left: --spacing(2);
+  z-index: 100;
 }
 
 /* ---------------------------------------------------------------- Docs home hero */
@@ -108,7 +125,7 @@
 .docs-hero-frame {
   /* The page colour, captured outside the hero's dark scope for its pixel edge. */
   --page-bg: var(--color-fd-background);
-  margin-bottom: 1.5rem;
+  margin-bottom: --spacing(6);
 }
 
 .docs-hero h1 {
@@ -125,7 +142,7 @@
 /* ---------------------------------------------------------------- Answer block */
 
 .answer-block {
-  margin-block: 1.75rem 2.25rem;
+  margin-block: --spacing(7) --spacing(9);
   padding: 1.1rem 1.35rem 1.25rem;
   border: 1px solid var(--color-fd-border);
   background: var(--color-fd-card);
@@ -133,15 +150,12 @@
   color: var(--color-fd-foreground);
 }
 
-/* The dashboard's eyebrow (control-styles eyebrowClass). */
+/* The dashboard's eyebrow, on the prose's own line height. */
 .answer-block-label {
+  @apply eyebrow;
   margin: 0 0 0.35rem !important;
   color: var(--color-fd-muted-foreground);
-  font-family: var(--font-inter), var(--font-geist), sans-serif;
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.025em;
-  text-transform: uppercase;
+  line-height: inherit;
 }
 
 .answer-block [data-answer-block] > :first-child {
@@ -157,9 +171,9 @@
 .section-cards > ul {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
-  gap: 0.75rem;
+  gap: --spacing(3);
   max-width: none;
-  margin: 1.5rem 0;
+  margin: --spacing(6) 0;
   padding: 0;
   list-style: none;
 }
@@ -168,7 +182,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: --spacing(1);
   margin: 0;
   padding: 1.1rem 1.15rem 1.2rem;
   border: 1px solid var(--color-fd-border);
@@ -176,7 +190,7 @@
   color: var(--color-fd-muted-foreground);
   font-size: 0.9375rem;
   line-height: 1.55;
-  transition: border-color var(--default-transition-duration) ease-out;
+  transition: border-color var(--transition-duration-base) var(--ease-standard);
 }
 
 .section-cards > ul > li::marker {
@@ -191,9 +205,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.25rem;
-  height: 2.25rem;
-  margin-bottom: 0.5rem;
+  width: --spacing(9);
+  height: --spacing(9);
+  margin-bottom: --spacing(2);
   border: 1px solid var(--color-fd-border);
   background: var(--color-fd-secondary);
   color: var(--color-fd-foreground);
@@ -207,9 +221,9 @@
 .section-cards > ul > li > a,
 .section-cards > ul > li > p > a {
   color: var(--color-fd-foreground);
-  font-family: var(--font-space-grotesk), var(--font-geist), sans-serif;
+  font-family: --theme(--font-display);
   font-size: 1.05rem;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
   letter-spacing: -0.015em;
   text-decoration: none;
 }
@@ -229,7 +243,7 @@
 
 .docs-steps > ol {
   counter-reset: step;
-  margin: 1.75rem 0;
+  margin: --spacing(7) 0;
   padding: 0;
   list-style: none;
 }
@@ -238,28 +252,34 @@
   position: relative;
   counter-increment: step;
   margin: 0;
-  padding: 0.2rem 0 1.5rem 3.4rem;
+  padding: 0.2rem 0 --spacing(6) 3.4rem;
 }
 
 .docs-steps > ol > li::marker {
   content: none;
 }
 
+/*
+ * The step number is drawn, not read: the list already tells a screen reader
+ * where it is. The second content line adds empty alternative text; a browser
+ * without that syntax keeps the first.
+ */
 .docs-steps > ol > li::before {
   content: counter(step, decimal-leading-zero);
+  content: counter(step, decimal-leading-zero) / "";
   position: absolute;
   top: 0;
   left: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.25rem;
-  height: 2.25rem;
+  width: --spacing(9);
+  height: --spacing(9);
   background: var(--color-fd-foreground);
   color: var(--color-fd-background);
-  font-family: var(--font-space-grotesk), var(--font-geist), sans-serif;
+  font-family: --theme(--font-display);
   font-size: 0.85rem;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 
 .docs-steps > ol > li::after {
@@ -273,7 +293,7 @@
 }
 
 .docs-steps > ol > li:last-child {
-  padding-bottom: 0.25rem;
+  padding-bottom: --spacing(1);
 }
 
 .docs-steps > ol > li:last-child::after {
@@ -284,8 +304,8 @@
 
 /*
  * The dashboard's code surface (Store/src/app/globals.css .code-surface): a
- * sharp slab in a 4px border of light greens that slowly turns, used wherever
- * a seller copies code. Its greens live in the dashboard, not in the tokens.
+ * sharp slab in a 4px border of light greens (tokens.css) that slowly turns,
+ * used wherever a seller copies code.
  */
 @property --flow-angle {
   syntax: "<angle>";
@@ -295,13 +315,20 @@
 
 .code-surface {
   --flow-ring: 4px;
-  --flow-stops: #22c55e, #4ade80 25%, #bbf7d0 50%, #4ade80 75%, #22c55e;
+  --flow-stops:
+    var(--color-code-flow-deep), var(--color-code-flow) 25%, var(--color-code-flow-light) 50%,
+    var(--color-code-flow) 75%, var(--color-code-flow-deep);
   position: relative;
   isolation: isolate;
-  margin: 1.5rem 0;
+  margin: --spacing(6) 0;
   padding: var(--flow-ring);
 }
 
+/*
+ * The dashboard turns it forever. Here it turns for 4.8 seconds (0.6 of a
+ * turn) and holds where it stopped: motion that starts by itself has to stop
+ * within five seconds (WCAG 2.2.2).
+ */
 .code-surface::before {
   content: "";
   position: absolute;
@@ -311,7 +338,7 @@
   background:
     linear-gradient(var(--color-fd-card), var(--color-fd-card)) padding-box,
     conic-gradient(from var(--flow-angle), var(--flow-stops)) border-box;
-  animation: code-flow 8s linear infinite;
+  animation: code-flow 8s linear 0.6 forwards;
   pointer-events: none;
 }
 
@@ -334,22 +361,40 @@
   }
 }
 
+/* ---------------------------------------------------------------- Tables */
+
+/*
+ * A comparison table's row labels are row headers and its empty corner a
+ * plain cell (components/mdx.tsx); each keeps the look it had: the labels
+ * that of the cells beside them, the corner that of the header row.
+ */
+#nd-page .prose tbody th[scope="row"] {
+  background: none;
+  font-weight: inherit;
+  text-align: start;
+}
+
+#nd-page .prose thead td {
+  background: var(--color-fd-muted);
+}
+
 /* ---------------------------------------------------------------- Glossary */
 
 /* Terms (a dl from the glossary plugin) as a grid of cards. */
 .glossary-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
-  gap: 0.75rem;
+  gap: --spacing(3);
   max-width: none;
-  margin: 1.5rem 0;
+  margin: --spacing(6) 0;
 }
 
+/* Linked terms land where they did before the root's scroll padding (tokens.css). */
 .glossary-list > div {
-  padding: 1rem 1.1rem;
+  padding: --spacing(4) 1.1rem;
   border: 1px solid var(--color-fd-border);
   background: var(--color-fd-card);
-  scroll-margin-top: 6rem;
+  scroll-margin-top: max(0px, calc(--spacing(24) - var(--docs-sticky-top)));
 }
 
 /* The term a link points at: the whole card, never one edge. */
@@ -358,11 +403,11 @@
 }
 
 .glossary-list dt {
-  margin: 0 0 0.25rem;
+  margin: 0 0 --spacing(1);
   color: var(--color-fd-foreground);
-  font-family: var(--font-space-grotesk), var(--font-geist), sans-serif;
+  font-family: --theme(--font-display);
   font-size: 1.05rem;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 
 #nd-page .glossary-list dd {
@@ -377,25 +422,24 @@
 
 /*
  * Section titles: the dashboard's eyebrow, in full colour and semibold so a
- * title stands out from the muted page links under it.
+ * title stands out from the muted page links under it, on the sidebar's own
+ * line height. lib/sidebar.tsx makes each one a heading.
  */
 /* The outer folder (the inner list has an id) and its first child, the title. */
 :is(#nd-sidebar, #nd-sidebar-mobile) [data-disabled]:not([id]) > :first-child {
-  margin-top: 0.75rem;
+  @apply eyebrow;
+  margin-top: --spacing(3);
   color: var(--color-fd-foreground);
-  font-family: var(--font-inter), var(--font-geist), sans-serif;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.025em;
-  text-transform: uppercase;
+  font-weight: var(--font-weight-semibold);
+  line-height: inherit;
 }
 
 /* Items: the dashboard's nav item (Sidebar.tsx NAV_ITEM_CLASSES), sharp. */
 :is(#nd-sidebar, #nd-sidebar-mobile) a[data-active] {
-  gap: 0.5rem;
+  gap: --spacing(2);
   border-radius: 0;
-  font-size: 0.875rem;
-  font-weight: 500;
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
 }
 
 :is(#nd-sidebar, #nd-sidebar-mobile) a[data-active="false"] {
@@ -418,20 +462,18 @@
 }
 
 :is(#nd-sidebar, #nd-sidebar-mobile) [data-radix-scroll-area-viewport] > div > p {
-  margin: auto 0 0.25rem;
-  padding: 1.25rem 0.5rem 0;
+  @apply eyebrow;
+  margin: auto 0 --spacing(1);
+  padding: --spacing(5) --spacing(2) 0;
   border-top: 1px solid var(--color-fd-border);
   color: var(--color-fd-foreground);
-  font-family: var(--font-inter), var(--font-geist), sans-serif;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.025em;
-  text-transform: uppercase;
+  font-weight: var(--font-weight-semibold);
+  line-height: inherit;
 }
 
 /* Room above the group when the list leaves none. */
 :is(#nd-sidebar, #nd-sidebar-mobile) [data-radix-scroll-area-viewport] > div > :has(+ p) {
-  margin-bottom: 1.5rem;
+  margin-bottom: --spacing(6);
 }
 
 /* The theme switch is a control: sharp like every dashboard control. */
@@ -449,19 +491,12 @@
   letter-spacing: -0.04em;
 }
 
-/* ---------------------------------------------------------------- Footer */
-
-/* From the homepage's globals.css: the footer wordmark's colour. */
-.footer-wordmark {
-  color: #ffffff;
-}
-
 /* ---------------------------------------------------------------- Setup map */
 
 /* The dashboard's "Get set up" rows (Store SetupChecklist): a label in
    text-sm font-medium, and under it the detail line in muted text-xs. */
 .setup-map {
-  margin: 1.75rem 0;
+  margin: --spacing(7) 0;
 }
 
 .setup-map-row {
@@ -474,8 +509,8 @@
 .setup-map-row > p:first-child > strong:first-child {
   display: block;
   color: var(--color-fd-foreground);
-  font-size: 0.875rem;
-  font-weight: 500;
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-medium);
 }
 
 .setup-map-row > p {
@@ -484,7 +519,7 @@
 
 .setup-map-row a {
   color: var(--color-fd-foreground);
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   text-decoration: underline;
   text-underline-offset: 3px;
 }

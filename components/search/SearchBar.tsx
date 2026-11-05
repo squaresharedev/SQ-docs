@@ -8,19 +8,21 @@
  *   - No next-intl (strings passed as plain props).
  *   - The selected row's text uses accent-foreground: in the dark palette the
  *     accent is the brand purple, and white on it is 3.95:1 (black is about 5:1).
+ *   - transitionClass from @squaresharedev/tokens; the ⌘K hint (ShortcutHint)
+ *     and the group heading's eyebrow are shared with the trigger.
  */
 
 import * as React from "react";
 import { Search as SearchIcon, X } from "lucide-react";
+import { transitionClass } from "@squaresharedev/tokens";
 import { cn } from "@/lib/cn";
+import { useIsMacPlatform } from "@/components/search/useIsMacPlatform";
 
 /** 200 characters is the server-side limit; mirrors Store's MAX_QUERY_LENGTH. */
 const MAX_QUERY_LENGTH = 200;
 
 const focusRingInsetClass =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset";
-const transitionClass =
-  "transition-colors duration-base ease-standard motion-reduce:transition-none";
 const overlayCloseButtonClass = cn(
   "flex size-9 shrink-0 items-center justify-center rounded-none",
   "text-muted-foreground hover:bg-accent hover:text-foreground",
@@ -163,12 +165,31 @@ export function SearchBar({
   );
 }
 
+/**
+ * The ⌘K / Ctrl K hint in the field and the palette. Shown once the platform
+ * is known, so it never names the wrong key; hidden from screen readers, which
+ * get the shortcut from aria-keyshortcuts. On bg-background: muted text on the
+ * muted grey is 4.34:1 at 11px, under 4.5:1.
+ */
+export function ShortcutHint({ className }: { className?: string }) {
+  const isMac = useIsMacPlatform();
+  if (isMac === null) return null;
+  return (
+    <kbd
+      aria-hidden
+      className={cn(
+        "shrink-0 rounded-none border border-border bg-background px-1.5 py-0.5 font-inter text-2xs leading-none text-muted-foreground",
+        className,
+      )}
+    >
+      {isMac ? "⌘K" : "Ctrl K"}
+    </kbd>
+  );
+}
+
 export function SearchGroupHeading({ id, label }: { id: string; label: string }) {
   return (
-    <p
-      id={id}
-      className="pb-1 pt-3 px-4 font-inter text-xs font-medium uppercase tracking-wide text-muted-foreground"
-    >
+    <p id={id} className="eyebrow px-4 pt-3 pb-1 text-muted-foreground">
       {label}
     </p>
   );

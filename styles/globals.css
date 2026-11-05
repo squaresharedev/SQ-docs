@@ -3,14 +3,20 @@
 @import "fumadocs-ui/css/preset.css";
 /* The dashboard's design tokens: colours, radius, shadows, font roles. */
 @import "@squaresharedev/tokens/tokens.css";
+/* The docs' own tokens: motion, the eyebrow, code greens, focus colour, sticky offset. */
+@import "./tokens.css";
 /* Fumadocs UI variables pointed at those tokens. */
 @import "./fumadocs-theme.css";
 /* The homepage and dashboard look: type, buttons, steps, cards, sidebar, editor view, footer. */
 @import "./visuals.css";
 /* The dashboard's settings-card corner art: its motion, copied as is. */
 @import "./corner-art.css";
-/* Motion tokens for the search palette (duration-base/slow, ease-standard/entrance). */
-@import "./search.css";
+
+/*
+ * The package's shared control classes (transitionClass, focusRingClass, ...)
+ * are imported as strings, so Tailwind reads the package to generate them.
+ */
+@source "../node_modules/@squaresharedev/tokens/dist";
 
 /*
  * Dark mode runs off the `.dark` class (next-themes, via Fumadocs). The
@@ -20,6 +26,7 @@
 
 html {
   scrollbar-gutter: stable;
+  scroll-padding-top: var(--docs-sticky-top);
   -webkit-font-smoothing: antialiased;
 }
 

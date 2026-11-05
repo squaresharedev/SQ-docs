@@ -18,10 +18,11 @@ Use lowercase kebab-case for all slugs in both locales.
 
 ## Frontmatter
 
-Every page must have exactly these five fields and no others:
+Every page must have these five fields, and may add a sixth, `navTitle`. No others:
 
 ```yaml
 title: How do I do the thing?
+navTitle: Do the thing
 description: One sentence, max 160 characters.
 translationKey: my-page-slug
 lastUpdated: 2026-11-02
@@ -31,6 +32,7 @@ draft: true
 | Field | Rules |
 | --- | --- |
 | `title` | The question a user would type. No H1 in the body; the framework renders the title from this field. |
+| `navTitle` | Optional. The short label in the sidebar, at most 30 characters, such as `Add a product`. Use the dashboard's own word where there is one (`Orders`, `Allowed domains`). Without it the sidebar shows the title. |
 | `description` | One sentence, max 160 characters. If it contains a colon, wrap the whole value in double quotes. |
 | `translationKey` | Lowercase kebab-case. Must match exactly between the EN and CS files for the same page. Used for hreflang. |
 | `lastUpdated` | ISO date of the last meaningful content change. Format `YYYY-MM-DD`. |

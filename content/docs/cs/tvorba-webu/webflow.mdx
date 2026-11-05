@@ -1,0 +1,92 @@
+---
+title: "Jak přidám Square Share na web ve Webflow?"
+navTitle: "Webflow"
+description: "Vložte kód výlohy do prvku Code Embed ve Webflow, nebo propojte tlačítko s produktovou stránkou. Potřebný tarif, testovací adresa a kontrola."
+translationKey: "builder-webflow"
+lastUpdated: "2026-11-05"
+draft: true
+---
+{/* TODO(adrian): native review */}
+
+<AnswerBlock>
+
+V nástroji Webflow Designer přetáhněte na stránku prvek Code Embed, vložte do něj kód ze stránky Sdílet vaší výlohy, uložte a zveřejněte. Výloha se zobrazí na zveřejněném webu, ne v Designeru. Code Embed Webflow nabízí v placených tarifech webu. Pro jeden produkt raději propojte tlačítko Webflow s jeho produktovou stránkou.
+
+</AnswerBlock>
+
+{/* TODO(adrian): The paid-plan rule for Code Embed comes from Webflow University's Code Embed lesson (university.webflow.com/course-lesson/custom-code-at-the-layout-level-code-embed-element, checked 2026-11-05). Recheck before publishing. */}
+
+## Co potřebuji předem?
+
+- Výlohu v panelu se zapnutým **Zobrazit na mém webu** na její stránce **Sdílet**.
+- Své adresy v **Povolených doménách**, uložené. Uveďte svou doménu, a pokud tam chcete výlohu vidět, i testovací adresu `vasweb.webflow.io`.
+- Tarif webu ve Webflow, který prvek Code Embed obsahuje. Webflow ho v [lekci o Code Embed](https://university.webflow.com/course-lesson/custom-code-at-the-layout-level-code-embed-element) uvádí jako funkci placených tarifů.
+
+## Jak přidám výlohu na stránku ve Webflow?
+
+<Steps>
+
+1. V panelu otevřete **Výloha**, u své výlohy klikněte na **Sdílet** a v poli **Váš nástroj pro tvorbu webu** zvolte **Webflow**.
+2. Nechte kartu **Skript** a klikněte na **Kopírovat kód pro vložení**.
+3. Ve Webflow Designeru otevřete panel Add a přetáhněte prvek **Code Embed** tam, kde má být výloha.
+4. Vložte kód do editoru, který se otevře, a klikněte na **Save & Close**.
+5. Web zveřejněte.
+
+</Steps>
+
+<Snippet>
+
+```html title="Kód Skript"
+<div data-squareshare-storefront="YOUR-EMBED-KEY"></div>
+<script async src="https://embed.squareshare.eu/widget.js"></script>
+```
+
+</Snippet>
+
+Plocha Designeru ukazuje jen zástupný prvek, ne vaši výlohu. Vložený kód běží na zveřejněném webu a v jeho náhledu ve Webflow.
+
+## Proč výloha funguje na mé doméně, ale ne na webflow.io?
+
+Protože `vasweb.webflow.io` je jiná doména než `vasweb.cz`. Square Share výlohu vykreslí jen na adresách uvedených v **Povolených doménách** a zástupné znaky neexistují. Pokud web před zveřejněním na vlastní doméně kontrolujete na `webflow.io`, přidejte i tuto adresu. Až ji nebudete používat, můžete ji odebrat.
+
+## Jak velká je výloha?
+
+Verze **Skript** roste podle výlohy, takže výšku nenastavujete. Šířku přebírá od prvku, ve kterém je: umístěte Code Embed do sekce nebo kontejneru tak širokého, jak má být výloha.
+
+## Jak přidám tlačítko pro nákup ve Webflow?
+
+<Steps>
+
+1. V panelu otevřete **Produkty**, u produktu klikněte na nabídku **⋯** a zvolte **Přidat na váš web**.
+2. Na kartě **Odkaz** zkopírujte odkaz.
+3. Ve Webflow vyberte prvek **Button** (nebo jakýkoli odkaz) a otevřete jeho nastavení odkazu.
+4. Zvolte odkaz typu URL a vložte odkaz na produkt.
+5. Web zveřejněte.
+
+</Steps>
+
+Tlačítko nepotřebuje skript, takže funguje v každém tarifu Webflow. Podrobnosti: [Jak přidám na svůj web tlačítko pro nákup?](/cs/instalace/pridani-tlacitka-pro-nakup)
+
+## Proč se výloha ve Webflow nezobrazuje?
+
+- **Díváte se do Designeru.** Zkontrolujte zveřejněný web.
+- **Adresa není v seznamu.** Přidejte do **Povolených domén** přesnou adresu z řádku prohlížeče, včetně `webflow.io`, pokud ji používáte.
+- **Tarif webu Code Embed neobsahuje.** Použijte tlačítko pro nákup, nebo změňte tarif.
+
+Celý seznam kontrol je na stránce [Proč se moje výloha na webu nezobrazuje?](/cs/reseni-problemu/vyloha-se-nezobrazuje)
+
+<Buttons>
+
+[Otevřít panel](https://dashboard.squareshare.eu) [Všechny nástroje pro tvorbu webu](/cs/tvorba-webu)
+
+</Buttons>
+
+## Klíčové pojmy
+
+<GlossaryList terms="storefront embed allowed-domains purchase-button" />
+
+## Související stránky
+
+- [Jak přidám výlohu na svůj web?](/cs/instalace/pridani-vylohy-na-web)
+- [Jak fungují povolené domény?](/cs/instalace/povolene-domeny)
+- [S jakými nástroji pro tvorbu webu Square Share funguje?](/cs/tvorba-webu)

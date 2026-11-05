@@ -1,0 +1,91 @@
+---
+title: How do I add Square Share to a Webflow site?
+navTitle: "Webflow"
+description: Paste your storefront snippet into a Webflow Code Embed element, or link a Webflow button to a product page. Plan needs, staging and checks.
+translationKey: builder-webflow
+lastUpdated: 2026-11-05
+draft: true
+---
+
+<AnswerBlock>
+
+In the Webflow Designer, drag a Code Embed element onto the page, paste the snippet from your storefront's Share page, save and publish. The storefront shows on the published site, not on the Designer canvas. Webflow allows Code Embed on paid site plans. For one product, link a Webflow button to its product page instead.
+
+</AnswerBlock>
+
+{/* TODO(adrian): The paid-plan rule for Code Embed comes from Webflow University's Code Embed lesson (university.webflow.com/course-lesson/custom-code-at-the-layout-level-code-embed-element, checked 2026-11-05). Recheck before publishing. */}
+
+## What do I need first?
+
+- A storefront in the dashboard with **Show on my website** turned on on its **Share** page.
+- Your addresses in **Allowed domains**, saved. List your own domain, and your staging address `yoursite.webflow.io` if you want to see the storefront there too.
+- A Webflow site plan that includes the Code Embed element. Webflow lists it as a paid plan feature in its [Code Embed lesson](https://university.webflow.com/course-lesson/custom-code-at-the-layout-level-code-embed-element).
+
+## How do I add a storefront to a Webflow page?
+
+<Steps>
+
+1. In the dashboard, open **Storefront**, click **Share** on your storefront, and choose **Webflow** under **Your site builder**.
+2. Keep the **Script** tab and click **Copy embed snippet**.
+3. In the Webflow Designer, open the Add panel and drag a **Code Embed** element to where the storefront should go.
+4. Paste the snippet into the code editor that opens, then click **Save & Close**.
+5. Publish the site.
+
+</Steps>
+
+<Snippet>
+
+```html title="Script snippet"
+<div data-squareshare-storefront="YOUR-EMBED-KEY"></div>
+<script async src="https://embed.squareshare.eu/widget.js"></script>
+```
+
+</Snippet>
+
+The Designer canvas shows a placeholder, not your storefront. Pasted code runs on the published site and in Webflow's preview of it.
+
+## Why does it work on my domain but not on webflow.io?
+
+Because `yoursite.webflow.io` is a different domain from `yoursite.com`. Square Share only draws the storefront on addresses listed in **Allowed domains**, and there are no wildcards. Add the `webflow.io` address if you check your work there before publishing to your own domain. Remove it later if you no longer use it.
+
+## How big is the storefront?
+
+The **Script** version grows to fit your storefront, so you do not set a height. Its width follows the element it sits in: put the Code Embed in a section or container as wide as you want the storefront.
+
+## How do I add a purchase button on Webflow?
+
+<Steps>
+
+1. In the dashboard, open **Products**, click the **...** menu on the product, and choose **Add to your website**.
+2. On the **Link** tab, copy the link.
+3. In Webflow, select a **Button** element (or any link) and open its link settings.
+4. Choose a URL link and paste the product link.
+5. Publish the site.
+
+</Steps>
+
+The button needs no script, so it works on any Webflow plan. Full details: [How do I add a purchase button to my website?](/en/install/add-purchase-button)
+
+## Why is the storefront not showing on Webflow?
+
+- **You are looking at the Designer.** Check the published site.
+- **The address is not listed.** Add the exact address from the browser bar to **Allowed domains**, including `webflow.io` if you use it.
+- **The site plan does not include Code Embed.** Use the purchase button, or change plan.
+
+The full checklist is on [Why is my storefront not showing on my website?](/en/troubleshooting/storefront-not-showing)
+
+<Buttons>
+
+[Open the dashboard](https://dashboard.squareshare.eu) [All site builders](/en/site-builders)
+
+</Buttons>
+
+## Key terms
+
+<GlossaryList terms="storefront embed allowed-domains purchase-button" />
+
+## Related pages
+
+- [How do I add a storefront to my website?](/en/install/add-storefront-to-website)
+- [How do allowed domains work?](/en/install/allowed-domains)
+- [Which site builders does Square Share work with?](/en/site-builders)

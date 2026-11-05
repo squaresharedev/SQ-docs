@@ -14,8 +14,13 @@
  *   - Navigation: useRouter from next/navigation (no navigation-blocker).
  *   - Removed: team roles, snapshot cache, "Recent" rail, local registry,
  *     remote API search, multi-retry fetch, remote status notices.
- *   - No changes to the visual layout, animation, ARIA structure, or keyboard
- *     behaviour: those are copied verbatim.
+ *   - Accessibility: "no results" is announced like a result count, and the
+ *     count is pluralised per locale (Intl.PluralRules). Tab never leaves the
+ *     palette for the page behind it (WCAG 2.4.3, 2.4.11): the full-screen
+ *     sheet keeps focus inside, the panel under the field closes and gives
+ *     focus back to the field.
+ *   - Otherwise the visual layout, animation and ARIA structure are copied
+ *     verbatim.
  */
 
 import * as React from "react";
@@ -30,10 +35,10 @@ import {
   SearchBar,
   SearchGroupHeading,
   SearchOption,
+  ShortcutHint,
   useActiveOption,
 } from "@/components/search/SearchBar";
-import { useIsMacPlatform } from "@/components/search/useIsMacPlatform";
-import { searchCopy, interpolate } from "@/components/search/copy";
+import { searchCopy, interpolate, resultCount } from "@/components/search/copy";
 
 // ---------------------------------------------------------------------------
 // Control-style constants (inlined from the dashboard's control-styles.ts)
@@ -199,7 +204,6 @@ export function SearchOverlay({
   const { locale } = useLocaleContext();
   const copy = searchCopy[locale];
   const router = useRouter();
-  const isMac = useIsMacPlatform();
 
   // The search hook owns the query string. It is called unconditionally so
   // that the index stays in memory across open/close cycles.
@@ -356,6 +360,26 @@ export function SearchOverlay({
     }
   }
 
+  /**
+   * Tab past the palette's first or last control. The full-screen sheet is
+   * modal and covers the page, so focus wraps round inside it. The panel under
+   * the field sits at the end of the document, far from the field in the tab
+   * order, so it closes and focus goes back to the field that opened it.
+   */
+  function onPanelKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
+    if (event.key !== "Tab") return;
+    const controls = [...(panelRef.current?.querySelectorAll<HTMLElement>("input, button, [href]") ?? [])].filter(
+      (element) => element.getClientRects().length > 0,
+    );
+    const first = controls[0];
+    const last = controls.at(-1);
+    const leaving = event.shiftKey ? document.activeElement === first : document.activeElement === last;
+    if (!first || !last || !leaving) return;
+    event.preventDefault();
+    if (anchored) onClose();
+    else (event.shiftKey ? last : first).focus();
+  }
+
   // ---- aria-live status ---------------------------------------------------
 
   const trimmed = search.trim();
@@ -365,8 +389,8 @@ export function SearchOverlay({
     : isLoading
       ? copy.searching
       : count > 0
-        ? interpolate(copy.resultCount, { count, query: trimmed })
-        : "";
+        ? resultCount(locale, count, trimmed)
+        : interpolate(copy.nothingMatches, { query: trimmed });
 
   const anchored = effectiveAnchorRect !== null;
 
@@ -376,6 +400,7 @@ export function SearchOverlay({
     <div className="pointer-events-none fixed inset-0 z-[60]">
       <div
         ref={panelRef}
+        onKeyDown={onPanelKeyDown}
         role="dialog"
         aria-modal={anchored ? undefined : "true"}
         aria-label={copy.overlayLabel}
@@ -419,16 +444,7 @@ export function SearchOverlay({
             },
             className: search ? "flex" : "flex sm:hidden",
           }}
-          trailing={
-            !search && isMac !== null ? (
-              <kbd
-                aria-hidden
-                className="hidden shrink-0 rounded-none border border-border bg-background px-1.5 py-0.5 font-inter text-[0.6875rem] leading-none text-muted-foreground sm:flex"
-              >
-                {isMac ? "⌘K" : "Ctrl K"}
-              </kbd>
-            ) : null
-          }
+          trailing={!search ? <ShortcutHint className="hidden sm:flex" /> : null}
         />
 
         {/* Results body */}

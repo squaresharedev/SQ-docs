@@ -18,7 +18,8 @@ const CORNER_ART_FADE = "opacity-40";
  * is for what the picture's animations read (its loop length).
  *
  * Decoration, so aria-hidden. Every picture's still pose is in its markup and
- * its motion in globals.css, off under reduced motion.
+ * its motion in styles/corner-art.css, which plays it once (under five
+ * seconds) and holds, and leaves it off under reduced motion.
  */
 export function CornerArt({
   name,

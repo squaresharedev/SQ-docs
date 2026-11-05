@@ -256,7 +256,9 @@ function expectedAlternates(page: PageInfo): Record<string, string> | undefined 
   if (page.draft || !pair || pair.draft) return undefined;
   const en = page.locale === "en" ? page : pair;
   const cs = page.locale === "cs" ? page : pair;
-  return { en: en.absolute, cs: cs.absolute, "x-default": `${SITE_URL}/` };
+  // x-default is the English page; only the docs homes point it at the chooser.
+  const isHome = page.url === `/${page.locale}`;
+  return { en: en.absolute, cs: cs.absolute, "x-default": isHome ? `${SITE_URL}/` : en.absolute };
 }
 
 // Global files.
@@ -275,12 +277,36 @@ for (const agent of CRAWLERS) {
 }
 const sitemapXml = readIfExists(join(OUT, "sitemap.xml")) ?? "";
 const sitemap = sitemapEntries(sitemapXml);
+const homesPublished = ["/en", "/cs"].every((url) => byUrl.get(url)?.draft === false);
 for (const loc of sitemap.keys()) {
+  if (loc === `${SITE_URL}/` || loc === SITE_URL) {
+    globalCheck.check(homesPublished, "sitemap.xml lists the chooser (/) although a docs home is still a draft");
+    continue;
+  }
   const page = byUrl.get(loc.startsWith(SITE_URL) ? loc.slice(SITE_URL.length) : "");
   globalCheck.check(Boolean(page), `sitemap.xml lists ${loc}, which is not a content page`);
   if (page) globalCheck.check(!page.draft, `sitemap.xml lists draft page ${loc}`);
 }
 globalCheck.check(pages.length > 0, "no content pages found under content/docs");
+
+// The language chooser at /.
+const chooserCheck = newRow("/ (language chooser)");
+rows.push(chooserCheck.row);
+const chooserHtml = readIfExists(join(OUT, "index.html"));
+chooserCheck.check(chooserHtml !== undefined, "out/index.html is missing");
+if (chooserHtml !== undefined) {
+  const chooserCanonical = tagsOf(chooserHtml, "link").find((tag) => attr(tag, "rel")?.toLowerCase() === "canonical");
+  const canonicalHref = chooserCanonical ? attr(chooserCanonical, "href") : undefined;
+  chooserCheck.check(canonicalHref === SITE_URL || canonicalHref === `${SITE_URL}/`, `chooser canonical is ${canonicalHref}`);
+  for (const [key, name] of [["property", "og:title"], ["property", "og:image"], ["property", "og:image:alt"], ["name", "twitter:card"], ["name", "description"]] as const) {
+    chooserCheck.check(Boolean(metaContent(chooserHtml, key, name)), `chooser has no <meta ${key}="${name}">`);
+  }
+  const chooserProblems: string[] = [];
+  const chooserNodes = jsonLdNodes(chooserHtml, chooserProblems);
+  for (const problem of chooserProblems) chooserCheck.check(false, problem);
+  chooserCheck.check(chooserNodes.some((node) => node["@type"] === "WebSite"), "chooser has no WebSite in JSON-LD");
+  chooserCheck.check(chooserNodes.some((node) => node["@type"] === "Organization"), "chooser has no Organization in JSON-LD");
+}
 
 // --expect-published.
 if (EXPECT_PUBLISHED.length > 0) {
@@ -339,6 +365,8 @@ for (const page of pages) {
     ["name", "twitter:title", title],
     ["name", "twitter:description", page.description],
     ["name", "twitter:image", ogImage],
+    ["property", "og:image:alt", page.title],
+    ["name", "twitter:image:alt", page.title],
   ];
   for (const [key, name, expected] of social) {
     const actual = metaContent(html, key, name);
@@ -361,6 +389,10 @@ for (const page of pages) {
     check(article.headline === page.title, `TechArticle.headline is ${JSON.stringify(article.headline)}, expected the page title`);
     check(article.dateModified === page.lastUpdated, `TechArticle.dateModified is ${JSON.stringify(article.dateModified)}, expected ${page.lastUpdated}`);
     check(article.url === page.absolute, `TechArticle.url is ${JSON.stringify(article.url)}, expected ${page.absolute}`);
+    check(Boolean((article.isPartOf as Record<string, unknown> | undefined)?.["@id"]), "TechArticle.isPartOf has no WebSite @id");
+  }
+  if (page.url === `/${page.locale}`) {
+    check(nodes.some((node) => node["@type"] === "WebSite"), "docs home has no WebSite in JSON-LD");
   }
   const crumbs = nodes.find((node) => node["@type"] === "BreadcrumbList");
   check(Boolean(crumbs), "JSON-LD has no BreadcrumbList");
@@ -459,6 +491,7 @@ for (const page of pages) {
   } else {
     check(!banner, "published page still shows data-draft-banner");
     check(!noindex, `published page has noindex (robots meta: "${robotsMeta}")`);
+    check(/max-snippet:-1/.test(robotsMeta) && /max-image-preview:large/.test(robotsMeta), `published page robots meta "${robotsMeta}" lacks max-snippet:-1 or max-image-preview:large`);
     check(Boolean(entry), "published page is missing from sitemap.xml");
     if (entry) check(entry.lastmod === page.lastUpdated, `sitemap <lastmod> is ${entry.lastmod}, expected ${page.lastUpdated}`);
     check(llmsIndex.includes(mdAbsolute), `published page is not in /${page.locale}/llms.txt`);

@@ -1,0 +1,91 @@
+---
+title: How do I add Square Share to a Framer site?
+navTitle: "Framer"
+description: Paste your storefront snippet into a Framer Embed component set to HTML, or link a Framer button to a product page. Domains and checks.
+translationKey: builder-framer
+lastUpdated: 2026-11-05
+draft: true
+---
+
+<AnswerBlock>
+
+In Framer, add an Embed component, set it to HTML, paste the snippet from your storefront's Share page and publish. Scripts do not run on the Framer canvas, so check the published site. List your framer.website address or your own domain in Allowed domains. For one product, link a button to its product page instead.
+
+</AnswerBlock>
+
+{/* TODO(adrian): Framer's help centre does not say whether the Embed component's HTML runs in the page or in a frame of its own, or which plans include it. Square Share only recognises builder frames from Wix and Google Sites (Store src/lib/storefront/embed.ts, isBuilderFrame). Test the Script snippet on a published Framer site before publishing this page. */}
+
+## What do I need first?
+
+- A storefront in the dashboard with **Show on my website** turned on on its **Share** page.
+- Your Framer address in **Allowed domains**, saved. A Framer site without its own domain is published on an address such as `yoursite.framer.website`. Framer also offers `framer.photos`, `framer.media` and `framer.wiki` addresses. List the one your site uses, and your own domain if you connect one.
+
+## How do I add a storefront to a Framer page?
+
+<Steps>
+
+1. In the dashboard, open **Storefront**, click **Share** on your storefront, and choose **Framer** under **Your site builder**.
+2. Keep the **Script** tab and click **Copy embed snippet**.
+3. In Framer, insert an **Embed** component where the storefront should go.
+4. In the component's settings, set it to **HTML** and paste the snippet into the HTML field.
+5. Publish the site.
+
+</Steps>
+
+<Snippet>
+
+```html title="Script snippet"
+<div data-squareshare-storefront="YOUR-EMBED-KEY"></div>
+<script async src="https://embed.squareshare.eu/widget.js"></script>
+```
+
+</Snippet>
+
+If the published storefront is cut off at the bottom, make the Embed component taller on the canvas and publish again.
+
+## How do I check it worked?
+
+<Steps>
+
+1. Open your published Framer site in a browser, not the Framer editor.
+2. Go to the page with the Embed component. The storefront should show inside it.
+3. If the space is empty, open the browser's developer console. A message starting with `[Square Share] The storefront is not showing on` names the address Square Share saw. Add that address to **Allowed domains**.
+
+</Steps>
+
+## How do I add a purchase button on Framer?
+
+<Steps>
+
+1. In the dashboard, open **Products**, click the **...** menu on the product, and choose **Add to your website**.
+2. On the **Link** tab, copy the link.
+3. In Framer, select the button (or any layer you want to make clickable) and add a link in its settings.
+4. Paste the product link and publish.
+
+</Steps>
+
+A purchase button is a plain link, so it works whatever Framer does with embedded code. Full details: [How do I add a purchase button to my website?](/en/install/add-purchase-button)
+
+## Why is the storefront not showing on Framer?
+
+- **You are looking at the canvas.** Framer does not run embed scripts there. Check the published site.
+- **The address is not listed.** A `framer.website` address and your own domain are different domains. List each one you use.
+- **The Embed component is set to URL.** Set it to **HTML** for the snippet.
+
+The full checklist is on [Why is my storefront not showing on my website?](/en/troubleshooting/storefront-not-showing)
+
+<Buttons>
+
+[Open the dashboard](https://dashboard.squareshare.eu) [All site builders](/en/site-builders)
+
+</Buttons>
+
+## Key terms
+
+<GlossaryList terms="storefront embed allowed-domains purchase-button" />
+
+## Related pages
+
+- [How do I add a storefront to my website?](/en/install/add-storefront-to-website)
+- [How do allowed domains work?](/en/install/allowed-domains)
+- [Which site builders does Square Share work with?](/en/site-builders)

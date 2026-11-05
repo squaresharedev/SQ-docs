@@ -259,3 +259,59 @@ relative to `Store/`. UI strings are quoted from `messages/en` and `messages/cs`
   dashboard links to `https://claude.ai/settings/connectors`; Claude's own
   docs (checked 2026-11-03) place custom connectors under Customize >
   Connectors.
+
+## 13. Third batch: site builders, selling, EU rules (verified 2026-11-05)
+
+Pages added on 2026-11-05. Store paths relative to `Store/`; builder and law
+facts from the official sources named here (each page also carries a
+`TODO(adrian)` with its source and date).
+
+- **Builder steps in the dashboard** (`storefront.json` `embed.builderSteps`,
+  `src/lib/storefront/embed-builders.ts`): Another site, WordPress,
+  Squarespace, Wix, Webflow, Shopify, Google Sites, Framer, Carrd. No Webnode
+  entry. Only Wix (`<site-with-dashes>.filesusr.com`) and Google Sites frames
+  are recognised (`isBuilderFrame` in `src/lib/storefront/embed.ts`), so
+  Framer and Webnode pages ask for a test on a real site before publishing.
+- **Builder plans** (official help centres, checked 2026-11-05): Squarespace
+  scripts/iframes in Code blocks need Core, Plus or Advanced; Ajax loading is
+  7.0 only. Webflow Code Embed needs a paid site plan. Carrd embeds need Pro
+  Standard or higher. WordPress.com: "tags like iframe and script require a
+  paid plan with hosting features activated". Webnode HTML is a premium
+  feature for projects created after 26 June 2023, called "HTML" in EN and CS.
+  Wix free address `siteprefix.wixsite.com/siteaddress`; Framer free domains
+  framer.website/.photos/.media/.wiki. Not stated anywhere official: Wix and
+  Framer plan rules for embeds, Framer/Webnode iframe rendering.
+- **Orders** (`orders.json`): only Square Share checkout creates orders; the
+  empty state says sales by own link or email will not show. No manual orders.
+- **Discounts** (`discounts.json`, `src/lib/discounts/public.ts`,
+  `src/components/product-page/SalePrice.tsx`): Sale (automatic) or Discount
+  code; amount or percent; sales show on storefront tiles and product pages
+  regardless of checkout; codes are typed at checkout, so unusable today. The
+  crossed-out price note follows the 30-day prior price (`productPage.json`
+  `sale.*`); the percentage shows only when proven against it.
+- **Analytics** (`analytics.json`, `src/lib/analytics/record.ts`): storefront
+  views, product clicks and product page views work now; sales and checkout
+  views need checkout; IP and user agent hashed (salted SHA-256), raw values
+  not stored. Email signups and bookings are listed but those widgets are
+  unshipped. Page included on every plan; CSV export plan-gated.
+- **Notifications** (`notifications.json`, `settings.json` `notifications`):
+  in-app only while email is off. The RingingBell corner art is not used on a
+  live settings card (only the dev gallery), so the docs page has none.
+- **CSV import** (`src/lib/products/csv.ts`, `src/components/products/ProductImport.tsx`):
+  Title and Price both required; skip reasons noTitle, titleTooLong (200),
+  noPrice, priceZero, duplicateTitle (case-insensitive); 2 MB; rows capped at
+  min(2000, plan product cap); good rows saved in one batch.
+- **Downloads** (`src/lib/validation/product.ts`): ZIP, PDF, EPUB, MP3, WAV,
+  MP4, JPEG, PNG, WebP, TXT up to 200 MB, contents checked against type.
+  Delivery after payment exists only behind checkout. Product pages still say
+  "Delivered as a download after purchase." while checkout is off: flagged.
+- **Safety and compliance** (`products.json`, `src/lib/validation/product.ts`):
+  manufacturer name/address/email (required once any field is filled), EU
+  responsible person fields, identifier (80), warnings (2000); hidden for
+  downloads.
+- **EU law** (secondary copies, EUR-Lex did not load): GPSR (EU) 2023/988
+  Art. 19, applies from 13 December 2024; Consumer Rights Directive
+  2011/83/EU Art. 6(1)(b)-(c) and Art. 2(2); E-Commerce Directive 2000/31/EC
+  Art. 5; CJEU C-649/17 (no duty to set up a phone line); Czech Civil Code
+  § 1811, § 1820; Czech act 387/2024 Sb. Each page says it is not legal
+  advice and carries a TODO to check the wording against EUR-Lex.

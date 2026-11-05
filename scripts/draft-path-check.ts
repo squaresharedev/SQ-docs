@@ -5,32 +5,47 @@
  * the SEO check (and optionally Lighthouse) against them, then puts the
  * original bytes back and rebuilds again so out/ returns to the draft state.
  *
- *   node scripts/draft-path-check.ts [--lighthouse] [--skip-build]
+ *   node scripts/draft-path-check.ts [--all] [--lighthouse] [--skip-build]
+ *
+ * --all publishes every page instead of the four fixtures: the whole site as
+ * it will be at launch. Run it with SITE_URL=https://docs.squareshare.eu to
+ * check the production URLs too. Because new pages are often not committed
+ * yet, it copies every file to a backup folder first instead of relying on
+ * git, and prints where.
  *
  * --skip-build only edits and restores the files (used to test the revert
  * logic); it runs no build, server, check or Lighthouse.
  */
 import { spawn, spawnSync, type ChildProcess } from "node:child_process";
-import { readFileSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
-import { parseArgs, ROOT } from "./shared.ts";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { dirname, join } from "node:path";
+import { frontmatter } from "fumadocs-core/content/md/frontmatter";
+import { contentFiles, parseArgs, ROOT } from "./shared.ts";
 
 const options = parseArgs(process.argv.slice(2));
 const WITH_LIGHTHOUSE = options.get("lighthouse") === true;
 const SKIP_BUILD = options.get("skip-build") === true;
+const PUBLISH_ALL = options.get("all") === true;
 // A Worker of its own, started after the build: `wrangler dev` does not notice
 // files that postbuild renames, so a server that was already running would
 // serve a stale file list.
 const PORT = "8788";
 const BASE = `http://localhost:${PORT}`;
-const EXPECT = "docs-home,what-is-square-share";
+const ALL_PAGES = PUBLISH_ALL ? contentFiles() : [];
 
-const FIXTURES = [
-  "content/docs/en/index.mdx",
-  "content/docs/en/(getting-started)/what-is-square-share.mdx",
-  "content/docs/cs/index.mdx",
-  "content/docs/cs/(zaciname)/co-je-square-share.mdx",
-];
+const FIXTURES = PUBLISH_ALL
+  ? ALL_PAGES.map((page) => page.rel)
+  : [
+      "content/docs/en/index.mdx",
+      "content/docs/en/(getting-started)/what-is-square-share.mdx",
+      "content/docs/cs/index.mdx",
+      "content/docs/cs/(zaciname)/co-je-square-share.mdx",
+    ];
+
+const EXPECT = PUBLISH_ALL
+  ? [...new Set(ALL_PAGES.map((page) => String((frontmatter(page.raw).data as Record<string, unknown>).translationKey)))].join(",")
+  : "docs-home,what-is-square-share";
 
 const failures: string[] = [];
 const isWindows = process.platform === "win32";
@@ -179,6 +194,16 @@ process.on("SIGTERM", () => onSignal("SIGTERM"));
 // ---------------------------------------------------------------------------
 
 async function main(): Promise<void> {
+  if (PUBLISH_ALL) {
+    phase(`1/7 preflight: back up all ${FIXTURES.length} pages`);
+    const backup = join(tmpdir(), `sq-docs-draft-path-${Date.now()}`);
+    for (const relative of FIXTURES) {
+      const target = join(backup, ...relative.split("/"));
+      mkdirSync(dirname(target), { recursive: true });
+      writeFileSync(target, readFileSync(absolute(relative)));
+    }
+    console.log(`backup of every page: ${backup}`);
+  }
   phase("1/7 preflight: the fixture files must be clean in git");
   const status = spawnSync("git", ["status", "--porcelain", "--", "content/"], { cwd: ROOT, encoding: "utf8" });
   if (status.status !== 0) {
@@ -190,14 +215,14 @@ async function main(): Promise<void> {
     .filter(Boolean)
     .map((line) => line.slice(3).replace(/^"|"$/g, "").replace(/ -> .*$/, ""))
     .filter((path) => FIXTURES.includes(path));
-  if (dirty.length > 0) {
+  if (dirty.length > 0 && !PUBLISH_ALL) {
     console.error("Refusing to start: these fixture files have uncommitted changes, and the revert would not be exact:");
     for (const path of dirty) console.error(`  ${path}`);
     console.error("Commit or stash them, then run again.");
     process.exit(2);
   }
 
-  phase("2/7 publish the four fixture pages (draft: false)");
+  phase(`2/7 publish ${PUBLISH_ALL ? `all ${FIXTURES.length} pages` : "the four fixture pages"} (draft: false)`);
   const edits = new Map<string, string>();
   for (const relative of FIXTURES) {
     const bytes = readFileSync(absolute(relative));

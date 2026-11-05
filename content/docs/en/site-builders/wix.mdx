@@ -1,0 +1,93 @@
+---
+title: How do I add Square Share to a Wix site?
+navTitle: "Wix"
+description: Paste your storefront snippet into a Wix Embed HTML element and size the box, or link a Wix button to a product page. Steps and checks.
+translationKey: builder-wix
+lastUpdated: 2026-11-05
+draft: true
+---
+
+<AnswerBlock>
+
+In the Wix Editor, add Embed Code, then Embed HTML, paste the snippet from your storefront's Share page, and drag the box as tall as your storefront. Publish and check the live site. For one product, link a Wix button to its product page. List your Wix address in Allowed domains first.
+
+</AnswerBlock>
+
+{/* TODO(adrian): Wix's help centre does not say whether Embed HTML needs a Premium plan. Check on a free Wix site before publishing, and add the answer here. */}
+
+## What do I need first?
+
+- A storefront in the dashboard with **Show on my website** turned on on its **Share** page.
+- Your Wix address in **Allowed domains**, saved. A free Wix site lives at `siteprefix.wixsite.com/siteaddress`: list `siteprefix.wixsite.com`. With your own domain, list that domain.
+
+## How do I add a storefront to a Wix page?
+
+<Steps>
+
+1. In the dashboard, open **Storefront**, click **Share** on your storefront, and choose **Wix** under **Your site builder**.
+2. Keep the **Script** tab and click **Copy embed snippet**.
+3. In the Wix Editor, click **Add Elements**, then **Embed Code**, then **Embed HTML**.
+4. Click **Enter Code**, choose **Code**, paste the snippet, and click **Update**.
+5. Drag the box's bottom edge down until it is as tall as your storefront.
+6. Publish the site.
+
+</Steps>
+
+<Snippet>
+
+```html title="Script snippet"
+<div data-squareshare-storefront="YOUR-EMBED-KEY"></div>
+<script async src="https://embed.squareshare.eu/widget.js"></script>
+```
+
+</Snippet>
+
+In Wix Studio the element is called **Embed code**. The steps are otherwise the same.
+
+## Why do I have to size the box myself?
+
+Wix runs pasted code inside a frame of its own, on a Wix address. The storefront grows to fit its content inside that frame, but the frame keeps the size you drag it to. Make the box tall enough for every row of products. If it is shorter, the storefront scrolls inside the box.
+
+Square Share recognises Wix's frame for the sites you list, so you only list your site's own address, not Wix's.
+
+## How do I add a purchase button on Wix?
+
+<Steps>
+
+1. In the dashboard, open **Products**, click the **...** menu on the product, and choose **Add to your website**.
+2. On the **Link** tab, copy the link.
+3. In the Wix Editor, add a **Button**, or select one you already have.
+4. Open the button's link settings, choose a web address, and paste the link.
+5. Publish the site.
+
+</Steps>
+
+Use the **Link** version on a Wix button rather than the **HTML** version in an Embed HTML box. Inside that box, a link would try to open the product page in Wix's frame, and the product page refuses to load in a frame. Full details: [How do I add a purchase button to my website?](/en/install/add-purchase-button)
+
+## Why is the storefront not showing on Wix?
+
+- **You are looking at the Editor.** Pasted code may not run there. Check the published site.
+- **The address is not listed.** List the address from the browser bar: `siteprefix.wixsite.com` for a free site, or your own domain.
+- **The box is too small.** A box only a few pixels tall hides the storefront. Drag it taller.
+
+The full checklist is on [Why is my storefront not showing on my website?](/en/troubleshooting/storefront-not-showing)
+
+## What's coming next?
+
+A Square Share plugin for Wix is planned. It is not available yet, and there is no date. Until then, the Embed HTML element is the way in.
+
+<Buttons>
+
+[Open the dashboard](https://dashboard.squareshare.eu) [All site builders](/en/site-builders)
+
+</Buttons>
+
+## Key terms
+
+<GlossaryList terms="storefront embed allowed-domains purchase-button" />
+
+## Related pages
+
+- [How do I add a storefront to my website?](/en/install/add-storefront-to-website)
+- [How do allowed domains work?](/en/install/allowed-domains)
+- [Which site builders does Square Share work with?](/en/site-builders)

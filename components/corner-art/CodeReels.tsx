@@ -31,6 +31,7 @@ const CYCLE = 14;
 const PAD = 3;
 /** The reel's top, with the cycle's first code in the field. */
 const STRIP_TOP = FIELD.top + FIELD.height / 2 - ROW / 2 - PAD * ROW;
+/** corner-art.css plays 0.58 of it, plus the stagger: keep that under 5s (WCAG 2.2.2). */
 const LOOP_MS = 6400;
 /** The reels start left to right, each a beat after the one before. */
 const STAGGER_MS = 90;

@@ -22,7 +22,7 @@ function hrefOf(node: ReactNode): string | undefined {
  * Wraps a plain Markdown list of links and lays it out as cards, each with
  * its page's icon (the one the sidebar shows). The content stays a Markdown
  * list, so the `.md` version and llms-full.txt get the same links and
- * descriptions.
+ * descriptions. The list keeps its role out loud, as its markers are styled away.
  */
 export function SectionCards({ children }: { children: ReactNode }) {
   const keyByUrl = new Map(allPages().map((page) => [page.url, page.data.translationKey]));
@@ -31,8 +31,8 @@ export function SectionCards({ children }: { children: ReactNode }) {
     <div className="section-cards">
       {elementsOf(children).map((list, listIndex) =>
         cloneElement(
-          list,
-          { key: listIndex },
+          list as ReactElement<{ children?: ReactNode; role?: string }>,
+          { key: listIndex, role: "list" },
           elementsOf(list.props.children).map((item, index) => {
             const href = hrefOf(item.props.children)?.split("#")[0];
             const Icon = href ? PAGE_ICONS[keyByUrl.get(href) ?? ""] : undefined;

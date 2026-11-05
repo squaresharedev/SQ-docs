@@ -1,4 +1,9 @@
-/* Copied from the homepage: Home/src/components/PixelGrid.tsx (unchanged). */
+/*
+ * Copied from the homepage: Home/src/components/PixelGrid.tsx. Changes: colours
+ * are tokens resolved where the canvas sits (so a `.dark` scope applies) and in
+ * any CSS colour syntax the tokens use (hex, oklch), and the faint resting dots
+ * are the foreground token at 2.2% instead of a literal white.
+ */
 "use client";
 
 import { useEffect, useRef } from "react";
@@ -8,33 +13,34 @@ interface PixelGridProps {
   cellSize?: number;
   /** Gap between lit pixels in CSS px. */
   gap?: number;
-  /** Lit-pixel color: a #rrggbb hex or a CSS var like var(--color-acid). */
+  /** Lit-pixel color: any CSS colour, or a token like var(--color-acid). */
   color?: string;
+  /** Resting dot-matrix colour, drawn at 2.2%. */
+  baseColor?: string;
   /** Radius of the cursor's influence in CSS px. */
   radius?: number;
   className?: string;
 }
 
-function hexToRgb(hex: string): [number, number, number] {
-  const h = hex.replace("#", "");
-  return [
-    parseInt(h.slice(0, 2), 16),
-    parseInt(h.slice(2, 4), 16),
-    parseInt(h.slice(4, 6), 16),
-  ];
-}
+/** Opacity of the resting dot matrix. */
+const BASE_ALPHA = 0.022;
 
-// Resolve a CSS custom property (e.g. var(--color-acid)) to its hex value so
-// the canvas can use it; pass-through for plain hex strings.
-function resolveColor(input: string): string {
-  if (input.startsWith("var(")) {
-    const name = input.slice(4, -1).trim();
-    const value = getComputedStyle(document.documentElement)
-      .getPropertyValue(name)
-      .trim();
-    return value || "#a855f7";
-  }
-  return input;
+/**
+ * Any CSS colour, or var(--token) read on `element`, as sRGB channels: painted
+ * on a one-pixel canvas and read back, because browsers keep oklch() as
+ * written when a canvas reports its fillStyle.
+ */
+function resolveRgb(input: string, element: Element): [number, number, number] {
+  const token = /^var\(\s*(--[\w-]+)\s*\)$/.exec(input)?.[1];
+  const value = token ? getComputedStyle(element).getPropertyValue(token).trim() : input;
+  const probe = document.createElement("canvas").getContext("2d");
+  if (!probe) return [0, 0, 0];
+  probe.canvas.width = 1;
+  probe.canvas.height = 1;
+  probe.fillStyle = value || "#000";
+  probe.fillRect(0, 0, 1, 1);
+  const [r = 0, g = 0, b = 0] = probe.getImageData(0, 0, 1, 1).data;
+  return [r, g, b];
 }
 
 // Cheap deterministic per-cell jitter so the lit area reads as "pixels",
@@ -48,6 +54,7 @@ export default function PixelGrid({
   cellSize = 24,
   gap = 3,
   color = "var(--color-acid)",
+  baseColor = "var(--foreground)",
   radius = 140,
   className = "",
 }: PixelGridProps) {
@@ -60,7 +67,8 @@ export default function PixelGrid({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const [r, g, b] = hexToRgb(resolveColor(color));
+    const [r, g, b] = resolveRgb(color, canvas);
+    const baseFill = `rgba(${resolveRgb(baseColor, canvas).join(", ")}, ${BASE_ALPHA})`;
     const dotSize = Math.max(1, cellSize - gap);
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
@@ -80,7 +88,7 @@ export default function PixelGrid({
     const drawBase = () => {
       ctx.clearRect(0, 0, width, height);
       // Faint static dot-matrix so the pixel texture is always present on the bg.
-      ctx.fillStyle = "rgba(255, 255, 255, 0.022)";
+      ctx.fillStyle = baseFill;
       for (let row = 0; row < rows; row++) {
         for (let col = 0; col < cols; col++) {
           ctx.fillRect(col * cellSize, row * cellSize, dotSize, dotSize);
@@ -137,7 +145,7 @@ export default function PixelGrid({
             busy = true;
             ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${next})`;
           } else {
-            ctx.fillStyle = "rgba(255, 255, 255, 0.022)";
+            ctx.fillStyle = baseFill;
           }
           ctx.fillRect(col * cellSize, row * cellSize, dotSize, dotSize);
         }
@@ -190,7 +198,7 @@ export default function PixelGrid({
       host.removeEventListener("pointerleave", onPointerOut);
       host.removeEventListener("pointercancel", onPointerOut);
     };
-  }, [cellSize, gap, color, radius]);
+  }, [cellSize, gap, color, baseColor, radius]);
 
   return (
     <canvas

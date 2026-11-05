@@ -2,6 +2,7 @@
 
 import { DocsLink as Link } from "./DocsLink";
 import { usePathname } from "next/navigation";
+import { transitionClass } from "@squaresharedev/tokens";
 import { LANGUAGE_NAME, LOCALES, type Locale } from "@/lib/i18n";
 import { cn } from "@/lib/cn";
 import { useLocaleContext } from "./locale-context";
@@ -9,7 +10,9 @@ import { useLocaleContext } from "./locale-context";
 /**
  * EN / CS as two plain links, so both targets are in the HTML. Each goes to the
  * paired translation of the current page (by translationKey), or to that
- * language's docs home when the page has no translation.
+ * language's docs home when the page has no translation. A link's name starts
+ * with the code it shows, then the language's own name ("CS Čeština"), so
+ * someone using voice control can say what they see (WCAG 2.5.3).
  */
 export function LanguageSwitcher({ className }: { className?: string }) {
   const { locale, copy, switchTargets } = useLocaleContext();
@@ -28,16 +31,16 @@ export function LanguageSwitcher({ className }: { className?: string }) {
                 hrefLang={code}
                 lang={code}
                 aria-current={current ? "page" : undefined}
-                title={LANGUAGE_NAME[code]}
                 className={cn(
-                  "flex h-8 min-w-8 items-center justify-center px-1.5 font-inter text-xs font-medium uppercase tracking-wide transition-colors sm:min-w-10 sm:px-2",
+                  "eyebrow flex h-8 min-w-8 items-center justify-center px-1.5 sm:min-w-10 sm:px-2",
+                  transitionClass,
                   current
                     ? "bg-fd-foreground text-fd-background"
                     : "text-fd-muted-foreground hover:bg-fd-accent hover:text-fd-accent-foreground",
                 )}
               >
-                <span aria-hidden="true">{code}</span>
-                <span className="sr-only">{LANGUAGE_NAME[code]}</span>
+                {code.toUpperCase()}
+                <span className="sr-only"> {LANGUAGE_NAME[code]}</span>
               </Link>
             </li>
           );

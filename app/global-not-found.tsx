@@ -26,7 +26,7 @@ export default function GlobalNotFound() {
             </p>
             <h1 className="mt-2 mb-0 font-display text-3xl font-bold tracking-tight">{COPY.en.notFoundTitle}</h1>
             <p className="mt-3 text-muted-foreground">{COPY.en.notFoundBody}</p>
-            <ul className="mt-8 flex list-none flex-wrap gap-3 p-0">
+            <ul role="list" className="mt-8 flex list-none flex-wrap gap-3 p-0">
               {LOCALES.map((locale, index) => (
                 <li key={locale} lang={locale}>
                   <ButtonLink href={`/${locale}`} variant={index === 0 ? "solid" : "outline"}>

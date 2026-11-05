@@ -9,6 +9,7 @@ import {
   CONTACT_EMAIL,
   HOME_URL,
   LOGO_PATH,
+  SITE_URL,
 } from "./site.ts";
 import { source, type DocsPage } from "./source.ts";
 import { ogImagePath } from "./urls.ts";
@@ -30,7 +31,25 @@ export function organization(): JsonLdNode {
   };
 }
 
-/** Breadcrumb trail from the locale's docs home to the page, matching the page tree. */
+const WEBSITE_ID = `${SITE_URL}/#website`;
+
+/**
+ * The docs site itself. Google reads the site name in results from WebSite
+ * data on the site's home page (the language chooser and the docs homes);
+ * every article points back at it with isPartOf.
+ */
+export function website(): JsonLdNode {
+  return {
+    "@type": "WebSite",
+    "@id": WEBSITE_ID,
+    name: COPY.en.siteName,
+    alternateName: [COPY.cs.siteName, `${BRAND_NAME} documentation`],
+    url: absoluteUrl("/"),
+    inLanguage: Object.values(LANGUAGE_TAG),
+    publisher: { "@id": `${HOME_URL}/#organization` },
+  };
+}
+
 /** Docs home, then the page's sections from the page tree (a section has a URL only when it has an index page). */
 export function sectionTrail(page: DocsPage): { name: string; url?: string }[] {
   const locale = localeOf(page);
@@ -73,6 +92,7 @@ export function techArticle(page: DocsPage): JsonLdNode {
     url: absoluteUrl(page.url),
     mainEntityOfPage: absoluteUrl(page.url),
     image: absoluteUrl(ogImagePath(page)),
+    isPartOf: { "@id": WEBSITE_ID },
     author: publisher,
     publisher,
   };
@@ -81,6 +101,7 @@ export function techArticle(page: DocsPage): JsonLdNode {
 /** Everything one page emits, as a single @graph. */
 export function pageGraph(page: DocsPage): JsonLdNode {
   const graph: JsonLdNode[] = [techArticle(page), breadcrumbList(page)];
+  if (page.slugs.length === 0) graph.push(website());
   if (page.data.translationKey === ORGANIZATION_PAGE_KEY) graph.push(organization());
   return { "@context": "https://schema.org", "@graph": graph };
 }

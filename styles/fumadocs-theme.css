@@ -55,12 +55,13 @@
 }
 
 /*
- * Visible focus everywhere, in the text colour so it clears 3:1 on both palettes.
- * In the base layer so a component's own focus style (the search field's ring) wins.
+ * Visible focus everywhere, in the ring token (tokens.css makes it clear 3:1
+ * on both palettes). In the base layer so a component's own focus style (the
+ * search field's ring) wins.
  */
 @layer base {
   :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
-    outline: 2px solid var(--color-fd-foreground);
+    outline: 2px solid var(--color-fd-ring);
     outline-offset: 2px;
   }
 }
@@ -75,6 +76,22 @@
 }
 
 #nd-page :where(h4) {
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   letter-spacing: -0.01em;
+}
+
+/*
+ * Fumadocs' "Copy link" button beside each heading only shows on hover. A
+ * keyboard user reaching it, or the heading's own link, sees it too (WCAG 2.4.7).
+ */
+#nd-page :is(h1, h2, h3, h4, h5, h6):focus-within > button {
+  opacity: 1;
+}
+
+/*
+ * Anchor jumps land where they did before the root's scroll padding (tokens.css
+ * --docs-sticky-top): Fumadocs' 7rem heading margin, less the padding.
+ */
+#nd-page :is(h1, h2, h3, h4, h5, h6)[id] {
+  scroll-margin-top: max(0px, calc(--spacing(28) - var(--docs-sticky-top)));
 }

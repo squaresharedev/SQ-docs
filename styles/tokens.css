@@ -1,0 +1,79 @@
+/*
+ * Docs tokens: values the docs use in more than one place that
+ * @squaresharedev/tokens does not ship, each named after where it comes from.
+ * Imported from globals.css after the package, so these can point at it.
+ * Components and the other stylesheets refer to these names, never to the
+ * values.
+ */
+
+/*
+ * Motion, from the dashboard's globals.css @theme (styles.md --duration and
+ * --ease-standard). duration-base is the control transition (the package's
+ * control-styles use the same 180ms), duration-slow and ease-entrance the
+ * search palette's opening morph.
+ */
+@theme {
+  --transition-duration-base: 180ms;
+  --transition-duration-slow: 260ms;
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-entrance: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* The dashboard's keyboard hints (⌘K): 11px, under the type scale's xs. */
+@theme {
+  --text-2xs: 0.6875rem;
+}
+
+/*
+ * The dashboard's code surface greens (Store globals.css .code-surface), which
+ * the dashboard keeps outside the tokens package.
+ */
+@theme {
+  --color-code-flow-deep: #22c55e;
+  --color-code-flow: #4ade80;
+  --color-code-flow-light: #bbf7d0;
+}
+
+/* The homepage footer's social buttons light up in the accent at 55%. */
+@theme {
+  --shadow-acid-glow: 0 0 24px -2px color-mix(in oklab, var(--color-acid) 55%, transparent);
+}
+
+/*
+ * The dashboard's eyebrow (control-styles eyebrowClass, "font-inter text-xs
+ * font-medium uppercase tracking-wide"): the small label over a section, a
+ * card or a field. Colour is left to the place that uses it.
+ */
+@utility eyebrow {
+  font-family: var(--font-inter);
+  font-size: var(--text-xs);
+  line-height: var(--tw-leading, var(--text-xs--line-height));
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+/*
+ * Focus colour. The tokens' light --ring (oklch 0.708) is 2.6:1 on white,
+ * under the 3:1 that WCAG 1.4.11 asks of a focus indicator, so in light mode
+ * the ring is the text colour. Dark keeps the brand purple: 5.3:1 on black,
+ * 4.7:1 on a card. Fumadocs reads it through --color-fd-ring. A candidate for
+ * the tokens package itself.
+ */
+:root:not(.dark) {
+  --ring: var(--foreground);
+}
+
+/*
+ * What sticks to the top of the viewport, the header (h-14) and below xl the
+ * "On this page" bar (h-10), plus room for a focus outline (2px, 2px out).
+ * The browser keeps a focused element or an anchor's target below it, outline
+ * and all (WCAG 2.4.11).
+ */
+:root {
+  --docs-sticky-top: --spacing(16);
+
+  @variant max-xl {
+    --docs-sticky-top: --spacing(26);
+  }
+}

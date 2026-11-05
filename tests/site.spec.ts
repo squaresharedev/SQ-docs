@@ -98,14 +98,14 @@ test("Control+K opens search", async ({ page }) => {
   await expect(page.getByRole("dialog")).toBeVisible();
 });
 
-async function expectNoSeriousAxe(page: Page, include?: string): Promise<void> {
-  const builder = new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"]);
+/** WCAG 2.2 A and AA, every impact (see AXE_TAGS in pages.spec.ts). */
+async function expectNoAxeViolations(page: Page, include?: string): Promise<void> {
+  const builder = new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"]);
   const results = await (include ? builder.include(include) : builder).analyze();
-  const serious = results.violations.filter((violation) => violation.impact === "serious" || violation.impact === "critical");
-  const report = serious
+  const report = results.violations
     .map((violation) => `[${violation.impact}] ${violation.id}: ${violation.nodes.map((node) => node.target.join(" ")).join(", ")}`)
     .join("\n");
-  expect(serious, report).toEqual([]);
+  expect(results.violations, report).toEqual([]);
 }
 
 // The palette only exists while open, so the per-page axe checks never see it.
@@ -115,9 +115,73 @@ for (const theme of THEMES) {
     await openSearch(page);
     await searchFor(page, "storefront");
     await expect(page.getByRole("dialog").getByRole("option").first()).toBeVisible();
-    await expectNoSeriousAxe(page, '[role="dialog"]');
+    await expectNoAxeViolations(page, '[role="dialog"]');
   });
 }
+
+test.describe("keyboard and screen readers", () => {
+  test("the skip link is the first Tab stop and leads into the page", async ({ page }) => {
+    await page.goto(EN);
+    await page.keyboard.press("Tab");
+    await expect(page.locator(":focus")).toHaveText("Skip to content");
+    await page.keyboard.press("Enter");
+    await page.keyboard.press("Tab");
+    expect(await page.evaluate(() => Boolean(document.activeElement?.closest("#nd-page")))).toBe(true);
+  });
+
+  test("the sidebar names the open page and its sections", async ({ page }) => {
+    await page.goto(EN);
+    const sidebar = page.locator("#nd-sidebar");
+    await expect(sidebar.locator('a[aria-current="page"]')).toHaveAttribute("href", EN);
+    await expect(sidebar.getByRole("heading", { level: 2 }).first()).toBeVisible();
+  });
+
+  test("search announces how many results, or none", async ({ page }) => {
+    await page.goto("/en");
+    await page.waitForLoadState("networkidle");
+    await openSearch(page);
+    const status = page.getByRole("dialog").locator('[aria-live="polite"]');
+    await searchFor(page, "storefront");
+    await expect(status).toHaveText(/^\d+ results? for "storefront"$/);
+    await searchFor(page, "zzzqqq");
+    await expect(status).toHaveText('No results for "zzzqqq"');
+  });
+
+  test("the theme switch says whether dark is on", async ({ page }) => {
+    await openPage(page, EN, "light");
+    const toggle = page.getByRole("button", { name: "Dark theme" });
+    await expect(toggle).toHaveAttribute("aria-pressed", "false");
+    await toggle.click();
+    await expect(toggle).toHaveAttribute("aria-pressed", "true");
+  });
+
+  test("motion that starts by itself stops within five seconds", async ({ page }) => {
+    // The receipt, the route, the code reels and the code surface's ring (WCAG 2.2.2).
+    for (const url of ["/en/payments-and-payouts", "/en/install/add-storefront-to-website"]) {
+      await page.goto(url);
+      await page.waitForTimeout(5100);
+      const running = await page.evaluate(() => document.getAnimations().filter((animation) => animation.playState === "running").length);
+      expect(running, url).toBe(0);
+    }
+  });
+});
+
+test.describe("narrow screens", () => {
+  test.use({ viewport: { width: 375, height: 812 } });
+
+  test("the sidebar drawer keeps focus and closes on Escape", async ({ page }) => {
+    await page.goto(EN);
+    await page.getByRole("button", { name: "Open Sidebar" }).click();
+    const inDrawer = () => page.evaluate(() => Boolean(document.activeElement?.closest("#nd-sidebar-mobile")));
+    await expect.poll(inDrawer).toBe(true);
+    for (let step = 0; step < 50; step += 1) {
+      await page.keyboard.press("Tab");
+      expect(await inDrawer()).toBe(true);
+    }
+    await page.keyboard.press("Escape");
+    await expect(page.locator(":focus")).toHaveAccessibleName("Open Sidebar");
+  });
+});
 
 test("the sidebar ends with the legal pages, in both languages", async ({ page }) => {
   for (const [url, label] of [

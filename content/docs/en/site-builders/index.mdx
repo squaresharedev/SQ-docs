@@ -1,0 +1,69 @@
+---
+title: Which site builders does Square Share work with?
+description: "Square Share works with any site builder that accepts pasted HTML: WordPress, Squarespace, Wix, Webflow, Framer, Carrd, Webnode and more."
+translationKey: site-builders
+lastUpdated: 2026-11-05
+draft: true
+---
+
+<AnswerBlock>
+
+Square Share works with any site builder that lets you paste HTML into a page: the storefront snippet goes there. A purchase button is a plain link, so it works on any builder that has buttons or links. Some builders only run pasted scripts on paid plans. The table below lists where the snippet goes in each.
+
+</AnswerBlock>
+
+{/* TODO(adrian): The plan column comes from each builder's own help centre, checked 2026-11-05. Builders change plans often: recheck every row before publishing. */}
+
+## Where does the snippet go in each builder?
+
+| Builder | Where the storefront snippet goes | Plan needed for the storefront |
+| --- | --- | --- |
+| [WordPress](/en/site-builders/wordpress) | A Custom HTML block | Own install: none, but an Administrator or Editor must save it. WordPress.com: a paid plan with hosting features. |
+| [Squarespace](/en/site-builders/squarespace) | A Code block | Core, Plus or Advanced |
+| [Wix](/en/site-builders/wix) | Embed Code, then Embed HTML | Not stated in Wix's help centre |
+| [Webflow](/en/site-builders/webflow) | A Code Embed element | A paid site plan |
+| [Framer](/en/site-builders/framer) | An Embed component set to HTML | Not stated in Framer's help centre |
+| [Carrd](/en/site-builders/carrd) | An Embed element of type Code | Pro Standard or higher |
+| [Webnode](/en/site-builders/webnode) | HTML content | A premium package, for projects created after 26 June 2023 |
+
+The purchase button needs no particular plan on any of them.
+
+The dashboard also says where the snippet goes in Google Sites (choose Insert, then Embed, then Embed code) and in Shopify (add a Custom Liquid section in the theme editor).
+
+## What is the same on every builder?
+
+- Pasted code runs on your published site, not in the builder's editor. Always check the live page.
+- The address in the browser bar must be in **Allowed domains** on the storefront's **Share** page. A builder's free address (such as `yoursite.webflow.io`) and your own domain are different domains. See [How do allowed domains work?](/en/install/allowed-domains)
+- The page must use https.
+- If a builder removes scripts, the **Iframe only** version on the Share page has no script. It has a fixed height of 640 px.
+
+This is the snippet you paste. The dashboard's **Copy embed snippet** button fills in your key:
+
+<Snippet>
+
+```html title="Script snippet"
+<div data-squareshare-storefront="YOUR-EMBED-KEY"></div>
+<script async src="https://embed.squareshare.eu/widget.js"></script>
+```
+
+</Snippet>
+
+## What if my builder is not listed?
+
+Choose **Another site** under **Your site builder** on the Share page, and paste the snippet into whatever your builder offers for raw HTML: an HTML block, a code element or an embed. If your builder has no such element, add a [purchase button](/en/install/add-purchase-button) instead. Every builder can link a button to an address.
+
+<Buttons>
+
+[Add a storefront](/en/install/add-storefront-to-website) [Add a purchase button](/en/install/add-purchase-button)
+
+</Buttons>
+
+## Key terms
+
+<GlossaryList terms="storefront embed allowed-domains purchase-button" />
+
+## Related pages
+
+- [How do I add a storefront to my website?](/en/install/add-storefront-to-website)
+- [How do I add a purchase button to my website?](/en/install/add-purchase-button)
+- [Why is my storefront not showing on my website?](/en/troubleshooting/storefront-not-showing)

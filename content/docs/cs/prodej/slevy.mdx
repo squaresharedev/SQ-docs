@@ -1,0 +1,86 @@
+---
+title: "Jak spustím akci nebo vytvořím slevový kód?"
+navTitle: "Slevy"
+description: "Akci spustíte ve Slevách v panelu: kupující uvidí nižší cenu ve výloze i na produktových stránkách. Slevové kódy potřebují pokladnu Square Share."
+translationKey: "discounts"
+lastUpdated: "2026-11-05"
+draft: true
+---
+{/* TODO(adrian): native review */}
+
+<AnswerBlock>
+
+V panelu otevřete Slevy a klikněte na Vytvořit slevu. Akce sníží ceny pro všechny bez kódu a kupující ji hned uvidí ve výloze i na produktových stránkách. Slevový kód se zadává v pokladně Square Share, která zatím spuštěná není. Pokud kupující platí přes váš vlastní odkaz na nákup, změňte cenu i tam.
+
+</AnswerBlock>
+
+{/* TODO(adrian): Discount codes only apply at Square Share checkout (NEXT_PUBLIC_STRIPE_CONNECT_ENABLED, off). Update this page when checkout goes live. */}
+
+## Jaký je rozdíl mezi akcí a slevovým kódem?
+
+| | Akce | Slevový kód |
+| --- | --- | --- |
+| Kdo ji dostane | Všichni | Kupující, kteří zadají kód |
+| Kde ji kupující uvidí | Výloha a produktové stránky ukazují sníženou cenu | V pokladně Square Share |
+| Funguje dnes | Ano, snížená cena se zobrazuje | Zatím ne: potřebuje pokladnu Square Share |
+| Hodnota | Částka nebo procento | Částka nebo procento |
+| Na co platí | Na všechny produkty, nebo na vybrané | Na všechny produkty, nebo na vybrané |
+| Navíc | Datum začátku a konce | Kód o 3 až 24 písmenech a číslicích, limit použití, data a štítek **Sdíleno na**, podle kterého uvidíte, jaký kanál objednávku přivedl |
+
+Sleva o částku platí jen pro produkty s cenou v měně té částky.
+
+## Jak spustím akci?
+
+<Steps>
+
+1. V panelu otevřete **Slevy** a klikněte na **Vytvořit slevu**.
+2. V části **Jaký druh slevy?** zvolte **Akce**.
+3. Nastavte, kolik se z ceny odečte a na které produkty akce platí.
+4. Zvolte začátek a konec: hned nebo k datu, a nikdy, k datu, nebo po zvolené době.
+5. Uložte ji.
+
+</Steps>
+
+## Co kupující během akce uvidí?
+
+Běžná cena je přeškrtnutá vedle akční ceny a poznámka pod cenou říká, kolik se odečítá a kdy akce končí („Akce končí“ a datum). Další poznámka říká, která cena je přeškrtnutá:
+
+| Poznámka na stránce | Kdy se zobrazí |
+| --- | --- |
+| „Přeškrtnutá cena: nejnižší cena za posledních 30 dní před slevou.“ | Vaše cena byla 30 dní před akcí stejná |
+| „Přeškrtnutá cena: běžná cena. Nejnižší cena za posledních 30 dní před slevou:“ a ta cena | Vaše cena byla během těch 30 dní někdy nižší |
+| „Přeškrtnutá cena: běžná cena.“ | Square Share nemá za to období úplnou historii cen |
+
+Procento slevy se zobrazí jen tehdy, když se počítá z nejnižší ceny za těch 30 dní. Odpovídá to pravidlu EU pro oznamování slev, podle kterého prodejce uvádí nejnižší cenu, za kterou zboží prodával nejméně 30 dní před slevou ([směrnice (EU) 2019/2161](https://eur-lex.europa.eu/eli/dir/2019/2161/oj), která do směrnice o označování cen doplnila článek 6a). Tato stránka není právní poradenství.
+
+{/* TODO(adrian): Article 6a of Directive 98/6/EC, as inserted by Directive (EU) 2019/2161, quoted from memory of the official text. Confirm the wording against EUR-Lex before publishing. */}
+
+## Co když kupující platí přes můj vlastní odkaz na nákup?
+
+Vaše vlastní pokladna účtuje cenu, kterou v ní máte nastavenou. Akce ve Square Share mění, co ukazuje produktová stránka, ne co účtuje jiná pokladna. Změňte cenu ve své pokladně na stejné dny, jinak kupující uvidí jednu cenu a zaplatí jinou.
+
+## Co se stane, když akce skončí?
+
+Ceny se okamžitě vrátí na normální úroveň. Jakmile akce začne, lze změnit už jen její konec. Pokud ji chcete ukončit dřív, použijte **Ukončit nyní**. Pokud ji chcete spustit znovu, vytvořte novou akci.
+
+| Stav | Význam |
+| --- | --- |
+| Naplánováno | Začne později |
+| Aktivní | Běží |
+| Vypnuto | Kód, který jste vypnuli |
+| Vyčerpáno | Kód dosáhl limitu použití |
+| Ukončeno | Uplynulo datum konce, nebo jste ji ukončili |
+
+## Co přijde dál?
+
+Slevové kódy začnou fungovat, až spustíme pokladnu Square Share. Kupující zadají kód při placení a **Slevy** ukážou, z jakého kanálu objednávky s každým kódem přišly. Termín zatím není stanovený.
+
+## Klíčové pojmy
+
+<GlossaryList terms="storefront product-page purchase-button" />
+
+## Související stránky
+
+- [Kde najdu své objednávky?](/cs/prodej/objednavky)
+- [Jak navrhnu výlohu?](/cs/produkty-a-vylohy/navrh-vylohy)
+- [Platby a výplaty](/cs/platby-a-vyplaty)

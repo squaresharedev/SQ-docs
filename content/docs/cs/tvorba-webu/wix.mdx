@@ -1,0 +1,94 @@
+---
+title: "Jak přidám Square Share na web ve Wixu?"
+navTitle: "Wix"
+description: "Vložte kód výlohy do prvku Embed HTML ve Wixu a nastavte velikost rámečku, nebo propojte tlačítko s produktovou stránkou. Postup a kontrola."
+translationKey: "builder-wix"
+lastUpdated: "2026-11-05"
+draft: true
+---
+{/* TODO(adrian): native review */}
+
+<AnswerBlock>
+
+V editoru Wixu přidejte Embed Code, potom Embed HTML, vložte kód ze stránky Sdílet vaší výlohy a roztáhněte rámeček na výšku výlohy. Web zveřejněte a zkontrolujte živou verzi. Pro jeden produkt propojte tlačítko Wixu s jeho produktovou stránkou. Adresu webu ve Wixu nejdřív uveďte v Povolených doménách.
+
+</AnswerBlock>
+
+{/* TODO(adrian): Wix's help centre does not say whether Embed HTML needs a Premium plan. Check on a free Wix site before publishing, and add the answer here. */}
+
+## Co potřebuji předem?
+
+- Výlohu v panelu se zapnutým **Zobrazit na mém webu** na její stránce **Sdílet**.
+- Adresu webu ve Wixu v **Povolených doménách**, uloženou. Bezplatný web ve Wixu má adresu `siteprefix.wixsite.com/siteaddress`: uveďte `siteprefix.wixsite.com`. S vlastní doménou uveďte tu.
+
+## Jak přidám výlohu na stránku ve Wixu?
+
+<Steps>
+
+1. V panelu otevřete **Výloha**, u své výlohy klikněte na **Sdílet** a v poli **Váš nástroj pro tvorbu webu** zvolte **Wix**.
+2. Nechte kartu **Skript** a klikněte na **Kopírovat kód pro vložení**.
+3. V editoru Wixu klikněte na **Add Elements**, potom **Embed Code**, potom **Embed HTML**.
+4. Klikněte na **Enter Code**, zvolte **Code**, vložte kód a klikněte na **Update**.
+5. Táhněte spodní okraj rámečku dolů, dokud není stejně vysoký jako výloha.
+6. Web zveřejněte.
+
+</Steps>
+
+<Snippet>
+
+```html title="Kód Skript"
+<div data-squareshare-storefront="YOUR-EMBED-KEY"></div>
+<script async src="https://embed.squareshare.eu/widget.js"></script>
+```
+
+</Snippet>
+
+Ve Wix Studiu se prvek jmenuje **Embed code**. Jinak je postup stejný.
+
+## Proč musím velikost rámečku nastavit sám?
+
+Wix spouští vložený kód ve vlastním rámu na adrese Wixu. Výloha uvnitř rámu roste podle obsahu, ale rám si drží velikost, na kterou ho roztáhnete. Udělejte rámeček tak vysoký, aby se do něj vešly všechny řady produktů. Pokud je nižší, výloha se posouvá uvnitř rámečku.
+
+Square Share rám Wixu u uvedených webů pozná, takže uvádíte jen adresu svého webu, ne adresu Wixu.
+
+## Jak přidám tlačítko pro nákup ve Wixu?
+
+<Steps>
+
+1. V panelu otevřete **Produkty**, u produktu klikněte na nabídku **⋯** a zvolte **Přidat na váš web**.
+2. Na kartě **Odkaz** zkopírujte odkaz.
+3. V editoru Wixu přidejte **Button**, nebo vyberte tlačítko, které už máte.
+4. Otevřete nastavení odkazu tlačítka, zvolte webovou adresu a vložte odkaz.
+5. Web zveřejněte.
+
+</Steps>
+
+Na tlačítko ve Wixu použijte verzi **Odkaz**, ne verzi **HTML** v rámečku Embed HTML. Uvnitř rámečku by se odkaz pokusil otevřít produktovou stránku v rámu Wixu a produktová stránka se v rámu načíst odmítne. Podrobnosti: [Jak přidám na svůj web tlačítko pro nákup?](/cs/instalace/pridani-tlacitka-pro-nakup)
+
+## Proč se výloha ve Wixu nezobrazuje?
+
+- **Díváte se do editoru.** Vložený kód se tam spustit nemusí. Zkontrolujte zveřejněný web.
+- **Adresa není v seznamu.** Uveďte adresu z řádku prohlížeče: `siteprefix.wixsite.com` u bezplatného webu, nebo svou doménu.
+- **Rámeček je příliš malý.** Rámeček vysoký jen pár pixelů výlohu skryje. Roztáhněte ho.
+
+Celý seznam kontrol je na stránce [Proč se moje výloha na webu nezobrazuje?](/cs/reseni-problemu/vyloha-se-nezobrazuje)
+
+## Co přijde dál?
+
+Plugin Square Share pro Wix je v plánu. Zatím není dostupný a termín není stanovený. Do té doby je cestou prvek Embed HTML.
+
+<Buttons>
+
+[Otevřít panel](https://dashboard.squareshare.eu) [Všechny nástroje pro tvorbu webu](/cs/tvorba-webu)
+
+</Buttons>
+
+## Klíčové pojmy
+
+<GlossaryList terms="storefront embed allowed-domains purchase-button" />
+
+## Související stránky
+
+- [Jak přidám výlohu na svůj web?](/cs/instalace/pridani-vylohy-na-web)
+- [Jak fungují povolené domény?](/cs/instalace/povolene-domeny)
+- [S jakými nástroji pro tvorbu webu Square Share funguje?](/cs/tvorba-webu)

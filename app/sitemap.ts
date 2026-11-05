@@ -1,14 +1,18 @@
 import type { MetadataRoute } from "next";
 import { LOCALES } from "@/lib/i18n";
 import { publishedPages } from "@/lib/llms";
-import { hreflangFor } from "@/lib/seo";
+import { chooserAlternates, hreflangFor } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/site";
 
 export const dynamic = "force-static";
 
-/** Published pages only, each with its frontmatter date and hreflang alternates. */
+/**
+ * Published pages only, each with its frontmatter date and hreflang
+ * alternates. The language chooser (/) joins them once both docs homes are
+ * published, because it is their x-default.
+ */
 export default function sitemap(): MetadataRoute.Sitemap {
-  return LOCALES.flatMap((locale) =>
+  const pages = LOCALES.flatMap((locale) =>
     publishedPages(locale).map((page) => {
       const languages = hreflangFor(page);
       return {
@@ -18,4 +22,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       };
     }),
   );
+  const chooser = chooserAlternates();
+  return chooser ? [{ url: absoluteUrl("/"), alternates: { languages: chooser } }, ...pages] : pages;
 }

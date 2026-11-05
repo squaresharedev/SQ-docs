@@ -1,11 +1,15 @@
 import { Clock, FileCode2 } from "lucide-react";
+import { transitionClass } from "@squaresharedev/tokens";
+import { cn } from "@/lib/cn";
 import { formatDate, type Copy } from "@/lib/copy";
 import type { Locale } from "@/lib/i18n";
 import { CopyMarkdownButton } from "./CopyMarkdownButton";
 
-/** The dashboard's secondary button (control-styles secondaryButtonClass), at bar size. */
-export const SECONDARY_BUTTON_CLASS =
-  "inline-flex h-8 items-center gap-1.5 border border-fd-border bg-fd-background px-3 text-sm font-medium text-fd-foreground transition-colors hover:bg-fd-accent";
+/** The dashboard's secondary button (control-styles secondaryButtonClass), at bar size, with its transition. */
+export const SECONDARY_BUTTON_CLASS = cn(
+  "inline-flex h-8 items-center gap-1.5 border border-fd-border bg-fd-background px-3 text-sm font-medium text-fd-foreground hover:bg-fd-accent",
+  transitionClass,
+);
 
 /** "Last updated", then "View as Markdown" (the raw `.md` file) and "Copy page as Markdown". */
 export function PageMeta({

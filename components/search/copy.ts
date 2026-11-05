@@ -24,8 +24,11 @@ export type SearchCopy = {
   startTyping: string;
   /** Announced via aria-live while the index is loading or a search is pending. */
   searching: string;
-  /** Announced via aria-live when results arrive. Contains {count} and {query}. */
-  resultCount: string;
+  /**
+   * Announced via aria-live when results arrive, one form per plural category
+   * of the locale (Intl.PluralRules). Contains {count} and {query}.
+   */
+  resultCount: Partial<Record<Intl.LDMLPluralRule, string>> & { other: string };
 };
 
 const en: SearchCopy = {
@@ -38,7 +41,10 @@ const en: SearchCopy = {
   nothingMatches: 'No results for "{query}"',
   startTyping: "Type to search...",
   searching: "Searching...",
-  resultCount: '{count} result for "{query}"',
+  resultCount: {
+    one: '{count} result for "{query}"',
+    other: '{count} results for "{query}"',
+  },
 };
 
 const cs: SearchCopy = {
@@ -51,10 +57,25 @@ const cs: SearchCopy = {
   nothingMatches: 'Žádné výsledky pro "{query}"',
   startTyping: "Začněte psát...",
   searching: "Hledám...",
-  resultCount: '{count} výsledek pro "{query}"',
+  resultCount: {
+    one: '{count} výsledek pro "{query}"',
+    few: '{count} výsledky pro "{query}"',
+    other: '{count} výsledků pro "{query}"',
+  },
 };
 
 export const searchCopy: Record<Locale, SearchCopy> = { en, cs };
+
+const PLURALS: Record<Locale, Intl.PluralRules> = {
+  en: new Intl.PluralRules("en"),
+  cs: new Intl.PluralRules("cs"),
+};
+
+/** "3 results for "storefront"", in the locale's plural form for the count. */
+export function resultCount(locale: Locale, count: number, query: string): string {
+  const forms = searchCopy[locale].resultCount;
+  return interpolate(forms[PLURALS[locale].select(count)] ?? forms.other, { count, query });
+}
 
 /** Substitute one or more {key} placeholders in a copy string. */
 export function interpolate(

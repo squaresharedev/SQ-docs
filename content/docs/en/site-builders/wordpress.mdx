@@ -1,0 +1,102 @@
+---
+title: How do I add Square Share to a WordPress site?
+navTitle: "WordPress"
+description: Paste your storefront snippet into a WordPress Custom HTML block, or link a Buttons block to a product page. Roles, WordPress.com plans and checks.
+translationKey: builder-wordpress
+lastUpdated: 2026-11-05
+draft: true
+---
+
+<AnswerBlock>
+
+In the WordPress block editor, add a Custom HTML block, paste the snippet from your storefront's Share page and publish. On your own WordPress install, an Administrator or Editor account must save it. On WordPress.com, scripts need a paid plan with hosting features activated. For one product, link a Buttons block to its product page.
+
+</AnswerBlock>
+
+{/* TODO(adrian): The WordPress.com rule is quoted from wordpress.com/support/wordpress-editor/blocks/custom-html-block/ (checked 2026-11-05). Recheck before publishing. */}
+
+## What do I need first?
+
+- A storefront in the dashboard with **Show on my website** turned on on its **Share** page.
+- Your site's domain in **Allowed domains**, saved. On WordPress.com without your own domain, that is your `yoursite.wordpress.com` address.
+- Permission to save scripts. See "Why did WordPress remove my snippet?" below.
+
+## How do I add a storefront to a WordPress page?
+
+<Steps>
+
+1. In the dashboard, open **Storefront**, click **Share** on your storefront, and choose **WordPress** under **Your site builder**.
+2. Keep the **Script** tab and click **Copy embed snippet**.
+3. In WordPress, edit the page or post. Click the block inserter (**+**), search for **Custom HTML**, and add the block where the storefront should go. You can also type `/html` on an empty line.
+4. Paste the snippet into the block.
+5. Click **Update** or **Publish**.
+
+</Steps>
+
+<Snippet>
+
+```html title="Script snippet"
+<div data-squareshare-storefront="YOUR-EMBED-KEY"></div>
+<script async src="https://embed.squareshare.eu/widget.js"></script>
+```
+
+</Snippet>
+
+The block's preview in the editor does not run scripts. Open the published page to see the storefront. It grows to fit, so you set no height.
+
+Using the classic editor? Switch to the **Text** tab and paste the snippet there. Page builders work too, as long as you paste into an element meant for HTML, such as Elementor's HTML widget.
+
+## Why did WordPress remove my snippet?
+
+WordPress strips `<script>` and `<iframe>` tags from content saved by accounts that are not allowed to post unfiltered HTML.
+
+| Where your site runs | Who can save the snippet |
+| --- | --- |
+| Your own WordPress install | Administrators and Editors. Authors and Contributors have scripts removed when they save. |
+| WordPress Multisite | Only Super Admins. |
+| WordPress.com | According to [WordPress.com's Custom HTML block guide](https://wordpress.com/support/wordpress-editor/blocks/custom-html-block/), "tags like iframe and script require a paid plan with hosting features activated". |
+
+If you cannot save scripts, a purchase button still works: it is a plain link, and WordPress keeps links.
+
+## How do I add a purchase button on WordPress?
+
+<Steps>
+
+1. In the dashboard, open **Products**, click the **...** menu on the product, and choose **Add to your website**.
+2. On the **Link** tab, copy the link.
+3. In WordPress, add a **Buttons** block and type the button's text.
+4. Click the link icon in the block toolbar, paste the link and press Enter.
+5. Click **Update** or **Publish**.
+
+</Steps>
+
+Full details: [How do I add a purchase button to my website?](/en/install/add-purchase-button)
+
+## Why is the storefront not showing on WordPress?
+
+- **The script was stripped.** Edit the block again. If the `<script>` line is gone, see the table above.
+- **You are looking at the editor.** Check the published page.
+- **The address is not listed.** The domain in the browser bar must be in **Allowed domains**.
+- **A caching or optimisation plugin changed the script.** Exclude `embed.squareshare.eu/widget.js` from script combining or delaying, or use the **Iframe only** version.
+
+The full checklist is on [Why is my storefront not showing on my website?](/en/troubleshooting/storefront-not-showing)
+
+## What's coming next?
+
+A Square Share plugin for WordPress is planned. It is not available yet, and there is no date. Until then, the Custom HTML block is the way in.
+
+<Buttons>
+
+[Open the dashboard](https://dashboard.squareshare.eu) [All site builders](/en/site-builders)
+
+</Buttons>
+
+## Key terms
+
+<GlossaryList terms="storefront embed allowed-domains purchase-button" />
+
+## Related pages
+
+- [How do I add a storefront to my website?](/en/install/add-storefront-to-website)
+- [How do I install Square Share with an AI coding tool?](/en/install/install-with-ai-coding-tool)
+- [Which site builders does Square Share work with?](/en/site-builders)

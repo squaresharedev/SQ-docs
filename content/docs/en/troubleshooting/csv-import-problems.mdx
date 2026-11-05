@@ -1,0 +1,78 @@
+---
+title: Why did my CSV import skip rows?
+navTitle: "CSV import problems"
+description: "Every message the product CSV import shows, what causes it and how to fix the file: missing titles or prices, duplicates, size and row limits."
+translationKey: csv-import-problems
+lastUpdated: 2026-11-05
+draft: true
+---
+
+<AnswerBlock>
+
+The import skips a row with no title, a title over 200 characters, a price it cannot read, a price of zero, or the same title as another row. Before anything is saved, it lists each row it will skip and why. Fix those rows in your file, save it as CSV again and import it once more.
+
+</AnswerBlock>
+
+## Why was a row skipped?
+
+Under "Rows that will be skipped", each row shows its line number and one of these reasons:
+
+| Message | What it means | Fix |
+| --- | --- | --- |
+| No title. | The Title column is empty on that row | Add a title |
+| Title is longer than 200 characters. | The title is too long | Shorten it to 200 characters or fewer |
+| No price we could read. | The Price column is empty or holds something that is not a price | Put a plain number in the price cell |
+| Price is zero. | The price is 0 | Set a price above zero. The import does not bring in products priced at zero. |
+| Another row has this title. | Two rows share a title, ignoring capital letters | Rename one, or delete the duplicate |
+
+Title and Price are the two columns the import needs. Description, SKU and Stock are optional. If the import picked the wrong column for a field, choose the right one under **Columns** before importing.
+
+## Why can't I import the file at all?
+
+| Message | Fix |
+| --- | --- |
+| "That file is" and its size, then "Import files up to 2 MB." | Split the file into smaller ones |
+| That file is empty. | Export it again from the source |
+| That import could not be read. | Save it as CSV (comma separated values) from your spreadsheet and try again |
+| Pick a currency for these products. | Choose the **Currency**. Every product in the file is priced in it. |
+| Pick whether these arrive as drafts or live products. | Choose **Drafts** or **Live products** under **Import as** |
+| Nothing in that file could be imported. | Every row was skipped. Fix the rows listed and import again. |
+| None of those rows could be saved. | Nothing was saved. Run the import again. |
+
+The good rows are saved together, in one go: if saving fails, none of them is saved, so you never end up with half a file.
+
+## Why are some rows past the limit?
+
+One file can bring in a set number of products, shown on the import page as "Up to" and the number. The limit is 2,000, or fewer if your plan allows fewer products. Rows past it are listed with "will not be imported. Split the file to bring them in." Import the rest in a second file.
+
+## What happens to a Shopify export?
+
+The import recognises a Shopify product export. Shopify writes one row per variant. The first row of each product is imported, and the other rows are folded into it: "variant rows folded into the products above them. Add sizes and colours after importing." Add the options in each product's form afterwards.
+
+## Why are my photos missing?
+
+Photos are never imported. The import page says: "Photos are not imported. Prices, stock and descriptions come across; add the pictures once the products are here."
+
+## Why can I only import drafts?
+
+**Live products** needs complete [seller details](/en/seller-details). Until then, the import offers **Drafts** only.
+
+## Why are imported products not visible yet?
+
+After an import, the dashboard may say that some products are "still being checked: buyers see them once the automatic check approves them." Nothing is wrong with them. They appear once the check approves them.
+
+<Buttons>
+
+[Open the dashboard](https://dashboard.squareshare.eu) [How do I add a product?](/en/products-and-storefronts/add-a-product)
+
+</Buttons>
+
+## Key terms
+
+<GlossaryList terms="product seller-details" />
+
+## Related pages
+
+- [How do I add a product?](/en/products-and-storefronts/add-a-product)
+- [What does this dashboard error message mean?](/en/troubleshooting/dashboard-error-messages)
+- [Troubleshooting](/en/troubleshooting)
