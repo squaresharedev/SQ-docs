@@ -1,0 +1,65 @@
+---
+title: "Jak přidám Square Share na web v Hostinger Website Builder?"
+navTitle: "Hostinger"
+description: "Tlačítko pro nákup funguje na každém webu v Hostinger Website Builder. Zda kód výlohy funguje v prvku Embed code, zatím není ověřené."
+translationKey: "builder-hostinger"
+lastUpdated: "2026-11-09"
+draft: true
+---
+{/* TODO(adrian): native review */}
+
+<AnswerBlock>
+
+Tlačítko pro nákup funguje na každém webu v Hostinger Website Builder: přidejte prvek Button a vložte do něj odkaz na produkt. Kód výlohy patří do prvku Embed code, ale Square Share zatím neověřil, že se v něm zobrazí, proto zkontrolujte zveřejněný web. Můžete také odkázat na vlastní stránku výlohy.
+
+</AnswerBlock>
+
+{/* TODO(adrian): Hostinger's embed guide (hostinger.com/support/6463152-website-builder-embed-code, checked 2026-11-09) does not say whether pasted code runs in the page or in a frame of its own, or whether <script> is allowed. Square Share only recognises builder frames from Wix and Google Sites. Test the Script and Iframe only snippets on a published Hostinger site, then rewrite this page as a full guide or as links only. */}
+
+## Jak přidám tlačítko pro nákup v Hostingeru?
+
+<Steps>
+
+1. V panelu otevřete **Produkty**, u produktu klikněte na nabídku **⋯** a zvolte **Přidat na váš web**.
+2. Na kartě **Odkaz** zkopírujte odkaz.
+3. V Hostinger Website Builder přidejte prvek **Button**, nebo vyberte ten, který máte.
+4. Nastavte jeho odkaz na odkaz produktu a web aktualizujte.
+
+</Steps>
+
+Podrobnosti: [Jak přidám na svůj web tlačítko pro nákup?](/cs/instalace/pridani-tlacitka-pro-nakup)
+
+## Můžu zobrazit celou výlohu?
+
+Vyzkoušejte to a zkontrolujte zveřejněný web. Podle návodu Hostingeru přetáhnete prvek **Embed code** na stránku, kliknete na **Enter code**, vložíte kód, potvrdíte a web aktualizujete. Použijte kód ze stránky **Sdílet** vaší výlohy (v poli **Váš nástroj pro tvorbu webu** zvolte **Jiný web**) a adresu webu nejdřív uveďte v **Povolených doménách**.
+
+Pokud místo na zveřejněném webu zůstane prázdné, použijte verzi **Jen iframe**, nebo jednu z možností níže.
+
+<Snippet>
+
+```html title="Kód Skript"
+<div data-squareshare-storefront="YOUR-EMBED-KEY"></div>
+<script async src="https://embed.squareshare.eu/widget.js"></script>
+```
+
+</Snippet>
+
+## Co když se výloha nezobrazí?
+
+Odkažte na výlohu, místo abyste ji vkládali. Každá výloha se zapnutými produktovými stránkami má vlastní stránku: na její stránce **Sdílet** v části **Odkaz na výlohu** klikněte na **Zkopírovat odkaz na výlohu** a odkaz dejte na tlačítko nebo do nabídky webu v Hostingeru.
+
+<Buttons>
+
+[Otevřít panel](https://dashboard.squareshare.eu) [Všechny nástroje pro tvorbu webu](/cs/tvorba-webu)
+
+</Buttons>
+
+## Klíčové pojmy
+
+<GlossaryList terms="storefront embed allowed-domains purchase-button" />
+
+## Související stránky
+
+- [Jak přidám na svůj web tlačítko pro nákup?](/cs/instalace/pridani-tlacitka-pro-nakup)
+- [Proč se moje výloha na webu nezobrazuje?](/cs/reseni-problemu/vyloha-se-nezobrazuje)
+- [S jakými nástroji pro tvorbu webu Square Share funguje?](/cs/tvorba-webu)

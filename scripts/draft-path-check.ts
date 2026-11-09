@@ -13,11 +13,14 @@
  * yet, it copies every file to a backup folder first instead of relying on
  * git, and prints where.
  *
+ * --snapshot <dir> copies the published build's out/ to <dir> before the
+ * restore, for reading the production HTML afterwards.
+ *
  * --skip-build only edits and restores the files (used to test the revert
  * logic); it runs no build, server, check or Lighthouse.
  */
 import { spawn, spawnSync, type ChildProcess } from "node:child_process";
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { cpSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { frontmatter } from "fumadocs-core/content/md/frontmatter";
@@ -27,6 +30,10 @@ const options = parseArgs(process.argv.slice(2));
 const WITH_LIGHTHOUSE = options.get("lighthouse") === true;
 const SKIP_BUILD = options.get("skip-build") === true;
 const PUBLISH_ALL = options.get("all") === true;
+const SNAPSHOT = typeof options.get("snapshot") === "string" ? String(options.get("snapshot")) : undefined;
+// Published pages are indexable only in a build for the production address
+// (lib/site.ts INDEXABLE), so that is the build this check proves by default.
+process.env.SITE_URL ??= "https://docs.squareshare.eu";
 // A Worker of its own, started after the build: `wrangler dev` does not notice
 // files that postbuild renames, so a server that was already running would
 // serve a stale file list.
@@ -280,6 +287,10 @@ async function main(): Promise<void> {
   phase("5/7 SEO check with the published pages");
   const seo = await run("node scripts/seo-check.ts", process.execPath, ["scripts/seo-check.ts", "--base", BASE, "--expect-published", EXPECT]);
   if (seo !== 0) failures.push("seo-check failed on the published pages");
+  if (SNAPSHOT) {
+    cpSync(join(ROOT, "out"), SNAPSHOT, { recursive: true });
+    console.log(`snapshot of the published out/: ${SNAPSHOT}`);
+  }
 
   phase("6/7 Lighthouse" + (WITH_LIGHTHOUSE ? "" : " (skipped, pass --lighthouse)"));
   if (WITH_LIGHTHOUSE) {

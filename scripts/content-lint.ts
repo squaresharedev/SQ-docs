@@ -198,13 +198,25 @@ const keysByLocale: Record<"en" | "cs", Map<string, string[]>> = { en: new Map()
 
 const TODO_MARKER = "{/* TODO(adrian): native review */}";
 
+/**
+ * The only pages allowed to state amounts: the pricing hub (what Square Share
+ * charges) and the VAT page (the EU's and Czechia's official thresholds).
+ */
+const PRICING_PAGES = new Set([
+  "content/docs/en/payments-and-payouts/index.mdx",
+  "content/docs/cs/platby-a-vyplaty/index.mdx",
+  "content/docs/en/payments-and-payouts/vat-and-taxes.mdx",
+  "content/docs/cs/platby-a-vyplaty/dph-a-dane.mdx",
+]);
+
 for (const page of pages) {
   const { rel, raw, locale } = page;
   const text = raw.startsWith(BOM) ? raw.slice(1) : raw;
   const all = lines(text);
 
-  // Prices, fees, percentages.
-  lines(blankCode(text)).forEach((lineText, index) => {
+  // Prices, fees, percentages: everywhere except the pricing hub, the one page
+  // that states what Square Share charges (WRITING.md, "Prices and fees").
+  if (!PRICING_PAGES.has(rel)) lines(blankCode(text)).forEach((lineText, index) => {
     for (const { name, regex } of PRICE_PATTERNS) {
       regex.lastIndex = 0;
       const match = regex.exec(lineText);

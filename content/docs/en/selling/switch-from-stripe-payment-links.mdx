@@ -1,0 +1,56 @@
+---
+title: How do I switch from Stripe Payment Links to Square Share?
+navTitle: "From Stripe Payment Links"
+description: Keep your Stripe Payment Links as each product's purchase link, and let Square Share add the storefront, product pages and analytics around them.
+translationKey: switch-from-stripe-payment-links
+lastUpdated: 2026-11-09
+draft: true
+---
+
+<AnswerBlock>
+
+You can keep your Stripe Payment Links. Add each product to Square Share, then paste its Payment Link as the product's purchase link. Buyers browse your storefront and product pages on Square Share, and pay on Stripe exactly as before. Your payments, receipts and payouts stay in your Stripe account.
+
+</AnswerBlock>
+
+## What changes, and what stays the same?
+
+| | With Payment Links alone | With Square Share and your Payment Links |
+| --- | --- | --- |
+| Where buyers see the product | Wherever you shared the link | A storefront on your site, and a product page per product |
+| Where buyers pay | Stripe's checkout page | The same Stripe checkout page, opened in a new tab |
+| Where payments and refunds live | Your Stripe account | Your Stripe account |
+| Views and clicks | Not counted before checkout | Counted in Square Share **Analytics** |
+
+## How do I move a product over?
+
+<Steps>
+
+1. In the Stripe Dashboard, open **Payment Links** and copy the link of the product (it starts with `https://buy.stripe.com/`).
+2. In Square Share, open **Products** and click **Add product**. Enter the same title and the same price.
+3. In the product form, open **Selling through your own checkout? Add its link** and paste the Payment Link.
+4. Set the product to **Active**, save it, and put it on a storefront with product pages turned on.
+
+</Steps>
+
+The product page's button now reads "Checkout on" followed by the link's site name, and opens your Payment Link in a new tab. Many products at once? Use the [CSV import](/en/products-and-storefronts/add-a-product#can-i-import-products-from-another-platform) for titles and prices, then add each link.
+
+## What do I need to keep in sync?
+
+- **The price.** Square Share shows the price you enter in Square Share, and Stripe charges the price on the Payment Link. Change both together.
+- **Sales.** A [sale](/en/selling/discounts) in Square Share changes the price on the product page only. Use a promotion code or a new Payment Link in Stripe for the same dates.
+- **Shipping and tax.** Stripe collects addresses and tax on the Payment Link if you set it up there. Square Share does not change that.
+
+## Will I still need Payment Links later?
+
+Square Share checkout will take card payments on the product page, into your own Stripe account. It is not open yet. Once it is, you can remove a product's purchase link to use it, or keep your Payment Links. See [Payments and payouts](/en/payments-and-payouts).
+
+## Key terms
+
+<GlossaryList terms="product product-page storefront merchant-of-record" />
+
+## Related pages
+
+- [How do I add a product?](/en/products-and-storefronts/add-a-product)
+- [How do I switch from Gumroad to Square Share?](/en/selling/switch-from-gumroad)
+- [Can I sell from my website without an online shop?](/en/selling/sell-without-online-shop)

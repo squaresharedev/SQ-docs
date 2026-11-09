@@ -1,0 +1,57 @@
+---
+title: "Jak vrátím kupujícímu peníze?"
+navTitle: "Vrácení peněz"
+description: "Jak dnes vrátíte kupujícímu peníze přes vlastní pokladnu a jak bude fungovat Vrátit peníze nebo zrušit v Objednávkách, až spustíme pokladnu Square Share."
+translationKey: "refunds"
+lastUpdated: "2026-11-09"
+draft: true
+---
+{/* TODO(adrian): native review */}
+
+<AnswerBlock>
+
+Dnes vracíte peníze tam, kde kupující platil: ve své vlastní pokladně u odkazu na nákup, nebo přímo u prodeje domluveného e-mailem. Square Share peníze nikdy nedržel, takže v panelu není co vracet. Až spustíme pokladnu Square Share, vlastník účtu vrátí objednávku přes Vrátit peníze nebo zrušit v Objednávkách.
+
+</AnswerBlock>
+
+{/* TODO(adrian): Square Share checkout and transactional email are switched off, so the Orders refund flow and the buyer emails below are future. Strings from Store messages/cs/orders.json (refund.*, email). Move them to the present tense when checkout goes live. */}
+
+## Jak dnes vrátím kupujícímu peníze?
+
+| Jak kupující zaplatil | Jak vrátit peníze |
+| --- | --- |
+| Přes odkaz na nákup u produktu | V pokladně, kterou odkaz otevírá (Stripe, Gumroad, váš vlastní e-shop), její funkcí pro vrácení peněz |
+| Po domluvě přes **Zeptat se na tento produkt** | Pošlete peníze zpět sami, stejnou cestou, jakou jste je dostali |
+
+Prodávajícím jste vy, takže vrácení peněz, vrácení zboží i zákonné lhůty jsou na vás. Produktové stránky kupujícím v EU už dnes uvádějí: „Od této kupní smlouvy můžete odstoupit bez udání důvodu do 14 dnů od převzetí zboží, pokud se neuplatní některá ze zákonných výjimek (například u zboží vyrobeného na zakázku nebo zboží v zapečetěném obalu).“
+
+## Co se změní, až spustíme pokladnu Square Share?
+
+Každý prodej se objeví v **Objednávkách** a objednávka bude mít akci **Vrátit peníze nebo zrušit**:
+
+<Steps>
+
+1. Otevřete objednávku v **Objednávkách** a klikněte na **Vrátit peníze nebo zrušit**.
+2. Vyberte důvod: „Zrušeno před odesláním“, „Vráceno kupujícím“ nebo „Jiný důvod“.
+3. Zvolte, jestli vrátit zboží zpět na sklad.
+4. Potvrďte. Celá objednávka se přes Stripe vrátí na kartu kupujícího a tuto akci nelze vrátit zpět.
+
+</Steps>
+
+Vracet peníze nebo rušit objednávky bude moct jen vlastník obchodu. Vrácení se bude týkat celé objednávky.
+
+## Co uvidí kupující?
+
+Kupující dostane e-mail, že peníze jsou na cestě. U platby kartou e-mail uvádí: „Peníze se vrátí stejnou cestou, jakou jste zaplatili, což obvykle trvá 5 až 10 dní.“
+
+Pokud kupující nákup do 14 dnů zruší přes stránku své objednávky, objednávka ukáže „Zrušeno kupujícím“ a panel vás požádá: „Domluvte s ním vrácení zboží a do 14 dnů mu vraťte peníze.“
+
+## Klíčové pojmy
+
+<GlossaryList terms="merchant-of-record seller-details" />
+
+## Související stránky
+
+- [Kolik Square Share stojí a jak dostanu zaplaceno?](/cs/platby-a-vyplaty)
+- [Kde najdu své objednávky?](/cs/prodej/objednavky)
+- [Jak nastavím podmínky dopravy a vrácení zboží?](/cs/produkty-a-vylohy/doprava-a-vraceni)

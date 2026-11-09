@@ -1,0 +1,81 @@
+---
+title: "Jak přidám Square Share na stránku obchodu v Shopify?"
+navTitle: "Shopify"
+description: "Přidejte výlohu Square Share na stávající stránku v Shopify sekcí Custom Liquid, nebo propojte tlačítko v Shopify s produktovou stránkou Square Share."
+translationKey: "builder-shopify"
+lastUpdated: "2026-11-09"
+draft: true
+---
+{/* TODO(adrian): native review */}
+
+<AnswerBlock>
+
+V editoru motivu Shopify přidejte na stránku sekci Custom Liquid, vložte do ní kód ze stránky Sdílet vaší výlohy a uložte. Custom Liquid je přímo ve stránce, takže si výloha sama nastaví velikost. Pokud má na produkt Square Share vést jedno tlačítko v Shopify, vložte odkaz na produkt do pole pro odkaz tlačítka.
+
+</AnswerBlock>
+
+{/* TODO(adrian): Shopify's Custom Liquid section comes with Online Store 2.0 themes such as Dawn; older themes may lack it. Check on a real Shopify store before publishing. */}
+
+## Co potřebuji předem?
+
+- Výlohu v panelu se zapnutým **Zobrazit na mém webu** na její stránce **Sdílet**.
+- Adresu obchodu v **Povolených doménách**, uloženou: svou doménu, a pokud ji návštěvníci používají, i `vasobchod.myshopify.com`.
+
+## Jak přidám výlohu na stránku v Shopify?
+
+<Steps>
+
+1. V panelu otevřete **Výloha**, u své výlohy klikněte na **Sdílet** a v poli **Váš nástroj pro tvorbu webu** zvolte **Shopify**.
+2. Nechte kartu **Skript** a klikněte na **Kopírovat kód pro vložení**.
+3. V Shopify otevřete **Online Store**, potom **Themes**, a klikněte na **Customize**.
+4. Otevřete požadovanou stránku, klikněte na **Add section** a zvolte **Custom Liquid**.
+5. Vložte kód do pole sekce a klikněte na **Save**.
+
+</Steps>
+
+<Snippet>
+
+```html title="Kód Skript"
+<div data-squareshare-storefront="YOUR-EMBED-KEY"></div>
+<script async src="https://embed.squareshare.eu/widget.js"></script>
+```
+
+</Snippet>
+
+Custom Liquid se vykreslí přímo do stránky, takže verze **Skript** roste podle výlohy.
+
+## Jak přidám tlačítko pro nákup v Shopify?
+
+<Steps>
+
+1. V panelu otevřete **Produkty**, u produktu klikněte na nabídku **⋯** a zvolte **Přidat na váš web**.
+2. Na kartě **Odkaz** zkopírujte odkaz.
+3. V editoru motivu Shopify přidejte tlačítko (mnoho sekcí má nastavení tlačítka) a vložte odkaz jako jeho cíl.
+4. Klikněte na **Save**.
+
+</Steps>
+
+Kupující pak platí na produktové stránce Square Share, ne v pokladně Shopify. Podrobnosti: [Jak přidám na svůj web tlačítko pro nákup?](/cs/instalace/pridani-tlacitka-pro-nakup)
+
+## Proč se výloha v Shopify nezobrazuje?
+
+- **Adresa není v seznamu.** Uveďte adresu z řádku prohlížeče: svou doménu a případně `vasobchod.myshopify.com`.
+- **Motiv nemá sekci Custom Liquid.** Použijte tlačítko pro nákup, nebo motiv, který tuto sekci nabízí.
+
+Celý seznam kontrol je na stránce [Proč se moje výloha na webu nezobrazuje?](/cs/reseni-problemu/vyloha-se-nezobrazuje)
+
+<Buttons>
+
+[Otevřít panel](https://dashboard.squareshare.eu) [Všechny nástroje pro tvorbu webu](/cs/tvorba-webu)
+
+</Buttons>
+
+## Klíčové pojmy
+
+<GlossaryList terms="storefront embed allowed-domains purchase-button" />
+
+## Související stránky
+
+- [Jak přidám výlohu na svůj web?](/cs/instalace/pridani-vylohy-na-web)
+- [Jak fungují povolené domény?](/cs/instalace/povolene-domeny)
+- [S jakými nástroji pro tvorbu webu Square Share funguje?](/cs/tvorba-webu)

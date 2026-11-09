@@ -1,0 +1,58 @@
+---
+title: "Co potřebuji vědět o DPH jako prodejce v EU?"
+navTitle: "DPH a daně"
+description: "Základy DPH pro prodejce v EU na Square Share: kdo ji účtuje, hranice 10 000 € pro prodej na dálku, One Stop Shop, český limit a oficiální zdroje."
+translationKey: "vat-and-taxes"
+lastUpdated: "2026-11-09"
+draft: true
+---
+{/* TODO(adrian): native review */}
+
+<AnswerBlock>
+
+Na Square Share jste prodávajícím vy, takže DPH z vašich prodejů řešíte vy, ne Square Share. Malí prodejci obvykle účtují DPH své země, pokud jsou k ní vůbec registrovaní. Jakmile vaše prodeje spotřebitelům v jiných zemích EU přesáhnou 10 000 € ročně, platí DPH země kupujícího a režim One Stop Shop vám ji dovolí přiznat na jednom místě.
+
+</AnswerBlock>
+
+{/* TODO(adrian): Thresholds checked on 2026-11-09 against vat-one-stop-shop.ec.europa.eu, europa.eu/youreurope and financnisprava.gov.cz. Recheck before publishing. Also confirm whether Square Share checkout will calculate VAT on the product page; nothing in the Store code says so today. */}
+
+Tato stránka vás odkáže na oficiální pravidla. Není to daňové poradenství: na svou situaci se zeptejte daňového poradce nebo finančního úřadu.
+
+## Kdo z mých prodejů odvádí DPH?
+
+Vy. Square Share není tržiště, které prodává vaším jménem: prodávajícím jste vy ([merchant of record](/cs/reference/slovnik#merchant-of-record)), s vlastními [údaji prodejce](/cs/povinne-udaje-prodejce) na každé produktové stránce. Až spustíme pokladnu Square Share, platby půjdou na váš vlastní účet Stripe, takže DPH z nich zůstane také vaše.
+
+## Kdy platí DPH země kupujícího?
+
+| Vaše prodeje spotřebitelům v jiných zemích EU | Která DPH platí |
+| --- | --- |
+| Nejvýše 10 000 € v tomto a předchozím kalendářním roce | DPH vaší země |
+| Více než 10 000 € | DPH země kupujícího |
+
+Hranice počítá dohromady zboží odeslané do jiných zemí EU i elektronické služby, například soubory ke stažení. Je to celoevropské číslo, uvedené na [portálu One Stop Shop](https://vat-one-stop-shop.ec.europa.eu/one-stop-shop_cs). Prodej kupujícím mimo EU je samostatný případ: Vaše Evropa uvádí, že při prodeji zboží zákazníkům mimo EU DPH neúčtujete.
+
+## Co je One Stop Shop?
+
+Nad hranicí byste se jinak museli registrovat k DPH v každé zemi, kam prodáváte. Režim One Stop Shop (OSS) vám dovolí registrovat se jen ve své zemi a DPH pro všechny ostatní země EU přiznat a zaplatit tam. V Česku se registrujete přes portál Moje daně, viz [Finanční správa: registrace do režimu EU](https://financnisprava.gov.cz/cs/mezinarodni-spoluprace/mezinarodni-spoluprace-a-dph/one-stop-shop-oss/rezim-eu/registrace).
+
+## Musím se k DPH vůbec registrovat?
+
+To závisí na limitu vaší země. V Česku je limit obratu pro vznik plátcovství 2 000 000 Kč za kalendářní rok a od roku 2025 platí i druhý limit 2 536 500 Kč, po jehož překročení se plátcem stáváte hned. Viz [Finanční správa: změny v plátcovství DPH od roku 2025](https://financnisprava.gov.cz/cs/financni-sprava/novinky/novinky-2025/informace-ke-zmenam-v-platcovstvi-dph-2025).
+
+Od 1. ledna 2025 může malý podnik využít osvobození i v jiných zemích EU, pokud jeho obrat v celé EU nepřesáhne 100 000 €. Viz [Vaše Evropa: osvobození od DPH](https://europa.eu/youreurope/business/taxation/vat/vat-exemptions/index_cs.htm).
+
+## Kde si můžu přečíst víc?
+
+- [Vaše Evropa: přeshraniční DPH](https://europa.eu/youreurope/business/taxation/vat/cross-border-vat/index_cs.htm)
+- [Vaše Evropa: prodej online](https://europa.eu/youreurope/business/selling-in-eu/selling-goods-services/ecommerce-distance-selling/index_cs.htm)
+- Váš finanční úřad
+
+## Klíčové pojmy
+
+<GlossaryList terms="merchant-of-record seller-details" />
+
+## Související stránky
+
+- [Jaké údaje prodejce mám podle práva EU ukázat kupujícím?](/cs/povinne-udaje-prodejce)
+- [Kolik Square Share stojí a jak dostanu zaplaceno?](/cs/platby-a-vyplaty)
+- [Jak prodávám soubory ke stažení ze svého webu?](/cs/prodej/prodej-souboru-ke-stazeni)

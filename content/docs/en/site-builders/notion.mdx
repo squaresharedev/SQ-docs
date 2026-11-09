@@ -1,0 +1,79 @@
+---
+title: How do I add Square Share to a Notion site?
+navTitle: "Notion"
+description: "A public Notion page takes links, not code: use a purchase button or storefront link. Notion-based builders such as Super can run the snippet."
+translationKey: builder-notion
+lastUpdated: 2026-11-09
+draft: true
+---
+
+<AnswerBlock>
+
+A public Notion page cannot run pasted code, so link to Square Share instead: a product's link, or your storefront's own page. Notion-based site builders are different: Super, for example, runs custom code on its paid plans, so the storefront snippet can go there. Links work on every plan of both.
+
+</AnswerBlock>
+
+{/* TODO(adrian): The Super steps come from super.so/faqs/faq-how-to-embed-code-on-a-notion-page and super.so/pricing (checked 2026-11-09). Test the Script snippet on a published Super site before publishing. Potion's help centre could not be checked. */}
+
+## How do I link to a product from Notion?
+
+<Steps>
+
+1. In the dashboard, open **Products**, click the **...** menu on the product, and choose **Add to your website**.
+2. On the **Link** tab, copy the link.
+3. In Notion, select the text you want buyers to click (for example "Buy the print"), and paste the link onto it.
+
+</Steps>
+
+A Notion embed block shows a web address inside a frame. Product pages refuse to load in frames, so use a plain link rather than an embed.
+
+## How do I link to my whole storefront?
+
+<Steps>
+
+1. In the dashboard, open **Storefront** and click **Share** on your storefront.
+2. Under **Storefront link**, click **Copy storefront link**.
+3. Paste it as a link on your Notion page.
+
+</Steps>
+
+The storefront link appears once product pages are turned on in the designer and your seller details are complete.
+
+## Can I embed the storefront on a Super site?
+
+Yes, on a Super plan that includes custom code (Super's pricing page says the free plan does not). Super's guide works like this:
+
+<Steps>
+
+1. In the Notion page behind your Super site, type `/code` to add a code block.
+2. On its first line, type `super-embed:`.
+3. Paste the snippet from your storefront's **Share** page below it (choose **Another site** under **Your site builder**).
+4. Add your Super site's address to **Allowed domains**, and check the published site.
+
+</Steps>
+
+<Snippet>
+
+```html title="Code block on a Super site"
+super-embed:
+<div data-squareshare-storefront="YOUR-EMBED-KEY"></div>
+<script async src="https://embed.squareshare.eu/widget.js"></script>
+```
+
+</Snippet>
+
+<Buttons>
+
+[Open the dashboard](https://dashboard.squareshare.eu) [All site builders](/en/site-builders)
+
+</Buttons>
+
+## Key terms
+
+<GlossaryList terms="storefront purchase-button product-page allowed-domains" />
+
+## Related pages
+
+- [How do I add a purchase button to my website?](/en/install/add-purchase-button)
+- [How do I sell on Instagram with Square Share?](/en/selling/sell-on-instagram)
+- [Which site builders does Square Share work with?](/en/site-builders)

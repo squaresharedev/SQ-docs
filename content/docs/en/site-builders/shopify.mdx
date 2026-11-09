@@ -1,0 +1,80 @@
+---
+title: How do I add Square Share to a Shopify store page?
+navTitle: "Shopify"
+description: Add a Square Share storefront to an existing Shopify page with a Custom Liquid section, or link a Shopify button to a Square Share product page.
+translationKey: builder-shopify
+lastUpdated: 2026-11-09
+draft: true
+---
+
+<AnswerBlock>
+
+In the Shopify theme editor, add a Custom Liquid section to the page and paste the snippet from your storefront's Share page, then save. Custom Liquid sits in the page itself, so the storefront sizes itself. To point one Shopify button at a Square Share product, paste the product's link into the button's link field.
+
+</AnswerBlock>
+
+{/* TODO(adrian): Shopify's Custom Liquid section comes with Online Store 2.0 themes such as Dawn; older themes may lack it. Check on a real Shopify store before publishing. */}
+
+## What do I need first?
+
+- A storefront in the dashboard with **Show on my website** turned on on its **Share** page.
+- Your store's address in **Allowed domains**, saved: your own domain, and `yourstore.myshopify.com` if visitors also use that address.
+
+## How do I add a storefront to a Shopify page?
+
+<Steps>
+
+1. In the dashboard, open **Storefront**, click **Share** on your storefront, and choose **Shopify** under **Your site builder**.
+2. Keep the **Script** tab and click **Copy embed snippet**.
+3. In Shopify, go to **Online Store**, then **Themes**, and click **Customize**.
+4. Open the page you want, click **Add section** and choose **Custom Liquid**.
+5. Paste the snippet into the section's code field and click **Save**.
+
+</Steps>
+
+<Snippet>
+
+```html title="Script snippet"
+<div data-squareshare-storefront="YOUR-EMBED-KEY"></div>
+<script async src="https://embed.squareshare.eu/widget.js"></script>
+```
+
+</Snippet>
+
+Custom Liquid renders straight into the page, so the **Script** version grows to fit the storefront.
+
+## How do I add a purchase button on Shopify?
+
+<Steps>
+
+1. In the dashboard, open **Products**, click the **...** menu on the product, and choose **Add to your website**.
+2. On the **Link** tab, copy the link.
+3. In the Shopify theme editor, add a button (many sections have a button setting) and paste the link as its link.
+4. Click **Save**.
+
+</Steps>
+
+The buyer then pays on the Square Share product page, not in your Shopify checkout. Full details: [How do I add a purchase button to my website?](/en/install/add-purchase-button)
+
+## Why is the storefront not showing on Shopify?
+
+- **The address is not listed.** List the address in the browser bar: your own domain and, if used, `yourstore.myshopify.com`.
+- **The theme has no Custom Liquid section.** Use a purchase button instead, or a theme that offers the section.
+
+The full checklist is on [Why is my storefront not showing on my website?](/en/troubleshooting/storefront-not-showing)
+
+<Buttons>
+
+[Open the dashboard](https://dashboard.squareshare.eu) [All site builders](/en/site-builders)
+
+</Buttons>
+
+## Key terms
+
+<GlossaryList terms="storefront embed allowed-domains purchase-button" />
+
+## Related pages
+
+- [How do I add a storefront to my website?](/en/install/add-storefront-to-website)
+- [How do allowed domains work?](/en/install/allowed-domains)
+- [Which site builders does Square Share work with?](/en/site-builders)

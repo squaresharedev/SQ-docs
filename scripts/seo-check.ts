@@ -36,6 +36,9 @@ const EXPECT_PUBLISHED = String(options.get("expect-published") ?? "")
   .map((key) => key.trim())
   .filter(Boolean);
 const SITE_URL = (process.env.SITE_URL ?? "http://localhost:3100").replace(/\/+$/, "");
+// Same rule as lib/site.ts: only a build for the production address is indexable.
+const PRODUCTION_URL = "https://docs.squareshare.eu";
+const INDEXABLE = SITE_URL === PRODUCTION_URL && process.env.NOINDEX !== "1";
 const OUT = join(ROOT, "out");
 
 const TITLE_SUFFIX = { en: " | Square Share Docs", cs: " | Square Share dokumentace" } as const;
@@ -256,9 +259,8 @@ function expectedAlternates(page: PageInfo): Record<string, string> | undefined 
   if (page.draft || !pair || pair.draft) return undefined;
   const en = page.locale === "en" ? page : pair;
   const cs = page.locale === "cs" ? page : pair;
-  // x-default is the English page; only the docs homes point it at the chooser.
-  const isHome = page.url === `/${page.locale}`;
-  return { en: en.absolute, cs: cs.absolute, "x-default": isHome ? `${SITE_URL}/` : en.absolute };
+  // x-default is always the English page (/ redirects to /en).
+  return { en: en.absolute, cs: cs.absolute, "x-default": en.absolute };
 }
 
 // Global files.
@@ -277,12 +279,7 @@ for (const agent of CRAWLERS) {
 }
 const sitemapXml = readIfExists(join(OUT, "sitemap.xml")) ?? "";
 const sitemap = sitemapEntries(sitemapXml);
-const homesPublished = ["/en", "/cs"].every((url) => byUrl.get(url)?.draft === false);
 for (const loc of sitemap.keys()) {
-  if (loc === `${SITE_URL}/` || loc === SITE_URL) {
-    globalCheck.check(homesPublished, "sitemap.xml lists the chooser (/) although a docs home is still a draft");
-    continue;
-  }
   const page = byUrl.get(loc.startsWith(SITE_URL) ? loc.slice(SITE_URL.length) : "");
   globalCheck.check(Boolean(page), `sitemap.xml lists ${loc}, which is not a content page`);
   if (page) globalCheck.check(!page.draft, `sitemap.xml lists draft page ${loc}`);
@@ -295,17 +292,23 @@ rows.push(chooserCheck.row);
 const chooserHtml = readIfExists(join(OUT, "index.html"));
 chooserCheck.check(chooserHtml !== undefined, "out/index.html is missing");
 if (chooserHtml !== undefined) {
+  // Production redirects / to /en; on static hosts the chooser shows but is never indexed.
   const chooserCanonical = tagsOf(chooserHtml, "link").find((tag) => attr(tag, "rel")?.toLowerCase() === "canonical");
   const canonicalHref = chooserCanonical ? attr(chooserCanonical, "href") : undefined;
-  chooserCheck.check(canonicalHref === SITE_URL || canonicalHref === `${SITE_URL}/`, `chooser canonical is ${canonicalHref}`);
-  for (const [key, name] of [["property", "og:title"], ["property", "og:image"], ["property", "og:image:alt"], ["name", "twitter:card"], ["name", "description"]] as const) {
+  chooserCheck.check(canonicalHref === `${SITE_URL}/en`, `chooser canonical is ${canonicalHref}, expected ${SITE_URL}/en`);
+  chooserCheck.check(/noindex/i.test(metaContent(chooserHtml, "name", "robots") ?? ""), "chooser has no noindex");
+  for (const [key, name] of [["property", "og:title"], ["property", "og:image"], ["name", "twitter:card"], ["name", "description"]] as const) {
     chooserCheck.check(Boolean(metaContent(chooserHtml, key, name)), `chooser has no <meta ${key}="${name}">`);
   }
-  const chooserProblems: string[] = [];
-  const chooserNodes = jsonLdNodes(chooserHtml, chooserProblems);
-  for (const problem of chooserProblems) chooserCheck.check(false, problem);
-  chooserCheck.check(chooserNodes.some((node) => node["@type"] === "WebSite"), "chooser has no WebSite in JSON-LD");
-  chooserCheck.check(chooserNodes.some((node) => node["@type"] === "Organization"), "chooser has no Organization in JSON-LD");
+}
+globalCheck.check(!mentions(sitemapXml, `${SITE_URL}/<`) && !sitemap.has(`${SITE_URL}/`), "sitemap.xml lists / although it redirects to /en");
+
+// A production build must not carry the dev site's address anywhere.
+if (SITE_URL === PRODUCTION_URL) {
+  const devHost = "squaresharedev.github.io";
+  const textFiles = [...walk(OUT, () => false)].filter((file) => /\.(html|xml|txt|md|json)$/.test(file));
+  const leaking = textFiles.filter((file) => (readIfExists(file) ?? "").includes(devHost));
+  globalCheck.check(leaking.length === 0, `${leaking.length} file(s) in out/ mention ${devHost}: ${leaking.slice(0, 5).map((file) => toPosix(file.slice(OUT.length + 1))).join(", ")}`);
 }
 
 // --expect-published.
@@ -405,15 +408,19 @@ for (const page of pages) {
       check(typeof item.item === "string" && item.item !== "", `BreadcrumbList item ${index + 1} has no item URL`);
     });
   }
-  if (page.translationKey === "what-is-square-share") {
+  if (page.translationKey === "what-is-square-share" || page.url === `/${page.locale}`) {
     const org = nodes.find((node) => node["@type"] === "Organization" && node.email !== undefined);
-    check(Boolean(org), "what-is-square-share has no Organization in JSON-LD");
+    check(Boolean(org), `${page.url} has no Organization in JSON-LD`);
     if (org) {
       check(org.name === "Square Share", `Organization.name is ${JSON.stringify(org.name)}`);
       check(org.alternateName === "SquareShare", `Organization.alternateName is ${JSON.stringify(org.alternateName)}`);
       check(typeof org.url === "string" && org.url !== "", "Organization.url is missing");
       check(typeof org.logo === "string" && org.logo !== "", "Organization.logo is missing");
       check(org.email === "office@squareshare.eu", `Organization.email is ${JSON.stringify(org.email)}`);
+      const sameAs = Array.isArray(org.sameAs) ? org.sameAs : [];
+      for (const profile of ["https://www.instagram.com/_squareshare/", "https://github.com/squaresharedev"]) {
+        check(sameAs.includes(profile), `Organization.sameAs lacks ${profile}`);
+      }
     }
   }
 
@@ -490,8 +497,16 @@ for (const page of pages) {
     check(Object.keys(hreflang).length === 0, `draft page has hreflang links: ${Object.keys(hreflang).join(", ")}`);
   } else {
     check(!banner, "published page still shows data-draft-banner");
-    check(!noindex, `published page has noindex (robots meta: "${robotsMeta}")`);
-    check(/max-snippet:-1/.test(robotsMeta) && /max-image-preview:large/.test(robotsMeta), `published page robots meta "${robotsMeta}" lacks max-snippet:-1 or max-image-preview:large`);
+    if (INDEXABLE) {
+      check(!noindex, `published page has noindex (robots meta: "${robotsMeta}")`);
+      check(
+        /max-snippet:-1/.test(robotsMeta) && /max-image-preview:large/.test(robotsMeta),
+        `published page robots meta "${robotsMeta}" lacks max-snippet:-1 or max-image-preview:large`,
+      );
+    } else {
+      // A dev or preview build: noindex on every page, published or not.
+      check(noindex, `published page on a non-production build (${SITE_URL}) has no noindex`);
+    }
     check(Boolean(entry), "published page is missing from sitemap.xml");
     if (entry) check(entry.lastmod === page.lastUpdated, `sitemap <lastmod> is ${entry.lastmod}, expected ${page.lastUpdated}`);
     check(llmsIndex.includes(mdAbsolute), `published page is not in /${page.locale}/llms.txt`);

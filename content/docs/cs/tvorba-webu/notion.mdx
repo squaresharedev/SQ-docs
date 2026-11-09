@@ -1,0 +1,80 @@
+---
+title: "Jak přidám Square Share na web v Notionu?"
+navTitle: "Notion"
+description: "Veřejná stránka v Notionu bere odkazy, ne kód: použijte tlačítko pro nákup nebo odkaz na výlohu. Super a podobné nástroje kód výlohy spustí."
+translationKey: "builder-notion"
+lastUpdated: "2026-11-09"
+draft: true
+---
+{/* TODO(adrian): native review */}
+
+<AnswerBlock>
+
+Veřejná stránka v Notionu vložený kód spustit nedokáže, proto na Square Share odkažte: odkazem na produkt, nebo na vlastní stránku výlohy. Nástroje pro tvorbu webu postavené na Notionu jsou jiné: například Super v placených tarifech spouští vlastní kód, takže kód výlohy tam vložit jde. Odkazy fungují v každém tarifu obou.
+
+</AnswerBlock>
+
+{/* TODO(adrian): The Super steps come from super.so/faqs/faq-how-to-embed-code-on-a-notion-page and super.so/pricing (checked 2026-11-09). Test the Script snippet on a published Super site before publishing. Potion's help centre could not be checked. */}
+
+## Jak odkážu na produkt z Notionu?
+
+<Steps>
+
+1. V panelu otevřete **Produkty**, u produktu klikněte na nabídku **⋯** a zvolte **Přidat na váš web**.
+2. Na kartě **Odkaz** zkopírujte odkaz.
+3. V Notionu označte text, na který mají kupující kliknout (třeba „Koupit tisk“), a vložte na něj odkaz.
+
+</Steps>
+
+Blok pro vložení obsahu v Notionu ukazuje webovou adresu uvnitř rámu. Produktové stránky se v rámu odmítnou načíst, proto použijte obyčejný odkaz, ne vložený obsah.
+
+## Jak odkážu na celou výlohu?
+
+<Steps>
+
+1. V panelu otevřete **Výloha** a u své výlohy klikněte na **Sdílet**.
+2. V části **Odkaz na výlohu** klikněte na **Zkopírovat odkaz na výlohu**.
+3. Vložte ho jako odkaz na svou stránku v Notionu.
+
+</Steps>
+
+Odkaz na výlohu se objeví, jakmile v editoru zapnete produktové stránky a doplníte údaje prodejce.
+
+## Můžu výlohu vložit na web v Superu?
+
+Ano, v tarifu Superu, který zahrnuje vlastní kód (podle ceníku Superu ho bezplatný tarif nemá). Návod Superu funguje takto:
+
+<Steps>
+
+1. Na stránce v Notionu, ze které je web v Superu, napište `/code` a přidejte blok kódu.
+2. Na jeho první řádek napište `super-embed:`.
+3. Pod něj vložte kód ze stránky **Sdílet** vaší výlohy (v poli **Váš nástroj pro tvorbu webu** zvolte **Jiný web**).
+4. Adresu webu v Superu přidejte do **Povolených domén** a zkontrolujte zveřejněný web.
+
+</Steps>
+
+<Snippet>
+
+```html title="Blok kódu na webu v Superu"
+super-embed:
+<div data-squareshare-storefront="YOUR-EMBED-KEY"></div>
+<script async src="https://embed.squareshare.eu/widget.js"></script>
+```
+
+</Snippet>
+
+<Buttons>
+
+[Otevřít panel](https://dashboard.squareshare.eu) [Všechny nástroje pro tvorbu webu](/cs/tvorba-webu)
+
+</Buttons>
+
+## Klíčové pojmy
+
+<GlossaryList terms="storefront purchase-button product-page allowed-domains" />
+
+## Související stránky
+
+- [Jak přidám na svůj web tlačítko pro nákup?](/cs/instalace/pridani-tlacitka-pro-nakup)
+- [Jak prodávám na Instagramu se Square Share?](/cs/prodej/prodej-na-instagramu)
+- [S jakými nástroji pro tvorbu webu Square Share funguje?](/cs/tvorba-webu)

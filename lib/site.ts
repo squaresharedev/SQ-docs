@@ -5,6 +5,17 @@
  */
 export const SITE_URL = (process.env.SITE_URL ?? "http://localhost:3100").replace(/\/+$/, "");
 
+/** The one address search engines may index. */
+export const PRODUCTION_URL = "https://docs.squareshare.eu";
+
+/**
+ * Only a build for the production address is indexable. Every other build
+ * (localhost, the GitHub Pages dev site, the workers.dev preview) puts noindex
+ * on every page, published or not, so a copy can never compete with the real
+ * site. NOINDEX=1 forces noindex on a production build too.
+ */
+export const INDEXABLE = SITE_URL === PRODUCTION_URL && process.env.NOINDEX !== "1";
+
 export const BRAND_NAME = "Square Share";
 export const BRAND_ALTERNATE_NAME = "SquareShare";
 export const CONTACT_EMAIL = "office@squareshare.eu";

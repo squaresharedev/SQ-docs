@@ -1,0 +1,64 @@
+---
+title: "Jak přidám Square Share na web v GoDaddy Website Builder?"
+navTitle: "GoDaddy"
+description: "V GoDaddy Website Builder odkazujte na Square Share tlačítkem pro nákup nebo odkazem na výlohu. Kód výlohy se v sekci HTML od GoDaddy nezobrazí."
+translationKey: "builder-godaddy"
+lastUpdated: "2026-11-09"
+draft: true
+---
+{/* TODO(adrian): native review */}
+
+<AnswerBlock>
+
+V GoDaddy Website Builder použijte odkazy: nasměrujte tlačítko na produktovou stránku, nebo na vlastní stránku výlohy. Kód výlohy se tam nezobrazí, protože GoDaddy spouští vložený kód ve vlastním rámu a Square Share vykreslí výlohu jen na webech, které uvedete. Odkazy nepotřebují kód a fungují v každém tarifu.
+
+</AnswerBlock>
+
+{/* TODO(adrian): GoDaddy's help (godaddy.com/help/troubleshoot-html-or-custom-code-not-displaying-properly-28025, checked 2026-11-09) says pasted code "is placed inside of an iframe"; it does not name the frame's address. Square Share only recognises builder frames from Wix and Google Sites (Store src/lib/storefront/embed.ts, isBuilderFrame). Confirm on a published GoDaddy site that the storefront is refused before publishing. */}
+
+## Jak přidám tlačítko pro nákup v GoDaddy?
+
+<Steps>
+
+1. V panelu otevřete **Produkty**, u produktu klikněte na nabídku **⋯** a zvolte **Přidat na váš web**.
+2. Na kartě **Odkaz** zkopírujte odkaz.
+3. V GoDaddy Website Builder přidejte nebo upravte tlačítko v libovolné sekci a vložte odkaz jako jeho cíl.
+4. Web zveřejněte.
+
+</Steps>
+
+Podrobnosti: [Jak přidám na svůj web tlačítko pro nákup?](/cs/instalace/pridani-tlacitka-pro-nakup)
+
+## Jak odkážu na celou výlohu?
+
+Každá výloha se zapnutými produktovými stránkami má vlastní stránku a web k ní nepotřebujete:
+
+<Steps>
+
+1. V panelu otevřete **Výloha** a u své výlohy klikněte na **Sdílet**.
+2. V části **Odkaz na výlohu** klikněte na **Zkopírovat odkaz na výlohu**.
+3. V GoDaddy dejte odkaz na tlačítko nebo do nabídky webu a web zveřejněte.
+
+</Steps>
+
+Odkaz na výlohu se objeví, jakmile v editoru zapnete produktové stránky a doplníte údaje prodejce.
+
+## Proč se kód výlohy v GoDaddy nezobrazí?
+
+Sekce **HTML** od GoDaddy vkládá vlastní kód do rámu na adrese GoDaddy, ne do vaší stránky. Výloha Square Share se odmítne zobrazit na každé stránce, která není ve vašich **Povolených doménách**, a pozná jen rámy, které používají Wix a Google Sites. Viz [Jak fungují povolené domény?](/cs/instalace/povolene-domeny)
+
+<Buttons>
+
+[Otevřít panel](https://dashboard.squareshare.eu) [Všechny nástroje pro tvorbu webu](/cs/tvorba-webu)
+
+</Buttons>
+
+## Klíčové pojmy
+
+<GlossaryList terms="storefront purchase-button product-page allowed-domains" />
+
+## Související stránky
+
+- [Jak přidám na svůj web tlačítko pro nákup?](/cs/instalace/pridani-tlacitka-pro-nakup)
+- [Jak prodávám na Instagramu se Square Share?](/cs/prodej/prodej-na-instagramu)
+- [S jakými nástroji pro tvorbu webu Square Share funguje?](/cs/tvorba-webu)

@@ -56,6 +56,10 @@ jobs:
         env:
           BASE_PATH: /SQ-docs
           SITE_URL: https://squaresharedev.github.io/SQ-docs
+          # The dev site must never be indexed: every page gets noindex. Any build
+          # whose SITE_URL is not https://docs.squareshare.eu is noindex anyway
+          # (lib/site.ts INDEXABLE); this states it outright.
+          NOINDEX: "1"
         run: pnpm build
 
       # Pages may redirect /en to /en/ when an en/ folder exists, so give

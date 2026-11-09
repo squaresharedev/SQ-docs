@@ -1,0 +1,63 @@
+---
+title: How do I add Square Share to a GoDaddy Website Builder site?
+navTitle: "GoDaddy"
+description: On GoDaddy Website Builder, use a purchase button or your storefront link. The storefront snippet does not show inside GoDaddy's HTML section.
+translationKey: builder-godaddy
+lastUpdated: 2026-11-09
+draft: true
+---
+
+<AnswerBlock>
+
+On GoDaddy Website Builder, use links: point a button at a product page, or at your storefront's own page. The storefront snippet does not show there, because GoDaddy runs pasted code inside a frame of its own, and Square Share only draws a storefront on the sites you list. Links need no code and work on any plan.
+
+</AnswerBlock>
+
+{/* TODO(adrian): GoDaddy's help (godaddy.com/help/troubleshoot-html-or-custom-code-not-displaying-properly-28025, checked 2026-11-09) says pasted code "is placed inside of an iframe"; it does not name the frame's address. Square Share only recognises builder frames from Wix and Google Sites (Store src/lib/storefront/embed.ts, isBuilderFrame). Confirm on a published GoDaddy site that the storefront is refused before publishing. */}
+
+## How do I add a purchase button on GoDaddy?
+
+<Steps>
+
+1. In the dashboard, open **Products**, click the **...** menu on the product, and choose **Add to your website**.
+2. On the **Link** tab, copy the link.
+3. In GoDaddy Website Builder, add or edit a button in any section, and paste the link as its destination.
+4. Publish the site.
+
+</Steps>
+
+Full details: [How do I add a purchase button to my website?](/en/install/add-purchase-button)
+
+## How do I link to my whole storefront?
+
+Every storefront with product pages turned on has a page of its own, with no website needed:
+
+<Steps>
+
+1. In the dashboard, open **Storefront** and click **Share** on your storefront.
+2. Under **Storefront link**, click **Copy storefront link**.
+3. In GoDaddy, put that link on a button or in your site's menu, and publish.
+
+</Steps>
+
+The storefront link only appears once product pages are turned on in the designer and your seller details are complete.
+
+## Why does the storefront snippet not show on GoDaddy?
+
+GoDaddy's **HTML** section places custom code inside a frame on a GoDaddy address, not on your page. Square Share's storefront refuses to show on any page that is not in your **Allowed domains**, and it only recognises the frames that Wix and Google Sites use. See [How do allowed domains work?](/en/install/allowed-domains)
+
+<Buttons>
+
+[Open the dashboard](https://dashboard.squareshare.eu) [All site builders](/en/site-builders)
+
+</Buttons>
+
+## Key terms
+
+<GlossaryList terms="storefront purchase-button product-page allowed-domains" />
+
+## Related pages
+
+- [How do I add a purchase button to my website?](/en/install/add-purchase-button)
+- [How do I sell on Instagram with Square Share?](/en/selling/sell-on-instagram)
+- [Which site builders does Square Share work with?](/en/site-builders)

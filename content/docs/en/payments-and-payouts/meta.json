@@ -1,1 +1,1 @@
-{ "title": "Payments and payouts", "defaultOpen": true, "collapsible": false }
+{ "title": "Payments and payouts", "defaultOpen": true, "collapsible": false, "pages": ["refunds", "vat-and-taxes"] }

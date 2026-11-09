@@ -206,6 +206,8 @@ The no-dash rule applies to Czech content as well.
 
 Never write prices, percentages, or the words fee, fees, or commission. No currency amounts of any kind.
 
+The exceptions are the Payments and payouts hub (`payments-and-payouts/index.mdx`, `platby-a-vyplaty/index.mdx`), which states what Square Share charges, and the VAT page (`vat-and-taxes.mdx`, `dph-a-dane.mdx`), which quotes official thresholds. Every amount there comes from the Store code or from Adrian, and carries a `TODO(adrian)` until it is live.
+
 ### Future features
 
 Never describe an unshipped feature in the present tense. Future features appear only in "What's coming next?" sections, in future tense, with no dates.

@@ -1,26 +1,84 @@
 ---
-title: "Platby a výplaty"
-description: "Jak vám zákazníci na Square Share platí: přímo vám, protože prodávajícím jste vy. Square Share vaše peníze nikdy nedrží."
+title: "Kolik Square Share stojí a jak dostanu zaplaceno?"
+navTitle: "Platby a výplaty"
+description: "Co Square Share účtuje dnes a v plánovaných tarifech, co účtuje Stripe, jak výplaty dorazí na váš účet a které měny a země fungují."
 translationKey: "payments-and-payouts"
-lastUpdated: "2026-11-02"
+lastUpdated: "2026-11-09"
 draft: true
 ---
 {/* TODO(adrian): native review */}
 
 <AnswerBlock>
 
-Zákazníci vám platí přímo a za každý prodej právně odpovídáte vy jako prodávající. Square Share vaše peníze nikdy nedrží. Pokladna Square Share bude přijímat platby na váš vlastní účet Stripe. Než bude dostupná, platí vám zákazníci přes odkaz na nákup u produktu nebo e-mailem. Tato sekce se bude rozšiřovat.
+Dnes Square Share neúčtuje nic: placené tarify ještě nejsou otevřené a pokladna Square Share je vypnutá. Kupující vám platí přes váš vlastní odkaz na nákup nebo e-mailem a peníze jdou rovnou k vám. Až pokladnu spustíme, platby půjdou na váš vlastní účet Stripe a Stripe vám je vyplatí na bankovní účet.
 
 </AnswerBlock>
 
-{/* TODO(adrian): pokladna Square Share přes Stripe je v kódu hotová, ale v produkci vypnutá. Panel na stránce Platby píše, že příjem plateb přes Stripe bude brzy a že do té doby zákazníci platí přes odkaz u produktu nebo e-mailem. Po spuštění pokladny stránku aktualizujte. */}
+{/* TODO(adrian): Square Share checkout is built but switched off (NEXT_PUBLIC_STRIPE_CONNECT_ENABLED), paid plans are not on sale ("Placené plány se brzy otevřou") and the per-sale charge is off (billing_switches.feesEnabled). Every amount below comes from Store src/lib/billing/plans.ts and pricing-seed.ts. Confirm all of them before publishing, and move this page to the present tense when they go live. */}
+
+## Co Square Share účtuje dnes?
+
+Nic. Každý účet je v tarifu Free a panel uvádí: „Placené plány se brzy otevřou. Do té doby vše na Free funguje beze změny.“ Z prodejů přes váš vlastní odkaz na nákup nebo e-mailem si Square Share nebere nic, protože tyto platby přes Square Share vůbec neprocházejí.
+
+## Kolik budou tarify stát?
+
+Toto jsou tarify v kódu panelu. Zatím se neprodávají.
+
+| Tarif | Za měsíc | Obsahuje |
+| --- | --- | --- |
+| Free | 0 € | 3 výlohy, 2 členové týmu, 20 produktů |
+| Starter | 12 € | 10 výloh, 5 členů týmu, 60 produktů |
+| Pro | 39 € | Neomezeně výloh a členů týmu, 500 produktů |
+
+Tarify se budou účtovat měsíčně v eurech, s cenami bez DPH. Roční platba se při spuštění neplánuje.
+
+## Kolik bude stát prodej přes pokladnu Square Share?
+
+Až pokladnu Square Share spustíme, Square Share si z každého prodeje přes ni vezme podíl podle vašeho tarifu:
+
+| Tarif | Podíl Square Share z každého prodeje přes pokladnu |
+| --- | --- |
+| Free | 5 % |
+| Starter | 2 % |
+| Pro | 0,5 % |
+
+Podíl se počítá ze všeho, co kupující za prodej zaplatí, včetně dopravy. Prodeje přes váš vlastní odkaz na nákup nebo e-mailem zůstanou bez něj.
+
+## Co účtuje Stripe?
+
+Pokladna Square Share poběží na vašem vlastním účtu Stripe, takže Stripe si u každého prodeje účtuje vlastní poplatek za zpracování platby kartou, navíc k podílu Square Share. Sazby Stripe závisí na vaší zemi a na kartě kupujícího: viz [ceník Stripe](https://stripe.com/cs-cz/pricing). V panelu je u objednávky částka, kterou dostanete, označená „Před poplatkem Stripe za kartu“.
+
+## Jak se výplaty dostanou na můj účet?
+
+Platby půjdou na váš vlastní účet Stripe, ne k Square Share: prodávajícím jste vy ([merchant of record](/cs/reference/slovnik#merchant-of-record)) a Square Share vaše peníze nikdy nedrží. Stripe pak váš zůstatek automaticky posílá na bankovní účet podle průběžného plánu, který určuje Stripe. Stránka **Platby** v panelu ukáže, co je k dispozici, co se ještě zpracovává a datum další výplaty.
+
+Než pokladnu spustíme, stránka Platby uvádí „Příjem plateb přes Stripe už brzy“ a zaplaceno dostáváte tak, jak vám platí vaše vlastní pokladna.
+
+## Které měny a země fungují?
+
+| | Co funguje |
+| --- | --- |
+| Ceny produktů | Euro (EUR) nebo americký dolar (USD), u každého produktu zvlášť |
+| Platba za tarif | Euro |
+| Prodejci | Od 18 let, se sídlem v EU, USA nebo Kanadě |
+
+Podmínky dodávají, že Québec musí počkat na francouzské znění podmínek.
 
 ## Kdo je prodávající?
 
-Vy. Proto panel chce vaše [údaje o prodejci](/cs/reference/slovnik#seller-details) (jméno, adresu a kontaktní e-mail), než se cokoli zveřejní nebo prodá.
+Vy. Proto panel chce vaše [údaje prodejce](/cs/reference/slovnik#seller-details) (jméno, adresu a kontaktní e-mail), než se cokoli zveřejní nebo prodá. Viz [Jaké údaje prodejce mám podle práva EU ukázat kupujícím?](/cs/povinne-udaje-prodejce)
+
+## Další informace o platbách
+
+- [Jak vrátím kupujícímu peníze?](/cs/platby-a-vyplaty/vraceni-penez)
+- [Co potřebuji vědět o DPH jako prodejce v EU?](/cs/platby-a-vyplaty/dph-a-dane)
+
+## Klíčové pojmy
+
+<GlossaryList terms="merchant-of-record payout seller-details" />
 
 ## Související stránky
 
 - [Co je Square Share?](/cs/co-je-square-share)
-- [Slovník pojmů: prodávající](/cs/reference/slovnik#merchant-of-record)
-- [Slovník pojmů: výplata](/cs/reference/slovnik#payout)
+- [Kde najdu své objednávky?](/cs/prodej/objednavky)
+- [Jak spustím akci nebo vytvořím slevový kód?](/cs/prodej/slevy)

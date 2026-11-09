@@ -1,0 +1,83 @@
+---
+title: "Jak přidám Square Share na web v Google Sites?"
+navTitle: "Google Sites"
+description: "Vložte kód výlohy do pole Embed code v Google Sites, nebo propojte tlačítko s produktovou stránkou. Povolené domény, velikost a kontrola."
+translationKey: "builder-google-sites"
+lastUpdated: "2026-11-09"
+draft: true
+---
+{/* TODO(adrian): native review */}
+
+<AnswerBlock>
+
+V Google Sites zvolte Insert, potom Embed, potom Embed code, vložte kód ze stránky Sdílet vaší výlohy a web zveřejněte. Google Sites spouští vložený kód ve vlastním rámu, který Square Share pozná, takže do Povolených domén uvádíte jen adresu svého webu. Pro jeden produkt propojte tlačítko s jeho produktovou stránkou.
+
+</AnswerBlock>
+
+## Co potřebuji předem?
+
+- Výlohu v panelu se zapnutým **Zobrazit na mém webu** na její stránce **Sdílet**.
+- Adresu webu v **Povolených doménách**, uloženou. Web na bezplatném účtu Google má adresu `sites.google.com/view/vasweb`: uveďte `sites.google.com`. S vlastní doménou uveďte tu.
+
+## Jak přidám výlohu na stránku v Google Sites?
+
+<Steps>
+
+1. V panelu otevřete **Výloha**, u své výlohy klikněte na **Sdílet** a v poli **Váš nástroj pro tvorbu webu** zvolte **Google Sites**.
+2. Nechte kartu **Skript** a klikněte na **Kopírovat kód pro vložení**.
+3. V Google Sites otevřete stránku a v panelu vpravo zvolte **Insert**, potom **Embed**.
+4. Zvolte **Embed code**, vložte kód a klikněte na **Next**, potom **Insert**.
+5. Roztáhněte rámeček na výšku výlohy.
+6. Klikněte na **Publish**.
+
+</Steps>
+
+<Snippet>
+
+```html title="Kód Skript"
+<div data-squareshare-storefront="YOUR-EMBED-KEY"></div>
+<script async src="https://embed.squareshare.eu/widget.js"></script>
+```
+
+</Snippet>
+
+## Proč kód běží v rámu?
+
+Google Sites nikdy nevkládá kód přímo do stránky: podává ho z vlastní adresy Googlu, uvnitř rámu. Square Share tento rám zná, takže se výloha zobrazí, pokud je adresa vašeho webu v **Povolených doménách**. Rám si drží velikost, kterou mu dáte, proto ho udělejte tak vysoký, aby se vešly všechny řady produktů.
+
+## Jak přidám tlačítko pro nákup v Google Sites?
+
+<Steps>
+
+1. V panelu otevřete **Produkty**, u produktu klikněte na nabídku **⋯** a zvolte **Přidat na váš web**.
+2. Na kartě **Odkaz** zkopírujte odkaz.
+3. V Google Sites zvolte **Insert**, potom **Button**.
+4. Pojmenujte tlačítko, vložte odkaz a klikněte na **Insert**. Pak web zveřejněte.
+
+</Steps>
+
+Podrobnosti: [Jak přidám na svůj web tlačítko pro nákup?](/cs/instalace/pridani-tlacitka-pro-nakup)
+
+## Proč se výloha v Google Sites nezobrazuje?
+
+- **Díváte se do editoru.** Zkontrolujte zveřejněný web.
+- **Adresa není v seznamu.** Uveďte `sites.google.com` u webu na bezplatném účtu Google, nebo svou doménu.
+- **Rámeček je příliš malý.** Roztáhněte ho.
+
+Celý seznam kontrol je na stránce [Proč se moje výloha na webu nezobrazuje?](/cs/reseni-problemu/vyloha-se-nezobrazuje)
+
+<Buttons>
+
+[Otevřít panel](https://dashboard.squareshare.eu) [Všechny nástroje pro tvorbu webu](/cs/tvorba-webu)
+
+</Buttons>
+
+## Klíčové pojmy
+
+<GlossaryList terms="storefront embed allowed-domains purchase-button" />
+
+## Související stránky
+
+- [Jak přidám výlohu na svůj web?](/cs/instalace/pridani-vylohy-na-web)
+- [Jak fungují povolené domény?](/cs/instalace/povolene-domeny)
+- [S jakými nástroji pro tvorbu webu Square Share funguje?](/cs/tvorba-webu)

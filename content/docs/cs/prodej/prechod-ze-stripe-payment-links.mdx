@@ -1,0 +1,57 @@
+---
+title: "Jak přejdu ze Stripe Payment Links na Square Share?"
+navTitle: "Ze Stripe Payment Links"
+description: "Ponechte si Stripe Payment Links jako odkaz na nákup u každého produktu a nechte Square Share přidat kolem nich výlohu, produktové stránky a analytiku."
+translationKey: "switch-from-stripe-payment-links"
+lastUpdated: "2026-11-09"
+draft: true
+---
+{/* TODO(adrian): native review */}
+
+<AnswerBlock>
+
+Stripe Payment Links si můžete ponechat. Přidejte každý produkt do Square Share a jeho Payment Link vložte jako odkaz na nákup u produktu. Kupující si prohlíží vaši výlohu a produktové stránky na Square Share a platí na Stripe stejně jako dřív. Platby, účtenky i výplaty zůstávají ve vašem účtu Stripe.
+
+</AnswerBlock>
+
+## Co se změní a co zůstane?
+
+| | Jen s Payment Links | Se Square Share a vašimi Payment Links |
+| --- | --- | --- |
+| Kde kupující produkt vidí | Tam, kde jste odkaz sdíleli | Ve výloze na vašem webu a na produktové stránce |
+| Kde kupující platí | Na stránce pokladny Stripe | Na stejné stránce pokladny Stripe, v nové kartě |
+| Kde jsou platby a vrácení peněz | Ve vašem účtu Stripe | Ve vašem účtu Stripe |
+| Zobrazení a kliknutí | Před pokladnou se nepočítají | Počítá je **Analytika** ve Square Share |
+
+## Jak převedu produkt?
+
+<Steps>
+
+1. V panelu Stripe otevřete **Payment Links** a zkopírujte odkaz produktu (začíná `https://buy.stripe.com/`).
+2. Ve Square Share otevřete **Produkty** a klikněte na **Přidat produkt**. Zadejte stejný název a stejnou cenu.
+3. Ve formuláři produktu otevřete **Prodáváte přes vlastní pokladnu? Přidejte odkaz** a vložte Payment Link.
+4. Nastavte produkt na **Aktivní**, uložte ho a umístěte do výlohy se zapnutými produktovými stránkami.
+
+</Steps>
+
+Tlačítko na produktové stránce pak zní „Pokladna na“ a název webu z odkazu a otevře váš Payment Link v nové kartě. Máte mnoho produktů? Názvy a ceny přeneste [importem CSV](/cs/produkty-a-vylohy/pridani-produktu#můžu-produkty-importovat-z-jiné-platformy) a odkazy pak doplňte.
+
+## Co musím udržovat stejné?
+
+- **Cenu.** Square Share ukazuje cenu zadanou ve Square Share a Stripe účtuje cenu z Payment Linku. Měňte obě zároveň.
+- **Akce.** [Akce](/cs/prodej/slevy) ve Square Share mění cenu jen na produktové stránce. Ve Stripe na stejné dny použijte slevový kód nebo nový Payment Link.
+- **Dopravu a daně.** Adresy a daně vybírá Stripe u Payment Linku, pokud to tam nastavíte. Square Share na tom nic nemění.
+
+## Budu Payment Links potřebovat i později?
+
+Pokladna Square Share bude přijímat platby kartou přímo na produktové stránce, na váš vlastní účet Stripe. Zatím spuštěná není. Až bude, můžete odkaz na nákup u produktu odebrat a používat ji, nebo si Payment Links ponechat. Viz [Platby a výplaty](/cs/platby-a-vyplaty).
+
+## Klíčové pojmy
+
+<GlossaryList terms="product product-page storefront merchant-of-record" />
+
+## Související stránky
+
+- [Jak přidám produkt?](/cs/produkty-a-vylohy/pridani-produktu)
+- [Jak přejdu z Gumroadu na Square Share?](/cs/prodej/prechod-z-gumroadu)
+- [Můžu prodávat ze svého webu bez e-shopu?](/cs/prodej/prodej-bez-e-shopu)

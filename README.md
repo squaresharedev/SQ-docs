@@ -152,7 +152,15 @@ before `robots.txt` is read).
 
 The site does the rest itself once pages are published: sitemap, hreflang,
 `llms.txt`, structured data and the Markdown versions only include pages with
-`draft: false` in both languages. What needs a person:
+`draft: false` in both languages.
+
+Only a build with `SITE_URL=https://docs.squareshare.eu` is indexable
+(`INDEXABLE` in `lib/site.ts`). Any other build (localhost, the GitHub Pages
+dev site, the workers.dev preview) puts `noindex` on every page, published or
+not; `NOINDEX=1` forces it on a production build too. The Worker answers `/`
+with a 301 to `/en`, the x-default of every hreflang set.
+
+What needs a person:
 
 1. A native speaker reviews the Czech pages; then set `draft: false` on both
    languages of each page (the pair goes live together).

@@ -1,25 +1,83 @@
 ---
-title: Payments and payouts
-description: "How buyers pay you on Square Share: directly, with you as merchant of record. Square Share never holds your money."
+title: What does Square Share cost, and how do I get paid?
+navTitle: "Payments and payouts"
+description: "What Square Share charges today and with its planned plans, what Stripe charges, how payouts reach your bank, and which currencies and countries work."
 translationKey: payments-and-payouts
-lastUpdated: 2026-11-02
+lastUpdated: 2026-11-09
 draft: true
 ---
 
 <AnswerBlock>
 
-Buyers pay you directly, and you are the merchant of record for every sale. Square Share never holds your money. Square Share checkout will take payments into your own Stripe account. Until it is available, buyers pay through your product's purchase link or by email. This section will grow as payment features ship.
+Today Square Share charges nothing: paid plans are not open yet and Square Share checkout is switched off. Buyers pay you through your own purchase link or by email, and the money goes straight to you. When checkout opens, payments will go into your own Stripe account, and Stripe pays you out to your bank.
 
 </AnswerBlock>
 
-{/* TODO(adrian): The Stripe checkout is built but switched off in production. The payments page in the dashboard currently says getting paid through Stripe is coming soon, and that until then buyers pay through the product's own link or by email. Update this page when checkout goes live. */}
+{/* TODO(adrian): Square Share checkout is built but switched off (NEXT_PUBLIC_STRIPE_CONNECT_ENABLED), paid plans are not on sale ("Paid plans open soon") and the per-sale charge is off (billing_switches.feesEnabled). Every amount below comes from Store src/lib/billing/plans.ts and pricing-seed.ts. Confirm all of them before publishing, and move this page to the present tense when they go live. */}
+
+## What does Square Share charge today?
+
+Nothing. Every account is on the Free plan, and the dashboard says: "Paid plans open soon. Everything on Free keeps working in the meantime." Square Share takes no share of sales made through your own purchase link or by email, because those payments never pass through Square Share.
+
+## What will the plans cost?
+
+These are the plans in the dashboard's code. They are not on sale yet.
+
+| Plan | Per month | Includes |
+| --- | --- | --- |
+| Free | €0 | 3 storefronts, 2 team seats, 20 products |
+| Starter | €12 | 10 storefronts, 5 team seats, 60 products |
+| Pro | €39 | Unlimited storefronts and team seats, 500 products |
+
+Plans will be billed monthly in euros, with prices shown before VAT. Yearly billing is not planned for launch.
+
+## What will a sale through Square Share checkout cost?
+
+Once Square Share checkout opens, Square Share will take a share of each sale made through it, depending on your plan:
+
+| Plan | Square Share's share of each checkout sale |
+| --- | --- |
+| Free | 5% |
+| Starter | 2% |
+| Pro | 0.5% |
+
+The share is worked out on everything the buyer pays for the sale, delivery included. Sales through your own purchase link or by email will stay free of it.
+
+## What does Stripe charge?
+
+Square Share checkout will run on your own Stripe account, so Stripe charges its own card processing fee on each sale, on top of Square Share's share. Stripe's rates depend on your country and the buyer's card: see [Stripe's pricing page](https://stripe.com/pricing). In the dashboard, an order's "You receive" line is shown "Before Stripe's card fee".
+
+## How will payouts reach my bank?
+
+Payments will go into your own Stripe account, not to Square Share: you are the [merchant of record](/en/reference/glossary#merchant-of-record), and Square Share never holds your money. Stripe then sends your balance to your bank account automatically, on a rolling schedule that Stripe sets. The dashboard's **Payments** page will show what is available, what is still pending and the date of the next payout.
+
+Until checkout opens, the Payments page says "Getting paid through Stripe is coming soon", and you are paid however your own checkout pays you.
+
+## Which currencies and countries work?
+
+| | What works |
+| --- | --- |
+| Product prices | Euro (EUR) or US dollar (USD), chosen per product |
+| Plan billing | Euro |
+| Sellers | 18 or over and based in the EU, the USA or Canada |
+
+The Terms add that Québec has to wait for the French version of the Terms.
 
 ## Who is the seller of record?
 
-You are. That is why the dashboard asks for your [seller details](/en/reference/glossary#seller-details) (name, address and contact email) before anything publishes or sells.
+You are. That is why the dashboard asks for your [seller details](/en/reference/glossary#seller-details) (name, address and contact email) before anything publishes or sells. See [What seller details does EU law ask me to show buyers?](/en/eu-seller-information)
+
+## More on payments
+
+- [How do I refund a buyer?](/en/payments-and-payouts/refunds)
+- [What do I need to know about VAT as an EU seller?](/en/payments-and-payouts/vat-and-taxes)
+
+## Key terms
+
+<GlossaryList terms="merchant-of-record payout seller-details" />
 
 ## Related pages
 
 - [What is Square Share?](/en/what-is-square-share)
-- [Glossary: merchant of record](/en/reference/glossary#merchant-of-record)
-- [Glossary: payout](/en/reference/glossary#payout)
+- [Where do I see my orders?](/en/selling/orders)
+- [How do I run a sale or make a discount code?](/en/selling/discounts)

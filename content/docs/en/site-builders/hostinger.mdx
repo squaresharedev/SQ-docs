@@ -1,0 +1,64 @@
+---
+title: How do I add Square Share to a Hostinger Website Builder site?
+navTitle: "Hostinger"
+description: A purchase button works on any Hostinger Website Builder site. Whether the storefront snippet works in its Embed code element is not confirmed yet.
+translationKey: builder-hostinger
+lastUpdated: 2026-11-09
+draft: true
+---
+
+<AnswerBlock>
+
+A purchase button works on any Hostinger Website Builder site: add a Button element and paste a product's link into it. The storefront snippet goes into the builder's Embed code element, but Square Share has not confirmed yet that it shows there, so check your published site. You can also link to your storefront's own page.
+
+</AnswerBlock>
+
+{/* TODO(adrian): Hostinger's embed guide (hostinger.com/support/6463152-website-builder-embed-code, checked 2026-11-09) does not say whether pasted code runs in the page or in a frame of its own, or whether <script> is allowed. Square Share only recognises builder frames from Wix and Google Sites. Test the Script and Iframe only snippets on a published Hostinger site, then rewrite this page as a full guide or as links only. */}
+
+## How do I add a purchase button on Hostinger?
+
+<Steps>
+
+1. In the dashboard, open **Products**, click the **...** menu on the product, and choose **Add to your website**.
+2. On the **Link** tab, copy the link.
+3. In Hostinger Website Builder, add a **Button** element, or select one you have.
+4. Set its link to the product link, then update your website.
+
+</Steps>
+
+Full details: [How do I add a purchase button to my website?](/en/install/add-purchase-button)
+
+## Can I show the whole storefront?
+
+Try it, and check the published site. Hostinger's guide says to drag the **Embed code** element onto the page, click **Enter code**, paste the code, confirm, and update the website. Use the snippet from your storefront's **Share** page (choose **Another site** under **Your site builder**), and put your site's address in **Allowed domains** first.
+
+If the space stays empty on the published site, use the **Iframe only** version, or one of the options below.
+
+<Snippet>
+
+```html title="Script snippet"
+<div data-squareshare-storefront="YOUR-EMBED-KEY"></div>
+<script async src="https://embed.squareshare.eu/widget.js"></script>
+```
+
+</Snippet>
+
+## What if the storefront does not show?
+
+Link to the storefront instead of embedding it. Every storefront with product pages turned on has a page of its own: on its **Share** page, under **Storefront link**, click **Copy storefront link**, and put that link on a Hostinger button or menu item.
+
+<Buttons>
+
+[Open the dashboard](https://dashboard.squareshare.eu) [All site builders](/en/site-builders)
+
+</Buttons>
+
+## Key terms
+
+<GlossaryList terms="storefront embed allowed-domains purchase-button" />
+
+## Related pages
+
+- [How do I add a purchase button to my website?](/en/install/add-purchase-button)
+- [Why is my storefront not showing on my website?](/en/troubleshooting/storefront-not-showing)
+- [Which site builders does Square Share work with?](/en/site-builders)

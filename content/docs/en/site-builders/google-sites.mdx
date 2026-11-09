@@ -1,0 +1,82 @@
+---
+title: How do I add Square Share to a Google Sites site?
+navTitle: "Google Sites"
+description: Paste your storefront snippet into a Google Sites Embed code box, or link a button to a product page. Allowed domains, sizing and checks.
+translationKey: builder-google-sites
+lastUpdated: 2026-11-09
+draft: true
+---
+
+<AnswerBlock>
+
+In Google Sites, choose Insert, then Embed, then Embed code, paste the snippet from your storefront's Share page and publish. Google Sites runs pasted code in a frame of its own, which Square Share recognises, so you only list your site's address in Allowed domains. For one product, link a button to its product page.
+
+</AnswerBlock>
+
+## What do I need first?
+
+- A storefront in the dashboard with **Show on my website** turned on on its **Share** page.
+- Your site's address in **Allowed domains**, saved. A site on a free Google account lives at `sites.google.com/view/yoursite`: list `sites.google.com`. With your own domain, list that domain.
+
+## How do I add a storefront to a Google Sites page?
+
+<Steps>
+
+1. In the dashboard, open **Storefront**, click **Share** on your storefront, and choose **Google Sites** under **Your site builder**.
+2. Keep the **Script** tab and click **Copy embed snippet**.
+3. In Google Sites, open the page, choose **Insert** in the panel on the right, then **Embed**.
+4. Choose **Embed code**, paste the snippet and click **Next**, then **Insert**.
+5. Drag the box as tall as your storefront.
+6. Click **Publish**.
+
+</Steps>
+
+<Snippet>
+
+```html title="Script snippet"
+<div data-squareshare-storefront="YOUR-EMBED-KEY"></div>
+<script async src="https://embed.squareshare.eu/widget.js"></script>
+```
+
+</Snippet>
+
+## Why does it run in a frame?
+
+Google Sites never puts pasted code on the page itself: it serves it from a Google address of its own, inside a frame. Square Share knows that frame, so the storefront shows as long as your site's own address is in **Allowed domains**. The frame keeps the size you give it, so make the box tall enough for every row of products.
+
+## How do I add a purchase button on Google Sites?
+
+<Steps>
+
+1. In the dashboard, open **Products**, click the **...** menu on the product, and choose **Add to your website**.
+2. On the **Link** tab, copy the link.
+3. In Google Sites, choose **Insert**, then **Button**.
+4. Give the button a name, paste the link and click **Insert**. Then publish.
+
+</Steps>
+
+Full details: [How do I add a purchase button to my website?](/en/install/add-purchase-button)
+
+## Why is the storefront not showing on Google Sites?
+
+- **You are looking at the editor.** Check the published site.
+- **The address is not listed.** List `sites.google.com` for a site on a free Google account, or your own domain.
+- **The box is too small.** Drag it taller.
+
+The full checklist is on [Why is my storefront not showing on my website?](/en/troubleshooting/storefront-not-showing)
+
+<Buttons>
+
+[Open the dashboard](https://dashboard.squareshare.eu) [All site builders](/en/site-builders)
+
+</Buttons>
+
+## Key terms
+
+<GlossaryList terms="storefront embed allowed-domains purchase-button" />
+
+## Related pages
+
+- [How do I add a storefront to my website?](/en/install/add-storefront-to-website)
+- [How do allowed domains work?](/en/install/allowed-domains)
+- [Which site builders does Square Share work with?](/en/site-builders)

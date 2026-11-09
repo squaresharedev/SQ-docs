@@ -1,1 +1,1 @@
-{ "title": "Platby a výplaty", "defaultOpen": true, "collapsible": false }
+{ "title": "Platby a výplaty", "defaultOpen": true, "collapsible": false, "pages": ["vraceni-penez", "dph-a-dane"] }

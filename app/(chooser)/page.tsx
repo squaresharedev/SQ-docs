@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 import { ButtonLink } from "@/components/ButtonLink";
 import { LogoMark } from "@/components/Logo";
-import { JsonLd } from "@/components/JsonLd";
 import { HeroCursors } from "@/components/visuals/HeroDecor";
 import { LANGUAGE_NAME, LOCALES, OG_LOCALE, type Locale } from "@/lib/i18n";
-import { organization, website } from "@/lib/jsonld";
-import { chooserAlternates } from "@/lib/seo";
 import { absoluteUrl, SITE_URL } from "@/lib/site";
 
 const CHOICES: Record<Locale, string> = {
@@ -18,16 +15,22 @@ const DESCRIPTION = "Square Share documentation in English and Czech. Dokumentac
 /** The chooser has no card image of its own, so it shares the English docs home's. */
 const IMAGE = absoluteUrl("/og/en/image.png");
 
+/**
+ * In production the Worker answers / with a 301 to /en, so this page only
+ * shows on static hosts (the GitHub Pages dev site). It is never indexed and
+ * points search engines at the English docs home.
+ */
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: { absolute: TITLE },
   description: DESCRIPTION,
-  alternates: { canonical: absoluteUrl("/"), languages: chooserAlternates() },
+  robots: { index: false },
+  alternates: { canonical: absoluteUrl("/en") },
   openGraph: {
     type: "website",
     title: TITLE,
     description: DESCRIPTION,
-    url: absoluteUrl("/"),
+    url: absoluteUrl("/en"),
     siteName: TITLE,
     locale: OG_LOCALE.en,
     alternateLocale: [OG_LOCALE.cs],
@@ -66,7 +69,6 @@ export default function LanguageChooser() {
           ))}
         </ul>
       </div>
-      <JsonLd data={{ "@context": "https://schema.org", "@graph": [website(), organization()] }} />
     </main>
   );
 }

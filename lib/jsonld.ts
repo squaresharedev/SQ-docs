@@ -14,10 +14,19 @@ import {
 import { source, type DocsPage } from "./source.ts";
 import { ogImagePath } from "./urls.ts";
 
+/** The FAQ page: its H2s are the questions, the text under each the answer. */
+export const FAQ_PAGE_KEY = "faq";
+
 /** The page that also describes the company, so it carries Organization data. */
 export const ORGANIZATION_PAGE_KEY = "what-is-square-share";
 
 type JsonLdNode = Record<string, unknown>;
+
+/**
+ * Square Share's own profiles, so search engines tie the company to them.
+ * TODO(adrian): add the LinkedIn company page URL once it is confirmed.
+ */
+export const SAME_AS = ["https://www.instagram.com/_squareshare/", "https://github.com/squaresharedev"];
 
 export function organization(): JsonLdNode {
   return {
@@ -28,6 +37,7 @@ export function organization(): JsonLdNode {
     url: HOME_URL,
     logo: absoluteUrl(LOGO_PATH),
     email: CONTACT_EMAIL,
+    sameAs: SAME_AS,
   };
 }
 
@@ -35,8 +45,8 @@ const WEBSITE_ID = `${SITE_URL}/#website`;
 
 /**
  * The docs site itself. Google reads the site name in results from WebSite
- * data on the site's home page (the language chooser and the docs homes);
- * every article points back at it with isPartOf.
+ * data on the site's home page (the docs homes; / redirects to /en); every
+ * article points back at it with isPartOf.
  */
 export function website(): JsonLdNode {
   return {
@@ -98,10 +108,48 @@ export function techArticle(page: DocsPage): JsonLdNode {
   };
 }
 
+type StructuredData = { headings: { id: string; content: string }[]; contents: { heading?: string; content: string }[] };
+
+/**
+ * FAQPage data built from the FAQ page's own content, so the questions in the
+ * JSON-LD can never drift from the questions on the page: each H2 is a
+ * Question, and the paragraphs under it are its Answer.
+ */
+export function faqPage(page: DocsPage): JsonLdNode | undefined {
+  const data = (page.data as { structuredData?: StructuredData }).structuredData;
+  if (!data) return undefined;
+  const questions = data.headings
+    .filter((heading) => heading.content.trim().endsWith("?"))
+    .map((heading) => ({
+      question: heading.content.trim(),
+      answer: data.contents
+        .filter((block) => block.heading === heading.id)
+        .map((block) => block.content.trim())
+        .join(" "),
+    }))
+    .filter((item) => item.answer !== "");
+  if (questions.length === 0) return undefined;
+  return {
+    "@type": "FAQPage",
+    url: absoluteUrl(page.url),
+    inLanguage: LANGUAGE_TAG[localeOf(page)],
+    mainEntity: questions.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
+    })),
+  };
+}
+
 /** Everything one page emits, as a single @graph. */
 export function pageGraph(page: DocsPage): JsonLdNode {
   const graph: JsonLdNode[] = [techArticle(page), breadcrumbList(page)];
-  if (page.slugs.length === 0) graph.push(website());
-  if (page.data.translationKey === ORGANIZATION_PAGE_KEY) graph.push(organization());
+  // The docs homes describe the site and the company behind it.
+  if (page.slugs.length === 0) graph.push(website(), organization());
+  else if (page.data.translationKey === ORGANIZATION_PAGE_KEY) graph.push(organization());
+  if (page.data.translationKey === FAQ_PAGE_KEY) {
+    const faq = faqPage(page);
+    if (faq) graph.push(faq);
+  }
   return { "@context": "https://schema.org", "@graph": graph };
 }

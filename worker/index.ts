@@ -47,6 +47,11 @@ app.get("*", async (c) => {
   const url = new URL(c.req.url);
   const isPage = PAGE_PATH.test(url.pathname);
 
+  // The site root is English: x-default in every hreflang set is the English page.
+  if (url.pathname === "/" || url.pathname === "/index.html") {
+    return withHeaders(new Response(null, { status: 301 }), { Location: `/en${url.search}`, "Cache-Control": CACHE.other });
+  }
+
   if (isPage && wantsMarkdown(c.req.header("Accept"))) {
     const markdown = await c.env.ASSETS.fetch(new URL(markdownPath(url.pathname), url));
     if (markdown.ok) {

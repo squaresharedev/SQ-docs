@@ -1,0 +1,55 @@
+---
+title: "Jak přejdu z Gumroadu na Square Share?"
+navTitle: "Z Gumroadu"
+description: "Ukažte produkty z Gumroadu ve výloze Square Share na vlastním webu, ponechte si pokladnu Gumroadu, pokud chcete, a co obnáší úplný přechod."
+translationKey: "switch-from-gumroad"
+lastUpdated: "2026-11-09"
+draft: true
+---
+{/* TODO(adrian): native review */}
+
+<AnswerBlock>
+
+Přejít můžete postupně. Přidejte každý produkt do Square Share, a pokud má platbu a doručení dál řešit Gumroad, vložte odkaz na produkt v Gumroadu jako odkaz na nákup. Vaše výloha pak bude na vašem vlastním webu. Úplný přechod znamená, že soubory doručujete a daně řešíte sami, protože prodávajícím budete vy.
+
+</AnswerBlock>
+
+## Můžu si ponechat pokladnu Gumroadu?
+
+Ano. Square Share přijme jako odkaz na nákup jakoukoli adresu `https://`, včetně odkazu na produkt v Gumroadu (vypadá jako `https://gumroad.com/l/vas-produkt`). Tlačítko na produktové stránce ho otevře v nové kartě a Gumroad vybere platbu a pošle kupujícímu soubor jako dosud.
+
+## Jak převedu produkt?
+
+<Steps>
+
+1. Přidejte produkt ve Square Share v **Produkty**, **Přidat produkt**, se stejným názvem a cenou.
+2. U souboru zvolte **Soubor ke stažení** a nahrajte ho, aby byl produkt připravený i na pozdější pokladnu Square Share.
+3. Odkaz z Gumroadu vložte do **Prodáváte přes vlastní pokladnu? Přidejte odkaz**, nebo ho nechte prázdný a kupující vám napíší e-mail.
+4. Nastavte produkt na **Aktivní**, uložte ho a umístěte do výlohy se zapnutými produktovými stránkami.
+
+</Steps>
+
+Nápověda Gumroadu popisuje exporty prodejů a zákazníků do CSV, ne exporty produktů. Produkty přidejte ručně, nebo si připravte CSV se sloupci **Název** a **Cena** a použijte [import CSV](/cs/reseni-problemu/problemy-s-importem-csv).
+
+## Co se změní, když přestanu používat pokladnu Gumroadu?
+
+| | Pokladna Gumroadu | Square Share bez odkazu na Gumroad |
+| --- | --- | --- |
+| Kdo je prodávající | Gumroad uvádí, že vystupuje jako prodávající (merchant of record) a řeší daň z prodeje | Prodávajícím jste vy, s vlastními [údaji prodejce](/cs/udaje-prodejce) |
+| DPH a daň z prodeje | Gumroad ji vybírá tam, kde má daňové povinnosti | Řešíte ji vy. Viz [DPH a daně](/cs/platby-a-vyplaty/dph-a-dane) |
+| Doručení souboru | Gumroad pošle kupujícímu e-mail s odkazem ke stažení | Dnes soubor posíláte vy. Pokladna Square Share ho doručí, až bude spuštěná |
+| Platba | Vyplácí vám Gumroad | Dnes vlastní pokladna nebo e-mail. Později váš vlastní účet Stripe |
+
+{/* TODO(adrian): Gumroad facts from gumroad.com/pricing and help.gumroad.com (checked 2026-11-09). Recheck before publishing. */}
+
+Než produkt z pokladny Gumroadu přesunete, tyto rozdíly porovnejte, zvlášť u digitálních produktů prodávaných kupujícím v EU.
+
+## Klíčové pojmy
+
+<GlossaryList terms="product merchant-of-record seller-details" />
+
+## Související stránky
+
+- [Jak prodávám soubory ke stažení ze svého webu?](/cs/prodej/prodej-souboru-ke-stazeni)
+- [Jak přejdu ze Stripe Payment Links na Square Share?](/cs/prodej/prechod-ze-stripe-payment-links)
+- [Kolik Square Share stojí a jak dostanu zaplaceno?](/cs/platby-a-vyplaty)
