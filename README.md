@@ -143,10 +143,13 @@ Playwright expect the localhost build.
 
 ### Production
 
-Not set up. When it is: build with `SITE_URL=https://docs.squareshare.eu`, deploy
-`worker/` with Wrangler, attach `docs.squareshare.eu`, and allow AI crawlers in
-the Cloudflare dashboard's AI bot settings (otherwise Cloudflare blocks them
-before `robots.txt` is read).
+The `sq-docs` Worker serves `https://docs.squareshare.eu` (custom domain set in
+`worker/wrangler.toml`, no workers.dev address).
+
+```sh
+SITE_URL=https://docs.squareshare.eu pnpm build
+pnpm exec wrangler deploy --config worker/wrangler.toml
+```
 
 ### Launch checklist for search and AI crawlers
 

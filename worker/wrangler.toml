@@ -2,13 +2,17 @@
 # answers `Accept: text/markdown` with each page's .md version.
 #
 # Local:  pnpm build && pnpm worker:dev   (http://localhost:8787)
-# Production (not set up yet): docs.squareshare.eu, built with
-# SITE_URL=https://docs.squareshare.eu. Also allow AI crawlers in the Cloudflare
-# dashboard's AI bot settings, or they are blocked before robots.txt is read.
+# Production: https://docs.squareshare.eu
+#   SITE_URL=https://docs.squareshare.eu pnpm build
+#   pnpm exec wrangler deploy --config worker/wrangler.toml
+# The custom domain below is attached on deploy (or already attached in the
+# dashboard). workers_dev is off so the site has one public address.
 
 name = "sq-docs"
 main = "index.ts"
 compatibility_date = "2026-10-01"
+workers_dev = false
+routes = [{ pattern = "docs.squareshare.eu", custom_domain = true }]
 
 [assets]
 directory = "../out"
@@ -29,6 +33,8 @@ port = 8787
 [env.preview]
 name = "sq-docs-preview"
 workers_dev = true
+# Must stay empty: otherwise the preview inherits docs.squareshare.eu and takes it.
+routes = []
 
 [env.preview.vars]
 NOINDEX = "1"
