@@ -27,7 +27,14 @@ registry refuses this machine's token (see "Tokens package" below).
 | Next dev server | `pnpm dev` | http://localhost:3100 |
 | Worker serving the static export | `pnpm worker:dev` | http://localhost:8787 |
 
-Do not run `pnpm build` while `pnpm dev` is running: both write `.next`.
+Do not run `pnpm build` while `pnpm dev` is running: both write `.next`. If a
+build then fails with "Node.js subprocess crashed while evaluating loaders
+[fumadocs-mdx...]", delete `.next` and build again.
+
+Dev-only labs live under `app/dev` as `*.dev.tsx` route files, which only
+`pnpm dev` (and `next typegen`) treat as pages (see `next.config.ts`); a build
+never contains them. `/dev/header-lab` tunes the header's right side
+(`components/HeaderActions.tsx`).
 
 `<page URL>.md` only exists in the build (postbuild puts the files there and the
 Worker serves them). Under `pnpm dev` the "View as Markdown" button and `.md`
