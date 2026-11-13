@@ -111,6 +111,7 @@ Graph tags and JSON-LD. It is read when the site is built.
 | `/en/llms-full.txt`, `/cs/llms-full.txt` | Every published page in full. |
 | `<page URL>.md` | The page as Markdown. The Worker also returns it for `Accept: text/markdown`. |
 | `/og/<lang>/<slug>/image.png` | Open Graph image per page, coloured from the tokens. |
+| `/31d1794a3bd09e6ebf170779d83bf859.txt` | IndexNow key (`public/`): proves the site owns submissions to `api.indexnow.org` (Bing, Seznam, Yandex and others). Keep it; a new key means a new file. |
 
 ### Drafts
 
