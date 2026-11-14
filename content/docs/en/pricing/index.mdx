@@ -1,0 +1,119 @@
+---
+title: "How much does Square Share cost?"
+navTitle: "Pricing"
+description: "Free is €0, Starter €12 and Pro €39 a month, plus 5%, 2% or 0.5% of each checkout sale. Nothing is charged during early access."
+translationKey: pricing
+lastUpdated: 2026-11-14
+draft: true
+---
+
+<AnswerBlock>
+
+Square Share has three plans: Free at €0, Starter at €12 and Pro at €39 a month, before VAT. On top of that, Square Share takes 5%, 2% or 0.5% of each sale made through Square Share checkout. Stripe's card fee is separate. Nothing is charged during early access, and early access sellers get Pro free for six months.
+
+</AnswerBlock>
+
+{/* TODO(adrian): Prices and shares are the live plan_prices rows, read from https://dashboard.squareshare.eu/api/billing/plan-prices on 2026-11-14 (Free 0 + 500 bps, Starter 1200 + 200 bps, Pro 3900 + 50 bps, EUR, monthly only). Limits and perks come from Store src/lib/billing/plans.ts, which still says "DRAFT NUMBERS". Billing behaviour comes from Store messages/en/billing.json and PAST_DUE_GRACE_DAYS. On 2026-11-14 every billing_switches row was off, checkout was off and no store was paying. The early access offer (Pro free for six months) is the owner's instruction of 2026-11-14 and is not in code: it runs on plan_grants, set in the Admin app, and no early access store had a grant yet. Confirm when the six months start (sign-up, or the day paid plans open) and the last day that counts as early access. Move the page to the present tense when plans open. */}
+
+## What do I pay today?
+
+Nothing. Square Share is in early access: paid plans and Square Share checkout are not switched on yet, so there is no subscription to pay and no share of sales to take. The dashboard says: "Paid plans open soon. Everything on Free keeps working in the meantime."
+
+Buyers pay you through your own purchase link or by email, and that money never passes through Square Share.
+
+## What is the early access offer?
+
+Sellers who join during early access get the Pro plan free for six months: the lowest share of each sale (0.5%), unlimited storefronts and team seats, 500 products, AI writing help and priority support.
+
+- It needs no card, and nothing is charged when it ends.
+- While it lasts, **Settings**, **Plan & billing** says "On us: Square Share gave your store this plan." with the date it ends.
+- When the six months are up, your store moves to Free unless you choose a paid plan. Nothing is taken down.
+
+## What do the plans cost?
+
+| | Free | Starter | Pro |
+| --- | --- | --- | --- |
+| Price a month, before VAT | €0 | €12 | €39 |
+| Share of each checkout sale | 5% | 2% | 0.5% |
+| Storefronts | 3 | 10 | Unlimited |
+| Products | 20 | 60 | 500 |
+| Team seats, you included | 2 | 5 | Unlimited |
+
+Plans are billed monthly, in euros. There is no yearly option yet.
+
+## What does every plan include?
+
+Free is not a trial: it has no end date. Every plan, Free included, comes with:
+
+- Product pages, and Square Share checkout once it opens
+- The storefront designer, and embedding storefronts on your own website
+- Digital downloads, with files up to 200 MB
+- Stock tracking and shipping profiles
+- Team roles
+- Analytics
+- Product import and orders export, as CSV files
+
+## What do the paid plans add?
+
+| | Free | Starter | Pro |
+| --- | --- | --- | --- |
+| Early access to new features | No | Yes | Yes |
+| Analytics reports (CSV) | No | No | Yes |
+| Priority support: your messages answered first | No | No | Yes |
+| AI writing help | No | No | €10 of AI credit a month |
+
+AI writing help drafts a product description from the details you enter, tidies one you wrote, and suggests the next words as you type. A draft or a suggestion uses a fraction of a cent of the credit.
+
+## How is the share of a sale worked out?
+
+It is taken only on sales made through Square Share checkout, and it is worked out on everything the buyer pays, delivery included. For a €40 product with €5 delivery, the buyer pays €45:
+
+| Plan | Square Share's share of that sale |
+| --- | --- |
+| Free | €2.25 |
+| Starter | €0.90 |
+| Pro | €0.23 |
+
+Each share is rounded to the nearest cent.
+
+- **You never get a separate bill for it.** Stripe takes the share out of the payment, and the rest stays in your Stripe account.
+- **A refund returns it.** Refund a checkout sale and Square Share's share goes back too: all of it for a full refund, the same proportion for a partial one.
+- **Your own checkout carries none.** Sales through your own purchase link or by email never pass through Square Share, on any plan.
+
+## What does Stripe charge?
+
+Square Share checkout will run on your own Stripe account, and Stripe charges its own card processing fee on each payment. Square Share adds nothing to Stripe's rate. Stripe's rates depend on your country and the buyer's card: see [Stripe's pricing page](https://stripe.com/pricing). Stripe's fee is the same on every Square Share plan, so it does not change which plan costs you least.
+
+## What will I pay in a month?
+
+The plan's price plus its share of what you sold through checkout that month. Before VAT and Stripe's fee:
+
+| Checkout sales in a month | Free | Starter | Pro |
+| --- | --- | --- | --- |
+| €200 | **€10.00** | €16.00 | €40.00 |
+| €1,000 | €50.00 | **€32.00** | €44.00 |
+| €3,000 | €150.00 | €72.00 | **€54.00** |
+
+Where each plan pulls ahead, with more examples: [Which Square Share plan costs me least?](/en/pricing/choose-a-plan)
+
+## How will billing work?
+
+When paid plans open:
+
+- A paid plan renews every month at the price shown, until you cancel.
+- Prices exclude VAT. VAT is added at checkout where it applies. Add an EU VAT ID at checkout and your invoices show the reverse charge instead.
+- You can switch plans at any time, up or down. Stripe shows exactly what you will pay before you confirm.
+- You can cancel at any time and keep your plan until the end of the period you paid for. Then your store moves to Free.
+- If a payment fails, Stripe tries your card again, and you keep your plan for 7 days while it does. After that your store moves to Free.
+- Invoices, your card and your VAT ID are under **Settings**, **Plan & billing**. Only the store owner can change the plan or see invoices.
+
+## What happens if I have more than my plan allows?
+
+Nothing is taken down. A plan's limits only apply to adding more: every storefront, product and teammate you already have keeps working. To add more, remove some or move to a bigger plan. The same goes for moving back to Free, including when the early access offer ends.
+
+## Related pages
+
+- [Which Square Share plan costs me least?](/en/pricing/choose-a-plan)
+- [What does Square Share cost, and how do I get paid?](/en/payments-and-payouts)
+- [How do I refund a buyer?](/en/payments-and-payouts/refunds)
+- [What do I need to know about VAT as an EU seller?](/en/payments-and-payouts/vat-and-taxes)

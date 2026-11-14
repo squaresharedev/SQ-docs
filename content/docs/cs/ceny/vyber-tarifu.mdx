@@ -1,0 +1,78 @@
+---
+title: "Který tarif Square Share mě vyjde nejlevněji?"
+navTitle: "Nejlevnější tarif"
+description: "Pod 400 € měsíčně v prodejích přes pokladnu vychází nejlevněji Free, od 400 do 1 800 € Starter a nad 1 800 € Pro, bez DPH a poplatku Stripe."
+translationKey: choose-a-plan
+lastUpdated: 2026-11-14
+draft: true
+---
+{/* TODO(adrian): native review */}
+
+<AnswerBlock>
+
+Záleží na tom, kolik za měsíc prodáte přes pokladnu Square Share. Pod 400 € vás nejlevněji vyjde Free, od 400 do 1 800 € Starter a nad 1 800 € Pro, který s rostoucími prodeji ušetří čím dál víc. Prodejci z předběžného přístupu mají Pro šest měsíců zdarma, takže na výběru záleží až potom.
+
+</AnswerBlock>
+
+{/* TODO(adrian): Every figure is worked out from the live plan_prices (dashboard /api/billing/plan-prices, checked 2026-11-14: Free €0 + 5%, Starter €12 + 2%, Pro €39 + 0.5%). Recalculate the tables if a price or a share changes. The early access offer: see the TODO on /cs/ceny. */}
+
+## Jak spočítám své náklady?
+
+Sečtěte měsíční cenu tarifu a jeho podíl z toho, co jste za měsíc prodali přes pokladnu Square Share:
+
+| Tarif | Náklady za měsíc |
+| --- | --- |
+| Free | 5 % z prodejů přes pokladnu |
+| Starter | 12 € plus 2 % z prodejů přes pokladnu |
+| Pro | 39 € plus 0,5 % z prodejů přes pokladnu |
+
+Prodeje přes váš vlastní odkaz na nákup nebo e-mailem se nepočítají: v žádném tarifu se z nich nic nebere.
+
+## Kde který tarif vychází lépe?
+
+- **Starter je levnější než Free nad 400 € měsíčně.** Při 400 € mají 3 procentní body podílu, které Starter ušetří, hodnotu přesně jeho 12 €.
+- **Pro je levnější než Starter nad 1 800 € měsíčně.** Při 1 800 € má 1,5 procentního bodu, který Pro ušetří, hodnotu 27 € rozdílu mezi oběma cenami.
+- **Pro je levnější než Free zhruba nad 867 € měsíčně.** Hodí se, pokud limity nebo nástroje Pro chcete tak jako tak.
+
+## Kolik mě který tarif vyjde při mých prodejích?
+
+Bez DPH a poplatku Stripe za kartu. Nejlevnější tarif je tučně.
+
+| Prodeje přes pokladnu za měsíc | Free | Starter | Pro |
+| --- | --- | --- | --- |
+| 100 € | **5,00 €** | 14,00 € | 39,50 € |
+| 250 € | **12,50 €** | 17,00 € | 40,25 € |
+| 400 € | **20,00 €** | **20,00 €** | 41,00 € |
+| 500 € | 25,00 € | **22,00 €** | 41,50 € |
+| 1 000 € | 50,00 € | **32,00 €** | 44,00 € |
+| 1 800 € | 90,00 € | **48,00 €** | **48,00 €** |
+| 2 500 € | 125,00 € | 62,00 € | **51,50 €** |
+| 5 000 € | 250,00 € | 112,00 € | **64,00 €** |
+| 10 000 € | 500,00 € | 212,00 € | **89,00 €** |
+
+Při 5 000 € měsíčně vyjde Pro celkem na 64 €, tedy 1,3 % z těchto prodejů. Free by vzal 250 €.
+
+Podíly se zaokrouhlují na centy u každého prodeje, takže skutečný měsíc se od těchto částek může lišit o pár centů. Poplatek Stripe za kartu je stejný ve všech tarifech, takže nemění, který tarif je nejlevnější.
+
+## Kdy nerozhoduje jen cena?
+
+Vybírejte i podle toho, co potřebujete:
+
+| Když potřebujete | Vyberte |
+| --- | --- |
+| Víc než 20 produktů nebo 3 výlohy | Starter (60 a 10) nebo Pro (500 a neomezeně) |
+| Víc než 2 lidi v obchodě, včetně vás | Starter (5) nebo Pro (neomezeně) |
+| Nové funkce dřív než ostatní | Starter nebo Pro |
+| Pomoc AI s psaním, reporty analytiky nebo prioritní podporu | Pro |
+
+Co obsahuje každý tarif a co přidávají placené tarify: [Kolik stojí Square Share?](/cs/ceny)
+
+## Kde to zkontroluji v panelu?
+
+Stránka **Plány** na [dashboard.squareshare.eu/plans](https://dashboard.squareshare.eu/plans) má kalkulačku „Který plán vás vyjde nejlevněji?“: posuňte jezdec na své měsíční prodeje a uvidíte cenu každého tarifu plus jeho podíl z těchto prodejů. Až bude pokladna spuštěná a budete mít prodeje, panel navíc spočítá, kolik by vám vyšší tarif ušetřil podle posledních 30 dní.
+
+## Související stránky
+
+- [Kolik stojí Square Share?](/cs/ceny)
+- [Kolik Square Share stojí a jak dostanu zaplaceno?](/cs/platby-a-vyplaty)
+- [Kde najdu své objednávky?](/cs/prodej/objednavky)

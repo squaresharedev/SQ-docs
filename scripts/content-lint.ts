@@ -202,10 +202,15 @@ const TODO_MARKER = "{/* TODO(adrian): native review */}";
 const DESCRIPTION_OPENER = /^(?:how|what|which|why|where|when|who|this page|these docs|learn|jak|co|kolik|proč|kde|kdy|kdo|které|jaké|tato stránka)(?![\p{L}\p{N}])/iu;
 
 /**
- * The only pages allowed to state amounts: the pricing hub (what Square Share
- * charges) and the VAT page (the EU's and Czechia's official thresholds).
+ * The only pages allowed to state amounts: the Pricing section and the
+ * payments hub (what Square Share charges), and the VAT page (the EU's and
+ * Czechia's official thresholds).
  */
 const PRICING_PAGES = new Set([
+  "content/docs/en/pricing/index.mdx",
+  "content/docs/cs/ceny/index.mdx",
+  "content/docs/en/pricing/choose-a-plan.mdx",
+  "content/docs/cs/ceny/vyber-tarifu.mdx",
   "content/docs/en/payments-and-payouts/index.mdx",
   "content/docs/cs/platby-a-vyplaty/index.mdx",
   "content/docs/en/payments-and-payouts/vat-and-taxes.mdx",
@@ -217,8 +222,8 @@ for (const page of pages) {
   const text = raw.startsWith(BOM) ? raw.slice(1) : raw;
   const all = lines(text);
 
-  // Prices, fees, percentages: everywhere except the pricing hub, the one page
-  // that states what Square Share charges (WRITING.md, "Prices and fees").
+  // Prices, fees, percentages: everywhere except PRICING_PAGES, the pages that
+  // state what Square Share charges (WRITING.md, "Prices and fees").
   if (!PRICING_PAGES.has(rel)) lines(blankCode(text)).forEach((lineText, index) => {
     for (const { name, regex } of PRICE_PATTERNS) {
       regex.lastIndex = 0;

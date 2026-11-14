@@ -206,7 +206,7 @@ The no-dash rule applies to Czech content as well.
 
 Never write prices, percentages, or the words fee, fees, or commission. No currency amounts of any kind.
 
-The exceptions are the Payments and payouts hub (`payments-and-payouts/index.mdx`, `platby-a-vyplaty/index.mdx`), which states what Square Share charges, and the VAT page (`vat-and-taxes.mdx`, `dph-a-dane.mdx`), which quotes official thresholds. Every amount there comes from the Store code or from Adrian, and carries a `TODO(adrian)` until it is live.
+The exceptions are the pages that state what Square Share charges: the Pricing section (`pricing/index.mdx` and `pricing/choose-a-plan.mdx`, in Czech `ceny/index.mdx` and `ceny/vyber-tarifu.mdx`) and the Payments and payouts hub (`payments-and-payouts/index.mdx`, `platby-a-vyplaty/index.mdx`). The VAT page (`vat-and-taxes.mdx`, `dph-a-dane.mdx`) may also quote official thresholds. The list lives in `PRICING_PAGES` in `scripts/content-lint.ts`. Every amount there comes from the dashboard's live price list (`https://dashboard.squareshare.eu/api/billing/plan-prices`), the Store code or Adrian, and carries a `TODO(adrian)` until it is live. Every worked example on the Pricing pages is computed from those prices: recalculate them when a price changes.
 
 ### Future features
 

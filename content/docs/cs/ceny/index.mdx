@@ -1,0 +1,120 @@
+---
+title: "Kolik stojí Square Share?"
+navTitle: "Ceny"
+description: "Free stojí 0 €, Starter 12 € a Pro 39 € měsíčně, plus 5 %, 2 % nebo 0,5 % z každého prodeje přes pokladnu. V předběžném přístupu se nic neúčtuje."
+translationKey: pricing
+lastUpdated: 2026-11-14
+draft: true
+---
+{/* TODO(adrian): native review */}
+
+<AnswerBlock>
+
+Square Share má tři tarify: Free za 0 €, Starter za 12 € a Pro za 39 € měsíčně, bez DPH. K tomu si Square Share bere 5 %, 2 % nebo 0,5 % z každého prodeje přes pokladnu Square Share. Poplatek Stripe za kartu je zvlášť. V předběžném přístupu se nic neúčtuje a prodejci z předběžného přístupu dostanou Pro na šest měsíců zdarma.
+
+</AnswerBlock>
+
+{/* TODO(adrian): Prices and shares are the live plan_prices rows, read from https://dashboard.squareshare.eu/api/billing/plan-prices on 2026-11-14 (Free 0 + 500 bps, Starter 1200 + 200 bps, Pro 3900 + 50 bps, EUR, monthly only). Limits and perks come from Store src/lib/billing/plans.ts, which still says "DRAFT NUMBERS". Billing behaviour comes from Store messages/cs/billing.json and PAST_DUE_GRACE_DAYS. On 2026-11-14 every billing_switches row was off, checkout was off and no store was paying. The early access offer (Pro free for six months) is the owner's instruction of 2026-11-14 and is not in code: it runs on plan_grants, set in the Admin app, and no early access store had a grant yet. Confirm when the six months start (sign-up, or the day paid plans open) and the last day that counts as early access. Move the page to the present tense when plans open. */}
+
+## Co platím dnes?
+
+Nic. Square Share je v předběžném přístupu: placené tarify ani pokladna Square Share zatím nejsou zapnuté, takže se neplatí žádné předplatné a z prodejů se nic nebere. Panel uvádí: „Placené plány se brzy otevřou. Do té doby vše na Free funguje beze změny.“
+
+Kupující vám platí přes váš vlastní odkaz na nákup nebo e-mailem a tyto peníze přes Square Share vůbec neprocházejí.
+
+## Co nabízí předběžný přístup?
+
+Prodejci, kteří se připojí v době předběžného přístupu, dostanou tarif Pro na šest měsíců zdarma: nejnižší podíl z prodeje (0,5 %), neomezený počet výloh a míst v týmu, 500 produktů, pomoc AI s psaním a prioritní podporu.
+
+- Nepotřebujete kartu a po skončení se nic neúčtuje.
+- Po celou dobu je v **Nastavení**, **Plán a fakturace** uvedeno „Na naše náklady: Square Share daroval vašemu obchodu tento plán.“ a datum, kdy nabídka končí.
+- Po šesti měsících obchod přejde na Free, pokud si nevyberete placený tarif. Nic se neodstraní.
+
+## Kolik tarify stojí?
+
+| | Free | Starter | Pro |
+| --- | --- | --- | --- |
+| Cena za měsíc, bez DPH | 0 € | 12 € | 39 € |
+| Podíl z každého prodeje přes pokladnu | 5 % | 2 % | 0,5 % |
+| Výlohy | 3 | 10 | Neomezeně |
+| Produkty | 20 | 60 | 500 |
+| Místa v týmu, včetně vás | 2 | 5 | Neomezeně |
+
+Tarify se účtují měsíčně v eurech. Roční platba zatím není.
+
+## Co obsahuje každý tarif?
+
+Free není zkušební verze: nemá datum konce. Každý tarif včetně Free obsahuje:
+
+- Stránky produktů a pokladnu Square Share, jakmile se spustí
+- Návrhář výlohy a vložení výloh na vlastní web
+- Digitální stahování, soubory do 200 MB
+- Sledování zásob a profily dopravy
+- Role v týmu
+- Analytiku
+- Import produktů a export objednávek jako soubory CSV
+
+## Co přidávají placené tarify?
+
+| | Free | Starter | Pro |
+| --- | --- | --- | --- |
+| Předběžný přístup k novým funkcím | Ne | Ano | Ano |
+| Reporty analytiky (CSV) | Ne | Ne | Ano |
+| Prioritní podpora: vaše zprávy vyřídíme jako první | Ne | Ne | Ano |
+| Pomoc AI s psaním | Ne | Ne | Kredit AI 10 € měsíčně |
+
+Pomoc AI s psaním napíše popis produktu z údajů, které zadáte, upraví popis, který jste napsali, a při psaní navrhuje další slova. Jeden návrh stojí zlomek centu z kreditu.
+
+## Jak se počítá podíl z prodeje?
+
+Bere se jen z prodejů přes pokladnu Square Share a počítá se ze všeho, co kupující zaplatí, včetně dopravy. U produktu za 40 € s dopravou za 5 € zaplatí kupující 45 €:
+
+| Tarif | Podíl Square Share z tohoto prodeje |
+| --- | --- |
+| Free | 2,25 € |
+| Starter | 0,90 € |
+| Pro | 0,23 € |
+
+Každý podíl se zaokrouhluje na celé centy.
+
+- **Zvláštní fakturu za něj nedostanete.** Stripe podíl strhne z platby a zbytek zůstane na vašem účtu Stripe.
+- **Při vrácení peněz se vrací.** Když vrátíte peníze za prodej přes pokladnu, vrátí se i podíl Square Share: celý při plném vrácení, ve stejném poměru při částečném.
+- **Vaše vlastní pokladna je bez podílu.** Prodeje přes váš vlastní odkaz na nákup nebo e-mailem přes Square Share neprocházejí, v žádném tarifu.
+
+## Co účtuje Stripe?
+
+Pokladna Square Share poběží na vašem vlastním účtu Stripe a Stripe si u každé platby účtuje vlastní poplatek za zpracování karty. Square Share k sazbě Stripe nic nepřidává. Sazby Stripe závisí na vaší zemi a na kartě kupujícího: viz [ceník Stripe](https://stripe.com/cs-cz/pricing). Poplatek Stripe je stejný ve všech tarifech Square Share, takže nemění, který tarif vás vyjde nejlevněji.
+
+## Kolik zaplatím za měsíc?
+
+Cenu tarifu plus jeho podíl z toho, co jste za měsíc prodali přes pokladnu. Bez DPH a poplatku Stripe:
+
+| Prodeje přes pokladnu za měsíc | Free | Starter | Pro |
+| --- | --- | --- | --- |
+| 200 € | **10,00 €** | 16,00 € | 40,00 € |
+| 1 000 € | 50,00 € | **32,00 €** | 44,00 € |
+| 3 000 € | 150,00 € | 72,00 € | **54,00 €** |
+
+Kde který tarif vychází lépe, s dalšími příklady: [Který tarif Square Share mě vyjde nejlevněji?](/cs/ceny/vyber-tarifu)
+
+## Jak bude placení fungovat?
+
+Až se placené tarify otevřou:
+
+- Placený tarif se obnovuje každý měsíc za zobrazenou cenu, dokud ho nezrušíte.
+- Ceny jsou bez DPH. DPH se přičte při platbě tam, kde se uplatňuje. Když při platbě uvedete DIČ z EU, faktury místo toho uvedou přenesenou daňovou povinnost.
+- Tarif můžete kdykoli změnit, na vyšší i nižší. Stripe před potvrzením přesně ukáže, kolik zaplatíte.
+- Tarif můžete kdykoli zrušit a ponecháte si ho do konce zaplaceného období. Potom obchod přejde na Free.
+- Když platba selže, Stripe ji z karty zkusí strhnout znovu a tarif si mezitím ponecháte 7 dní. Potom obchod přejde na Free.
+- Faktury, kartu a DIČ najdete v **Nastavení**, **Plán a fakturace**. Tarif měnit a faktury vidět může jen vlastník obchodu.
+
+## Co když mám víc, než můj tarif dovoluje?
+
+Nic se neodstraní. Limity tarifu platí jen pro přidávání dalších: všechny výlohy, produkty i spolupracovníci, které už máte, fungují dál. Abyste mohli přidávat další, některé odeberte nebo přejděte na vyšší tarif. Totéž platí při návratu na Free, i po skončení nabídky předběžného přístupu.
+
+## Související stránky
+
+- [Který tarif Square Share mě vyjde nejlevněji?](/cs/ceny/vyber-tarifu)
+- [Kolik Square Share stojí a jak dostanu zaplaceno?](/cs/platby-a-vyplaty)
+- [Jak vrátím kupujícímu peníze?](/cs/platby-a-vyplaty/vraceni-penez)
+- [Co potřebuji vědět o DPH jako prodejce v EU?](/cs/platby-a-vyplaty/dph-a-dane)
