@@ -23,7 +23,7 @@ Every page must have these five fields, and may add a sixth, `navTitle`. No othe
 ```yaml
 title: How do I do the thing?
 navTitle: Do the thing
-description: One sentence, max 160 characters.
+description: You do the thing by doing this. Max 155 characters.
 translationKey: my-page-slug
 lastUpdated: 2026-11-02
 draft: true
@@ -31,9 +31,9 @@ draft: true
 
 | Field | Rules |
 | --- | --- |
-| `title` | The question a user would type. No H1 in the body; the framework renders the title from this field. |
-| `navTitle` | Optional. The short label in the sidebar, at most 30 characters, such as `Add a product`. Use the dashboard's own word where there is one (`Orders`, `Allowed domains`). Without it the sidebar shows the title. |
-| `description` | One sentence, max 160 characters. If it contains a colon, wrap the whole value in double quotes. |
+| `title` | The question a user would type into a search engine or an AI assistant, ending in `?`. Every page, hubs included. It is the H1, the `<title>` and the headline in search results. No H1 in the body; the framework renders the title from this field. |
+| `navTitle` | Optional. The short label in the sidebar and the last breadcrumb, at most 30 characters, such as `Add a product`. Use the dashboard's own word where there is one (`Orders`, `Allowed domains`). Without it both show the title. |
+| `description` | The answer to the title, in one or two sentences, max 155 characters (Google cuts longer ones). Start with the answer itself: "Go to Settings, then...", "Nothing today.", "Yes." Never with "How to", "What", "Jak" or "Co", and never a list of what the page covers. Take the facts from the page's AnswerBlock. If it contains a colon, wrap the whole value in double quotes. |
 | `translationKey` | Lowercase kebab-case. Must match exactly between the EN and CS files for the same page. Used for hreflang. |
 | `lastUpdated` | ISO date of the last meaningful content change. Format `YYYY-MM-DD`. |
 | `draft` | Boolean. Always `true` for new pages. Only a human changes it to `false`. |

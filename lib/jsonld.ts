@@ -71,11 +71,15 @@ export function sectionTrail(page: DocsPage): { name: string; url?: string }[] {
   return [home, ...sections];
 }
 
-/** The JSON-LD trail: every item needs a URL, and it ends with the page. */
+/**
+ * The JSON-LD trail: every item needs a URL, and it ends with the page, named
+ * by its short sidebar label (search results print the trail; the question is
+ * already the headline).
+ */
 export function breadcrumbTrail(page: DocsPage): { name: string; url: string }[] {
   if (page.url === `/${localeOf(page)}`) return sectionTrail(page) as { name: string; url: string }[];
   const linked = sectionTrail(page).filter((item): item is { name: string; url: string } => Boolean(item.url));
-  return [...linked, { name: page.data.title, url: page.url }];
+  return [...linked, { name: page.data.navTitle ?? page.data.title, url: page.url }];
 }
 
 export function breadcrumbList(page: DocsPage): JsonLdNode {

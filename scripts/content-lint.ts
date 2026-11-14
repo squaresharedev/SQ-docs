@@ -198,6 +198,9 @@ const keysByLocale: Record<"en" | "cs", Map<string, string[]>> = { en: new Map()
 
 const TODO_MARKER = "{/* TODO(adrian): native review */}";
 
+/** Description openers that summarise the page ("How to...", "Jak...") instead of answering it. */
+const DESCRIPTION_OPENER = /^(?:how|what|which|why|where|when|who|this page|these docs|learn|jak|co|kolik|proč|kde|kdy|kdo|které|jaké|tato stránka)(?![\p{L}\p{N}])/iu;
+
 /**
  * The only pages allowed to state amounts: the pricing hub (what Square Share
  * charges) and the VAT page (the EU's and Czechia's official thresholds).
@@ -238,6 +241,17 @@ for (const page of pages) {
         report(rel, keyLine > 0 ? keyLine : 1, "frontmatter", `${where}: ${issue.message}`);
       }
     } else {
+      // A search result shows the title as its headline and the description
+      // under it: the title is the question a reader types, the description
+      // starts with its answer.
+      const lineOf = (field: string) => all.findIndex((l) => l.startsWith(`${field}:`)) + 1 || 1;
+      if (!result.data.title.endsWith("?")) {
+        report(rel, lineOf("title"), "title", `title "${result.data.title}" must be the question a reader would type, ending in "?"`);
+      }
+      const opener = DESCRIPTION_OPENER.exec(result.data.description)?.[0];
+      if (opener) {
+        report(rel, lineOf("description"), "description", `description starts with "${opener.trim()}"; start with the answer to the title, not a summary of the page`);
+      }
       const key = result.data.translationKey;
       const bucket = keysByLocale[locale].get(key) ?? [];
       bucket.push(rel);

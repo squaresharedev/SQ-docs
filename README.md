@@ -1,14 +1,14 @@
 # Square Share Docs
 
-Documentation for Square Share, future home `https://docs.squareshare.eu`.
+Documentation for Square Share at `https://docs.squareshare.eu`.
 English and Czech, built for people and for AI systems that read docs.
 
 Next.js 16 (App Router, static export) + Fumadocs 16 + Tailwind CSS 4, with the
 dashboard's design tokens from `@squaresharedev/tokens`. A small Hono Worker
 serves the export on Cloudflare Workers and answers `Accept: text/markdown`.
 
-A preview runs at https://sq-docs-preview.squareshare.workers.dev (see
-"Deploying" below). Production is not set up yet.
+Production runs at https://docs.squareshare.eu, and a noindex preview at
+https://sq-docs-preview.squareshare.workers.dev (see "Deploying" below).
 
 ## Setup
 
@@ -105,7 +105,7 @@ Graph tags and JSON-LD. It is read when the site is built.
 | Path | Contents |
 | --- | --- |
 | `/sitemap.xml` | Published pages only, `lastmod` from frontmatter, hreflang alternates. |
-| `/robots.txt` | Everything allowed, AI crawlers named, sitemap reference. |
+| `/robots.txt` | Everything allowed, AI crawlers named, a `Content-Signal` line in every group (search and AI answers yes, training no), sitemap reference. Cloudflare prepends its own managed block in production. |
 | `/llms.txt` | Site summary and links to each language's index. |
 | `/en/llms.txt`, `/cs/llms.txt` | Published pages, linking their `.md` versions. |
 | `/en/llms-full.txt`, `/cs/llms-full.txt` | Every published page in full. |

@@ -1,7 +1,7 @@
 import { z } from "zod";
 
-/** Search engines cut longer meta descriptions. */
-export const DESCRIPTION_MAX = 160;
+/** Google cuts meta descriptions at about this length on desktop. */
+export const DESCRIPTION_MAX = 155;
 
 /** A sidebar label longer than this wraps onto a third line. */
 export const NAV_TITLE_MAX = 30;
