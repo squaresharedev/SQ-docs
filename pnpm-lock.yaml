@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@squaresharedev/consent':
+        specifier: file:../System/SQ-system/packages/consent
+        version: file:../System/SQ-system/packages/consent(@squaresharedev/tokens@file:../System/SQ-system/packages/tokens)(react@19.2.4)
       '@squaresharedev/tokens':
         specifier: file:../System/SQ-system/packages/tokens
         version: file:../System/SQ-system/packages/tokens
@@ -1348,6 +1351,17 @@ packages:
 
   '@speed-highlight/core@1.2.24':
     resolution: {integrity: sha512-qeW2e1l78afw8VhRPfPQ1Gjj+KU5XFQ/OFV5ti6eTa9bruO7mJyZtA4vw0ofqmA3tKCkROE9xLk3VZoeRc98nw==}
+
+  '@squaresharedev/consent@file:../System/SQ-system/packages/consent':
+    resolution: {directory: ../System/SQ-system/packages/consent, type: directory}
+    peerDependencies:
+      '@squaresharedev/tokens': ^0.3.0
+      react: ^19.0.0
+    peerDependenciesMeta:
+      '@squaresharedev/tokens':
+        optional: true
+      react:
+        optional: true
 
   '@squaresharedev/tokens@file:../System/SQ-system/packages/tokens':
     resolution: {directory: ../System/SQ-system/packages/tokens, type: directory}
@@ -5188,6 +5202,11 @@ snapshots:
   '@sindresorhus/is@7.2.0': {}
 
   '@speed-highlight/core@1.2.24': {}
+
+  '@squaresharedev/consent@file:../System/SQ-system/packages/consent(@squaresharedev/tokens@file:../System/SQ-system/packages/tokens)(react@19.2.4)':
+    optionalDependencies:
+      '@squaresharedev/tokens': file:../System/SQ-system/packages/tokens
+      react: 19.2.4
 
   '@squaresharedev/tokens@file:../System/SQ-system/packages/tokens': {}
 

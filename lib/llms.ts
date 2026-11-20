@@ -39,8 +39,8 @@ export function publishedPages(locale: Locale): DocsPage[] {
 }
 
 const LOCALE_SUMMARY: Record<Locale, string> = {
-  en: "Documentation for Square Share: add a storefront or a purchase button to the website you already have. Buyers pay the seller directly.",
-  cs: "Dokumentace Square Share: přidejte výlohu nebo tlačítko pro nákup na web, který už máte. Zákazníci platí přímo prodejci.",
+  en: "Documentation for SquareShare: add a storefront or a purchase button to the website you already have. Buyers pay the seller directly.",
+  cs: "Dokumentace SquareShare: přidejte výlohu nebo tlačítko pro nákup na web, který už máte. Zákazníci platí přímo prodejci.",
 };
 
 const EMPTY_NOTE: Record<Locale, string> = {

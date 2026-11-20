@@ -25,7 +25,7 @@ const CONTENT_SIGNAL = "Content-Signal: search=yes,ai-input=yes,ai-train=no";
 
 export function GET() {
   const body = [
-    "# Square Share Docs: every crawler, including AI crawlers, may read every page.",
+    "# SquareShare Docs: every crawler, including AI crawlers, may read every page.",
     "# Draft pages carry <meta name=\"robots\" content=\"noindex\"> instead of a Disallow line.",
     "# AI answers may use the docs (ai-input=yes); training may not (ai-train=no).",
     "#",

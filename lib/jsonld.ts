@@ -23,7 +23,7 @@ export const ORGANIZATION_PAGE_KEY = "what-is-square-share";
 type JsonLdNode = Record<string, unknown>;
 
 /**
- * Square Share's own profiles, so search engines tie the company to them.
+ * SquareShare's own profiles, so search engines tie the company to them.
  * TODO(adrian): add the LinkedIn company page URL once it is confirmed.
  */
 export const SAME_AS = ["https://www.instagram.com/_squareshare/", "https://github.com/squaresharedev"];

@@ -18,6 +18,7 @@
     "check": "pnpm typecheck && pnpm lint && pnpm build && pnpm check:links && pnpm check:seo"
   },
   "dependencies": {
+    "@squaresharedev/consent": "file:../System/SQ-system/packages/consent",
     "@squaresharedev/tokens": "file:../System/SQ-system/packages/tokens",
     "fumadocs-core": "16.17.10",
     "fumadocs-mdx": "15.4.10",

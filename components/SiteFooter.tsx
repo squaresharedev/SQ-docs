@@ -4,8 +4,9 @@
  * The homepage's footer, copied from Home/src/components/Footer.tsx. Same
  * markup, classes, pixel grid and social row. Changed only where the docs
  * differ: links go back to squareshare.eu, the labels have a Czech version,
- * the brand is spelled "Square Share", and the cookie settings opener is left
- * out because the docs set no cookies and have no consent banner.
+ * there is no Sign In link until sign-up opens, and the cookie settings opener only
+ * shows when the build turns analytics on (GA_MEASUREMENT_ID in lib/site.ts);
+ * without it the docs set no cookies and have no consent banner.
  *
  * Layout: the two halves sit side by side from xl, not md. Between md and xl
  * the original's link columns (shrink-0) push into the wordmark, and at 1280px
@@ -29,7 +30,8 @@ import { transitionClass } from "@squaresharedev/tokens";
 import { cn } from "@/lib/cn";
 import type { Locale } from "@/lib/i18n";
 import { LEGAL_HEADING, LEGAL_LINKS } from "@/lib/legal";
-import { CONTACT_EMAIL, DASHBOARD_URL, HOME_URL } from "@/lib/site";
+import { openConsentSettings } from "@squaresharedev/consent";
+import { CONTACT_EMAIL, GA_MEASUREMENT_ID, HOME_URL } from "@/lib/site";
 import PixelGrid from "./home/PixelGrid";
 
 // Background pixel-grid cell size; the social buttons are sized and snapped to
@@ -42,8 +44,9 @@ const FOOTER_COPY = {
     tagline: "Turn any website into a store. Embed a portable storefront anywhere and own your revenue stream.",
     explore: "Explore",
     contact: "Contact",
-    links: ["How It Works", "Our Story", "Get Started", "Sign In"],
-    rights: "© 2026 Square Share. All rights reserved.",
+    links: ["How It Works", "Our Story", "Get Started"],
+    cookieSettings: "Cookie settings",
+    rights: "© 2026 SquareShare. All rights reserved.",
     madeWith: "Made with",
     love: "love",
     byThe: "and passion by the",
@@ -53,8 +56,9 @@ const FOOTER_COPY = {
     tagline: "Udělejte z jakéhokoli webu obchod. Vložte přenosnou výlohu kamkoli a mějte své tržby pod kontrolou.",
     explore: "Procházet",
     contact: "Kontakt",
-    links: ["Jak to funguje", "Náš příběh", "Začít", "Přihlásit se"],
-    rights: "© 2026 Square Share. Všechna práva vyhrazena.",
+    links: ["Jak to funguje", "Náš příběh", "Začít"],
+    cookieSettings: "Nastavení cookies",
+    rights: "© 2026 SquareShare. Všechna práva vyhrazena.",
     madeWith: "Vyrobeno s",
     love: "láskou",
     byThe: "a nadšením týmem",
@@ -62,7 +66,11 @@ const FOOTER_COPY = {
   },
 } as const;
 
-const FOOTER_HREFS = [`${HOME_URL}/#features`, `${HOME_URL}/#founder`, `${HOME_URL}/#hero`, `${DASHBOARD_URL}/login`];
+// No Sign In link yet: squareshare.eu hides it until seller sign-up opens.
+const FOOTER_HREFS = [`${HOME_URL}/#features`, `${HOME_URL}/#founder`, `${HOME_URL}/`];
+
+/** The GA4 event each Explore link sends (lib/analytics.ts), by position. */
+const FOOTER_TRACK = [undefined, undefined, "get_started_click"];
 
 /** The link columns' links (Explore and Legal). */
 const LINK_CLASS = cn("font-mono text-xs uppercase tracking-widest text-foreground/50 hover:text-acid", transitionClass);
@@ -147,7 +155,9 @@ export function SiteFooter({ locale }: { locale: Locale }) {
               aria-hidden="true"
               className="select-none text-[clamp(2.5rem,11vw,9rem)] font-black uppercase leading-[0.82] tracking-tighter text-foreground"
             >
-              Square Share
+              {/* One word that may still break between its halves, so the
+                  giant letters stack on two lines when they do not fit. */}
+              Square<wbr />Share
             </div>
           </div>
 
@@ -156,7 +166,13 @@ export function SiteFooter({ locale }: { locale: Locale }) {
             <div className="flex flex-col gap-10 sm:flex-row sm:gap-12">
               <nav className="flex flex-col gap-3" aria-label={copy.explore}>
                 {copy.links.map((label, index) => (
-                  <a key={label} href={FOOTER_HREFS[index]} className={LINK_CLASS}>
+                  <a
+                    key={label}
+                    href={FOOTER_HREFS[index]}
+                    data-track={FOOTER_TRACK[index]}
+                    data-placement={FOOTER_TRACK[index] ? "docs-footer" : undefined}
+                    className={LINK_CLASS}
+                  >
                     {label}
                   </a>
                 ))}
@@ -167,6 +183,13 @@ export function SiteFooter({ locale }: { locale: Locale }) {
                     {label[locale]}
                   </a>
                 ))}
+                {/* Only with analytics on is there a consent choice to change
+                    (withdrawing must be as easy as consenting, on every page). */}
+                {GA_MEASUREMENT_ID ? (
+                  <button type="button" onClick={() => openConsentSettings()} className={cn(LINK_CLASS, "text-left")}>
+                    {copy.cookieSettings}
+                  </button>
+                ) : null}
               </nav>
               <div className="flex flex-col gap-3">
                 <span className="font-mono text-xs uppercase tracking-widest text-foreground/50">{copy.contact}</span>

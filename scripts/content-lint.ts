@@ -203,7 +203,7 @@ const DESCRIPTION_OPENER = /^(?:how|what|which|why|where|when|who|this page|thes
 
 /**
  * The only pages allowed to state amounts: the Pricing section and the
- * payments hub (what Square Share charges), and the VAT page (the EU's and
+ * payments hub (what SquareShare charges), and the VAT page (the EU's and
  * Czechia's official thresholds).
  */
 const PRICING_PAGES = new Set([
@@ -223,7 +223,7 @@ for (const page of pages) {
   const all = lines(text);
 
   // Prices, fees, percentages: everywhere except PRICING_PAGES, the pages that
-  // state what Square Share charges (WRITING.md, "Prices and fees").
+  // state what SquareShare charges (WRITING.md, "Prices and fees").
   if (!PRICING_PAGES.has(rel)) lines(blankCode(text)).forEach((lineText, index) => {
     for (const { name, regex } of PRICE_PATTERNS) {
       regex.lastIndex = 0;

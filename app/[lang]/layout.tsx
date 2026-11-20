@@ -13,7 +13,10 @@ import { isLocale, LANGUAGE_TAG, LOCALES } from "@/lib/i18n";
 import { withLegalPages } from "@/lib/legal";
 import { switchTargets } from "@/lib/pairing";
 import { withSectionHeadings } from "@/lib/sidebar";
-import { WAITLIST_URL } from "@/lib/site";
+import { GA_MEASUREMENT_ID, WAITLIST_URL } from "@/lib/site";
+import { CONSENT_DEFAULT_SCRIPT } from "@/lib/analytics";
+import { DocsAnalytics } from "@/components/analytics/DocsAnalytics";
+import "@squaresharedev/consent/styles.css";
 import { source } from "@/lib/source";
 import { i18nUI } from "@/lib/ui-translations";
 
@@ -30,6 +33,12 @@ export default async function LocaleLayout({ params, children }: LayoutProps<"/[
 
   return (
     <html lang={LANGUAGE_TAG[lang]} className={fontVariables} suppressHydrationWarning>
+      {GA_MEASUREMENT_ID ? (
+        <head>
+          {/* Consent Mode v2 defaults, before the banner and before any tag: everything denied. Static text (lib/analytics.ts). */}
+          <script id="ga-consent-default" dangerouslySetInnerHTML={{ __html: CONSENT_DEFAULT_SCRIPT }} />
+        </head>
+      ) : null}
       <body className="flex min-h-screen flex-col">
         {/* The first thing a keyboard reaches: past the header and sidebar to the page (WCAG 2.4.1). */}
         <a href="#nd-page" className="skip-link docs-button">
@@ -50,6 +59,7 @@ export default async function LocaleLayout({ params, children }: LayoutProps<"/[
               {children}
             </DocsLayout>
             <SiteFooter locale={lang} />
+            <DocsAnalytics />
             </SearchProvider>
           </LocaleProvider>
         </Provider>

@@ -10,8 +10,10 @@ import { HOME_URL } from "./site.ts";
 export const LEGAL_LINKS = [
   { key: "privacy", href: `${HOME_URL}/legal/privacy-policy/`, Icon: Shield, label: { en: "Privacy policy", cs: "Ochrana osobních údajů" } },
   { key: "cookies", href: `${HOME_URL}/legal/cookie-policy/`, Icon: Cookie, label: { en: "Cookie policy", cs: "Zásady cookies" } },
-  { key: "terms", href: `${HOME_URL}/terms`, Icon: Scale, label: { en: "Terms of service", cs: "Obchodní podmínky" } },
-  { key: "accessibility", href: `${HOME_URL}/accessibility`, Icon: Accessibility, label: { en: "Accessibility", cs: "Přístupnost" } },
+  // With the trailing slash: squareshare.eu's canonical addresses (and its
+  // sitemap) end in one, so these links skip the redirect.
+  { key: "terms", href: `${HOME_URL}/terms/`, Icon: Scale, label: { en: "Terms of service", cs: "Obchodní podmínky" } },
+  { key: "accessibility", href: `${HOME_URL}/accessibility/`, Icon: Accessibility, label: { en: "Accessibility", cs: "Přístupnost" } },
 ] as const;
 
 export const LEGAL_HEADING: Record<Locale, string> = { en: "Legal", cs: "Právní informace" };

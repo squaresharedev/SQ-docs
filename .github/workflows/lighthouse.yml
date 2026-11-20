@@ -1,0 +1,77 @@
+# Lighthouse CI (mobile, lab data) for the docs. Core Web Vitals have no field
+# data yet (too little traffic for the Chrome UX Report), so this is the
+# number to watch until they do. Builds the static export the way production
+# does (no BASE_PATH) and audits the pages in lighthouserc.json three times
+# each, served straight from out/.
+#
+# The build is not for docs.squareshare.eu, so every page carries noindex
+# (lib/site.ts INDEXABLE) and the is-crawlable audit is skipped, so the SEO
+# score covers everything else.
+# Fails the check on: accessibility under 95, SEO under 90, or layout shift
+# (CLS) over 0.1. Warns on performance under 90, LCP over 2.5 s, TBT over
+# 200 ms. The reports are the "lighthouse-reports" artifact of each run.
+name: Lighthouse CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Check out the docs
+        uses: actions/checkout@v4
+        with:
+          path: SQ-docs
+
+      # package.json installs the tokens and consent packages from
+      # ../System/SQ-system, so the shared repo sits there (as in pages.yml).
+      - name: Check out the shared packages
+        uses: actions/checkout@v4
+        with:
+          repository: squaresharedev/SQ-system
+          path: System/SQ-system
+
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: SQ-docs/package.json
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build the tokens and consent packages
+        working-directory: System/SQ-system
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm --filter @squaresharedev/tokens build
+          pnpm --filter @squaresharedev/consent build
+
+      - name: Install docs dependencies
+        working-directory: SQ-docs
+        run: pnpm install --frozen-lockfile
+
+      - name: Build the static export
+        working-directory: SQ-docs
+        run: pnpm build
+
+      - name: Lighthouse CI
+        working-directory: SQ-docs
+        run: npx --yes @lhci/cli@0.16.1 autorun
+
+      - name: Keep the reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-reports
+          path: SQ-docs/.lighthouseci/
+          if-no-files-found: ignore

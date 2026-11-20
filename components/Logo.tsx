@@ -1,7 +1,7 @@
 import type { SVGProps } from "react";
 
 /**
- * The Square Share mark, from BRAND_MARK in the dashboard (Store/src/lib/brand.ts).
+ * The SquareShare mark, from BRAND_MARK in the dashboard (Store/src/lib/brand.ts).
  * The one place to swap when the mark changes. It draws in currentColor, so it
  * follows light and dark mode.
  */
@@ -22,13 +22,13 @@ export function LogoMark({ className, ...props }: SVGProps<SVGSVGElement>) {
 
 /**
  * Mark and wordmark, like the dashboard sidebar's brand row (the mark, then
- * the product name in semibold): "Square Share Docs" on one line.
+ * the product name in semibold): "SquareShare Docs" on one line.
  */
 export function Logo() {
   return (
     <span className="inline-flex items-center gap-2.5">
       <LogoMark className="size-5 shrink-0 sm:size-6" />
-      <span className="whitespace-nowrap text-base font-semibold tracking-tight sm:text-lg">Square Share Docs</span>
+      <span className="whitespace-nowrap text-base font-semibold tracking-tight sm:text-lg">SquareShare Docs</span>
     </span>
   );
 }

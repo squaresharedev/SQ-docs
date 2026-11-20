@@ -1,5 +1,5 @@
 /**
- * The single source of truth for Square Share terminology.
+ * The single source of truth for SquareShare terminology.
  *
  * - The Glossary pages render every entry (EN and CS).
  * - "Key terms" sections render a chosen subset by key.
@@ -63,11 +63,11 @@ export const GLOSSARY = [
     key: "dashboard",
     en: {
       term: "Dashboard",
-      definition: "The Square Share web app at dashboard.squareshare.eu where you add products, design storefronts and copy your code.",
+      definition: "The SquareShare web app at dashboard.squareshare.eu where you add products, design storefronts and copy your code.",
     },
     cs: {
       term: "Panel",
-      definition: "Webová aplikace Square Share na dashboard.squareshare.eu. Přidáváte v ní produkty, navrhujete výlohy a kopírujete kód.",
+      definition: "Webová aplikace SquareShare na dashboard.squareshare.eu. Přidáváte v ní produkty, navrhujete výlohy a kopírujete kód.",
     },
     deprecated: { en: ["admin panel"], cs: [] },
   },
@@ -87,11 +87,11 @@ export const GLOSSARY = [
     key: "product-page",
     en: {
       term: "Product page",
-      definition: "The page Square Share hosts for each product. Storefront tiles and purchase buttons open it.",
+      definition: "The page SquareShare hosts for each product. Storefront tiles and purchase buttons open it.",
     },
     cs: {
       term: "Stránka produktu",
-      definition: "Stránka, kterou Square Share hostuje pro každý produkt. Otevírají ji dlaždice výlohy i tlačítka pro nákup.",
+      definition: "Stránka, kterou SquareShare hostuje pro každý produkt. Otevírají ji dlaždice výlohy i tlačítka pro nákup.",
     },
     deprecated: { en: [], cs: [] },
   },
@@ -101,11 +101,11 @@ export const GLOSSARY = [
     // today; the shared schemas package defines Collection for the future app.
     en: {
       term: "Collection",
-      definition: "A group of items on a hosted Square Share page. Collections will come with hosted storefronts.",
+      definition: "A group of items on a hosted SquareShare page. Collections will come with hosted storefronts.",
     },
     cs: {
       term: "Kolekce",
-      definition: "Skupina položek na stránce hostované Square Share. Kolekce přibudou s hostovanými výlohami.",
+      definition: "Skupina položek na stránce hostované SquareShare. Kolekce přibudou s hostovanými výlohami.",
     },
     deprecated: { en: [], cs: [] },
   },
@@ -149,11 +149,11 @@ export const GLOSSARY = [
     key: "merchant-of-record",
     en: {
       term: "Merchant of record",
-      definition: "The business legally responsible for a sale. On Square Share that is you, the seller.",
+      definition: "The business legally responsible for a sale. On SquareShare that is you, the seller.",
     },
     cs: {
       term: "Prodávající",
-      definition: "Ten, kdo za prodej právně odpovídá. Na Square Share jste to vy, prodejce.",
+      definition: "Ten, kdo za prodej právně odpovídá. Na SquareShare jste to vy, prodejce.",
     },
     deprecated: { en: [], cs: [] },
   },

@@ -10,3 +10,6 @@ test-results/
 playwright-report/
 tests/screenshots/
 reports/
+
+# Lighthouse CI reports (.github/workflows/lighthouse.yml)
+.lighthouseci/

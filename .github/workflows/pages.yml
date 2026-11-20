@@ -41,11 +41,14 @@ jobs:
         with:
           node-version: 22
 
-      - name: Build the tokens package
+      # package.json also installs @squaresharedev/consent from the same repo
+      # (the consent banner, used when the build sets a GA measurement ID).
+      - name: Build the tokens and consent packages
         working-directory: System/SQ-system
         run: |
           pnpm install --frozen-lockfile
           pnpm --filter @squaresharedev/tokens build
+          pnpm --filter @squaresharedev/consent build
 
       - name: Install docs dependencies
         working-directory: SQ-docs

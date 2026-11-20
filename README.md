@@ -1,6 +1,6 @@
-# Square Share Docs
+# SquareShare Docs
 
-Documentation for Square Share at `https://docs.squareshare.eu`.
+Documentation for SquareShare at `https://docs.squareshare.eu`.
 English and Czech, built for people and for AI systems that read docs.
 
 Next.js 16 (App Router, static export) + Fumadocs 16 + Tailwind CSS 4, with the
@@ -55,7 +55,7 @@ links in page text go to the Markdown route instead,
 | `pnpm check:seo` | Titles, descriptions, canonicals, JSON-LD, hreflang, sitemap, llms files, Markdown versions, drafts. Needs `pnpm worker:dev`. |
 | `pnpm check:draft-path` | Temporarily publishes four pages, rebuilds and proves the non-draft path (sitemap, hreflang, llms), then reverts and rebuilds. `--lighthouse` also runs Lighthouse while they are published. |
 | `pnpm test:e2e` | Playwright at 1280, 768 and 375 px, light and dark, with axe: any WCAG 2.2 A/AA violation fails. Keyboard and screen reader checks in `tests/site.spec.ts`. Screenshots go to `tests/screenshots/`. |
-| `pnpm test:lighthouse` | Lighthouse (mobile) on the docs homes and the "What is Square Share" pages. |
+| `pnpm test:lighthouse` | Lighthouse (mobile) on the docs homes and the "What is SquareShare" pages. |
 
 ## SITE_URL
 
@@ -158,6 +158,14 @@ The `sq-docs` Worker serves `https://docs.squareshare.eu` (custom domain set in
 SITE_URL=https://docs.squareshare.eu pnpm build
 pnpm exec wrangler deploy --config worker/wrangler.toml
 ```
+
+Analytics: a build with `NEXT_PUBLIC_GA_MEASUREMENT_ID=G-HS3FEXXBQG` (the
+same GA4 property as squareshare.eu) shows squareshare.eu's consent banner,
+adds a Cookie settings button to the footer and loads GA4 only after a visitor
+accepts Analytics. Leave it unset until squareshare.eu's Cookie and Privacy
+Policies name Google Analytics and both sites' consent policyVersion is bumped
+(`GA_MEASUREMENT_ID` in `lib/site.ts`). Consent records go to
+`https://squareshare.eu/api/consent-log/`.
 
 ### Launch checklist for search and AI crawlers
 

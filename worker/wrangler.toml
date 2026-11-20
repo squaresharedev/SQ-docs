@@ -1,4 +1,4 @@
-# Square Share Docs Worker: serves the Next.js static export from ../out and
+# SquareShare Docs Worker: serves the Next.js static export from ../out and
 # answers `Accept: text/markdown` with each page's .md version.
 #
 # Local:  pnpm build && pnpm worker:dev   (http://localhost:8787)

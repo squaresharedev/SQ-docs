@@ -1,4 +1,4 @@
-# Writing guide for Square Share docs
+# Writing guide for SquareShare docs
 
 This guide is for anyone adding or editing pages in `content/docs`. Read it before writing a new page.
 
@@ -206,7 +206,7 @@ The no-dash rule applies to Czech content as well.
 
 Never write prices, percentages, or the words fee, fees, or commission. No currency amounts of any kind.
 
-The exceptions are the pages that state what Square Share charges: the Pricing section (`pricing/index.mdx` and `pricing/choose-a-plan.mdx`, in Czech `ceny/index.mdx` and `ceny/vyber-tarifu.mdx`) and the Payments and payouts hub (`payments-and-payouts/index.mdx`, `platby-a-vyplaty/index.mdx`). The VAT page (`vat-and-taxes.mdx`, `dph-a-dane.mdx`) may also quote official thresholds. The list lives in `PRICING_PAGES` in `scripts/content-lint.ts`. Every amount there comes from the dashboard's live price list (`https://dashboard.squareshare.eu/api/billing/plan-prices`), the Store code or Adrian, and carries a `TODO(adrian)` until it is live. Every worked example on the Pricing pages is computed from those prices: recalculate them when a price changes.
+The exceptions are the pages that state what SquareShare charges: the Pricing section (`pricing/index.mdx` and `pricing/choose-a-plan.mdx`, in Czech `ceny/index.mdx` and `ceny/vyber-tarifu.mdx`) and the Payments and payouts hub (`payments-and-payouts/index.mdx`, `platby-a-vyplaty/index.mdx`). The VAT page (`vat-and-taxes.mdx`, `dph-a-dane.mdx`) may also quote official thresholds. The list lives in `PRICING_PAGES` in `scripts/content-lint.ts`. Every amount there comes from the dashboard's live price list (`https://dashboard.squareshare.eu/api/billing/plan-prices`), the Store code or Adrian, and carries a `TODO(adrian)` until it is live. Every worked example on the Pricing pages is computed from those prices: recalculate them when a price changes.
 
 ### Future features
 
@@ -224,9 +224,9 @@ Do not present Stripe as a selling point. State the fact that payments go throug
 | storefront | store, shop |
 | embed | widget (in prose) |
 | dashboard | admin panel |
-| Square Share | SquareShare, Squareshare |
+| SquareShare | Square Share, Squareshare |
 
-Brand names are always "Square Share" (two words, consistent capitalisation).
+The brand is always "SquareShare": one word, capital S twice, as in the domain. The one exception is the storefront script's own console message, quoted as it prints: `[Square Share] ...`.
 
 ### Tone and structure
 

@@ -41,7 +41,7 @@ const PRODUCTION_URL = "https://docs.squareshare.eu";
 const INDEXABLE = SITE_URL === PRODUCTION_URL && process.env.NOINDEX !== "1";
 const OUT = join(ROOT, "out");
 
-const TITLE_SUFFIX = { en: " | Square Share Docs", cs: " | Square Share dokumentace" } as const;
+const TITLE_SUFFIX = { en: " | SquareShare Docs", cs: " | SquareShare dokumentace" } as const;
 const CRAWLERS = [
   "Googlebot",
   "Bingbot",
@@ -412,8 +412,8 @@ for (const page of pages) {
     const org = nodes.find((node) => node["@type"] === "Organization" && node.email !== undefined);
     check(Boolean(org), `${page.url} has no Organization in JSON-LD`);
     if (org) {
-      check(org.name === "Square Share", `Organization.name is ${JSON.stringify(org.name)}`);
-      check(org.alternateName === "SquareShare", `Organization.alternateName is ${JSON.stringify(org.alternateName)}`);
+      check(org.name === "SquareShare", `Organization.name is ${JSON.stringify(org.name)}`);
+      check(org.alternateName === "Square Share", `Organization.alternateName is ${JSON.stringify(org.alternateName)}`);
       check(typeof org.url === "string" && org.url !== "", "Organization.url is missing");
       check(typeof org.logo === "string" && org.logo !== "", "Organization.logo is missing");
       check(org.email === "office@squareshare.eu", `Organization.email is ${JSON.stringify(org.email)}`);

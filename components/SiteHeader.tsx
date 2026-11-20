@@ -53,7 +53,13 @@ export function SiteHeader(props: ComponentProps<"header">) {
             the button class sets its own display.
           */}
           <span className="max-lg:hidden">
-            <a href={WAITLIST_URL} data-external="" className="docs-button docs-button-sm">
+            <a
+              href={WAITLIST_URL}
+              data-external=""
+              data-track="get_started_click"
+              data-placement="docs-header"
+              className="docs-button docs-button-sm"
+            >
               {copy.getStarted}
             </a>
           </span>

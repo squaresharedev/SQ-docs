@@ -7,6 +7,7 @@ import { TOCProvider } from "fumadocs-ui/layouts/notebook/page/slots/toc";
 import { DocsHomeHero } from "@/components/DocsHomeHero";
 import { DocsTOC, DocsTOCPopover } from "@/components/TableOfContents";
 import { DraftBanner } from "@/components/DraftBanner";
+import { HomeCta } from "@/components/HomeCta";
 import { JsonLd } from "@/components/JsonLd";
 import { getMDXComponents } from "@/components/mdx";
 import { PageHeader } from "@/components/PageHeader";
@@ -89,6 +90,7 @@ export default async function Page(props: PageProps<"/[lang]/[[...slug]]">) {
       <DocsBody>
         <MDX components={getMDXComponents(locale, { a: contentLink(page) })} />
       </DocsBody>
+      <HomeCta copy={copy} />
       <JsonLd data={pageGraph(page)} />
     </DocsPage>
   );

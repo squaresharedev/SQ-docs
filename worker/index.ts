@@ -37,6 +37,17 @@ function markdownPath(pathname: string): string {
   return `${pathname.replace(/\/+$/, "")}.md`;
 }
 
+/**
+ * The Markdown versions are for AI tools, not search results. Each one names
+ * its HTML page as canonical in a Link header (Google reads rel="canonical"
+ * from HTTP headers for non-HTML files), so search engines fold it into the
+ * page instead of indexing a duplicate. Crawlers can still fetch it.
+ */
+function canonicalLink(url: URL, pathname: string): string {
+  const page = pathname.replace(/\.md$/, "").replace(/\/+$/, "") || "/";
+  return `<${url.origin}${page}>; rel="canonical"`;
+}
+
 function withHeaders(response: Response, headers: Record<string, string>): Response {
   const result = new Response(response.body, response);
   for (const [name, value] of Object.entries(headers)) result.headers.set(name, value);
@@ -59,6 +70,7 @@ app.get("*", async (c) => {
         "Content-Type": "text/markdown; charset=utf-8",
         "Cache-Control": CACHE.document,
         Vary: "Accept",
+        Link: canonicalLink(url, url.pathname),
       });
     }
   }
@@ -76,7 +88,9 @@ app.get("*", async (c) => {
     return withHeaders(response, { "Cache-Control": CACHE.document, Vary: "Accept" });
   }
   if (url.pathname.endsWith(".md")) {
-    return withHeaders(response, { "Content-Type": "text/markdown; charset=utf-8", "Cache-Control": CACHE.document });
+    const headers: Record<string, string> = { "Content-Type": "text/markdown; charset=utf-8", "Cache-Control": CACHE.document };
+    if (response.ok && PAGE_PATH.test(url.pathname.replace(/\.md$/, ""))) headers.Link = canonicalLink(url, url.pathname);
+    return withHeaders(response, headers);
   }
   if (url.pathname.startsWith("/_next/static/")) {
     return withHeaders(response, { "Cache-Control": CACHE.immutable });
